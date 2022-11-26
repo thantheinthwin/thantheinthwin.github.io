@@ -43,11 +43,11 @@ export default function Home() {
   }; 
 
   const Links = [
-    {name: "Home", link: "/"},
-    {name: "About", link: "/"},
-    {name: "Skills", link: "/"},
-    {name: "Projects", link: "/"},
-    {name: "Contact", link: "/"},
+    {name: "Home", link: "#home"},
+    {name: "About", link: "#about"},
+    {name: "Skills", link: "#skills"},
+    {name: "Projects", link: "#projects"},
+    {name: "Contact", link: "#contact"},
   ];
 
   const SocialLinks = [
@@ -71,13 +71,13 @@ export default function Home() {
 
       <main>
         <section className='font-body bg-light-theme-background dark:bg-dark-theme-background'>
-          <nav className="absolute w-screen font-light pr-2 py-2 lg:pr-4 lg:py-4">
+          <nav className="absolute z-50 w-screen font-light pr-2 py-2 lg:pr-4 lg:py-4">
             <ul className="lg:hidden flex justify-end text-light-theme-text dark:text-dark-theme-text">
                 <li className="px-2 pt-1 text-2xl mr-2">
                   <button onClick={handleThemeSwitch}><BsMoonStarsFill/></button>
                 </li>
                 <li className='text-4xl'>
-                  <IoMenuOutline/>
+                  <IoMenuOutline onClick={showMenu}/>
                 </li>
             </ul>
             <ul className="hidden lg:flex justify-end text-light-theme-text dark:text-dark-theme-text">
@@ -97,7 +97,7 @@ export default function Home() {
           </nav>
           <div className='snap-y snap-mandatory h-screen w-screen overflow-scroll'>
             {/* Home div */}
-            <div className='snap-start w-screen h-screen grid content-between justify-center text-6xl'>
+            <div id='home' className='snap-start w-screen h-screen grid content-between justify-center text-6xl'>
               <div className='text-light-theme-text dark:text-dark-theme-text lg:text-center w-screen grid content-center mt-52 lg:mt-64'>
                 <div className= 'font-light text-sm ml-6 lg:text-3xl mb-10 lg:mb-24'>BE CREATIVE</div>
                 <div className='font-light text-xl ml-6 lg:text-5xl'>Hello, my name is</div>
@@ -125,7 +125,7 @@ export default function Home() {
               </div>
             </div>
             {/* About div */}
-            <div className='snap-start w-screen h-screen grid content-center lg:flex items-center justify-between text-6xl lg:p-36'>
+            <div id='about' className='snap-start w-screen h-screen grid content-center lg:flex items-center justify-between text-6xl lg:p-36'>
               <div className='hidden lg:grid lg: w-2/3 mr-20'>
                   <h1 className='text-light-theme-title dark:text-light-theme-green'>About Me</h1>
                   <p className='text-2xl tracking-widest mt-4 leading-relaxed text-light-theme-text dark:text-dark-theme-title'>
@@ -150,12 +150,12 @@ export default function Home() {
                   <div className='card grid'  onClick={() => setFlip(!flip)}>
                     <Image src={ProfilePic} alt='Profile Picture' className='rounded-2xl w-[22rem] lg:m-2'/>
                     <div className='grid'>
-                    <span className='text-base lg:text-3xl ml-2'> About Me ? </span>
-                    <span className='text-xs lg:text-xl mr-2 opacity-70 flex items-center justify-between mx-2'> Flip the card to find out ! <TbArrowBarDown/> </span>
+                    <span className='text-base lg:text-3xl ml-2 dark:text-light-theme-title'> About Me ? </span>
+                    <span className='text-xs lg:text-xl mr-2 opacity-70 flex items-center justify-between mx-2 dark:text-light-theme-text'> Flip the card to find out ! <TbArrowBarDown/> </span>
                     </div>
                   </div>
                   <div className='card grid content-center' onClick={() => setFlip(!flip)}>
-                    <ul className='text-base lg:text-xl font-bold m-6'>
+                    <ul className='text-base lg:text-xl font-bold m-6 dark:text-light-theme-text'>
                       <li className='lg:my-4'>🎓 <br/>Alumini of <u><b><a href='https://www.miit.edu.mm/'>MIIT</a></b></u></li>
                       <li className='lg:my-4'>📖 <br/>Currently studying in <b>MCC</b> for <b>NCC Level 5 Diploma in Computing</b></li>
                       <li className='lg:my-4'>⌨️ <br/>Loves to code</li>
@@ -164,11 +164,10 @@ export default function Home() {
                   </div>
                 </ReactCardFlip>
                 
-
                 {/* 3 words to describe myself */}
                 <div className='card lg:hidden my-10 grid'>
-                  <span className='text-base flex justify-center'>3 Words To Describe Myself</span>
-                  <ul className='text-2xl font-bold text-center'>
+                  <span className='text-base flex justify-center dark:text-light-theme-text'>3 Words To Describe Myself</span>
+                  <ul className='text-2xl font-bold text-center dark:text-light-theme-title'>
                     <li>Creative</li>
                     <li>Ambitious</li>
                     <li>Cooperative</li>
@@ -177,11 +176,11 @@ export default function Home() {
               </div>
             </div>
             {/* Skills div */}
-            <div className='snap-start w-screen h-screen flex items-center justify-center text-6xl'>3</div>
+            <div id='skills' className='snap-start w-screen h-screen flex items-center justify-center text-6xl'>3</div>
             {/* Projects div */}
-            <div className='snap-start w-screen h-screen flex items-center justify-center text-6xl'>4</div>
+            <div id='projects' className='snap-start w-screen h-screen flex items-center justify-center text-6xl'>4</div>
             {/* Contact div */}
-            <div className='snap-start w-screen h-screen flex items-center justify-center text-6xl'>5</div>
+            <div id='contact' className='snap-start w-screen h-screen flex items-center justify-center text-6xl'>5</div>
           </div>
         </section>
       </main>
