@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
@@ -15,12 +21,36 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@layer components {
+  .card {
+     @apply
+      bg-white text-light-theme-text dark:text-dark-theme-text
+      w-11/12 lg:w-max p-2
+      shadow-lg rounded-2xl overflow-hidden object-fill
+      h-full
   }
-  body {
-    color: white;
-    background: black;
+
+  .card{
+    transition: 150ms;
+    transform: perspective(1000px) rotateY(var(--rotate-y, 0)) translateY(var(--translate-y, 0));
+    transform-style: preserve-3d;
+  }
+
+  .card:hover {
+    --translate-y: -2px;
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, .5);
+  }
+
+  .card .flip {
+    --rotate-y: 180deg;
+  }
+
+  .card .front,
+  .card .back {
+    backface-visibility: hidden;
+  }
+
+  .card .back {
+    transform: rotateX(180deg);
   }
 }
