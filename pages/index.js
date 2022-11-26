@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import React,{useState, useEffect} from 'react';
 import Typewriter from 'typewriter-effect';
+import ReactCardFlip from 'react-card-flip';
 
 import { BsMoonStarsFill } from 'react-icons/bs';
 import { IoMenuOutline } from "react-icons/io5";
@@ -12,9 +13,9 @@ import ProfilePic from '../public/Profile.png';
 
 import { TbArrowBarDown } from 'react-icons/tb';
 
-import AboutMeCard from '../components/AboutMeCard';
-
 export default function Home() {
+  const [flip, setFlip] = useState(false);
+
   const [theme, setTheme] = useState(null);
 
   //Matching with system pref
@@ -39,26 +40,7 @@ export default function Home() {
 
   const handleThemeSwitch = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
-
-  const cardFaces = [
-    {
-      front: 'hello',
-      // front : `<Image src={ProfilePic} alt='Profile Picture' className='rounded-2xl lg:m-2'/>
-      // <div className='grid'>
-      // <span className='text-base lg:text-3xl ml-2'> About Me ? </span>
-      // <span className='text-xs lg:text-xl mr-2 opacity-70 flex items-center justify-between mx-2'> Flip the card to find out ! <TbArrowBarDown/> </span>
-      // </div>`,
-      back : `<ul className='text-center'>
-      <li>Alumini of <a href='https://www.miit.edu.mm/'><u><b>MIIT</b></u></a></li>
-      <li>Currently studying in <b><u>MCC</u></b> for a <b>Diploma in Computing</b></li>
-      <li>Love to code</li>
-      <li>Good at problem solving</li>
-      </ul>`
-    }
-  ]
-
-  const [aboutMe, setAboutMe] = useState(cardFaces); 
+  }; 
 
   const Links = [
     {name: "Home", link: "/"},
@@ -144,7 +126,7 @@ export default function Home() {
             </div>
             {/* About div */}
             <div className='snap-start w-screen h-screen grid content-center lg:flex items-center justify-between text-6xl lg:p-36'>
-              <div className='hidden lg:grid mr-20 overflow-ellipsis'>
+              <div className='hidden lg:grid lg: w-2/3 mr-20'>
                   <h1 className='text-light-theme-title dark:text-light-theme-green'>About Me</h1>
                   <p className='text-2xl tracking-widest mt-4 leading-relaxed text-light-theme-text dark:text-dark-theme-title'>
                   Started learning about <b>web development</b> back in <b>2017</b>. As an alumni of <br/>
@@ -162,16 +144,26 @@ export default function Home() {
                   Creative, Ambitious and Cooperative
                   </p>
               </div>
-              <div className='w-screen lg:w-auto pl-12 pr-12 lg:p-0 grid'>
+              <div className='absoulute w-screen lg:w-1/3 pl-12 pr-12 lg:p-0 grid justify-center'>
                 {/* About me card */}
-                <AboutMeCard aboutMe = {aboutMe}/>
-                {/* <div className='card grid duration-1000'>
-                  <Image src={ProfilePic} alt='Profile Picture' className='rounded-2xl lg:m-2'/>
-                  <div className='grid'>
-                  <span className='text-base lg:text-3xl ml-2'> About Me ? </span>
-                  <span className='text-xs lg:text-xl mr-2 opacity-70 flex items-center justify-between mx-2'> Flip the card to find out ! <TbArrowBarDown/> </span>
+                <ReactCardFlip isFlipped={flip} flipDirection='horizontal'>
+                  <div className='card grid'  onClick={() => setFlip(!flip)}>
+                    <Image src={ProfilePic} alt='Profile Picture' className='rounded-2xl w-[22rem] lg:m-2'/>
+                    <div className='grid'>
+                    <span className='text-base lg:text-3xl ml-2'> About Me ? </span>
+                    <span className='text-xs lg:text-xl mr-2 opacity-70 flex items-center justify-between mx-2'> Flip the card to find out ! <TbArrowBarDown/> </span>
+                    </div>
                   </div>
-                </div> */}
+                  <div className='card grid content-center' onClick={() => setFlip(!flip)}>
+                    <ul className='text-base lg:text-xl font-bold m-6'>
+                      <li className='lg:my-4'>🎓 <br/>Alumini of <u><b><a href='https://www.miit.edu.mm/'>MIIT</a></b></u></li>
+                      <li className='lg:my-4'>📖 <br/>Currently studying in <b>MCC</b> for <b>NCC Level 5 Diploma in Computing</b></li>
+                      <li className='lg:my-4'>⌨️ <br/>Loves to code</li>
+                      <li className='lg:my-4'>💭 <br/>Good at problem solving</li>
+                    </ul>
+                  </div>
+                </ReactCardFlip>
+                
 
                 {/* 3 words to describe myself */}
                 <div className='card lg:hidden my-10 grid'>
