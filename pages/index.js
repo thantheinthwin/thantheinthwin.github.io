@@ -4,7 +4,7 @@ import Typewriter from 'typewriter-effect';
 import ReactCardFlip from 'react-card-flip';
 
 import { BsMoonStarsFill } from 'react-icons/bs';
-import { IoMenuOutline } from "react-icons/io5";
+import { Squash as Hamburger } from 'hamburger-react'
 import { AiFillLinkedin, AiFillYoutube } from 'react-icons/ai';
 import { FaGithubSquare } from 'react-icons/fa';
 
@@ -42,6 +42,9 @@ export default function Home() {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   }; 
 
+  // For hamburger menu
+  const [isOpen, setOpen] = useState(false);
+
   const Links = [
     {name: "Home", link: "#home"},
     {name: "About", link: "#about"},
@@ -73,11 +76,35 @@ export default function Home() {
         <section className='font-body bg-light-theme-background dark:bg-dark-theme-background'>
           <nav className="absolute z-50 w-screen font-light pr-2 py-2 lg:pr-4 lg:py-4">
             <ul className="lg:hidden flex justify-end text-light-theme-text dark:text-dark-theme-text">
-                <li className="px-2 pt-1 text-2xl mr-2">
+                <li className="px-2 pt-2 text-3xl mr-2">
                   <button onClick={handleThemeSwitch}><BsMoonStarsFill/></button>
                 </li>
                 <li className='text-4xl'>
-                  <IoMenuOutline onClick={showMenu}/>
+                  <button onClick={showMenu}><Hamburger toggled={isOpen} toggle={setOpen}/></button>
+                  <ul className={active ? 'absolute right-0 w-screen h-screen grid content-center text-center bg-light-theme-background dark:bg-dark-theme-background' : 'hidden'}>
+                    {
+                      Links.map((Link) => (
+                        <li key={Link.name} className='font-light text-4xl lg:text-xl my-4' 
+                            onClick={() => {
+                              setActive(!active);
+                              setOpen(!isOpen);
+                            }}>
+                          <a href={Link.link}>{Link.name}</a>
+                        </li>
+                      ))
+                    }
+                    <div className='w-screen flex justify-center mb-10 text-5xl lg:text-7xl text-light-theme-text dark:text-dark-theme-text mt-20 translate-y-11'>
+                      <ul className='flex'>
+                        {
+                          SocialLinks.map((icons) => (
+                            <li key={icons.name} className='ml-2 mr-2'>
+                              <a href={icons.links}>{icons.logo}</a>
+                            </li>
+                          ))
+                        }
+                      </ul>
+                    </div>
+                  </ul>
                 </li>
             </ul>
             <ul className="hidden lg:flex justify-end text-light-theme-text dark:text-dark-theme-text">
