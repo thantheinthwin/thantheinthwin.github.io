@@ -12,6 +12,7 @@ import Image from 'next/image';
 import ProfilePic from '../public/Profile.png';
 
 import { TbArrowBarDown } from 'react-icons/tb';
+import { icons } from 'react-icons/lib';
 
 export default function Home() {
   const [flip, setFlip] = useState(false);
@@ -54,9 +55,9 @@ export default function Home() {
   ];
 
   const SocialLinks = [
-    {name: 'LinkedIn', logo: <AiFillLinkedin/>, links: 'https://www.linkedin.com/in/thanthein/'},
-    {name: 'Github', logo: <FaGithubSquare/>, links: 'https://github.com/thantheinthwin'},
-    {name: 'YouTube', logo: <AiFillYoutube/>, links: 'https://www.youtube.com/@sforsteve'},
+    {id: 1, name: 'LinkedIn', logo: <AiFillLinkedin/>, links: 'https://www.linkedin.com/in/thanthein/'},
+    {id: 2, name: 'Github', logo: <FaGithubSquare/>, links: 'https://github.com/thantheinthwin'},
+    {id: 3, name: 'YouTube', logo: <AiFillYoutube/>, links: 'https://www.youtube.com/@sforsteve'},
   ]
 
   const [active,setActive] = useState(false);
@@ -74,7 +75,7 @@ export default function Home() {
 
       <main>
         <section className='font-body bg-light-theme-background dark:bg-dark-theme-background'>
-          <nav className="absolute z-50 w-screen font-light pr-2 py-2 lg:pr-4 lg:py-4">
+          <nav className="absolute z-50 font-light pr-2 py-2 lg:pr-4 lg:py-4 w-screen">
             <ul className="lg:hidden flex justify-end text-light-theme-text dark:text-dark-theme-text">
                 <li className="px-2 pt-2 text-3xl mr-2">
                   <button onClick={handleThemeSwitch}><BsMoonStarsFill/></button>
@@ -82,18 +83,20 @@ export default function Home() {
                 <li className='text-4xl'>
                   <button onClick={showMenu}><Hamburger toggled={isOpen} toggle={setOpen}/></button>
                   <ul className={active ? 'absolute right-0 w-screen h-screen grid content-center text-center bg-light-theme-background dark:bg-dark-theme-background' : 'hidden'}>
-                    {
-                      Links.map((Link) => (
-                        <li key={Link.name} className='font-light text-4xl lg:text-xl my-4' 
-                            onClick={() => {
-                              setActive(!active);
-                              setOpen(!isOpen);
-                            }}>
-                          <a href={Link.link}>{Link.name}</a>
-                        </li>
-                      ))
-                    }
-                    <div className='w-screen flex justify-center mb-10 text-5xl lg:text-7xl text-light-theme-text dark:text-dark-theme-text mt-20 translate-y-11'>
+                    <ul className='absolute w-screen h-screen top-1/4'>
+                      {
+                        Links.map((Link) => (
+                          <li key={Link.name} className='font-light text-4xl lg:text-xl my-4' 
+                              onClick={() => {
+                                setActive(!active);
+                                setOpen(!isOpen);
+                              }}>
+                            <a href={Link.link}>{Link.name}</a>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                    <div className='absolute bottom-[6.7rem] flex justify-center mb-10 text-5xl lg:text-7xl text-light-theme-text dark:text-dark-theme-text mt-20 translate-y-11'>
                       <ul className='flex'>
                         {
                           SocialLinks.map((icons) => (
@@ -122,10 +125,10 @@ export default function Home() {
                 </ul>
             </ul>
           </nav>
-          <div className='snap-y snap-mandatory h-screen w-screen overflow-scroll'>
+          <div className='relative snap-y snap-mandatory h-screen w-screen overflow-y-scroll overflow-x-hidden'>
             {/* Home div */}
-            <div id='home' className='snap-start w-screen h-screen grid content-between justify-center text-6xl'>
-              <div className='text-light-theme-text dark:text-dark-theme-text lg:text-center w-screen grid content-center mt-52 lg:mt-64'>
+            <div id='home' className='snap-start w-full h-screen justify-center text-6xl'>
+              <div className='absolute w-screen text-light-theme-text dark:text-dark-theme-text lg:text-center grid content-center top-1/3'>
                 <div className= 'font-light text-sm ml-6 lg:text-3xl mb-10 lg:mb-24'>BE CREATIVE</div>
                 <div className='font-light text-xl ml-6 lg:text-5xl'>Hello, my name is</div>
                 <div className='font-bold text-5xl m-6 lg:text-8xl dark:text-dark-theme-title'>THANT HEIN THWIN</div>
@@ -139,7 +142,7 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div className='w-screen flex justify-center mb-10 text-5xl lg:text-7xl text-light-theme-text dark:text-dark-theme-text'>
+              <div className='absolute w-screen flex justify-center text-5xl bottom-10 lg:text-7xl text-light-theme-text dark:text-dark-theme-text'>
                 <ul className='flex'>
                   {
                     SocialLinks.map((icons) => (
@@ -207,7 +210,50 @@ export default function Home() {
             {/* Projects div */}
             <div id='projects' className='snap-start w-screen h-screen flex items-center justify-center text-6xl'>4</div>
             {/* Contact div */}
-            <div id='contact' className='snap-start w-screen h-screen flex items-center justify-center text-6xl'>5</div>
+            <div id='contact' className='snap-start w-screen h-screen flex items-center justify-center text-6xl'>
+              <div className='relative w-screen h-screen grid content-between justify-start p-4 text-light-theme-text dark:text-dark-theme-text'>
+                <div className='absolute top-1/4 left-[4%]'>
+                  <p className='font-light text-xl lg:text-4xl'>I'm always interested in working as</p>
+                  <ul className='text-2xl mt-12 text-light-theme-title dark:text-dark-theme-title lg:hidden'>
+                    <li><div className='border-solid border-2 border-light-theme-title dark:border-dark-theme-title rounded-2xl p-1 w-fit mb-2'>Front-end Web Developer</div></li>
+                    <li><div className='border-solid border-2 border-light-theme-title dark:border-dark-theme-title rounded-2xl p-1 w-fit mb-2'>Junior Programmer</div></li>
+                    <li><div className='border-solid border-2 border-light-theme-title dark:border-dark-theme-title rounded-2xl p-1 w-fit mb-2'>Graphic Designer</div></li>
+                    <li><div className='border-solid border-2 border-light-theme-title dark:border-dark-theme-title rounded-2xl p-1 w-fit mb-2'>Game Development</div></li>
+                  </ul>
+                  <div className='hidden relative w-screen h-96 p-6 lg:flex'>
+                    <div className='absolute border-solid border-2 border-light-theme-title dark:border-dark-theme-title rounded-2xl p-1 w-fit mb-2 lg:text-4xl top-[30%] right-[50%]'>Front-end Web Developer</div>
+                    <div className='absolute border-solid border-2 border-light-theme-title dark:border-dark-theme-title rounded-2xl p-1 w-fit mb-2 lg:text-4xl top-[30%] right-[32%]'>Junior Programmer</div>
+                    <div className='absolute border-solid border-2 border-light-theme-title dark:border-dark-theme-title rounded-2xl p-1 w-fit mb-2 lg:text-4xl top-[53%] right-[48%]'>Graphic Designer</div>
+                    <div className='absolute border-solid border-2 border-light-theme-title dark:border-dark-theme-title rounded-2xl p-1 w-fit mb-2 lg:text-4xl top-[53%] right-[30%]'>Game Development</div>
+                  </div>
+                </div>
+                <div className='absolute bottom-0 w-screen h-72 p-2'>
+                  <span className='absolute text-6xl lg:text-9xl bottom-0 lg:bottom-5 lg:left-12'>LET'S <br/> CONNECT</span>
+                  <div className='absolute bottom-[4.5rem] right-4 border-b-4 lg:hidden border-light-theme-title dark:border-dark-theme-title pb-1'>
+                    <ul className='flex'>
+                      {
+                        SocialLinks.map((icons) => (
+                          <li key={icons.id} className='ml-4 text-5xl'>
+                            <a href={icons.links}>{icons.logo}</a>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                  <div className='absolute bottom-[4.5rem] right-4 border-t-4 hidden lg:flex border-light-theme-title dark:border-dark-theme-title pb-1'>
+                    <ul className='flex'>
+                      {
+                        SocialLinks.map((links) => (
+                          <li key={links.id} className='text-4xl ml-6 tracking-widest'>
+                            <a href={links.links}>{links.name}</a>
+                          </li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>
