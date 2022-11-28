@@ -76,6 +76,7 @@ export default function Home() {
       <main>
         <section className='font-body bg-light-theme-background dark:bg-dark-theme-background'>
           <nav className="absolute z-50 font-light pr-2 py-2 lg:pr-4 lg:py-4 w-screen">
+            {/* Nav for mobile view */}
             <ul className="lg:hidden flex justify-end text-light-theme-text dark:text-dark-theme-text">
                 <li className="px-2 pt-2 text-3xl mr-2">
                   <button onClick={handleThemeSwitch}><BsMoonStarsFill/></button>
@@ -96,8 +97,8 @@ export default function Home() {
                         ))
                       }
                     </ul>
-                    <div className='absolute bottom-[6.7rem] flex justify-center mb-10 text-5xl lg:text-7xl text-light-theme-text dark:text-dark-theme-text mt-20 translate-y-11'>
-                      <ul className='flex'>
+                    <div className='absolute bottom-[6.7rem] mb-10 text-5xl  text-light-theme-text dark:text-dark-theme-text mt-20 translate-y-11'>
+                      <ul className='flex w-screen justify-center'>
                         {
                           SocialLinks.map((icons) => (
                             <li key={icons.name} className='ml-2 mr-2'>
@@ -110,14 +111,15 @@ export default function Home() {
                   </ul>
                 </li>
             </ul>
+            {/* Nav for desktop view*/}
             <ul className="hidden lg:flex justify-end text-light-theme-text dark:text-dark-theme-text">
-                <li className="px-2 pt-1 text-2xl">
+                <li className="px-2 pt-1 text-3xl">
                   <BsMoonStarsFill onClick={handleThemeSwitch}/>
                 </li>
                 <ul className='lg:flex xs:pb-0 pb-12'>
                   {
                     Links.map((Link) => (
-                      <li key={Link.name} className='ml-8 font-base lg:text-xl'>
+                      <li key={Link.name} className='ml-8 font-light text-3xl'>
                         <a href={Link.link}>{Link.name}</a>
                       </li>
                     ))
@@ -241,10 +243,10 @@ export default function Home() {
                     </ul>
                   </div>
                   <div className='absolute bottom-[4.5rem] right-4 border-t-4 hidden lg:flex border-light-theme-title dark:border-dark-theme-title pb-1'>
-                    <ul className='flex'>
+                    <ul className='flex mt-4'>
                       {
                         SocialLinks.map((links) => (
-                          <li key={links.id} className='text-4xl ml-6 tracking-widest'>
+                          <li key={links.id} className='socialLinks'>
                             <a href={links.links}>{links.name}</a>
                           </li>
                         ))

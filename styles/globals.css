@@ -35,3 +35,35 @@ a {
       lg:hover:-translate-y-2
   }
 }
+
+@layer components {
+  .socialLinks {
+    text-decoration: none;
+    @apply
+      relative
+      text-4xl ml-6 tracking-widest
+  }
+
+  .socialLinks::after {
+    content: '';
+    @apply
+      absolute
+      bg-light-theme-title
+      dark:bg-dark-theme-title
+      h-1 w-0
+      left-0 -bottom-2
+      duration-500
+  }
+
+  .socialLinks:hover:after {
+    @apply
+      w-full
+      opacity-80
+  }
+
+  .socialLinks:hover{
+    @apply
+      opacity-60
+      duration-1000
+  }
+}
