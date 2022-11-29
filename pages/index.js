@@ -113,13 +113,13 @@ export default function Home() {
             </ul>
             {/* Nav for desktop view*/}
             <ul className="hidden lg:flex justify-end text-light-theme-text dark:text-dark-theme-text">
-                <li className="px-2 pt-1 text-3xl">
+                <li className="px-2 pt-1 text-3xl hover:opacity-80 duration-1000">
                   <BsMoonStarsFill onClick={handleThemeSwitch}/>
                 </li>
                 <ul className='lg:flex xs:pb-0 pb-12'>
                   {
                     Links.map((Link) => (
-                      <li key={Link.name} className='ml-8 font-light text-3xl'>
+                      <li key={Link.name} className='navItems'>
                         <a href={Link.link}>{Link.name}</a>
                       </li>
                     ))

@@ -22,7 +22,7 @@ module.exports = {
       },
       fontFamily: {
         body : ['Inria Sans'],
-      }
+      },
     },
   },
   plugins: [

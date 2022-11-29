@@ -37,6 +37,39 @@ a {
 }
 
 @layer components {
+  /*#region navItems*/
+  .navItems {
+    @apply
+     relative
+      ml-8 text-3xl
+      font-light
+  }
+
+  .navItems:hover {
+    @apply
+      opacity-75
+      duration-1000
+  }
+
+  .navItems::after{
+    content: '';
+    @apply
+      absolute
+      bg-light-theme-title
+      dark:bg-dark-theme-title
+      h-[0.1rem] w-0
+      left-0 -bottom-2
+      duration-500
+  }
+
+  .navItems:hover::after{
+    @apply
+      w-full
+      opacity-80
+  }
+  /*#endregion*/
+
+  /*#region socialLinks*/
   .socialLinks {
     text-decoration: none;
     @apply
@@ -55,7 +88,7 @@ a {
       duration-500
   }
 
-  .socialLinks:hover:after {
+  .socialLinks:hover::after {
     @apply
       w-full
       opacity-80
@@ -66,4 +99,5 @@ a {
       opacity-60
       duration-1000
   }
+  /*#endregion*/
 }
