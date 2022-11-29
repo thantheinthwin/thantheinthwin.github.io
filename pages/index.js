@@ -2,6 +2,7 @@ import Head from 'next/head';
 import React,{useState, useEffect} from 'react';
 import Typewriter from 'typewriter-effect';
 import ReactCardFlip from 'react-card-flip';
+import FlipText from '../components/FlipText';
 
 import { BsMoonStarsFill } from 'react-icons/bs';
 import { Squash as Hamburger } from 'hamburger-react'
@@ -12,7 +13,6 @@ import Image from 'next/image';
 import ProfilePic from '../public/Profile.png';
 
 import { TbArrowBarDown } from 'react-icons/tb';
-import { icons } from 'react-icons/lib';
 
 export default function Home() {
   const [flip, setFlip] = useState(false);
@@ -186,7 +186,7 @@ export default function Home() {
                     <span className='text-xs lg:text-xl mr-2 opacity-70 flex items-center justify-between mx-2 dark:text-light-theme-text'> Flip the card to find out ! <TbArrowBarDown/> </span>
                     </div>
                   </div>
-                  <div className='card grid content-center' onClick={() => setFlip(!flip)}>
+                  <div className='card grid content-center lg:h-[32rem]' onClick={() => setFlip(!flip)}>
                     <ul className='text-base lg:text-xl font-bold m-6 dark:text-light-theme-text'>
                       <li className='lg:my-4'>🎓 <br/>Alumini of <u><b><a href='https://www.miit.edu.mm/'>MIIT</a></b></u></li>
                       <li className='lg:my-4'>📖 <br/>Currently studying in <b>MCC</b> for <b>NCC Level 5 Diploma in Computing</b></li>
@@ -230,7 +230,10 @@ export default function Home() {
                   </div>
                 </div>
                 <div className='absolute bottom-0 w-screen h-72 p-2'>
-                  <span className='absolute text-6xl lg:text-9xl bottom-0 lg:bottom-5 lg:left-12'>LET'S <br/> CONNECT</span>
+                  <span className='absolute text-6xl lg:text-9xl bottom-0 lg:bottom-5 lg:left-12'>
+                    <FlipText FlipText={"LET'S"}></FlipText>
+                    <FlipText FlipText={"CONNECT"}></FlipText>
+                  </span>
                   <div className='absolute bottom-[4.5rem] right-4 border-b-4 lg:hidden border-light-theme-title dark:border-dark-theme-title pb-1'>
                     <ul className='flex'>
                       {
