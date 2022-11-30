@@ -3,6 +3,7 @@ import React,{useState, useEffect} from 'react';
 import Typewriter from 'typewriter-effect';
 import ReactCardFlip from 'react-card-flip';
 import FlipText from '../components/FlipText';
+import BouncingText from '../components/BouncingText';
 
 import { BsMoonStarsFill } from 'react-icons/bs';
 import { Squash as Hamburger } from 'hamburger-react'
@@ -74,7 +75,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <section className='font-body bg-light-theme-background dark:bg-dark-theme-background'>
+        <section className='font-body bg-light-theme-background dark:bg-dark-theme-background cursor-default'>
           <nav className="absolute z-50 font-light pr-2 py-2 lg:pr-4 lg:py-4 w-screen">
             {/* Nav for mobile view */}
             <ul className="lg:hidden flex justify-end text-light-theme-text dark:text-dark-theme-text">
@@ -133,7 +134,13 @@ export default function Home() {
               <div className='absolute w-screen text-light-theme-text dark:text-dark-theme-text lg:text-center grid content-center top-1/3'>
                 <div className= 'font-light text-sm ml-6 lg:text-3xl mb-10 lg:mb-24'>BE CREATIVE</div>
                 <div className='font-light text-xl ml-6 lg:text-5xl'>Hello, my name is</div>
-                <div className='font-bold text-5xl m-6 lg:text-8xl dark:text-dark-theme-title'>THANT HEIN THWIN</div>
+                <div className='font-bold text-5xl m-6 lg:text-8xl dark:text-dark-theme-title lg:flex justify-center'>
+                  <div className='flex'>
+                  <BouncingText BouncingText={'THANT'}></BouncingText>
+                  <BouncingText BouncingText={'HEIN'}></BouncingText>
+                  </div>
+                  <BouncingText BouncingText={'THWIN'}></BouncingText>
+                </div>
                 <div className='font-light text-xl ml-8 lg:text-3xl flex lg:justify-center'>I am a&nbsp;
                  <Typewriter
                     options={{

@@ -1,4 +1,3 @@
-import { transform } from 'framer-motion';
 import React from 'react'
 
 export default function FlipText(input) {
@@ -8,7 +7,7 @@ export default function FlipText(input) {
       {
         sentence.map((letter, index) => {
             return (
-                <span key={index} className='mirror lg:bg-teal-50 lg:p-1'>
+                <span key={index} className='mirror lg:p-1'>
                     {letter}
                 </span>
             )

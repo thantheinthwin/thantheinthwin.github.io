@@ -100,19 +100,36 @@ a {
       duration-1000
   }
   /*#endregion*/
+  
+  /*#region mirror*/
   .mirror{
-    display: inline-block;
-    cursor: default;
-    transition-duration: 500ms;
+    @apply
+      duration-500
+      inline-block
   }
   
   .mirror:hover{
-    display: inline-block;
-    cursor: default;
     -webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
     -moz-transform: matrix(-1, 0, 0, 1, 0, 0);
     -o-transform: matrix(-1, 0, 0, 1, 0, 0);
     transform: matrix(-1, 0, 0, 1, 0, 0);
-    transition-duration: 500ms;
+    @apply
+      inline-block
+      duration-500
   }
+  /*#endregion*/
+
+  /*#region bouncingText*/
+  .bouncing{
+    @apply
+      duration-500
+      inline-block
+  }
+
+  .bouncing:hover{
+    @apply
+      scale-150
+      duration-500
+  }
+  /*#endregion*/
 }
