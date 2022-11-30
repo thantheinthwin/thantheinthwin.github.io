@@ -76,6 +76,7 @@ export default function Home() {
 
       <main>
         <section className='font-body bg-light-theme-background dark:bg-dark-theme-background cursor-default'>
+          {/* Nav bar */}
           <nav className="absolute z-50 font-light pr-2 py-2 lg:pr-4 lg:py-4 w-screen">
             {/* Nav for mobile view */}
             <ul className="lg:hidden flex justify-end text-light-theme-text dark:text-dark-theme-text">
@@ -165,7 +166,7 @@ export default function Home() {
             </div>
             {/* About div */}
             <div id='about' className='snap-start w-screen h-screen grid content-center lg:flex items-center justify-between text-6xl lg:p-36'>
-              <div className='hidden lg:grid lg: w-2/3 mr-20'>
+              <div className='hidden lg:grid lg: w-2/3 mr-20 font-light'>
                   <h1 className='text-light-theme-title dark:text-light-theme-green'>About Me</h1>
                   <p className='text-2xl tracking-widest mt-4 leading-relaxed text-light-theme-text dark:text-dark-theme-title'>
                   Started learning about <b>web development</b> back in <b>2017</b>. As an alumni of <br/>
@@ -215,7 +216,40 @@ export default function Home() {
               </div>
             </div>
             {/* Skills div */}
-            <div id='skills' className='snap-start w-screen h-screen flex items-center justify-center text-6xl'>3</div>
+            <div id='skills' className='relative snap-start w-screen h-screen flex items-center justify-center text-6xl'>
+              <div className='absolute left-0 hidden w-2/3 h-screen lg:grid content-center text-2xl px-36 font-light tracking-widest text-light-theme-text dark:text-dark-theme-text'>
+                  <div>
+                    Here are a few technologies I've been recently working with : 
+                  </div>
+                  <div className='flex justify-evenly my-10'>
+                    <div>
+                      <ul className='list-disc'>
+                        <li className='mb-2'>JavaScript</li>
+                        <li className='mb-2'>React</li>
+                        <li className='mb-2'>Node.js</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <ul className='list-disc'>
+                        <li className='mb-2'>Express.js</li>
+                        <li className='mb-2'>MongoDB</li>
+                        <li className='mb-2'>MySql</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div>
+                    As for career-wise experience :
+                    <ul className='list-disc my-10 ml-10'>
+                      <li className='mb-4'>ICT Teacher, IT Support, Graphic Designer and IT consultant in <b>ILBSM International School</b></li>
+                      <li className='mb-4'>Quality Assurance Developer in <b>Armor Piercing Indie Games Production</b></li>
+                      <li className='mb-4'>Video Translator</li>
+                    </ul>
+                  </div>
+              </div>
+              <div className='absolute lg:right-0 w-screen lg:w-1/3 h-screen bg-teal-200 text-center grid items-center'>
+                  Effect
+              </div>
+            </div>
             {/* Projects div */}
             <div id='projects' className='snap-start w-screen h-screen flex items-center justify-center text-6xl'>4</div>
             {/* Contact div */}

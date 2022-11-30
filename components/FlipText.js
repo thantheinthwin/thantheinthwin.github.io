@@ -1,15 +1,17 @@
 import React from 'react'
+import FlipTextSpan from './FlipTextSpan';
 
 export default function FlipText(input) {
     const sentence = input.FlipText.split("");
+
   return (
-    <div>
+    <div className='flex'>
       {
         sentence.map((letter, index) => {
             return (
-                <span key={index} className='mirror lg:p-1'>
+                <FlipTextSpan key={index}>
                     {letter}
-                </span>
+                </FlipTextSpan>
             )
         })
       }
