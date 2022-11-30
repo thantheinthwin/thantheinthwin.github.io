@@ -10,7 +10,7 @@ export default function FlipText(input) {
         sentence.map((letter, index) => {
             return (
                 <FlipTextSpan key={index}>
-                    {letter}
+                    {letter === " " ? "\u00A0" : letter}
                 </FlipTextSpan>
             )
         })

@@ -136,11 +136,13 @@ export default function Home() {
                 <div className= 'font-light text-sm ml-6 lg:text-3xl mb-10 lg:mb-24'>BE CREATIVE</div>
                 <div className='font-light text-xl ml-6 lg:text-5xl'>Hello, my name is</div>
                 <div className='font-bold text-5xl m-6 lg:text-8xl dark:text-dark-theme-title lg:flex justify-center'>
-                  <div className='flex'>
-                  <BouncingText BouncingText={'THANT'}></BouncingText>
-                  <BouncingText BouncingText={'HEIN'}></BouncingText>
+                  <div className='hidden lg:flex'>
+                  <BouncingText BouncingText={'THANT HEIN THWIN'}></BouncingText>
                   </div>
-                  <BouncingText BouncingText={'THWIN'}></BouncingText>
+                  <div className='lg:hidden'>
+                    <BouncingText BouncingText={'THANT HEIN'}></BouncingText>
+                    <BouncingText BouncingText={'THWIN'}></BouncingText>
+                  </div>
                 </div>
                 <div className='font-light text-xl ml-8 lg:text-3xl flex lg:justify-center'>I am a&nbsp;
                  <Typewriter

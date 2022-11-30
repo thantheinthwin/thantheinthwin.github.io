@@ -25,6 +25,7 @@ export default function FlipTextSpan({children}) {
                   if(!isPlaying)
                     mirror()
                 }}
+                onAnimationComplete={() => setIsPlaying(false)}
                 className='mirror lg:p-1'>
                     {children}
                 </motion.span>

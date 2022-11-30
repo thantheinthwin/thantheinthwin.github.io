@@ -107,12 +107,6 @@ a {
       duration-500
       inline-block
   }
-  
-  .mirror:hover{
-    @apply
-      inline-block
-      duration-500
-  }
   /*#endregion*/
 
   /*#region bouncingText*/
@@ -120,12 +114,6 @@ a {
     @apply
       duration-500
       inline-block
-  }
-
-  .bouncing:hover{
-    @apply
-      scale-150
-      duration-500
   }
   /*#endregion*/
 }
