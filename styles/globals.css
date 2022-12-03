@@ -116,4 +116,13 @@ a {
       inline-block
   }
   /*#endregion*/
+
+  /*#region TextSphere*/
+  .tagcloud {
+    @apply
+      text-base lg:text-2xl
+      font-body
+      font-normal lg:font-bold
+  }
+  /*#endregion*/
 }

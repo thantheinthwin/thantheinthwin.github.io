@@ -14,6 +14,7 @@ import Image from 'next/image';
 import ProfilePic from '../public/Profile.png';
 
 import { TbArrowBarDown } from 'react-icons/tb';
+import TextShpere from '../components/TextSphere';
 
 export default function Home() {
   const [flip, setFlip] = useState(false);
@@ -72,6 +73,7 @@ export default function Home() {
       <Head>
         <title>Steve's Portfolio</title>
         <link rel='icon' href='/Logo.png'></link>
+        <script src="https://cdn.jsdelivr.net/npm/TagCloud@2.2.0/dist/TagCloud.min.js"></script>
       </Head>
 
       <main>
@@ -248,8 +250,11 @@ export default function Home() {
                     </ul>
                   </div>
               </div>
-              <div className='absolute lg:right-0 w-screen lg:w-1/3 h-screen bg-teal-200 text-center grid items-center'>
-                  Effect
+              <div className='absolute lg:right-0 w-screen lg:w-1/3 h-screen text-center grid items-center'>
+                <div className='mt-8 justify-center w-screen'><TextShpere/></div>
+                <div className='card lg:hidden grid mx-10 -mt-20'>
+                  <span className='text-2xl flex justify-center dark:text-light-theme-text'>What I've learned till now</span>
+                </div>
               </div>
             </div>
             {/* Projects div */}
