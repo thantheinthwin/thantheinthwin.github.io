@@ -52,7 +52,7 @@ export default function Home() {
     {name: "Home", link: "#home"},
     {name: "About", link: "#about"},
     {name: "Skills", link: "#skills"},
-    // {name: "Projects", link: "#projects"},
+    {name: "Projects", link: "#projects"},
     {name: "Contact", link: "#contact"},
   ];
 
@@ -257,8 +257,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            {/* Projects div
-            <div id='projects' className='snap-start w-screen h-screen flex items-center justify-center text-6xl'>4</div> */}
+            {/* Projects div */}
+            <div id='projects' className='snap-start w-screen h-screen flex items-center justify-center text-6xl'>4</div>
             {/* Contact div */}
             <div id='contact' className='snap-start w-screen h-screen flex items-center justify-center text-6xl'>
               <div className='relative w-screen h-screen grid content-between justify-start p-4 text-light-theme-text dark:text-dark-theme-text'>
