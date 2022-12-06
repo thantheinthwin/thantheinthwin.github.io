@@ -101,7 +101,7 @@ export default function Home() {
                         ))
                       }
                     </ul>
-                    <div className='absolute bottom-[6.7rem] mb-10 text-5xl  text-light-theme-text dark:text-dark-theme-text mt-20 translate-y-11'>
+                    <div className='absolute bottom-[8.2rem] mb-10 text-5xl  text-light-theme-text dark:text-dark-theme-text mt-20 translate-y-11'>
                       <ul className='flex w-screen justify-center'>
                         {
                           SocialLinks.map((icons) => (
