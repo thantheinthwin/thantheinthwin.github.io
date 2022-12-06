@@ -134,7 +134,7 @@ export default function Home() {
           <div className='relative snap-y snap-mandatory h-screen w-screen overflow-y-scroll overflow-x-hidden'>
             {/* Home div */}
             <div id='home' className='snap-start w-full h-screen justify-center text-6xl'>
-              <div className='absolute w-screen text-light-theme-text dark:text-dark-theme-text lg:text-center grid content-center top-1/3'>
+              <div className='absolute w-screen text-light-theme-text dark:text-dark-theme-text lg:text-center grid content-center top-1/4'>
                 <div className= 'font-light text-sm ml-6 lg:text-3xl mb-10 lg:mb-24'>BE CREATIVE</div>
                 <div className='font-light text-xl ml-6 lg:text-5xl'>Hello, my name is</div>
                 <div className='font-bold text-5xl m-6 lg:text-8xl dark:text-dark-theme-title lg:flex justify-center'>
@@ -156,7 +156,7 @@ export default function Home() {
                   />
                 </div>
               </div>
-              <div className='absolute w-screen flex justify-center text-5xl bottom-10 lg:text-7xl text-light-theme-text dark:text-dark-theme-text'>
+              <div className='absolute w-screen flex justify-center text-5xl bottom-16 lg:text-7xl text-light-theme-text dark:text-dark-theme-text'>
                 <ul className='flex'>
                   {
                     SocialLinks.map((icons) => (
@@ -278,11 +278,11 @@ export default function Home() {
                   </div>
                 </div>
                 <div className='absolute bottom-0 w-screen h-72 p-2'>
-                  <span className='absolute text-6xl lg:text-9xl bottom-0 lg:bottom-5 lg:left-12'>
+                  <span className='absolute text-6xl lg:text-9xl bottom-14 lg:bottom-5 lg:left-12'>
                     <FlipText FlipText={"LET'S"}></FlipText>
                     <FlipText FlipText={"CONNECT"}></FlipText>
                   </span>
-                  <div className='absolute bottom-[4.5rem] right-4 border-b-4 lg:hidden border-light-theme-title dark:border-dark-theme-title pb-1'>
+                  <div className='absolute bottom-[7rem] right-4 border-b-4 lg:hidden border-light-theme-title dark:border-dark-theme-title pb-1'>
                     <ul className='flex'>
                       {
                         SocialLinks.map((icons) => (
