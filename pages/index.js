@@ -192,7 +192,7 @@ export default function Home() {
                 {/* About me card */}
                 <ReactCardFlip isFlipped={flip} flipDirection='horizontal'>
                   <div className='card grid'  onClick={() => setFlip(!flip)}>
-                    <Image src={ProfilePic} alt='Profile Picture' className='rounded-2xl w-[22rem] lg:m-2'/>
+                    <Image src={ProfilePic} alt='Profile Picture' className='rounded-2xl lg:w-[22rem] lg:m-2'/>
                     <div className='grid'>
                     <span className='text-base lg:text-3xl ml-2 dark:text-light-theme-title'> About Me ? </span>
                     <span className='text-xs lg:text-xl mr-2 opacity-70 flex items-center justify-between mx-2 dark:text-light-theme-text'> Flip the card to find out ! <TbArrowBarDown/> </span>
