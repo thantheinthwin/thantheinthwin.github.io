@@ -18,3 +18,8 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+
+section{
+    width: 100vw;
+    height: 100vh;
+}

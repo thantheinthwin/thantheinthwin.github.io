@@ -1,16 +1,15 @@
-import React from 'react'
-import Box from '@mui/material/Box';
+import React, { forwardRef } from 'react'
+import { motion } from 'framer-motion';
 
-const Contact = () => {
+const Contact = forwardRef((state, ref) => {
   return (
-    <Box
-      sx={{ bgcolor: "background.default", color: "text.primary" }}
-      className="relative flex items-center justify-center w-screen h-screen snap-start"
+    <motion.section
       id="contact"
+      className="relative p-4 snap-start"
     >
-      Contact
-    </Box>
+      <div ref={ref} className='flex items-center justify-center w-full h-full bg-blue-50'>Contact</div>
+    </motion.section>
   );
-}
+})
 
 export default Contact

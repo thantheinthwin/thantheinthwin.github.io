@@ -3,13 +3,13 @@ import { useTheme } from '@emotion/react';
 
 import { ColorModeContext } from '..';
 
-import { Button, Grid, IconButton, Link, Typography } from '@mui/material'
+import { Button, Chip, Grid, IconButton, Link, Typography } from '@mui/material'
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 
 import { BsSend } from 'react-icons/bs'
 
-const NavBar = () => {
+const NavBar = (location) => {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
 
@@ -44,15 +44,15 @@ const NavBar = () => {
             <Typography variant='Logo' className='text-4xl dark:text-white'>Steve</Typography>
           </Grid>
           <Grid item md={8} className='items-center justify-center hidden gap-8 md:flex'>
-            {links.map(link => <Link href={link.path} underline='none' className='text-black transition-all duration-200 ease-in-out dark:text-white hover:scale-110 hover:font-semibold'>{link.to}</Link>)}
+            {links.map((link, i) => <Link key={i} href={link.path} underline='none' className='text-black transition-all duration-200 ease-in-out dark:text-white hover:scale-110 hover:font-semibold'>{link.to}</Link>)}
           </Grid>
           <Grid item xs={6} md={2} className='flex justify-end'>
             <IconButton variant='text' onClick={colorMode.toggleTheme}>{theme.palette.mode === "dark" ? <DarkModeIcon/> : <LightModeIcon/>}</IconButton>
           </Grid>
         </Grid>
       </div>
-      <div className='fixed top-0 z-10 flex items-center justify-center h-screen bg-slate-300'>
-        <span className='-rotate-90'>Home</span>
+      <div className='fixed top-0 z-10 flex items-center justify-center h-screen w-14 md:hidden'>
+        <span className='-rotate-90'><Chip label={location?.location} variant='outlined'/></span>
       </div>
     </div>
   )
