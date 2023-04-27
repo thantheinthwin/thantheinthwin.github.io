@@ -27,7 +27,7 @@ const Main = () => {
       setLocation("Portfolio");
     }
     if(contactIsVisible){
-      setLocation("Contact Me");
+      setLocation("Contact");
     }
   }, [homeIsVisible, aboutIsVisible, skillIsVisible, portfolioIsVisible, contactIsVisible])
 

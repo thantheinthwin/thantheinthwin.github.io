@@ -27,7 +27,7 @@ export default function App() {
           ...( mode === 'light' 
           ? {
           // palette values for light mode
-           
+            
           } 
           : {
           // palette values for dark mode

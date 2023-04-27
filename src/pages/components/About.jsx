@@ -7,7 +7,7 @@ const About = forwardRef((state, ref) => {
       id="about"
       className="relative p-4 snap-start"
     >
-      <div ref={ref} className='flex items-center justify-center w-full h-full bg-blue-100'>About</div>
+      <div ref={ref} className='flex items-center justify-center w-full h-full bg-blue-50'>About</div>
       {/* {console.log("About : ", state)} */}
     </motion.section>
   );

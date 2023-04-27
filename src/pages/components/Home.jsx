@@ -6,9 +6,9 @@ const Home = forwardRef((state, ref) => {
   return (
     <motion.section
       id="home"
-      className="relative p-4 snap-start"
+      className="relative p-4 bg-white snap-start dark:bg-zinc-600"
     >
-      <div ref={ref} className='flex items-center justify-center w-full h-full bg-blue-50'>Home</div>
+      <div ref={ref} className='flex items-center justify-center w-full h-full'>Home</div>
       {/* {console.log("Home : ", state)} */}
     </motion.section>
   );
