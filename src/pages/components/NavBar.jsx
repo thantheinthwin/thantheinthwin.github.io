@@ -11,6 +11,8 @@ import LightModeIcon from '@mui/icons-material/LightMode'
 import { AiOutlineAppstore } from 'react-icons/ai'
 import { IoClose } from 'react-icons/io5'
 import { BsSend } from 'react-icons/bs'
+import { HiOutlineHome, HiOutlineUserCircle, HiOutlineCode } from 'react-icons/hi'
+import { MdOutlineWorkOutline } from 'react-icons/md'
 
 const NavBar = (location) => {
   const theme = useTheme();
@@ -20,47 +22,29 @@ const NavBar = (location) => {
 
   const links = [
     {
-      to: 'Home',
-      path: '#home'
-    },
-    {
-      to: 'About',
-      path: '#about'
-    },
-    {
-      to: 'Skill',
-      path: '#skill'
-    },
-    {
-      to: 'Portfolio',
-      path: '#portfolio'
-    },
-    {
-      to: <Button className='text-black border-black rounded-md hover:text-white hover:border-transparent hover:bg-black dark:text-white dark:border-white dark:hover:text-black dark:hover:bg-white' variant='outlined' endIcon={<BsSend/>}>Work with me</Button>,
-      path: '#contact'
-    }
-  ]
-
-  const mobileNavButtons = [
-    {
       name: 'Home',
-      link: '#home'
+      link: '#home',
+      icon: <HiOutlineHome className='m-2 text-xl'/>
     },
     {
       name: 'About',
-      link: '#about'
+      link: '#about',
+      icon: <HiOutlineUserCircle className='m-2 text-xl'/>
     },
     {
       name: 'Skill',
-      link: '#skill'
+      link: '#skill',
+      icon: <HiOutlineCode className='m-2 text-xl'/>
     },
     {
       name: 'Portfolio',
-      link: '#portfolio'
+      link: '#portfolio',
+      icon: <MdOutlineWorkOutline className='m-2 text-xl'/>
     },
     {
-      name: 'Contact',
-      link: '#contact'
+      name: 'Work with me',
+      link: '#contact',
+      icon: <BsSend className='m-2 text-xl'/>
     }
   ]
   
@@ -83,16 +67,31 @@ const NavBar = (location) => {
             md={8}
             className="items-center justify-center hidden gap-8 md:flex"
           >
-            {links.map((link, i) => (
-              <Link
-                key={i}
-                href={link.path}
-                underline="none"
-                className="text-black transition-all duration-200 ease-in-out dark:text-white hover:scale-110 hover:font-semibold"
-              >
-                {link.to}
-              </Link>
-            ))}
+            {links.map((link, i, {length}) => {
+              if(i + 1 == length){
+                return (
+                  <Link
+                    key={i}
+                    href={link.link}
+                    underline="none"
+                    className="transition-all duration-200 ease-in-out hover:scale-110 hover:font-semibold"
+                  >
+                    <Button className='text-black border-black rounded-md hover:text-white hover:border-transparent hover:bg-black dark:text-white dark:border-white dark:hover:text-black dark:hover:bg-white' variant='outlined' endIcon={<BsSend/>}>{link.name}</Button>
+                  </Link>
+                )
+              }else{
+                return(
+                  <Link
+                  key={i}
+                  href={link.link}
+                  underline="none"
+                  className="text-black transition-all duration-200 ease-in-out dark:text-white hover:scale-110 hover:font-semibold"
+                  >
+                    {link.name}
+                  </Link>
+                )
+              }
+            })}
           </Grid>
           <Grid item xs={6} md={2} className="flex justify-end">
             <IconButton variant="text" onClick={colorMode.toggleTheme}>
@@ -117,6 +116,8 @@ const NavBar = (location) => {
           </span>
         </div>
       </div>
+
+      {/* menu for mobile view */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -124,24 +125,29 @@ const NavBar = (location) => {
             animate={{ x: 0 }}
             exit={{ x: -500 }}
             transition={{ ease: "easeInOut", duration: 1 }}
-            className="fixed z-20 grid w-screen h-screen grid-cols-4 grid-rows-6 bg-white dark:bg-zinc-700"
+            className="fixed z-20 grid w-screen h-screen grid-cols-4 grid-rows-6 bg-white dark:bg-neutral-800"
           >
             <div className="flex items-start justify-end row-span-1 col-span-full">
               <IconButton variant="text" onClick={() => setMenuOpen(!menuOpen)}>
                 <IoClose />
               </IconButton>
             </div>
-            <div className="grid col-span-2 col-start-2 grid-rows-5 row-span-4 gap-6">
-              {mobileNavButtons.map((item) => (
+            <motion.div className="grid col-span-2 col-start-2 grid-rows-5 row-span-4 gap-6">
+              {links.map((item) => (
                 <Button
                   variant="outlined"
                   className="row-span-1 text-black border-black rounded-lg focus:border-black hover:border-black dark:text-white dark:border-white"
                   onClick={() => setMenuOpen(!menuOpen)}
                 >
-                  <a href={item.link}>{item.name}</a>
+                  <a href={item.link} className='flex items-center justify-center w-full h-full'>
+                    <div className='flex flex-col items-center justify-center'>
+                      {item.icon}
+                      {item.name}
+                    </div>
+                  </a>
                 </Button>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
