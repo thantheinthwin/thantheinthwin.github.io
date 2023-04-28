@@ -1,0 +1,1 @@
+export { default as GeekPic } from './Coding-bro.png'

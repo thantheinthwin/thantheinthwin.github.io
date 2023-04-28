@@ -29,3 +29,33 @@ section{
     width: 100vw;
     height: 100vh;
 }
+
+/* Corner border */
+div.corner-border{
+    display: inline-block;
+    position: relative;
+    border: 1px solid #111;
+    border-radius: 0.125rem;
+}
+
+div.corner-border::before{
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% - 12px);
+    background: #fff;
+    transform: scaleY(1);
+}
+
+div.corner-border::after{
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: -2px;
+    height: calc(100% + 4px);
+    width: calc(100% - 12px);
+    background: #fff;
+    transform: scaleY(1);
+}

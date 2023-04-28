@@ -5,7 +5,7 @@ const Portfolio = forwardRef((state, ref) => {
   return (
     <motion.section
       id="portfolio"
-      className="relative p-4 snap-start"
+      className="relative p-8 snap-start"
     >
       <div ref={ref} className='flex items-center justify-center w-full h-full bg-blue-50'>Portfolio</div>
     </motion.section>

@@ -104,6 +104,8 @@ const NavBar = (location) => {
           </Grid>
         </Grid>
       </div>
+      
+      {/* Sidebar */}
       <div className="fixed top-0 z-10 flex flex-col items-center justify-between h-screen w-14 md:hidden">
         <div className="flex flex-col items-center w-full pt-5 h-1/6">
           <IconButton variant="text" onClick={() => setMenuOpen(!menuOpen)}>
@@ -111,7 +113,7 @@ const NavBar = (location) => {
           </IconButton>
         </div>
         <div className="flex flex-col items-center justify-center w-full h-2/6">
-          <span className="-rotate-90">
+          <span className="-mb-8 -rotate-90">
             <Chip label={location?.location} variant="outlined" />
           </span>
         </div>
