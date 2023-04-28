@@ -1,4 +1,4 @@
-import React, { use, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer';
 
 import { Home, NavBar, About, Skill, Portfolio, Contact } from '.';

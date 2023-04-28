@@ -133,9 +133,10 @@ const NavBar = (location) => {
               </IconButton>
             </div>
             <motion.div className="grid col-span-2 col-start-2 grid-rows-5 row-span-4 gap-6">
-              {links.map((item) => (
+              {links.map((item, i) => (
                 <Button
                   variant="outlined"
+                  key={i}
                   className="row-span-1 text-black border-black rounded-lg focus:border-black hover:border-black dark:text-white dark:border-white"
                   onClick={() => setMenuOpen(!menuOpen)}
                 >
