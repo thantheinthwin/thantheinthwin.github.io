@@ -27,12 +27,15 @@ export default function App() {
           ...( mode === 'light' 
           ? {
           // palette values for light mode
-      
+            
           } 
           : {
           // palette values for dark mode
            background: {
             default: colors.grey[800]
+           },
+           grey: {
+            700: colors.grey[400]
            }
           }),
         },

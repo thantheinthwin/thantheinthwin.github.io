@@ -37,8 +37,8 @@ const NavBar = (location) => {
       icon: <HiOutlineCode className='m-2 text-xl'/>
     },
     {
-      name: 'Portfolio',
-      link: '#portfolio',
+      name: 'Qualificaton',
+      link: '#qualification',
       icon: <MdOutlineWorkOutline className='m-2 text-xl'/>
     },
     {
@@ -54,7 +54,7 @@ const NavBar = (location) => {
         <Grid
           container
           padding={2}
-          className="fixed bottom-0 z-30 md:top-0 md:bottom-auto"
+          className="fixed bottom-0 z-30 shadow md:top-0 md:bottom-auto"
           sx={{ bgcolor: "background.default" }}
         >
           <Grid item xs={6} md={2}>
@@ -76,9 +76,15 @@ const NavBar = (location) => {
                     underline="none"
                     className="transition-all duration-200 ease-in-out hover:scale-110 hover:font-semibold"
                   >
-                    <Button className='text-black border-black rounded-md hover:text-white hover:border-transparent hover:bg-black dark:text-white dark:border-white dark:hover:text-black dark:hover:bg-white' variant='outlined' endIcon={<BsSend/>}>{link.name}</Button>
+                    <Button
+                      className="text-black border-black rounded-md hover:text-white hover:border-transparent hover:bg-black dark:text-white dark:border-white dark:hover:text-black dark:hover:bg-white"
+                      variant="outlined"
+                      endIcon={<BsSend />}
+                    >
+                      {link.name}
+                    </Button>
                   </Link>
-                )
+                );
               }else{
                 return(
                   <Link

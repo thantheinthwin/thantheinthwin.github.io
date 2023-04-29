@@ -59,3 +59,13 @@ div.corner-border::after{
     background: #fff;
     transform: scaleY(1);
 }
+
+::-moz-selection { /* Code for Firefox */
+    color: white;
+    background: black;
+  }
+  
+::selection {
+color: white;
+background: black;
+}

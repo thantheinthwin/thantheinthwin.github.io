@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer';
 
-import { Home, NavBar, About, Skill, Portfolio, Contact } from '.';
+import { Home, NavBar, About, Skill, Qualification, Contact } from '.';
 import { AnimatePresence } from 'framer-motion';
 
 const Main = () => {
@@ -10,7 +10,7 @@ const Main = () => {
   const {ref: homeRef, inView: homeIsVisible} = useInView();
   const {ref: aboutRef, inView: aboutIsVisible} = useInView();
   const {ref: skillRef, inView: skillIsVisible} = useInView();
-  const {ref: portfolioRef, inView: portfolioIsVisible} = useInView();
+  const {ref: qualificationRef, inView: qualificationIsVisible} = useInView();
   const {ref: contactRef, inView: contactIsVisible} = useInView();
 
   useEffect(() => {
@@ -23,19 +23,19 @@ const Main = () => {
     if(skillIsVisible){
       setLocation("Skill");
     }
-    if(portfolioIsVisible){
-      setLocation("Portfolio");
+    if(qualificationIsVisible){
+      setLocation("Qualification");
     }
     if(contactIsVisible){
       setLocation("Contact");
     }
-  }, [homeIsVisible, aboutIsVisible, skillIsVisible, portfolioIsVisible, contactIsVisible])
+  }, [homeIsVisible, aboutIsVisible, skillIsVisible, qualificationIsVisible, contactIsVisible])
 
   const components = [
     <Home ref={homeRef} state={homeIsVisible} />,
     <About ref={aboutRef} state={aboutIsVisible} />,
     <Skill ref={skillRef} state={skillIsVisible} />,
-    <Portfolio ref={portfolioRef} state={portfolioIsVisible} />,
+    <Qualification ref={qualificationRef} state={qualificationIsVisible} />,
     <Contact ref={contactRef} state={contactIsVisible} />,
   ];
   return (

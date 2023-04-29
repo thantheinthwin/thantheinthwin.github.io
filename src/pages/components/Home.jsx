@@ -34,7 +34,7 @@ const Home = forwardRef((state, ref) => {
 
   const [moreInfo, setMoreInfo] = useState(false);
 
-  const info = ['MERN Stack', 'NextJs', 'PHP', 'Python', 'Jquery', 'C', 'C#', 'Java', 'Firebase', 'MySql', 'MariaDB', 'Git', 'Unity', 'Tailwind', 'Material UI', 'Bootstrap 5'];
+  const info = ['MERN Stack', 'NextJs', ,'Redux', 'PHP', 'Python', 'Jquery', 'C', 'C#', 'Java', 'Firebase', 'MySql', 'MariaDB', 'Git', 'Unity', 'Tailwind', 'Material UI', 'Bootstrap 5'];
 
   return (
     <motion.section
@@ -97,12 +97,12 @@ const Home = forwardRef((state, ref) => {
 
         {/* Second div */}
         <div className="flex flex-row self-end justify-center order-first w-2/3 col-span-1 md:w-full md:self-center md:order-none md:col-span-3 lg:col-span-2">
-          <div className="p-2 transition-all border border-black rounded-lg lg:p-4 dark:border-white md:pb-6">
-            <div className="p-1 corner-border dark:border-white dark:before:bg-neutral-700 dark:after:bg-neutral-700 lg:p-3">
+          <div className="p-2 transition-all border border-black rounded-lg lg:p-4 dark:border-white">
+            <div className="p-1 corner-border md:pb-6 lg:pb-0 dark:border-white dark:before:bg-neutral-700 dark:after:bg-neutral-700 lg:p-3">
               <div className="relative z-10 grid gap-2 divide-y">
                 <Image
                   src={GeekPic}
-                  alt='GeekPic'
+                  alt="GeekPic"
                   className="object-cover rounded bg-neutral-200 dark:bg-neutral-600"
                 />
                 <Typography
@@ -123,25 +123,51 @@ const Home = forwardRef((state, ref) => {
                   </div>
                   <div>
                     <AnimatePresence>
-                    {moreInfo && <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0, transition: {duration: 0.25} }}
-                      transition={{ duration: 0.5 }}
-                      className='grid grid-cols-2 gap-1 pt-2'
-                    >
-                      {info.map((item, i) => 
-                        <Typography key={i} variant='caption' className='col-span-1 text-neutral-600 dark:text-neutral-300'>{item}</Typography>
+                      {moreInfo && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{
+                            height: 0,
+                            opacity: 0,
+                            transition: { duration: 0.25 },
+                          }}
+                          transition={{ duration: 0.5 }}
+                          className="grid grid-cols-2 gap-1 pt-2"
+                        >
+                          <Typography variant="h6" className="col-span-2">
+                            Technologies I use
+                          </Typography>
+                          {info.map((item, i) => (
+                            <Typography
+                              key={i}
+                              variant="body2"
+                              className="col-span-1 text-neutral-600 dark:text-neutral-300"
+                            >
+                              {item}
+                            </Typography>
+                          ))}
+                        </motion.div>
                       )}
-                      </motion.div>
-                    }
                     </AnimatePresence>
-                    <div className='flex flex-row-reverse items-center justify-center py-2'>
-                      <IconButton onClick={() => setMoreInfo(!moreInfo)} sx={{fontSize: '1rem'}}>
-                        {!moreInfo 
-                        ? <AiOutlineDown/>
-                        : <AiOutlineUp/>
-                        }
+                    <div className="flex flex-col items-center justify-center gap-1 py-2">
+                      {!moreInfo && (
+                        <AnimatePresence mode='wait'>
+                          <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} transition={{ duration: 1 }}>
+                            <Typography
+                              variant="subtitle2"
+                              sx={{ color: "grey.700" }}
+                            >
+                              More about me
+                            </Typography>
+                          </motion.div>
+                        </AnimatePresence>
+                      )}
+                      <IconButton
+                        onClick={() => setMoreInfo(!moreInfo)}
+                        sx={{ fontSize: "1rem" }}
+                      >
+                        {!moreInfo ? <AiOutlineDown /> : <AiOutlineUp />}
                       </IconButton>
                     </div>
                   </div>
