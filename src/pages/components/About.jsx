@@ -35,9 +35,9 @@ const About = forwardRef((state, ref) => {
           <Image src={ProfilePic} alt='ProfilePic' className='object-cover filter grayscale'/>
         </div>
         <div className='flex flex-col col-span-1 p-6 text-center md:justify-center md:text-left md:col-span-4'>
-          <Typography variant='h4' sx={{fontWeight: 'bold'}}>About Me</Typography>
-          <Typography variant='subtitle2' sx={{color: 'grey.700'}} className='mb-2'>My Introduction</Typography>
-          <Typography align='justify' variant='body2' paragraph='true' sx={{fontWeight: 'light'}}>
+          <Typography variant='h3' sx={{fontWeight: 'bold'}}>About Me</Typography>
+          <Typography variant='h6' sx={{color: 'grey.700'}} className='mb-2'>My Introduction</Typography>
+          <Typography align='justify' variant='body2' paragraph={true} sx={{fontWeight: 'light'}}>
             I love to create web applications basically through MERN technology and I have also built some using PHP. 
             I have over 3 years of experience in web development. And I am currently a student persuing a Bachelor Degree in Computing with honours through NCC educaton.
           </Typography>

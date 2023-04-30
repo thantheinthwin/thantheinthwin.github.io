@@ -38,6 +38,7 @@ const Main = () => {
     <Qualification ref={qualificationRef} state={qualificationIsVisible} />,
     <Contact ref={contactRef} state={contactIsVisible} />,
   ];
+  
   return (
     <AnimatePresence mode='wait'>
       <div className='relative w-screen h-screen overflow-x-hidden overflow-y-scroll scrollbar-hide snap-y snap-mandatory'>
