@@ -46,7 +46,7 @@ const Contact = forwardRef((state, ref) => {
   };
 
   // Snack bar
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {

@@ -76,6 +76,7 @@ const Home = forwardRef((state, ref) => {
           <Button
             className="gap-2 mt-4 bg-black rounded-md shadow-none md:mt-10 hover:bg-black hover:shadow-none dark:bg-white w-max"
             variant="contained"
+            onClick={() => window.location = '#contact'}
           >
             Talk to me
             <BsSend />
