@@ -35,7 +35,7 @@ const About = forwardRef((state, ref) => {
           <Image src={ProfilePic} alt='ProfilePic' className='object-cover filter grayscale'/>
         </div>
         <div className='flex flex-col col-span-1 p-6 text-center md:justify-center md:text-left md:col-span-4'>
-          <Typography variant='h3' sx={{fontWeight: 'bold'}}>About Me</Typography>
+          <Typography variant='h4' sx={{fontWeight: 'bold'}}>About Me</Typography>
           <Typography variant='h6' sx={{color: 'grey.700'}} className='mb-2'>My Introduction</Typography>
           <Typography align='justify' variant='body2' paragraph={true} sx={{fontWeight: 'light'}}>
             I love to create web applications basically through MERN technology and I have also built some using PHP. 

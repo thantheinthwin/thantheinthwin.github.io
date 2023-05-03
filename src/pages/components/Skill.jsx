@@ -109,14 +109,16 @@ const Skill = forwardRef((state, ref) => {
     }
   ]
 
+  const skills = [frontend, backend, programming];
+
   return (
     <motion.section
       id="skill"
-      className="relative flex justify-center p-8 snap-start"
+      className="relative flex justify-center p-8 snap-start dark:bg-neutral-700"
     >
       <div
         ref={ref}
-        className="flex flex-col items-center justify-center w-5/6 h-full gap-4"
+        className="flex flex-col items-center justify-center w-5/6 h-full gap-4 dark:text-white"
       >
         <div className="grid w-full text-center" ref={titleRef}>
           {isInView && (
@@ -127,108 +129,83 @@ const Skill = forwardRef((state, ref) => {
               exit="exit"
             >
               <motion.div variants={title}>
-                <Typography variant="h3" sx={{ fontWeight: "bold" }}>
+                <Typography variant="h4" sx={{ fontWeight: "bold" }}>
                   Skills
                 </Typography>
               </motion.div>
               <motion.div variants={title}>
-                <Typography variant="h6" sx={{ color: "grey.700" }}>
+                <Typography variant="body2" sx={{ color: "grey.700" }}>
                   My technical level
                 </Typography>
               </motion.div>
             </motion.div>
           )}
         </div>
-        {isInView && (
+        {isInView && 
           <motion.div
-            className="grid w-5/6 grid-cols-1 gap-2 lg:gap-6 md:grid-cols-2"
+            className="grid w-full grid-cols-1 gap-2 lg:w-4/5 xl:w-2/3 md:w-5/6 lg:gap-6 md:grid-cols-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1.75 }}
           >
-            <motion.div className="p-2 border rounded-md md:p-4">
-              <Typography
-                variant="subtitle1"
-                sx={{ fontWeight: "bold" }}
-                align="center"
-              >
-                Frontend developer
-              </Typography>
-              <div className="grid grid-cols-2 m-2 lg:px-4">
-                {frontend.map((item, i) => {
-                  return (
-                    <div key={i} className="flex col-span-1">
-                      <HiCheckBadge className="m-1 text-xl" />
-                      <div>
-                        <Typography
-                          variant="subtitle2"
-                          sx={{ fontWeight: "bold" }}
-                        >
-                          {item.language}
-                        </Typography>
-                        <Typography variant="caption">{item.exp}</Typography>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </motion.div>
-            <motion.div className="p-2 border rounded-md md:p-4">
-              <Typography
-                variant="subtitle1"
-                sx={{ fontWeight: "bold" }}
-                align="center"
-              >
-                Backend developer
-              </Typography>
-              <div className="grid grid-cols-2 m-2 lg:px-4">
-                {backend.map((item, i) => {
-                  return (
-                    <div key={i} className="flex col-span-1">
-                      <HiCheckBadge className="m-1 text-xl" />
-                      <div>
-                        <Typography
-                          variant="subtitle2"
-                          sx={{ fontWeight: "bold" }}
-                        >
-                          {item.language}
-                        </Typography>
-                        <Typography variant="caption">{item.exp}</Typography>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </motion.div>
-            <motion.div className="p-2 border rounded-md md:p-4">
-              <Typography
-                variant="subtitle1"
-                sx={{ fontWeight: "bold" }}
-                align="center"
-              >
-                Programming Languages
-              </Typography>
-              <div className="grid grid-cols-2 m-2 lg:px-4">
-                {programming.map((item, i) => {
-                  return (
-                    <div key={i} className="flex col-span-1">
-                      <HiCheckBadge className="m-1 text-xl" />
-                      <div>
-                        <Typography
-                          variant="subtitle2"
-                          sx={{ fontWeight: "bold" }}
-                        >
-                          {item.language}
-                        </Typography>
-                        <Typography variant="caption">{item.exp}</Typography>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </motion.div>
+            {skills.map((item, i) => {
+              return (
+                <motion.div key={i} className="p-2 border border-black rounded-md dark:border-white md:p-4">
+                  {i == 0 && (
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ fontWeight: "bold" }}
+                      align="center"
+                    >
+                      Frontend Developer
+                    </Typography>
+                  )}
+                  {i == 1 && (
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ fontWeight: "bold" }}
+                      align="center"
+                    >
+                      Backend Developer
+                    </Typography>
+                  )}
+                  {i == 2 && (
+                    <Typography
+                      variant="subtitle1"
+                      sx={{ fontWeight: "bold" }}
+                      align="center"
+                    >
+                      Programming Languages
+                    </Typography>
+                  )}
+                  <div className="grid grid-cols-2 gap-2 m-2 lg:px-4">
+                    {item.map((skill, i) => {
+                      return (
+                        <div key={i} className="flex col-span-1">
+                          <HiCheckBadge className="m-1 text-xl" />
+                          <div className="grid">
+                            <Typography
+                              variant="subtitle2"
+                              sx={{ fontWeight: "bold" }}
+                            >
+                              {skill.language}
+                            </Typography>
+                            <Typography
+                              variant="caption"
+                              sx={{ color: "grey.700" }}
+                            >
+                              {skill.exp}
+                            </Typography>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
-        )}
+        }
       </div>
     </motion.section>
   );
