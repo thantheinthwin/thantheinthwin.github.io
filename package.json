@@ -30,5 +30,8 @@
     "react-router-hash-link": "^2.4.3",
     "tailwindcss": "3.3.1",
     "typewriter-effect": "^2.19.0"
+  },
+  "devDependencies": {
+    "file-loader": "^6.2.0"
   }
 }

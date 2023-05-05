@@ -3,7 +3,6 @@ import { ThemeProvider } from '@mui/material/styles';
 import { createTheme, colors } from '@mui/material'
 
 import { Main } from './components';
-import { color } from 'framer-motion';
 
 export const ColorModeContext = React.createContext();
 

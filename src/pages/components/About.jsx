@@ -1,6 +1,7 @@
 import React, { forwardRef, useRef } from 'react'
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
+
 import { ProfilePic } from '../../../public/assets/images';
 import { Button, Icon, Typography } from '@mui/material';
 
@@ -79,7 +80,7 @@ const About = forwardRef((state, ref) => {
     >
       <div
         ref={ref}
-        className="grid justify-center grid-cols-1 col-span-10 col-start-2 gap-4 lg:col-span-8 lg:col-start-3 dark:text-white md:grid-cols-6"
+        className="grid justify-center grid-cols-1 col-span-10 col-start-2 md:gap-4 lg:col-span-8 lg:col-start-3 dark:text-white md:grid-cols-6"
       >
         <div
           ref={myRef}
@@ -115,7 +116,7 @@ const About = forwardRef((state, ref) => {
             </motion.div>
             <motion.div variants={title}>
               <Typography
-                variant="h6"
+                variant="subtitle2"
                 sx={{ color: "grey.700" }}
                 className="mb-2"
               >
@@ -153,13 +154,15 @@ const About = forwardRef((state, ref) => {
               })}
             </motion.div>
             <motion.div variants={item}>
-              <Button
-                className="gap-2 mt-4 bg-black rounded-md shadow-none md:mt-6 hover:bg-black hover:shadow-none dark:bg-white w-max"
-                variant="contained"
-              >
-                Download CV
-                <FiDownload />
-              </Button>
+              <a href='https://drive.google.com/uc?export=download&id=13wuchmn9GaaRhLKmVfS1HRs2FQDGDBOQ' target='_blank' download='Thant Hein Thwin-Resume.pdf' rel='noopener noreferrer'>
+                <Button
+                  className="gap-2 mt-4 bg-black rounded-md shadow-none md:mt-6 hover:bg-black hover:shadow-none dark:bg-white w-max"
+                  variant="contained"
+                >
+                  Download CV
+                  <FiDownload />
+                </Button>
+              </a>
             </motion.div>
           </motion.div>
         )}

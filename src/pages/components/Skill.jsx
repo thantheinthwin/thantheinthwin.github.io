@@ -114,11 +114,11 @@ const Skill = forwardRef((state, ref) => {
   return (
     <motion.section
       id="skill"
-      className="relative flex justify-center p-8 snap-start dark:bg-neutral-700"
+      className="relative flex justify-center h-full p-8 snap-start dark:bg-neutral-700"
     >
       <div
         ref={ref}
-        className="flex flex-col items-center justify-center w-5/6 h-full gap-4 dark:text-white"
+        className="flex flex-col items-center justify-center w-5/6 gap-2 mb-4 md:mb-0 md:gap-4 dark:text-white"
       >
         <div className="grid w-full text-center" ref={titleRef}>
           {isInView && (
@@ -150,7 +150,7 @@ const Skill = forwardRef((state, ref) => {
           >
             {skills.map((item, i) => {
               return (
-                <motion.div key={i} className="p-2 border border-black rounded-md dark:border-white md:p-4">
+                <motion.div key={i} className="border border-black rounded-md dark:border-white md:p-4">
                   {i == 0 && (
                     <Typography
                       variant="subtitle1"

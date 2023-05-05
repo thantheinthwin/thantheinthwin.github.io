@@ -37,7 +37,7 @@ const NavBar = (location) => {
       icon: <HiOutlineCode className='m-2 text-xl'/>
     },
     {
-      name: 'Qualificaton',
+      name: 'Qualification',
       link: '#qualification',
       icon: <MdOutlineWorkOutline className='m-2 text-xl'/>
     },
@@ -119,7 +119,7 @@ const NavBar = (location) => {
           </IconButton>
         </div>
         <div className="flex flex-col items-center justify-center w-full h-2/6">
-          <span className="-mb-8 -rotate-90">
+          <span className="-rotate-90">
             <Chip label={location?.location} variant="outlined" />
           </span>
         </div>
