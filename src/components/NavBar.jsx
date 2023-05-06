@@ -53,7 +53,7 @@ const NavBar = (location) => {
       <div>
         <Grid
           container
-          className="fixed bottom-0 z-30 p-2 md:shadow md:top-0 md:bottom-auto"
+          className="fixed bottom-0 z-30 hidden p-2 md:flex md:shadow md:top-0 md:bottom-auto"
           sx={{ bgcolor: "background.default" }}
         >
           <Grid item xs={6} md={2}>
@@ -134,7 +134,10 @@ const NavBar = (location) => {
             transition={{ ease: "easeInOut", duration: 1 }}
             className="fixed z-20 grid w-screen h-screen grid-cols-4 grid-rows-6 bg-white dark:bg-neutral-800"
           >
-            <div className="flex items-start justify-end row-span-1 col-span-full">
+            <div className="flex items-start justify-between row-span-1 p-2 col-span-full">
+              <Typography variant="Logo" className="text-4xl dark:text-white">
+                Steve
+              </Typography>
               <IconButton variant="text" onClick={() => setMenuOpen(!menuOpen)}>
                 <IoClose />
               </IconButton>
@@ -155,6 +158,13 @@ const NavBar = (location) => {
                   </a>
                 </Button>
               ))}
+              <IconButton variant="text" onClick={colorMode.toggleTheme}>
+              {theme.palette.mode === "dark" ? (
+                <DarkModeIcon />
+              ) : (
+                <LightModeIcon />
+              )}
+            </IconButton>
             </motion.div>
           </motion.div>
         )}
