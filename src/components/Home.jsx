@@ -39,7 +39,7 @@ const Home = forwardRef((state, ref) => {
   return (
     <motion.section
       id="home"
-      className="relative grid grid-cols-12 bg-white snap-start dark:bg-neutral-700"
+      className="relative grid grid-cols-12 pl-4 bg-white snap-start dark:bg-neutral-700"
     >
       <div
         ref={ref}

@@ -53,7 +53,7 @@ const NavBar = (location) => {
       <div>
         <Grid
           container
-          className="fixed bottom-0 z-30 px-2 md:shadow md:top-0 md:bottom-auto md:p-2"
+          className="fixed bottom-0 z-30 p-2 md:shadow md:top-0 md:bottom-auto"
           sx={{ bgcolor: "background.default" }}
         >
           <Grid item xs={6} md={2}>
@@ -117,7 +117,7 @@ const NavBar = (location) => {
             <AiOutlineAppstore />
           </IconButton>
         </div>
-        <div className="flex flex-col items-center justify-center w-full h-2/6">
+        <div className="absolute flex flex-col items-center justify-center w-full bottom-32">
           <span className="-rotate-90">
             <Chip label={location?.location} variant="outlined" />
           </span>
