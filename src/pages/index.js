@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { createTheme, colors } from '@mui/material'
 
-import { Main } from './components';
+import { Main } from '../components';
 
 export const ColorModeContext = React.createContext();
 

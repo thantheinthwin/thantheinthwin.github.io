@@ -1,7 +1,0 @@
-export { default as Main } from './Main'
-export { default as NavBar } from './NavBar'
-export { default as Home } from './Home'
-export { default as About } from './About'
-export { default as Skill } from './Skill'
-export { default as Qualification } from './Qualification'
-export { default as Contact } from './Contact'

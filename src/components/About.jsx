@@ -2,7 +2,7 @@ import React, { forwardRef, useRef } from 'react'
 import { motion, useInView } from 'framer-motion';
 import Image from 'next/image';
 
-import { ProfilePic } from '../../../public/assets/images';
+import { ProfilePic } from '../../public/assets/images';
 import { Button, Icon, Typography } from '@mui/material';
 
 import { HiOutlineCheckBadge } from 'react-icons/hi2'

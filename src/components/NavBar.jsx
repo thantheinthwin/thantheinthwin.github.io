@@ -3,7 +3,7 @@ import { useTheme } from '@emotion/react';
 
 import { AnimatePresence, motion } from "framer-motion";
 
-import { ColorModeContext } from '..';
+import { ColorModeContext } from '../pages';
 
 import { Button, Chip, Grid, IconButton, Link, Typography } from '@mui/material'
 import DarkModeIcon from '@mui/icons-material/DarkMode'

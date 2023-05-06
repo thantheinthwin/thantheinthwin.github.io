@@ -8,7 +8,7 @@ import { AiOutlineCode, AiOutlineDown, AiOutlineUp } from 'react-icons/ai'
 import { FiGithub, FiLinkedin, FiYoutube } from 'react-icons/fi'
 import { BsSend } from 'react-icons/bs';
 
-import { GeekPic } from '../../../public/assets/images';
+import { GeekPic } from '../../public/assets/images';
 import Image from 'next/image';
 import moment from 'moment/moment';
 

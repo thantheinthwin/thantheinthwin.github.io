@@ -1,0 +1,7 @@
+export { default as Main } from './Main.jsx'
+export { default as NavBar } from './NavBar.jsx'
+export { default as Home } from './Home.jsx'
+export { default as About } from './About.jsx'
+export { default as Skill } from './Skill.jsx'
+export { default as Qualification } from './Qualification.jsx'
+export { default as Contact } from './Contact.jsx'
