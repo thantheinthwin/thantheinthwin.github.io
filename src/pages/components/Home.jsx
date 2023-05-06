@@ -51,7 +51,7 @@ const Home = forwardRef((state, ref) => {
             variant="subtitle1"
             sx={{ textTransform: "uppercase", color: "grey.500" }}
           >
-            " be creative " 🧑‍💻
+            &ldquo; be creative &ldquo; 🧑‍💻
           </Typography>
           <Typography
             variant="h3"

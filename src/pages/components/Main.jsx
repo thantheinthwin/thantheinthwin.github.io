@@ -3,6 +3,7 @@ import { useInView } from 'react-intersection-observer';
 
 import { Home, NavBar, About, Skill, Qualification, Contact } from '.';
 import { AnimatePresence } from 'framer-motion';
+import Head from 'next/head';
 
 const Main = () => {
   const [locaton, setLocation] = useState(null);
@@ -31,19 +32,26 @@ const Main = () => {
     }
   }, [homeIsVisible, aboutIsVisible, skillIsVisible, qualificationIsVisible, contactIsVisible])
 
-  const components = [
-    <Home ref={homeRef} state={homeIsVisible} />,
-    <About ref={aboutRef} state={aboutIsVisible} />,
-    <Skill ref={skillRef} state={skillIsVisible} />,
-    <Qualification ref={qualificationRef} state={qualificationIsVisible} />,
-    <Contact ref={contactRef} state={contactIsVisible} />,
-  ];
+  // const components = [
+  //   <Home ref={homeRef} state={homeIsVisible} />,
+  //   <About ref={aboutRef} state={aboutIsVisible} />,
+  //   <Skill ref={skillRef} state={skillIsVisible} />,
+  //   <Qualification ref={qualificationRef} state={qualificationIsVisible} />,
+  //   <Contact ref={contactRef} state={contactIsVisible} />,
+  // ];
   
   return (
     <AnimatePresence mode='wait'>
+      <Head>
+        <link rel="shortcut icon" href="logo.png" />
+      </Head>
       <div className='relative w-screen h-screen overflow-x-hidden overflow-y-scroll scrollbar-hide snap-y snap-mandatory'>
         <NavBar location={locaton}/>
-        {...components}
+        <Home ref={homeRef} state={homeIsVisible} />,
+        <About ref={aboutRef} state={aboutIsVisible} />,
+        <Skill ref={skillRef} state={skillIsVisible} />,
+        <Qualification ref={qualificationRef} state={qualificationIsVisible} />,
+        <Contact ref={contactRef} state={contactIsVisible} />,
       </div>
     </AnimatePresence>
   )
