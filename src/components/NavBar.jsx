@@ -53,8 +53,7 @@ const NavBar = (location) => {
       <div>
         <Grid
           container
-          padding={2}
-          className="fixed bottom-0 z-30 md:shadow md:top-0 md:bottom-auto"
+          className="fixed bottom-0 z-30 px-2 md:shadow md:top-0 md:bottom-auto md:p-2"
           sx={{ bgcolor: "background.default" }}
         >
           <Grid item xs={6} md={2}>

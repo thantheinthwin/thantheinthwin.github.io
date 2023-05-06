@@ -45,8 +45,8 @@ const Main = () => {
       <Head>
         <link rel="shortcut icon" href="logo.png" />
       </Head>
-      <div className='relative w-screen overflow-x-hidden overflow-y-scroll scrollbar-hide snap-y snap-mandatory'>
-        <NavBar location={locaton}/>
+      <NavBar location={locaton}/>
+      <div className='relative w-screen h-screen overflow-x-hidden overflow-y-scroll bg-white scrollbar-hide snap-y snap-mandatory dark:bg-neutral-700'>
         <Home ref={homeRef} state={homeIsVisible} />,
         <About ref={aboutRef} state={aboutIsVisible} />,
         <Skill ref={skillRef} state={skillIsVisible} />,
