@@ -66,7 +66,7 @@ const Qualification = forwardRef((state, ref) => {
   return (
     <motion.section
       id="qualification"
-      className="relative flex justify-center p-2 md:p-8 snap-start dark:bg-neutral-700"
+      className="relative flex justify-center p-2 bg-white md:p-8 snap-start dark:bg-neutral-700"
     >
       <div
         ref={ref}

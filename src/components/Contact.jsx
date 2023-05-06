@@ -139,7 +139,7 @@ const Contact = forwardRef((state, ref) => {
   return (
     <motion.section
       id="contact"
-      className="relative flex justify-center p-8 snap-start dark:bg-neutral-700"
+      className="relative flex justify-center p-8 bg-white snap-start dark:bg-neutral-700"
     >
       <div
         ref={ref}

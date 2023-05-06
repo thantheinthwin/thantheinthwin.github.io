@@ -114,7 +114,7 @@ const Skill = forwardRef((state, ref) => {
   return (
     <motion.section
       id="skill"
-      className="relative flex justify-center h-full p-8 snap-start dark:bg-neutral-700"
+      className="relative flex justify-center h-full p-8 bg-white snap-start dark:bg-neutral-700"
     >
       <div
         ref={ref}

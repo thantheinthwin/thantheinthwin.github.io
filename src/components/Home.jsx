@@ -43,7 +43,7 @@ const Home = forwardRef((state, ref) => {
     >
       <div
         ref={ref}
-        className="grid justify-center grid-cols-1 col-span-10 col-start-2 gap-4 lg:col-span-8 lg:col-start-3 dark:text-white md:grid-cols-6 lg:grid-cols-5"
+        className="grid grid-cols-1 col-span-10 col-start-2 gap-4 lg:col-span-8 lg:col-start-3 dark:text-white md:grid-cols-6 lg:grid-cols-5"
       >
         {/* First div */}
         <div className="relative grid self-start col-span-1 gap-2 md:col-span-3 md:self-center">
