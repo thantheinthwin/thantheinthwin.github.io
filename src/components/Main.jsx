@@ -31,14 +31,6 @@ const Main = () => {
       setLocation("Contact");
     }
   }, [homeIsVisible, aboutIsVisible, skillIsVisible, qualificationIsVisible, contactIsVisible])
-
-  // const components = [
-  //   <Home ref={homeRef} state={homeIsVisible} />,
-  //   <About ref={aboutRef} state={aboutIsVisible} />,
-  //   <Skill ref={skillRef} state={skillIsVisible} />,
-  //   <Qualification ref={qualificationRef} state={qualificationIsVisible} />,
-  //   <Contact ref={contactRef} state={contactIsVisible} />,
-  // ];
   
   return (
     <AnimatePresence mode='wait'>
