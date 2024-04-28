@@ -154,7 +154,7 @@ const About = forwardRef((state, ref) => {
               })}
             </motion.div>
             <motion.div variants={item}>
-              <a href='https://drive.google.com/uc?export=download&id=13wuchmn9GaaRhLKmVfS1HRs2FQDGDBOQ' target='_blank' download='Thant Hein Thwin-Resume.pdf' rel='noopener noreferrer'>
+              <a href='https://drive.google.com/file/d/1bUz9I-QU-BI1GfESj3dskm3M1Z3bXI7I/view?usp=sharing' target='_blank' download='Thant Hein Thwin-Resume.pdf' rel='noopener noreferrer'>
                 <Button
                   className="gap-2 mt-4 bg-black rounded-md shadow-none md:mt-6 hover:bg-black hover:shadow-none dark:bg-white w-max"
                   variant="contained"
