@@ -7,8 +7,7 @@ import Contact from "../components/Sections/Contact";
 import { BlogsResponse } from "@/api-services/blogs";
 
 export default function HomePage({ blogs }: { blogs: BlogsResponse }) {
-  console.log(blogs);
-
+  console.log("blogs", blogs);
   return (
     <div className="container mx-auto flex flex-col gap-4 h-full">
       <Header />

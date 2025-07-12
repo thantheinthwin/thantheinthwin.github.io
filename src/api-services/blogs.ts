@@ -3,7 +3,7 @@ import { parseString } from "xml2js";
 export interface Blog {
   id: string;
   title: string;
-  description: string;
+  excerpt: string;
   link: string;
   pubDate: string;
   author: string;
@@ -12,6 +12,7 @@ export interface Blog {
 interface XmlItem {
   title?: string[];
   description?: string[];
+  "content:encoded"?: string[];
   link?: string[];
   pubDate?: string[];
   "dc:creator"?: string[];
@@ -22,6 +23,29 @@ export interface BlogsResponse {
   success: boolean;
   data: Blog[] | null;
   message: string;
+}
+
+// Helper function to extract first paragraph as excerpt
+function extractExcerpt(content: string): string {
+  if (!content) return "";
+
+  // Find the first <p> tag and extract its content
+  const pMatch = content.match(/<p[^>]*>(.*?)<\/p>/);
+  if (pMatch) {
+    const pContent = pMatch[1];
+    // Remove any remaining HTML tags and decode entities
+    return pContent
+      .replace(/<[^>]*>/g, "") // Remove HTML tags
+      .replace(/&nbsp;/g, " ") // Replace &nbsp; with space
+      .replace(/&amp;/g, "&") // Replace &amp; with &
+      .replace(/&lt;/g, "<") // Replace &lt; with <
+      .replace(/&gt;/g, ">") // Replace &gt; with >
+      .replace(/&quot;/g, '"') // Replace &quot; with "
+      .replace(/&#39;/g, "'") // Replace &#39; with '
+      .trim();
+  }
+
+  return "";
 }
 
 export async function getBlogs(): Promise<BlogsResponse> {
@@ -51,7 +75,8 @@ export async function getBlogs(): Promise<BlogsResponse> {
           const items = result.rss?.channel?.[0]?.item || [];
           const blogs: Blog[] = items.map((item: XmlItem, index: number) => {
             const title = item.title?.[0] || `Blog ${index + 1}`;
-            const description = item.description?.[0] || "";
+            const content = item["content:encoded"]?.[0] || "";
+            const excerpt = extractExcerpt(content);
             const link = item.link?.[0] || "";
             const pubDate = item.pubDate?.[0] || "";
             const author =
@@ -60,7 +85,7 @@ export async function getBlogs(): Promise<BlogsResponse> {
             return {
               id: `blog-${index}`,
               title,
-              description,
+              excerpt,
               link,
               pubDate,
               author,

@@ -32,27 +32,32 @@ export default function Blogs(props: BlogsProps) {
   return (
     <div
       className={cn(
-        "col-span-2 row-span-3 border rounded border-black p-6",
+        "col-span-2 row-span-3 border rounded border-black p-4",
         props.className
       )}
     >
       <h1 className="text-xl font-semibold mb-4">Blogs</h1>
       <div className="grid grid-cols-1 gap-4 max-h-96 overflow-y-auto">
         {blogs.data.map((blog) => (
-          <div
+          <article
             key={blog.id}
-            className="border rounded p-3 hover:bg-muted/50 transition-colors"
+            className="border rounded p-2 hover:bg-muted/50 transition-colors"
           >
+            <time className="text-xs text-muted-foreground">
+              {new Date(blog.pubDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </time>
+
             <h2 className="font-medium text-sm mb-1 line-clamp-2">
               {blog.title}
             </h2>
             <p className="text-xs text-muted-foreground line-clamp-3 mb-2">
-              {blog.description}
+              {blog.excerpt}
             </p>
-            <div className="flex justify-between items-center text-xs text-muted-foreground">
-              <span>{blog.author}</span>
-              <span>{new Date(blog.pubDate).toLocaleDateString()}</span>
-            </div>
+
             {blog.link && (
               <a
                 href={blog.link}
@@ -63,7 +68,7 @@ export default function Blogs(props: BlogsProps) {
                 Read more →
               </a>
             )}
-          </div>
+          </article>
         ))}
       </div>
     </div>
