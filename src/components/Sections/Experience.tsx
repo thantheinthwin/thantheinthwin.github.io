@@ -195,7 +195,6 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                   className="p-2 rounded-md hover:bg-muted-foreground/10 cursor-pointer"
                   onClick={() => handleExperienceClick(exp)}
                   aria-label={`View more details about ${exp.title} at ${exp.company}`}
-                  title={`View more details about ${exp.title} at ${exp.company}`}
                 >
                   <Expand className="w-4 h-4" aria-hidden="true" />
                 </button>

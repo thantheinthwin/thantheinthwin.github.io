@@ -127,7 +127,6 @@ const Projects: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                   className="p-2 rounded-md hover:bg-muted-foreground/10 cursor-pointer"
                   onClick={() => handleProjectClick(project)}
                   aria-label={`View more details about ${project.title}`}
-                  title={`View more details about ${project.title}`}
                 >
                   <Expand className="w-4 h-4" aria-hidden="true" />
                 </button>
