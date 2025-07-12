@@ -8,7 +8,6 @@ export default async function Root() {
 
   return (
     <main className="h-screen overflow-y-auto flex justify-center gap-8 p-8 3xl:p-12">
-      {/* <Navigation /> */}
       <HomePage />
       <div className="sticky top-0 p-4 border rounded h-fit max-w-96 grid gap-4">
         <h2>Blogs</h2>
@@ -24,21 +23,23 @@ export default async function Root() {
                       day: "numeric",
                     })}
                   </time>
-                  <h3 className="font-semibold text-sm group-hover:text-primary transition-colors">
+                  <h3 className="text-sm group-hover:text-primary transition-colors">
                     {blog.title}
                   </h3>
-                  <p className="text-foreground/80 leading-relaxed text-xs line-clamp-3">
+                  <p className="text-foreground/80 leading-relaxed text-xs line-clamp-2">
                     {blog.excerpt}
                   </p>
                 </article>
               ))}
-              <Link
-                href="https://medium.com/@thantheinthwin.dev"
-                className="text-sm text-muted-foreground flex gap-1 items-center"
-              >
-                View all blogs{" "}
-                <ArrowRightIcon className="w-4 h-4" strokeWidth={1} />
-              </Link>
+              {blogs.data.length > 5 && (
+                <Link
+                  href="https://medium.com/@thantheinthwin.dev"
+                  className="text-sm text-muted-foreground flex gap-1 items-center"
+                >
+                  View all blogs{" "}
+                  <ArrowRightIcon className="w-4 h-4" strokeWidth={1} />
+                </Link>
+              )}
             </>
           ) : (
             <p>No blogs found</p>
