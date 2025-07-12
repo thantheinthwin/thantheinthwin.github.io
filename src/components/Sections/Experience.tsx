@@ -1,5 +1,5 @@
-import { SectionBase } from "@/types";
 import React from "react";
+import SessionBase, { SectionBase } from "./Base";
 
 interface Experience {
   date: string;
@@ -17,11 +17,27 @@ const experienceData: Experience[] = [
     company: "Empire Pixel",
     location: "Phuket, Thailand (Based in Canada)",
     summary:
-      "Building scalable web apps and cloud solutions with React, Next.js, Node.js, and TypeScript. Led cloud deployments, CI/CD, and AI-powered workflows for high-performance, SEO-optimized platforms.",
-    tech: ["React", "Next.js", "Node.js", "TypeScript", "AWS", "GCP", "Docker"],
+      "Led a team to architect and implement an AI-powered content generation system using 3 AI models in an event-driven architecture with queues and webhooks. The system generates 50 pages daily with AI detection bypass capabilities, integrated with React, Next.js, and cloud infrastructure.",
+    tech: [
+      "React",
+      "Next.js",
+      "Node.js",
+      "TypeScript",
+      "AWS",
+      "GCP",
+      "Docker",
+      "Redis",
+      "AI",
+      "Webhooks",
+      "PM2",
+      "Nginx",
+      "Apache2",
+      "Coolify",
+      "Cloudflare",
+    ],
   },
   {
-    date: "2021 – 10/2024",
+    date: "2021 – 2024",
     title: "Mid Level Fullstack Software Engineer",
     company: "BigBee",
     location: "Yangon, Myanmar",
@@ -34,6 +50,7 @@ const experienceData: Experience[] = [
       "Golang",
       "PostgreSQL",
       "Docker",
+      "Redis",
     ],
   },
   {
@@ -47,25 +64,27 @@ const experienceData: Experience[] = [
   },
 ];
 
-const Experience: React.FC<SectionBase> = ({ id }) => (
-  <section id={id}>
-    <h2 className="text-2xl font-bold mb-8">Professional Experience</h2>
+const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => (
+  <SessionBase id={id} title="Professional Experience">
     <div className="space-y-10">
       {experienceData.map((exp) => (
         <div
           className="flex flex-row items-start gap-6"
           key={exp.title + exp.company}
         >
-          <div className={`text-sm min-w-30 text-muted-foreground pt-1`}>
-            {exp.date}
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="font-semibold">{exp.title}</span>
-              <span className="text-muted-foreground">– {exp.company}</span>
+          <div className={`min-w-30 text-muted-foreground`}>{exp.date}</div>
+          <div className="grid gap-1">
+            <div className="font-semibold">{exp.title}</div>
+            <div className="flex flex-row gap-1">
+              <span className="text-sm text-muted-foreground">
+                {exp.company}
+              </span>
+              -
+              <span className="text-sm text-muted-foreground">
+                {exp.location}
+              </span>
             </div>
-            <div className="text-foreground/80 mb-1">{exp.location}</div>
-            <div className="mb-2">{exp.summary}</div>
+            <div className="text-sm my-2 text-foreground/80">{exp.summary}</div>
             <div className="text-xs text-muted-foreground">
               {exp.tech.join(" • ")}
             </div>
@@ -73,7 +92,7 @@ const Experience: React.FC<SectionBase> = ({ id }) => (
         </div>
       ))}
     </div>
-  </section>
+  </SessionBase>
 );
 
 export default Experience;

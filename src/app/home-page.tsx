@@ -5,30 +5,28 @@ import About from "../components/Sections/About";
 import Experience from "../components/Sections/Experience";
 import Skills from "../components/Sections/Skills";
 import Projects from "../components/Sections/Projects";
-import Blogs from "../components/Sections/Blogs";
-import { BlogsResponse } from "@/api-services/blogs";
+import Links from "@/components/Sections/Links";
 
-export default function HomePage({ blogs }: { blogs: BlogsResponse }) {
+export default function HomePage() {
   const sections = [
     <About key="about" id="about" />,
     <Skills key="skills" id="skills" />,
     <Experience key="experience" id="experience" />,
     <Projects key="projects" id="projects" />,
-    <Blogs key="blogs" id="blogs" blogs={blogs} />,
+    <Links key="links" id="links" />,
   ];
 
   return (
-    <div className="max-w-xl fade-in grid gap-8">
+    <div className="max-w-xl fade-in grid gap-6 py-4">
       <Header />
       <hr />
       {/* Render sections */}
       {sections.map((section, index) => (
-        <>
-          <section key={index}>{section}</section>
+        <div key={index} className="grid gap-8">
+          <section>{section}</section>
           <hr />
-        </>
+        </div>
       ))}
-      <hr />
       {/* LINKS SECTION */}
       {/* <section className="mb-16">
         <h2 className="text-2xl font-bold mb-8">Links</h2>

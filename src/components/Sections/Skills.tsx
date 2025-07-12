@@ -1,5 +1,5 @@
-import { SectionBase } from "@/types";
 import React from "react";
+import SessionBase, { SectionBase } from "./Base";
 
 const skills: string[] = [
   "ReactJS",
@@ -21,22 +21,34 @@ const skills: string[] = [
   "Python",
   "Docker",
   "AWS",
+  "GCP",
   "Cloud Computing",
   "HTML",
   "CSS",
+  "AI-Integration",
+  "Webhooks",
+  "PM2",
+  "Nginx",
+  "Apache2",
+  "Coolify",
+  "Cloudflare",
+  "Unity",
+  "Sourcetree",
 ];
 
-const Skills: React.FC<SectionBase> = ({ id }) => (
-  <section id={id}>
-    <h2 className="text-2xl font-bold mb-8">Skills</h2>
+const Skills: React.FC<Pick<SectionBase, "id">> = ({ id }) => (
+  <SessionBase id={id} title="Skills">
     <div className="flex flex-wrap gap-2 text-sm">
       {skills.map((skill) => (
-        <span key={skill} className="bg-muted px-2 py-1 rounded mb-2">
+        <span
+          key={skill}
+          className="bg-muted-foreground/30 px-2 py-1 rounded text-xs"
+        >
           {skill}
         </span>
       ))}
     </div>
-  </section>
+  </SessionBase>
 );
 
 export default Skills;

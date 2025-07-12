@@ -9,10 +9,10 @@ export const Header = () => {
           <AvatarFallback className="text-lg font-semibold">THT</AvatarFallback>
         </Avatar>
         <div>
-          <h1 className="text-xl font-semibold tracking-tight">
+          <h1 className="text-lg font-semibold tracking-tight">
             Thant Hein Thwin
           </h1>
-          <p className="text text-muted-foreground mt-1">
+          <p className="text-sm text-muted-foreground">
             Full Stack Software Engineer
           </p>
         </div>
