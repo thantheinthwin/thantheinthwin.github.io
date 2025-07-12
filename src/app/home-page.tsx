@@ -2,200 +2,20 @@
 
 import { Header } from "../components/Header";
 import About from "../components/Sections/About";
+import Experience from "../components/Sections/Experience";
+import Skills from "../components/Sections/Skills";
 import { BlogsResponse } from "@/api-services/blogs";
 
 export default function HomePage({ blogs }: { blogs: BlogsResponse }) {
   return (
     <div className="container mx-auto max-w-4xl px-4 py-8 fade-in">
       <Header />
-
       <section className="mt-16 mb-16">
         <About />
       </section>
-
-      {/* SKILLS SECTION */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-8">Skills</h2>
-        <div className="flex flex-wrap gap-2 text-sm">
-          {[
-            "ReactJS",
-            "NextJS",
-            "React Native",
-            "Golang",
-            "TypeScript",
-            "JavaScript",
-            "Redis",
-            "PostgreSQL",
-            "MySQL",
-            "OracleDB",
-            "MongoDB",
-            "NodeJS",
-            "ExpressJS",
-            "C",
-            "C#",
-            "Java",
-            "Python",
-            "Docker",
-            "AWS",
-            "Cloud Computing",
-            "HTML",
-            "CSS",
-          ].map((skill) => (
-            <span key={skill} className="bg-muted px-2 py-1 rounded mb-2">
-              {skill}
-            </span>
-          ))}
-        </div>
-      </section>
-
-      {/* WORK EXPERIENCE SECTION */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-8">Professional Experience</h2>
-        <div className="space-y-8">
-          {/* Empire Pixel */}
-          <div>
-            <div className="flex justify-between items-start mb-2">
-              <h3 className="text-lg font-semibold">Full Stack Engineer</h3>
-              <span className="text-sm text-muted-foreground">
-                09/2024 – present
-              </span>
-            </div>
-            <p className="text-sm text-muted-foreground mb-2">
-              Empire Pixel &mdash; Phuket, Thailand (Based in Canada)
-            </p>
-            <ul className="list-disc ml-6 text-foreground/80 leading-relaxed mb-2">
-              <li>
-                Built scalable web apps with Next.js, Express.js, and
-                TypeScript; optimized SSR, SSG, and caching for speed and SEO.
-              </li>
-              <li>
-                Led cloud deployments on AWS, GCP, and VPS; configured S3 for
-                media storage and secured EC2 instances.
-              </li>
-              <li>
-                Designed Docker-based CI/CD pipelines, reducing downtime and
-                streamlining releases.
-              </li>
-              <li>
-                Implemented Redis queues and AI-powered workflows (ChatGPT,
-                Storm AI) for large-scale, automated content generation.
-              </li>
-              <li>
-                Collaborated cross-functionally with SEO, UI/UX, and backend
-                teams to deliver high-performance applications.
-              </li>
-            </ul>
-            <div className="mb-2">
-              <span className="font-semibold">Impact Highlights:</span>
-              <ul className="list-disc ml-6">
-                <li>
-                  Improved load times and Core Web Vitals through SSR and DB
-                  optimizations.
-                </li>
-                <li>Cut API latency with Redis caching and smarter queries.</li>
-                <li>
-                  Reduced manual workload by 70% with{" "}
-                  <span className="font-semibold">AI-driven automation</span>.
-                </li>
-              </ul>
-            </div>
-            <div className="mb-2">
-              <span className="font-semibold">Tech Stack:</span> React.js,
-              Next.js, TypeScript, Node.js, Payload CMS, Strapi, MySQL, MongoDB,
-              Redis, AWS, GCP, Docker, Express.js
-            </div>
-          </div>
-
-          {/* BigBee */}
-          <div>
-            <div className="flex justify-between items-start mb-2">
-              <h3 className="text-lg font-semibold">
-                Mid Level Fullstack Software Engineer
-              </h3>
-              <span className="text-sm text-muted-foreground">
-                2021 – 10/2024
-              </span>
-            </div>
-            <p className="text-sm text-muted-foreground mb-2">
-              BigBee &mdash; Yangon, Myanmar
-            </p>
-            <ul className="list-disc ml-6 text-foreground/80 leading-relaxed mb-2">
-              <li>
-                Led performance optimization efforts, boosting app speed with
-                SSR, hydration, caching, and rendering strategies using Next.js
-                and React.
-              </li>
-              <li>
-                Researched and integrated modern tech to enhance system
-                architecture and align with evolving stack requirements.
-              </li>
-              <li>
-                Built reusable, headless components for scalable and
-                maintainable frontend architecture.
-              </li>
-              <li>
-                Applied RxJS for reactive programming, improving responsiveness
-                and user experience.
-              </li>
-              <li>
-                Utilized TypeScript with generics and MVC/MVP patterns for
-                modular code design.
-              </li>
-              <li>
-                Strengthened backend workflows by implementing Golang
-                middlewares, pipelines, and context handling.
-              </li>
-              <li>
-                Automated processes using Redis queues to increase system
-                efficiency and reduce manual effort.
-              </li>
-            </ul>
-            <div className="mb-2">
-              <span className="font-semibold">Tech Stack:</span> ReactJS,
-              Next.js, React Native, TypeScript, RxJS, React Query, React Hook
-              Form, TanStack Table, Expo, Golang, PostgreSQL, Redis, Hasura,
-              Docker
-            </div>
-          </div>
-
-          {/* Armor Piercing Indie Games Production */}
-          <div>
-            <div className="flex justify-between items-start mb-2">
-              <h3 className="text-lg font-semibold">
-                Quality Assurance Engineer - Intern
-              </h3>
-              <span className="text-sm text-muted-foreground">2021 – 2021</span>
-            </div>
-            <p className="text-sm text-muted-foreground mb-2">
-              Armor Piercing Indie Games Production &mdash; Australia
-            </p>
-            <ul className="list-disc ml-6 text-foreground/80 leading-relaxed mb-2">
-              <li>
-                Contributed to game development using C# and Unity, building
-                core gameplay mechanics and UI features.
-              </li>
-              <li>
-                Collaborated on interactive elements to enhance player
-                engagement and overall user experience.
-              </li>
-              <li>
-                Designed polished UI components, contributing to a cohesive and
-                immersive game feel.
-              </li>
-              <li>
-                Managed version control with Sourcetree and participated in code
-                reviews to maintain high code quality.
-              </li>
-            </ul>
-            <div className="mb-2">
-              <span className="font-semibold">Tech Stack:</span> C#, Unity,
-              Sourcetree
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* PROJECTS SECTION */}
+      <Skills />
+      <Experience />
+      {/* PROJECTS SECTION (to be split next) */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold mb-8">Projects</h2>
         <div className="space-y-8">
@@ -248,7 +68,6 @@ export default function HomePage({ blogs }: { blogs: BlogsResponse }) {
           </div>
         </div>
       </section>
-
       {/* BLOGS SECTION */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold mb-8">Blogs</h2>
@@ -301,8 +120,7 @@ export default function HomePage({ blogs }: { blogs: BlogsResponse }) {
           )}
         </div>
       </section>
-
-      {/* EDUCATION SECTION */}
+      {/* EDUCATION SECTION (to be split next) */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold mb-8">Education</h2>
         <div className="space-y-4">
@@ -346,7 +164,6 @@ export default function HomePage({ blogs }: { blogs: BlogsResponse }) {
           </div>
         </div>
       </section>
-
       {/* LANGUAGES SECTION */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold mb-8">Languages</h2>
@@ -362,7 +179,6 @@ export default function HomePage({ blogs }: { blogs: BlogsResponse }) {
           </div>
         </div>
       </section>
-
       {/* LINKS SECTION */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold mb-8">Links</h2>
