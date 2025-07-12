@@ -1,0 +1,14 @@
+# robots.txt for Thant Hein Thwin's Portfolio
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://thantheinthwin.vercel.app/sitemap.xml
+
+# Crawl delay (optional - helps prevent overwhelming your server)
+Crawl-delay: 1
+
+# Disallow specific paths if needed (uncomment if you want to block certain areas)
+# Disallow: /api/
+# Disallow: /admin/ 
