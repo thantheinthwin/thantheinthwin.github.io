@@ -13,7 +13,7 @@ export interface SectionBase extends React.PropsWithChildren {
 
 const SessionBase: React.FC<SectionBase> = ({ id, title, children }) => {
   return (
-    <section id={id} className="grid gap-4">
+    <section id={id} className="grid gap-4 py-6">
       <h2 className="font-semibold">{title}</h2>
       {children}
     </section>
