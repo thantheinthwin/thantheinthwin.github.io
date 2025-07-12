@@ -63,7 +63,10 @@ const Projects: React.FC<Pick<SectionBase, "id">> = ({ id }) => (
   <SessionBase id={id} title="Projects">
     <div className="space-y-10">
       {projects.map((project) => (
-        <div className="flex flex-row items-start gap-6" key={project.title}>
+        <div
+          className="flex flex-col md:flex-row items-start gap-x-6 gap-y-2"
+          key={project.title}
+        >
           <div className={`text-sm min-w-30 text-muted-foreground pt-1`}>
             {project.date}
           </div>

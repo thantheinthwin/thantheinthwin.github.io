@@ -69,17 +69,19 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => (
     <div className="space-y-10">
       {experienceData.map((exp) => (
         <div
-          className="flex flex-row items-start gap-6"
+          className="flex flex-col md:flex-row items-start gap-x-6 gap-y-2"
           key={exp.title + exp.company}
         >
           <div className={`min-w-30 text-muted-foreground`}>{exp.date}</div>
           <div className="grid gap-1">
             <div className="font-semibold">{exp.title}</div>
-            <div className="flex flex-row gap-1">
+            <div className="flex flex-col md:flex-row gap-1">
               <span className="text-sm text-muted-foreground">
                 {exp.company}
               </span>
-              -
+              <span className="text-sm text-muted-foreground hidden md:block">
+                -
+              </span>
               <span className="text-sm text-muted-foreground">
                 {exp.location}
               </span>

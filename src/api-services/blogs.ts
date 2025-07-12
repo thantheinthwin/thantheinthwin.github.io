@@ -7,6 +7,7 @@ export interface Blog {
   link: string;
   pubDate: string;
   author: string;
+  categories: string[];
 }
 
 interface XmlItem {
@@ -17,6 +18,7 @@ interface XmlItem {
   pubDate?: string[];
   "dc:creator"?: string[];
   author?: string[];
+  category?: string[];
 }
 
 export interface BlogsResponse {
@@ -81,6 +83,7 @@ export async function getBlogs(): Promise<BlogsResponse> {
             const pubDate = item.pubDate?.[0] || "";
             const author =
               item["dc:creator"]?.[0] || item.author?.[0] || "Unknown Author";
+            const categories = item.category || [];
 
             return {
               id: `blog-${index}`,
@@ -89,6 +92,7 @@ export async function getBlogs(): Promise<BlogsResponse> {
               link,
               pubDate,
               author,
+              categories,
             };
           });
 
