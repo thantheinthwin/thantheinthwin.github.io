@@ -13,7 +13,7 @@ const profile: Profile = {
   name: "Thant Hein Thwin",
   title: "Full Stack Software Engineer",
   email: "thantheinthwin.dev@gmail.com",
-  avatar: "/profile.png",
+  avatar: "/profile.webp",
 };
 
 export const ProfileSection: React.FC = () => {
@@ -57,7 +57,14 @@ export const ProfileSection: React.FC = () => {
   return (
     <div className="flex items-center justify-end flex-row-reverse md:flex-row gap-6">
       <Avatar className="size-14 ring-2 ring-border/20">
-        <AvatarImage src={profile.avatar} alt="Profile" />
+        <AvatarImage
+          src={profile.avatar}
+          alt="Profile"
+          width={56}
+          height={56}
+          className="object-cover w-14 h-14"
+          loading="eager"
+        />
         <AvatarFallback className="text-lg font-semibold">THT</AvatarFallback>
       </Avatar>
       <div>
