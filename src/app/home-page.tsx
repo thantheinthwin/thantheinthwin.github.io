@@ -22,7 +22,7 @@ export default function HomePage({ blogs }: { blogs: BlogsResponse }) {
   ];
 
   return (
-    <div className="max-w-xl fade-in grid py-4 divide-y border-b md:border-b-0">
+    <div className="max-w-xl grid py-4 divide-y border-b md:border-b-0">
       <Header />
 
       {/* Render sections */}

@@ -78,6 +78,7 @@ export async function getBlogs(): Promise<BlogsResponse> {
           const blogs: Blog[] = items.map((item: XmlItem, index: number) => {
             const title = item.title?.[0] || `Blog ${index + 1}`;
             const content = item["content:encoded"]?.[0] || "";
+            const description = item.description?.[0] || "";
             const excerpt = extractExcerpt(content);
             const link = item.link?.[0] || "";
             const pubDate = item.pubDate?.[0] || "";
@@ -88,6 +89,7 @@ export async function getBlogs(): Promise<BlogsResponse> {
             return {
               id: `blog-${index}`,
               title,
+              description,
               excerpt,
               link,
               pubDate,
