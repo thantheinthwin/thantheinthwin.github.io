@@ -1,6 +1,7 @@
+import { SectionBase } from "@/types";
 import React from "react";
 
-const skills = [
+const skills: string[] = [
   "ReactJS",
   "NextJS",
   "React Native",
@@ -25,8 +26,8 @@ const skills = [
   "CSS",
 ];
 
-const Skills: React.FC = () => (
-  <section className="mb-16">
+const Skills: React.FC<SectionBase> = ({ id }) => (
+  <section id={id}>
     <h2 className="text-2xl font-bold mb-8">Skills</h2>
     <div className="flex flex-wrap gap-2 text-sm">
       {skills.map((skill) => (

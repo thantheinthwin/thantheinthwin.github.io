@@ -1,3 +1,4 @@
+import { SectionBase } from "@/types";
 import React from "react";
 
 interface Experience {
@@ -46,8 +47,8 @@ const experienceData: Experience[] = [
   },
 ];
 
-const Experience: React.FC = () => (
-  <section className="mb-16">
+const Experience: React.FC<SectionBase> = ({ id }) => (
+  <section id={id}>
     <h2 className="text-2xl font-bold mb-8">Professional Experience</h2>
     <div className="space-y-10">
       {experienceData.map((exp) => (

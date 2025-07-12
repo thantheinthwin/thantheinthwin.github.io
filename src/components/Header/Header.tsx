@@ -2,17 +2,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export const Header = () => {
   return (
-    <header className="flex justify-between items-center py-8">
+    <header className="flex justify-between items-center">
       <div className="flex items-center gap-6">
-        <Avatar className="size-16 ring-2 ring-border/20">
+        <Avatar className="size-14 ring-2 ring-border/20">
           <AvatarImage src="/profile.jpg" />
           <AvatarFallback className="text-lg font-semibold">THT</AvatarFallback>
         </Avatar>
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
+          <h1 className="text-xl font-semibold tracking-tight">
             Thant Hein Thwin
           </h1>
-          <p className="text-lg text-muted-foreground mt-1">
+          <p className="text text-muted-foreground mt-1">
             Full Stack Software Engineer
           </p>
         </div>
