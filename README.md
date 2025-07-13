@@ -167,6 +167,41 @@ The portfolio integrates with external APIs for:
 - **Bundle Size**: Optimized with Turbopack
 - **Image Optimization**: Next.js automatic image optimization
 
+## 🔗 SEO & OpenGraph
+
+The portfolio includes comprehensive SEO and OpenGraph optimization:
+
+### OpenGraph Features
+
+- **Dynamic OG Images**: Automatically generated OpenGraph images using Next.js 15's `opengraph-image.tsx`
+- **Twitter Cards**: Optimized Twitter sharing with `twitter-image.tsx`
+- **Structured Data**: JSON-LD schema markup for better search engine understanding
+- **Meta Tags**: Complete meta tag optimization including:
+  - Title and description
+  - Keywords and author information
+  - Robots directives
+  - Canonical URLs
+  - Theme colors
+
+### Files Included
+
+- `src/app/opengraph-image.tsx` - Dynamic OpenGraph image generation
+- `src/app/twitter-image.tsx` - Twitter-specific image optimization
+- `src/app/structured-data.tsx` - JSON-LD structured data
+- `src/app/layout.tsx` - Complete metadata configuration
+- `public/manifest.json` - Web app manifest for PWA support
+- `public/robots.txt` - Search engine crawling directives
+- `src/app/sitemap.ts` - Dynamic sitemap generation
+
+### Customization
+
+To customize the OpenGraph setup:
+
+1. **Update URLs**: Replace `https://thantheinthwin.vercel.app` with your actual domain
+2. **Social Media**: Add your social media handles in the metadata
+3. **Images**: Modify the generated images in `opengraph-image.tsx` and `twitter-image.tsx`
+4. **Structured Data**: Update the JSON-LD schema in `structured-data.tsx`
+
 ## 🤝 Contributing
 
 1. Fork the repository

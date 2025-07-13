@@ -1,0 +1,27 @@
+{
+  "name": "Thant Hein Thwin - Full Stack Software Engineer",
+  "short_name": "Thant Hein Thwin",
+  "description": "Portfolio of Thant Hein Thwin, a Full Stack Software Engineer with expertise in React, Next.js, Node.js, and Golang",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/profile.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/profile.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["technology", "portfolio", "developer"],
+  "lang": "en",
+  "dir": "ltr"
+} 
