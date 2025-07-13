@@ -6,125 +6,123 @@ export const alt = "Thant Hein Thwin - Full Stack Software Engineer";
 export const contentType = "image/png";
 export const size = {
   width: 1200,
-  height: 630,
+  height: 300,
 };
 
 export default async function Image() {
   return new ImageResponse(
     (
       <div
-        style={{
-          background: "linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)",
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "40px",
-          position: "relative",
-        }}
-      >
-        {/* Background pattern */}
-        <div
+      style={{
+        width: "100%",
+        height: "100%",
+        background: "black",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        border: "1px solid #27272a",
+        borderRadius: "16px",
+        justifyContent: "space-between",
+        padding: "48px 64px",
+        boxSizing: "border-box",
+        fontFamily: "Inter, Arial, sans-serif",
+      }}
+    >
+      {/* ProfileSection */}
+      <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
+        {/* Avatar */}
+        <img
+          src={"/profile.webp"}
+          width={90}
+          height={90}
           style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background:
-              "radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.1) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(147, 51, 234, 0.1) 0%, transparent 50%)",
+            borderRadius: "50%",
+            border: "4px solid #27272a",
+            objectFit: "cover",
+            background: "#232326",
           }}
+          alt="Profile"
         />
-
-        {/* Main content */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            zIndex: 1,
-          }}
-        >
-          {/* Name */}
-          <h1
+        {/* Name, Title, Email */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <span
             style={{
-              fontSize: "64px",
-              fontWeight: "bold",
-              color: "#ffffff",
-              margin: "0 0 16px 0",
-              lineHeight: 1.2,
+              fontSize: 36,
+              fontWeight: 700,
+              color: "#fff",
+              lineHeight: 1.1,
             }}
           >
             Thant Hein Thwin
-          </h1>
-
-          {/* Title */}
-          <h2
+          </span>
+          <span
             style={{
-              fontSize: "32px",
-              fontWeight: "600",
-              color: "#3b82f6",
-              margin: "0 0 24px 0",
-              lineHeight: 1.3,
+              fontSize: 22,
+              fontWeight: 500,
+              color: "#a1a1aa",
+              lineHeight: 1.2,
             }}
           >
             Full Stack Software Engineer
-          </h2>
-
-          {/* Skills */}
-          <div
+          </span>
+          <span
             style={{
-              display: "flex",
-              gap: "16px",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              marginTop: "24px",
+              fontSize: 18,
+              color: "#60a5fa",
+              textDecoration: "underline",
+              textUnderlineOffset: 3,
+              fontWeight: 500,
             }}
           >
-            {["React", "Next.js", "Node.js", "Golang", "TypeScript"].map(
-              (skill) => (
-                <span
-                  key={skill}
-                  style={{
-                    background: "rgba(59, 130, 246, 0.2)",
-                    color: "#3b82f6",
-                    padding: "8px 16px",
-                    borderRadius: "20px",
-                    fontSize: "18px",
-                    fontWeight: "500",
-                    border: "1px solid rgba(59, 130, 246, 0.3)",
-                  }}
-                >
-                  {skill}
-                </span>
-              )
-            )}
-          </div>
-
-          {/* Portfolio indicator */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: "40px",
-              right: "40px",
-              background: "rgba(255, 255, 255, 0.1)",
-              color: "#ffffff",
-              padding: "12px 24px",
-              borderRadius: "8px",
-              fontSize: "18px",
-              fontWeight: "500",
-              backdropFilter: "blur(10px)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
-            }}
-          >
-            Portfolio
-          </div>
+            thantheinthwin.dev@gmail.com
+          </span>
         </div>
       </div>
+      {/* StatusSection */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-end",
+          gap: 12,
+        }}
+      >
+        {/* Status */}
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <span
+            style={{
+              display: "inline-block",
+              width: 14,
+              height: 14,
+              borderRadius: "50%",
+              background: "#22c55e",
+              marginRight: 6,
+            }}
+          />
+          <span style={{ color: "#fff", fontSize: 18, fontWeight: 500 }}>
+            Available for work
+          </span>
+        </div>
+        {/* Links */}
+        <div
+          style={{
+            display: "flex",
+            gap: 24,
+            fontSize: 18,
+            color: "#a1a1aa",
+            fontWeight: 500,
+          }}
+        >
+          <span style={{ color: "#fff", fontWeight: 700 }}>Links</span>
+          <span>
+            Github <span style={{ fontSize: 18 }}>↗</span>
+          </span>
+          <span>
+            LinkedIn <span style={{ fontSize: 18 }}>↗</span>
+          </span>
+        </div>
+      </div>
+    </div>
     ),
     {
       ...size,
