@@ -3,6 +3,8 @@ import HomePage from "./home-page";
 import CoffeeChat from "@/components/SideBar/CoffeeChat";
 import Blogs from "@/components/SideBar/Blogs";
 
+export const revalidate = 3600; // Revalidate every hour
+
 export async function generateMetadata() {
   return {
     title: "Mid Senior Full Stack Software Engineer",
