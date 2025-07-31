@@ -38,6 +38,7 @@ const experienceData: Experience[] = [
       "Next.js",
       "Node.js",
       "TypeScript",
+      "Python",
       "AWS",
       "GCP",
       "Docker",
@@ -49,6 +50,12 @@ const experienceData: Experience[] = [
       "Apache2",
       "Coolify",
       "Cloudflare",
+      "Grafana",
+      "Prometheus",
+      "Loki",
+      "React Native",
+      "Shadcn/ui",
+      "Stripe",
     ],
     details: {
       responsibilities: [
@@ -90,6 +97,8 @@ const experienceData: Experience[] = [
       "PostgreSQL",
       "Docker",
       "Redis",
+      "Hasura",
+      "Sentry",
     ],
     details: {
       responsibilities: [
@@ -239,7 +248,7 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                       (responsibility, index) => (
                         <li
                           key={index}
-                          className="text-sm text-muted-foreground flex items-start gap-2"
+                          className="text-sm text-muted-foreground flex items-end gap-2"
                         >
                           <span className="text-primary mt-1">•</span>
                           {responsibility}
@@ -258,7 +267,7 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                       (achievement, index) => (
                         <li
                           key={index}
-                          className="text-sm text-muted-foreground flex items-start gap-2"
+                          className="text-sm text-muted-foreground flex items-end gap-2"
                         >
                           <span className="text-primary mt-1">•</span>
                           {achievement}

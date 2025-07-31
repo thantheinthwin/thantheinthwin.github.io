@@ -10,9 +10,21 @@ interface BlogsProps {
 }
 
 const Blogs: React.FC<BlogsProps> = ({ blogs }) => {
+  console.log("Blogs component rendered with data:", blogs);
   return (
     <div className=" p-4 border rounded h-fit max-w-96 grid gap-4">
-      <h2>Blogs</h2>
+      <div className="flex items-center justify-between">
+        <h2>Blogs</h2>
+        {blogs?.data && blogs.data.length > 3 && (
+          <Link
+            href="https://medium.com/@thantheinthwin.dev"
+            className="text-xs text-muted-foreground flex gap-1 items-center"
+          >
+            View all blogs{" "}
+            <ArrowRightIcon className="w-4 h-4" strokeWidth={1} />
+          </Link>
+        )}
+      </div>
       <div className="space-y-4">
         {blogs.success && blogs.data ? (
           <>
@@ -21,7 +33,7 @@ const Blogs: React.FC<BlogsProps> = ({ blogs }) => {
                 key={blog.id}
                 className={cn(
                   "group grid gap-2 border-b last:border-b-0",
-                  (blogs.data?.length ?? 0) > 1 && "pb-4"
+                  (blogs.data?.length ?? 0) > 1 && "pb-4 last:pb-0"
                 )}
               >
                 <time className="text-xs text-muted-foreground">
@@ -60,15 +72,6 @@ const Blogs: React.FC<BlogsProps> = ({ blogs }) => {
                 </Link>
               </article>
             ))}
-            {blogs.data.length > 5 && (
-              <Link
-                href="https://medium.com/@thantheinthwin.dev"
-                className="text-sm text-muted-foreground flex gap-1 items-center"
-              >
-                View all blogs{" "}
-                <ArrowRightIcon className="w-4 h-4" strokeWidth={1} />
-              </Link>
-            )}
           </>
         ) : (
           <p>No blogs found</p>
