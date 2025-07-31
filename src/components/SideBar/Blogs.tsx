@@ -35,7 +35,7 @@ const Blogs: React.FC<BlogsProps> = ({ blogs }) => {
                   {blog.title}
                 </h3>
                 {blog.categories.length > 0 && (
-                  <div className="flex gap-1">
+                  <div className="flex gap-1 flex-wrap">
                     {blog.categories.map((category) => (
                       <span
                         key={category}
