@@ -44,7 +44,14 @@ const Blogs: React.FC<BlogsProps> = ({ blogs }) => {
                   })}
                 </time>
                 <h3 className="text-sm group-hover:text-primary transition-colors line-clamp-1">
+                  <Link
+                  href={blog.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline"
+                  >
                   {blog.title}
+                  </Link>
                 </h3>
                 {blog.categories.length > 0 && (
                   <div className="flex gap-1 flex-wrap">
@@ -61,7 +68,7 @@ const Blogs: React.FC<BlogsProps> = ({ blogs }) => {
                 <p className="text-foreground/80 leading-relaxed text-xs line-clamp-2">
                   {blog.excerpt}
                 </p>
-                <Link
+                {/* <Link
                   href={blog.link}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -69,7 +76,7 @@ const Blogs: React.FC<BlogsProps> = ({ blogs }) => {
                 >
                   Read more{" "}
                   <ArrowRightIcon className="w-4 h-4" strokeWidth={1} />
-                </Link>
+                </Link> */}
               </article>
             ))}
           </>
