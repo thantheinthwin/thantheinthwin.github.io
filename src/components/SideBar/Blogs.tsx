@@ -10,7 +10,7 @@ interface BlogsProps {
 }
 
 const Blogs: React.FC<BlogsProps> = ({ blogs }) => {
-  console.log("Blogs component rendered with data:", blogs);
+  // console.log("Blogs component rendered with data:", blogs);
   return (
     <div className=" p-4 border rounded h-fit max-w-96 grid gap-4">
       <div className="flex items-center justify-between">
