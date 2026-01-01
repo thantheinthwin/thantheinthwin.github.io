@@ -27,8 +27,8 @@ interface Experience {
 
 const experienceData: Experience[] = [
   {
-    date: "2024 – present",
-    title: "Full Stack Engineer",
+    date: "2024 – 2025",
+    title: "Senior Full Stack Engineer",
     company: "Empire Pixel",
     location: "Phuket, Thailand (Based in Canada)",
     summary:
