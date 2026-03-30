@@ -51,48 +51,6 @@ portfolio/
 └── README.md
 ```
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-
-### Installation
-
-1. **Clone the repository**
-
-   ```bash
-   git clone https://github.com/yourusername/portfolio.git
-   cd portfolio
-   ```
-
-2. **Install dependencies**
-
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
-
-3. **Run the development server**
-
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
-
-4. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## 📝 Available Scripts
-
-- `npm run dev` - Start development server with Turbopack
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
 ## 🎨 Customization
 
 ### Personal Information
@@ -116,23 +74,6 @@ Update your personal information in the following files:
 - Update resume files in `public/resume/`
 - Modify blog API integration in `src/api-services/blogs.ts`
 
-## 🌐 Deployment
-
-### Vercel (Recommended)
-
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Deploy automatically on every push
-
-### Other Platforms
-
-The app can be deployed to any platform that supports Next.js:
-
-- Netlify
-- Railway
-- DigitalOcean App Platform
-- AWS Amplify
-
 ## 📱 Responsive Design
 
 The portfolio is fully responsive with breakpoints:
@@ -140,18 +81,6 @@ The portfolio is fully responsive with breakpoints:
 - **Mobile**: < 768px
 - **Tablet**: 768px - 1024px
 - **Desktop**: > 1024px
-
-## 🔧 Configuration
-
-### Environment Variables
-
-Create a `.env.local` file for any API keys or configuration:
-
-```env
-# Example environment variables
-NEXT_PUBLIC_BLOG_API_URL=your_blog_api_url
-NEXT_PUBLIC_AVAILABILITY_API=your_status_api_url
-```
 
 ### API Integration
 
@@ -193,23 +122,6 @@ The portfolio includes comprehensive SEO and OpenGraph optimization:
 - `public/robots.txt` - Search engine crawling directives
 - `src/app/sitemap.ts` - Dynamic sitemap generation
 
-### Customization
-
-To customize the OpenGraph setup:
-
-1. **Update URLs**: Replace `https://thantheinthwin.vercel.app` with your actual domain
-2. **Social Media**: Add your social media handles in the metadata
-3. **Images**: Modify the generated images in `opengraph-image.tsx` and `twitter-image.tsx`
-4. **Structured Data**: Update the JSON-LD schema in `structured-data.tsx`
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -218,9 +130,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Thant Hein Thwin**
 
-- LinkedIn: [Your LinkedIn]
+- LinkedIn: [Thant Hein Thwin](https://www.linkedin.com/in/thanthein/)
 - GitHub: [@thantheinthwin](https://github.com/thantheinthwin)
-- Email: [your.email@example.com]
+- Email: [thantheinthwin.dev@gmail.com](thantheinthwin.dev@gmail.com)
 
 ## 🙏 Acknowledgments
 
@@ -229,7 +141,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Radix UI](https://www.radix-ui.com/) - UI components
 - [Lucide](https://lucide.dev/) - Icons
 - [Vercel](https://vercel.com/) - Deployment platform
-
----
-
-⭐ If you found this portfolio helpful, please give it a star!
