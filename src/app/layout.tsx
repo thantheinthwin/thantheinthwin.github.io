@@ -23,13 +23,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Thant Hein Thwin - Lead Algorithm Engineer",
+  title: "Thant Hein Thwin - Lead Software Engineer",
   description:
-    "Portfolio of Thant Hein Thwin, a Lead Algorithm Engineer with expertise in React, Next.js, Node.js, Golang, and Python",
+    "Portfolio of Thant Hein Thwin, a Lead Software Engineer with expertise in React, Next.js, Node.js, Golang, and Python",
   manifest: "/manifest.json",
   keywords: [
     "Thant Hein Thwin",
-    "Lead Algorithm Engineer",
+    "Lead Software Engineer",
     "React",
     "Next.js",
     "Node.js",
@@ -59,9 +59,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://thantheinthwin.vercel.app",
     siteName: "Thant Hein Thwin Portfolio",
-    title: "Thant Hein Thwin - Lead Algorithm Engineer",
+    title: "Thant Hein Thwin - Lead Software Engineer",
     description:
-      "Portfolio of Thant Hein Thwin, a Lead Algorithm Engineer with expertise in React, Next.js, Node.js, Golang, and Python",
+      "Portfolio of Thant Hein Thwin, a Lead Software Engineer with expertise in React, Next.js, Node.js, Golang, and Python",
   },
   alternates: {
     canonical: "https://thantheinthwin.vercel.app",

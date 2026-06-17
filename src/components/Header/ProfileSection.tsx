@@ -11,7 +11,7 @@ interface Profile {
 
 const profile: Profile = {
   name: "Thant Hein Thwin",
-  title: "Lead Algorithm Engineer",
+  title: "Lead Software Engineer",
   email: "thantheinthwin.dev@gmail.com",
   avatar: "/profile.webp",
 };

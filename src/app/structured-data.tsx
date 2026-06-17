@@ -3,9 +3,9 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Thant Hein Thwin",
-    jobTitle: "Lead Algorithm Engineer",
+    jobTitle: "Lead Software Engineer",
     description:
-      "Portfolio of Thant Hein Thwin, a Lead Algorithm Engineer with expertise in React, Next.js, Node.js, Golang, and Python",
+      "Portfolio of Thant Hein Thwin, a Lead Software Engineer with expertise in React, Next.js, Node.js, Golang, and Python",
     url: "https://thantheinthwin.vercel.app",
     image: "https://thantheinthwin.vercel.app/profile.webp",
     sameAs: [
