@@ -49,7 +49,6 @@ const experienceData: Experience[] = [
       methodologies: [
         "Agentic Frameworks",
         "Semantic AI",
-        "Vector Databases",
         "TDD",
         "Design Patterns",
         "SOLID",
