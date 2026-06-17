@@ -36,11 +36,10 @@ const experienceData: Experience[] = [
     tech: ["Python", "TypeScript", "AWS", "Docker"],
     details: {
       responsibilities: [
-        "Took autonomous ownership of the Garment Generation API, one of three core product pillars",
+        "Took autonomous ownership of the Garment Generation API, one of three core product pillars, within 3 months after joining freshly",
         "Designed comprehensive TDD test suites and orchestrated coding agents through SOLID design patterns",
         "Designed agent behavior validation frameworks with quality thresholds as harness engineer",
         "Architected CI/CD pipelines and deployment strategies for coordinating multiple intelligent agents",
-        "Mentored 2 engineers on AI-assisted development, harness engineering, and agent orchestration",
       ],
       achievements: [
         "Architected a generative design platform within 3 months of joining, generating production-ready patterns in 5 minutes vs. 2-4 weeks traditionally",
