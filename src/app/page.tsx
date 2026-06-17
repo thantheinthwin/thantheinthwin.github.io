@@ -7,9 +7,9 @@ export const revalidate = 3600; // Revalidate every hour
 
 export async function generateMetadata() {
   return {
-    title: "Mid Senior Full Stack Software Engineer",
+    title: "Lead Algorithm Engineer",
     description:
-      "Portfolio of Thant Hein Thwin, a Full Stack Software Engineer with expertise in React, Next.js, Node.js, and Golang",
+      "Portfolio of Thant Hein Thwin, a Lead Algorithm Engineer with expertise in React, Next.js, Node.js, Golang, and Python",
   };
 }
 
