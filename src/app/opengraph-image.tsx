@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "Thant Hein Thwin - Full Stack Software Engineer";
+export const alt = "Thant Hein Thwin - Lead Software Engineer";
 export const contentType = "image/png";
 export const size = {
   width: 1200,
@@ -86,7 +86,7 @@ export default async function Image() {
               opacity: 0.9,
             }}
           >
-            Full Stack Software Engineer
+            Lead Software Engineer
           </h2>
 
           {/* Skills */}

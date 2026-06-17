@@ -27,6 +27,35 @@ interface Experience {
 
 const experienceData: Experience[] = [
   {
+    date: "2025 – Present",
+    title: "Lead Software Engineer",
+    company: "Six Atomic",
+    location: "Bangkok, Onsite",
+    summary:
+      "Took autonomous ownership of the Garment Generation API, transitioning from full-stack web into the math-heavy fashion domain. Architected a generative design platform with end-to-end agentic composition that generates production-ready patterns in 5 minutes versus 2-4 weeks traditionally, while leading the agentic platform's evolution as harness engineer.",
+    tech: ["Python", "TypeScript", "AWS", "Docker"],
+    details: {
+      responsibilities: [
+        "Took autonomous ownership of the Garment Generation API, one of three core product pillars, within 3 months after joining freshly",
+        "Designed comprehensive TDD test suites and orchestrated coding agents through SOLID design patterns",
+        "Designed agent behavior validation frameworks with quality thresholds as harness engineer",
+        "Architected CI/CD pipelines and deployment strategies for coordinating multiple intelligent agents",
+      ],
+      achievements: [
+        "Architected a generative design platform within 3 months of joining, generating production-ready patterns in 5 minutes vs. 2-4 weeks traditionally",
+        "Shipped solutions autonomously with AI-native engineering: defined test contracts for agents and maintained quality despite velocity demands",
+        "Managed operational complexity at scale while preventing agent drift across multiple coordinated agents",
+      ],
+      methodologies: [
+        "Agentic Frameworks",
+        "Semantic AI",
+        "TDD",
+        "Design Patterns",
+        "SOLID",
+      ],
+    },
+  },
+  {
     date: "2024 – 2025",
     title: "Senior Full Stack Engineer",
     company: "Empire Pixel",

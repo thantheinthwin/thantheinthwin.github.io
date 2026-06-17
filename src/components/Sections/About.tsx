@@ -4,7 +4,7 @@ const About: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
   return (
     <SessionBase id={id} title="About">
       <p className="leading-relaxed text-balance text-foreground/80">
-        Mid-Senior Full Stack Engineer with 4+ years of experience building
+        Lead Software Engineer with 5+ years of experience building
         enterprise-scale applications across React, Next.js, Node.js, and Go.
         Led development of high-traffic web platforms, microservices
         architectures, and cloud-native solutions. Expert in TypeScript,
