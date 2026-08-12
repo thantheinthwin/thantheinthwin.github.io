@@ -31,6 +31,52 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "Forged",
+    date: "Apr 2026 – Present",
+    subtitle: "AI-Powered Fitness Coaching App (Commercial Product)",
+    description:
+      "A mobile-first AI workout coach I'm building as a commercial product—it generates personalized training plans, logs gym sessions with PR detection, and answers training questions through a context-aware AI chat. Built as a Go API gateway with a dedicated auth service and an Expo mobile app, heading toward app store launch.",
+    tech: [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Golang",
+      "Gin",
+      "PostgreSQL",
+      "pgvector",
+      "Redis",
+      "Better Auth",
+      "Hono",
+      "OpenRouter",
+      "Docker",
+      "Fly.io",
+    ],
+    details: {
+      features: [
+        "AI-generated 4-week personalized training plans from a 6-step onboarding flow",
+        "LLM tool-calling (get_exercises, get_substitutes) against a curated exercise catalogue—zero freehand exercise names",
+        "Workout logging with per-set tracking, PR detection, and per-muscle-group volume analysis",
+        "Streaming AI coach chat with RAG context: user profile, recent workouts, and pgvector semantic search",
+        "SQL-driven exercise substitution engine that avoids AI calls entirely",
+        "Better Auth service (Node.js + Hono) issuing JWTs consumed by the Go API middleware chain",
+      ],
+      challenges: [
+        "Enforcing canonical exercise naming by routing all AI exercise selection through database-backed tools",
+        "Bridging authentication between a Node.js auth server and a Go API via JWT validation middleware",
+        "Designing a Postgres schema resilient to messy AI-generated workout log ingestion",
+        "Reducing LLM API cost by moving exercise lookup and substitution from AI calls to SQL queries",
+      ],
+      outcomes: [
+        "Full backend deployed to Fly.io: Go API, auth server, and Supabase Postgres with automated migrations",
+        "End-to-end plan generation pipeline working from onboarding profile to structured 4-week plan",
+        "Exercise catalogue with seeded muscles, exercises, and muscle mappings powering deterministic substitution",
+        "OpenAPI documentation generated from code annotations via swaggo",
+      ],
+      role: "Founder & Full Stack Developer",
+      teamSize: "Solo Founder",
+    },
+  },
+  {
     title: "WealthSync",
     date: "May – Nov 2024",
     subtitle: "Finance Management App",
@@ -247,23 +293,25 @@ const Projects: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                     </div>
                   )} */}
 
-                  <div>
-                    <h4 className="font-semibold text-sm mb-2">GitHub</h4>
-                    <div className="flex divide-x">
-                      {selectedProject.details.github?.map((github) => (
-                        <a
-                          key={github.label}
-                          href={github.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm text-primary hover:underline flex items-center gap-1 first:pr-2 first:pl-0 last:pr-0 last:pl-2"
-                        >
-                          {github.label}
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                      ))}
+                  {selectedProject.details.github && (
+                    <div>
+                      <h4 className="font-semibold text-sm mb-2">GitHub</h4>
+                      <div className="flex divide-x">
+                        {selectedProject.details.github.map((github) => (
+                          <a
+                            key={github.label}
+                            href={github.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-sm text-primary hover:underline flex items-center gap-1 first:pr-2 first:pl-0 last:pr-0 last:pl-2"
+                          >
+                            {github.label}
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
+                        ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   {selectedProject.details.live && (
                     <div>
