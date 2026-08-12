@@ -59,7 +59,7 @@ const experienceData: Experience[] = [
     date: "2024 – 2025",
     title: "Senior Full Stack Engineer",
     company: "Empire Pixel",
-    location: "Phuket, Thailand (Based in Canada)",
+    location: "Remote (Canada)",
     summary:
       "Led a team to architect and implement an AI-powered content generation system using 3 AI models in an event-driven architecture with queues and webhooks. The system generates 50 pages daily with AI detection bypass capabilities, integrated with React, Next.js, and cloud infrastructure.",
     tech: [
