@@ -34,7 +34,7 @@ const experienceData: Experience[] = [
     location: "Bangkok, Onsite",
     summary:
       "Took autonomous ownership of the Garment Generation API, transitioning from full-stack web into the math-heavy fashion domain. Architected a generative design platform with end-to-end agentic composition that generates production-ready patterns in <b>5 minutes versus 2-4 weeks traditionally</b>, while leading the agentic platform's evolution as harness engineer.",
-    tech: ["Python", "TypeScript", "AWS", "Docker"],
+    tech: ["Python", "TypeScript", "AWS", "Docker", "LogFire", "PostgreSQL"],
     details: {
       responsibilities: [
         "Took autonomous ownership of the Garment Generation API, one of three core product pillars, within 3 months after joining freshly",
@@ -239,9 +239,9 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                 </button>
               </div>
               <div className="text-sm my-2 text-foreground/80">
-                <RichText text={exp.summary} className="leading-6" />
+                <RichText text={exp.summary} className="lg:leading-6" />
               </div>
-              <div className="text-xs text-muted-foreground leading-6">
+              <div className="text-xs text-muted-foreground lg:leading-6">
                 {exp.tech.join(" • ")}
               </div>
             </div>
