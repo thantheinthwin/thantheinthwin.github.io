@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import SessionBase, { SectionBase } from "./Base";
 import { Expand } from "lucide-react";
+import React, { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -8,6 +7,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
+import { RichText } from "../ui/rich-text";
+import SessionBase, { SectionBase } from "./Base";
 
 interface Experience {
   date: string;
@@ -32,7 +33,7 @@ const experienceData: Experience[] = [
     company: "Six Atomic",
     location: "Bangkok, Onsite",
     summary:
-      "Took autonomous ownership of the Garment Generation API, transitioning from full-stack web into the math-heavy fashion domain. Architected a generative design platform with end-to-end agentic composition that generates production-ready patterns in 5 minutes versus 2-4 weeks traditionally, while leading the agentic platform's evolution as harness engineer.",
+      "Took autonomous ownership of the Garment Generation API, transitioning from full-stack web into the math-heavy fashion domain. Architected a generative design platform with end-to-end agentic composition that generates production-ready patterns in <b>5 minutes versus 2-4 weeks traditionally</b>, while leading the agentic platform's evolution as harness engineer.",
     tech: ["Python", "TypeScript", "AWS", "Docker"],
     details: {
       responsibilities: [
@@ -61,7 +62,7 @@ const experienceData: Experience[] = [
     company: "Empire Pixel",
     location: "Remote (Canada)",
     summary:
-      "Led a team to architect and implement an AI-powered content generation system using 3 AI models in an event-driven architecture with queues and webhooks. The system generates 50 pages daily with AI detection bypass capabilities, integrated with React, Next.js, and cloud infrastructure.",
+      "Led a team to architect and implement an AI-powered content generation system using 3 AI models in an event-driven architecture with queues and webhooks. The system generates <b>50 pages daily with AI detection bypass capabilities</b>, integrated with React, Next.js, and cloud infrastructure.",
     tech: [
       "React",
       "Next.js",
@@ -238,9 +239,9 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                 </button>
               </div>
               <div className="text-sm my-2 text-foreground/80">
-                {exp.summary}
+                <RichText text={exp.summary} className="leading-6" />
               </div>
-              <div className="text-xs text-muted-foreground">
+              <div className="text-xs text-muted-foreground leading-6">
                 {exp.tech.join(" • ")}
               </div>
             </div>
@@ -264,7 +265,7 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                 <div>
                   <h4 className="font-semibold text-sm mb-2">Summary</h4>
                   <p className="text-sm text-muted-foreground">
-                    {selectedExperience.summary}
+                    <RichText text={selectedExperience.summary} />
                   </p>
                 </div>
 
@@ -280,9 +281,9 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                           className="text-sm text-muted-foreground flex items-end gap-2"
                         >
                           <span className="text-primary mt-1">•</span>
-                          {responsibility}
+                          <RichText text={responsibility} />
                         </li>
-                      )
+                      ),
                     )}
                   </ul>
                 </div>
@@ -299,9 +300,9 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                           className="text-sm text-muted-foreground flex items-end gap-2"
                         >
                           <span className="text-primary mt-1">•</span>
-                          {achievement}
+                          <RichText text={achievement} />
                         </li>
-                      )
+                      ),
                     )}
                   </ul>
                 </div>
@@ -320,7 +321,7 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                           >
                             {project}
                           </span>
-                        )
+                        ),
                       )}
                     </div>
                   </div>
@@ -350,7 +351,7 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                             >
                               {methodology}
                             </span>
-                          )
+                          ),
                         )}
                       </div>
                     </div>
