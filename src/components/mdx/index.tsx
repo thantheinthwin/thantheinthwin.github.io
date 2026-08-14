@@ -78,5 +78,17 @@ export const mdxComponents: MDXComponents = {
     />
   ),
   strong: (props) => <strong className="font-semibold text-foreground" {...props} />,
+  img: ({ alt = "", ...props }) => (
+    // span-based figure: markdown nests images inside <p>, where <figure> is invalid
+    <span className="my-6 block">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img alt={alt} loading="lazy" className="w-full rounded border" {...props} />
+      {alt && (
+        <span className="mt-2 block text-center text-xs text-muted-foreground">
+          {alt}
+        </span>
+      )}
+    </span>
+  ),
   Callout,
 };

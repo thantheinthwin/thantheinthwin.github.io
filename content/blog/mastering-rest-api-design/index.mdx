@@ -1,116 +1,122 @@
 ---
 title: "Mastering REST API Design: The Art of Resources and Methods"
 date: "2025-12-17"
-tags: ["api-design", "rest", "backend", "go"]
+tags: ["api-design", "rest", "backend", "best-practices"]
 excerpt: "A well-designed REST API is easy for other developers to use and keeps your system efficient and stable — by organizing everything around simple, conceptual resources."
 canonicalUrl: "https://medium.com/@thantheinthwin.dev/mastering-rest-api-design-resources-methods-best-practices-14ad117c6fe6"
 draft: false
 ---
 
-A well-designed REST API is easy for other developers to use and keeps your
-system efficient and stable. The secret is not clever tooling or exotic
-frameworks — it is organizing everything around simple, conceptual
-**resources**, and letting the standard HTTP methods do the talking.
+If you're building software that needs to talk to the internet, you need to
+master REST (Representational State Transfer). This isn't just a technical
+acronym; it's the fundamental architectural style behind how modern web
+services are built. A well-designed REST API is easy for other developers to
+use and keeps your system efficient and stable by organizing everything
+around simple, conceptual resources.
 
 <Callout>
   This post was originally published on
   [Medium](https://medium.com/@thantheinthwin.dev/mastering-rest-api-design-resources-methods-best-practices-14ad117c6fe6).
-  This MDX version demonstrates the blog rendering pipeline on this site.
 </Callout>
 
-## Resources: nouns, not verbs
+{/* TODO: drop the cover graphic into public/blog/mastering-rest-api-design/
+    and uncomment:
+![Mastering REST API Design cover](/blog/mastering-rest-api-design/cover.png) */}
+
+## 1. The Core Principle: Resources, Not Actions
 
 The most fundamental rule of RESTful design is to structure your API around
-resources. A resource is any conceptual entity that can be identified and
-acted upon — a user, an order, an invoice.
+**resources**. A resource is any conceptual entity that can be identified
+and acted upon. Think of resources as **nouns, not verbs**.
 
-Think of resources as **nouns, not verbs**:
+- **Bad endpoint example:** `/getAllUsers` or `/createNewOrder` — the verb
+  is baked into the URL.
+- **Good endpoint example:** `/users` or `/orders/{id}` — just the noun.
+
+The actions (the verbs) are implied by the standard HTTP methods themselves.
+
+## 2. Structuring Your Endpoints: Naming Conventions
+
+The URI (Uniform Resource Identifier) for a resource should clearly
+identify the resource you are interacting with.
+
+| Principle                 | Guideline                                                              | Example(s)                              |
+| ------------------------- | ---------------------------------------------------------------------- | --------------------------------------- |
+| Use plural nouns          | Name collections with plural nouns for consistency.                    | `/users`, not `/user`                   |
+| Identify specific resources | Use a unique identifier in the path to address one item.             | `/users/123`                            |
+| Model relationships       | Use nesting to show ownership — but keep it shallow.                   | `/users/123/orders`                     |
+| Avoid verbs               | Never put action words in the URL; rely on the HTTP method instead.    | `GET /users`, not `/getAllUsers`        |
+
+## 3. Essential Best Practices: The Finishing Touches
+
+{/* TODO: drop the URL-anatomy diagram into public/blog/mastering-rest-api-design/
+    and uncomment:
+![Anatomy of a REST URL — protocol, domain, service, version, resource, parameters](/blog/mastering-rest-api-design/url-anatomy.png) */}
+
+Every part of a URL has a job to do:
 
 ```
-GET  /users            ← good: a collection of a resource
-GET  /orders/{id}      ← good: a single resource
-POST /createNewOrder   ← bad: the verb belongs in the method, not the path
+https://example.com/foo-service/v1/user/{id}
+└─┬─┘   └───┬────┘ └────┬────┘ └┬┘ └──┬───┘
+protocol  domain     service  version  resource + parameters
 ```
 
-The actions — the verbs — are implied by the standard HTTP methods
-themselves. When you find yourself putting a verb in a URL, it is usually a
-sign that a resource is hiding somewhere in your domain model waiting to be
-named.
+### 3.1. Verbs of the Web
 
-## Mapping methods to actions
+The standard HTTP methods are used to perform the basic CRUD (Create, Read,
+Update, Delete) operations on your resources. They provide the action part
+of your request, so it never has to live in the URL.
 
-Each HTTP method carries a well-understood meaning. Using them consistently
-means a developer who has never seen your API can already guess how it works:
+| HTTP Method | Operation | Description                                                    | Example Endpoint & Action        |
+| ----------- | --------- | -------------------------------------------------------------- | -------------------------------- |
+| `GET`       | Read      | Retrieves a resource or a collection of resources.              | `GET /orders` — list orders      |
+| `POST`      | Create    | Creates a new resource within a collection.                     | `POST /orders` — create an order |
+| `PUT`       | Update    | Replaces an entire existing resource with the request payload.  | `PUT /orders/42` — replace       |
+| `PATCH`     | Update    | Applies a partial update to an existing resource.               | `PATCH /orders/42` — modify      |
+| `DELETE`    | Delete    | Removes a resource from the system.                             | `DELETE /orders/42` — remove     |
 
-| Method   | Action                    | Example                | Idempotent |
-| -------- | ------------------------- | ---------------------- | ---------- |
-| `GET`    | Read a resource           | `GET /orders/42`       | Yes        |
-| `POST`   | Create a new resource     | `POST /orders`         | No         |
-| `PUT`    | Replace a resource        | `PUT /orders/42`       | Yes        |
-| `PATCH`  | Partially update          | `PATCH /orders/42`     | No         |
-| `DELETE` | Remove a resource         | `DELETE /orders/42`    | Yes        |
+### 3.2. API Versioning
 
-Idempotency is the property worth memorizing in that table: a `PUT` or
-`DELETE` can be safely retried by a client or a proxy, while a `POST`
-generally cannot. Design with that in mind and network hiccups stop being
-data-corruption incidents.
+APIs inevitably change. Use versioning to prevent breaking existing
+clients. The recommended approach is **URI versioning**.
 
-## A concrete example in Go
+- **Example:** `/v1/products` or `/v2/products`
 
-Here is what a resource-oriented handler looks like in a small Go service:
+### 3.3. Standard HTTP Status Codes
 
-```go
-func (s *Server) routes() {
-	s.mux.HandleFunc("GET /orders", s.handleListOrders)
-	s.mux.HandleFunc("POST /orders", s.handleCreateOrder)
-	s.mux.HandleFunc("GET /orders/{id}", s.handleGetOrder)
-	s.mux.HandleFunc("DELETE /orders/{id}", s.handleDeleteOrder)
-}
+Status codes are crucial for signaling the outcome of a request. Using them
+correctly is mandatory for a RESTful API.
 
-func (s *Server) handleGetOrder(w http.ResponseWriter, r *http.Request) {
-	id := r.PathValue("id")
+| Category           | Key Codes & Meaning                                        | Common Use Cases                                          |
+| ------------------ | ---------------------------------------------------------- | --------------------------------------------------------- |
+| Success (2xx)      | `200 OK`, `201 Created`, `204 No Content`                  | Successful reads, successful creation, successful deletes |
+| Client Error (4xx) | `400 Bad Request`, `401 Unauthorized`, `404 Not Found`     | Malformed input, missing authentication, missing resource |
+| Server Error (5xx) | `500 Internal Server Error`, `503 Service Unavailable`     | Something went wrong on the server side, not the client's |
 
-	order, err := s.store.GetOrder(r.Context(), id)
-	if errors.Is(err, ErrNotFound) {
-		http.Error(w, "order not found", http.StatusNotFound)
-		return
-	}
-	if err != nil {
-		http.Error(w, "internal error", http.StatusInternalServerError)
-		return
-	}
+### 3.4. Data Format and Content Negotiation
 
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(order)
-}
-```
+JSON (JavaScript Object Notation) is the industry standard for data transfer.
 
-Notice how little there is to explain. The route table reads like
-documentation because the resource naming and the method semantics carry the
-meaning.
+- **Request:** specify the format being sent via the `Content-Type` header
+  (e.g. `Content-Type: application/json`).
+- **Response:** clients can request a format via the `Accept` header.
 
-## Best practices that keep APIs stable
+### 3.5. Statelessness
 
-1. **Use plural nouns for collections** — `/users`, not `/user`. Consistency
-   beats personal taste.
-2. **Nest only one level deep** — `/users/{id}/orders` is fine;
-   `/users/{id}/orders/{id}/items/{id}/discounts` is a sign your resources
-   want their own top-level home.
-3. **Return the right status codes** — `201 Created` with a `Location`
-   header on creation, `404` for missing resources, `422` for semantic
-   validation errors.
-4. **Version from day one** — a `/v1/` prefix costs nothing now and saves a
-   breaking-change migration later.
-5. **Paginate every collection** — an endpoint that returns an unbounded
-   list is a production incident on a delay timer.
+REST implies that the API be stateless. Every request must contain all the
+information needed to process it. The server does not store any session
+state information derived from previous requests. This improves reliability
+and scalability.
 
-> A good API is like a good joke — if you have to explain it, it isn't that
-> good.
+### 3.6. Filtering, Sorting, and Pagination
 
-## Wrapping up
+For managing large collections of resources (e.g. `GET /products`), the key
+query parameters are:
 
-REST is not a framework you install; it is a set of naming and semantics
-conventions that make your system predictable. Model your domain as
-resources, let the HTTP methods express the actions, and be boringly
-consistent about status codes and pagination. Your future consumers — and
-your future self — will thank you.
+- **Pagination:** `GET /products?page=2&limit=25`
+- **Filtering:** `GET /products?category=electronics&in_stock=true`
+- **Sorting:** `GET /products?sort=-price`
+
+By embracing the principles of resource orientation and leveraging the
+power of HTTP methods, you can design RESTful APIs that are clean,
+consistent, and a pleasure for developers to use.
