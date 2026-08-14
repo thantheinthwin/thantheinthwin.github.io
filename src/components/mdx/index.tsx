@@ -1,6 +1,75 @@
+import fs from "fs";
+import path from "path";
+import { imageSize } from "image-size";
 import type { MDXComponents } from "mdx/types";
+import Image from "next/image";
 import Link from "next/link";
 import { InfoIcon } from "lucide-react";
+
+// Self-hosted images (no CDN): measure dimensions from public/ at render time
+// so the layout reserves space before the image loads (no CLS). Rasters go
+// through next/image for on-demand resizing; SVGs are served as-is since the
+// image optimizer doesn't process them.
+function BlogImage({ src = "", alt = "" }: { src?: string; alt?: string }) {
+  const caption = alt && (
+    <span className="mt-2 block text-center text-xs text-muted-foreground">
+      {alt}
+    </span>
+  );
+
+  if (src.startsWith("/")) {
+    try {
+      const buffer = fs.readFileSync(path.join(process.cwd(), "public", src));
+      const { width, height } = imageSize(buffer);
+      if (width && height) {
+        const image = src.endsWith(".svg") ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            loading="lazy"
+            decoding="async"
+            className="h-auto w-full rounded"
+          />
+        ) : (
+          <Image
+            src={src}
+            alt={alt}
+            width={width}
+            height={height}
+            sizes="(max-width: 768px) 100vw, 576px"
+            className="h-auto w-full rounded border"
+          />
+        );
+        // span-based figure: markdown nests images inside <p>, where <figure> is invalid
+        return (
+          <span className="my-6 block">
+            {image}
+            {caption}
+          </span>
+        );
+      }
+    } catch {
+      // fall through to the plain <img> below (e.g. file missing in public/)
+    }
+  }
+
+  return (
+    <span className="my-6 block">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        decoding="async"
+        className="h-auto w-full rounded border"
+      />
+      {caption}
+    </span>
+  );
+}
 
 function Callout({ children }: { children: React.ReactNode }) {
   return (
@@ -78,17 +147,6 @@ export const mdxComponents: MDXComponents = {
     />
   ),
   strong: (props) => <strong className="font-semibold text-foreground" {...props} />,
-  img: ({ alt = "", ...props }) => (
-    // span-based figure: markdown nests images inside <p>, where <figure> is invalid
-    <span className="my-6 block">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt={alt} loading="lazy" className="w-full rounded border" {...props} />
-      {alt && (
-        <span className="mt-2 block text-center text-xs text-muted-foreground">
-          {alt}
-        </span>
-      )}
-    </span>
-  ),
+  img: BlogImage,
   Callout,
 };

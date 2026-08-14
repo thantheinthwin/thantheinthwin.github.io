@@ -43,7 +43,7 @@ export default function BlogIndexPage() {
                 {post.readingTimeMinutes} min read
               </time>
               <h2 className="group-hover:text-primary transition-colors">
-                <Link href={`/blog/${post.slug}`} className="hover:underline">
+                <Link href={`/blogs/${post.slug}`} className="hover:underline">
                   {post.title}
                 </Link>
               </h2>

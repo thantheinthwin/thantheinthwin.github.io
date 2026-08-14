@@ -43,7 +43,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     <main className="flex justify-center p-8 3xl:p-12 fade-in">
       <article className="w-full max-w-xl py-4">
         <Link
-          href="/blog"
+          href="/blogs"
           className="mb-8 flex w-fit items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors"
         >
           <ArrowLeftIcon className="h-4 w-4" strokeWidth={1} />
