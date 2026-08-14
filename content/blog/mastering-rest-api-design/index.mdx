@@ -1,0 +1,116 @@
+---
+title: "Mastering REST API Design: The Art of Resources and Methods"
+date: "2025-12-17"
+tags: ["api-design", "rest", "backend", "go"]
+excerpt: "A well-designed REST API is easy for other developers to use and keeps your system efficient and stable — by organizing everything around simple, conceptual resources."
+canonicalUrl: "https://medium.com/@thantheinthwin.dev/mastering-rest-api-design-resources-methods-best-practices-14ad117c6fe6"
+draft: false
+---
+
+A well-designed REST API is easy for other developers to use and keeps your
+system efficient and stable. The secret is not clever tooling or exotic
+frameworks — it is organizing everything around simple, conceptual
+**resources**, and letting the standard HTTP methods do the talking.
+
+<Callout>
+  This post was originally published on
+  [Medium](https://medium.com/@thantheinthwin.dev/mastering-rest-api-design-resources-methods-best-practices-14ad117c6fe6).
+  This MDX version demonstrates the blog rendering pipeline on this site.
+</Callout>
+
+## Resources: nouns, not verbs
+
+The most fundamental rule of RESTful design is to structure your API around
+resources. A resource is any conceptual entity that can be identified and
+acted upon — a user, an order, an invoice.
+
+Think of resources as **nouns, not verbs**:
+
+```
+GET  /users            ← good: a collection of a resource
+GET  /orders/{id}      ← good: a single resource
+POST /createNewOrder   ← bad: the verb belongs in the method, not the path
+```
+
+The actions — the verbs — are implied by the standard HTTP methods
+themselves. When you find yourself putting a verb in a URL, it is usually a
+sign that a resource is hiding somewhere in your domain model waiting to be
+named.
+
+## Mapping methods to actions
+
+Each HTTP method carries a well-understood meaning. Using them consistently
+means a developer who has never seen your API can already guess how it works:
+
+| Method   | Action                    | Example                | Idempotent |
+| -------- | ------------------------- | ---------------------- | ---------- |
+| `GET`    | Read a resource           | `GET /orders/42`       | Yes        |
+| `POST`   | Create a new resource     | `POST /orders`         | No         |
+| `PUT`    | Replace a resource        | `PUT /orders/42`       | Yes        |
+| `PATCH`  | Partially update          | `PATCH /orders/42`     | No         |
+| `DELETE` | Remove a resource         | `DELETE /orders/42`    | Yes        |
+
+Idempotency is the property worth memorizing in that table: a `PUT` or
+`DELETE` can be safely retried by a client or a proxy, while a `POST`
+generally cannot. Design with that in mind and network hiccups stop being
+data-corruption incidents.
+
+## A concrete example in Go
+
+Here is what a resource-oriented handler looks like in a small Go service:
+
+```go
+func (s *Server) routes() {
+	s.mux.HandleFunc("GET /orders", s.handleListOrders)
+	s.mux.HandleFunc("POST /orders", s.handleCreateOrder)
+	s.mux.HandleFunc("GET /orders/{id}", s.handleGetOrder)
+	s.mux.HandleFunc("DELETE /orders/{id}", s.handleDeleteOrder)
+}
+
+func (s *Server) handleGetOrder(w http.ResponseWriter, r *http.Request) {
+	id := r.PathValue("id")
+
+	order, err := s.store.GetOrder(r.Context(), id)
+	if errors.Is(err, ErrNotFound) {
+		http.Error(w, "order not found", http.StatusNotFound)
+		return
+	}
+	if err != nil {
+		http.Error(w, "internal error", http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(order)
+}
+```
+
+Notice how little there is to explain. The route table reads like
+documentation because the resource naming and the method semantics carry the
+meaning.
+
+## Best practices that keep APIs stable
+
+1. **Use plural nouns for collections** — `/users`, not `/user`. Consistency
+   beats personal taste.
+2. **Nest only one level deep** — `/users/{id}/orders` is fine;
+   `/users/{id}/orders/{id}/items/{id}/discounts` is a sign your resources
+   want their own top-level home.
+3. **Return the right status codes** — `201 Created` with a `Location`
+   header on creation, `404` for missing resources, `422` for semantic
+   validation errors.
+4. **Version from day one** — a `/v1/` prefix costs nothing now and saves a
+   breaking-change migration later.
+5. **Paginate every collection** — an endpoint that returns an unbounded
+   list is a production incident on a delay timer.
+
+> A good API is like a good joke — if you have to explain it, it isn't that
+> good.
+
+## Wrapping up
+
+REST is not a framework you install; it is a set of naming and semantics
+conventions that make your system predictable. Model your domain as
+resources, let the HTTP methods express the actions, and be boringly
+consistent about status codes and pagination. Your future consumers — and
+your future self — will thank you.

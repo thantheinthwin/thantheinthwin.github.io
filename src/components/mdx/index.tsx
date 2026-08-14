@@ -1,0 +1,82 @@
+import type { MDXComponents } from "mdx/types";
+import Link from "next/link";
+import { InfoIcon } from "lucide-react";
+
+function Callout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="my-6 flex gap-3 rounded border bg-secondary/50 p-4 text-sm text-foreground/90">
+      <InfoIcon className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" strokeWidth={1.5} />
+      <div className="[&>p]:m-0 space-y-2">{children}</div>
+    </div>
+  );
+}
+
+export const mdxComponents: MDXComponents = {
+  h1: (props) => (
+    <h1 className="mt-10 mb-4 text-2xl font-semibold tracking-tight" {...props} />
+  ),
+  h2: (props) => (
+    <h2
+      className="mt-10 mb-4 scroll-mt-24 border-b pb-2 text-xl font-semibold tracking-tight"
+      {...props}
+    />
+  ),
+  h3: (props) => (
+    <h3 className="mt-8 mb-3 scroll-mt-24 text-lg font-medium tracking-tight" {...props} />
+  ),
+  h4: (props) => (
+    <h4 className="mt-6 mb-2 scroll-mt-24 font-medium" {...props} />
+  ),
+  p: (props) => <p className="my-4 leading-7 text-foreground/80" {...props} />,
+  a: ({ href = "", ...props }) => {
+    const isExternal = href.startsWith("http");
+    return (
+      <Link
+        href={href}
+        target={isExternal ? "_blank" : undefined}
+        rel={isExternal ? "noopener noreferrer" : undefined}
+        className="underline underline-offset-4 decoration-muted-foreground hover:text-primary transition-colors"
+        {...props}
+      />
+    );
+  },
+  ul: (props) => (
+    <ul className="my-4 list-disc space-y-2 pl-6 text-foreground/80" {...props} />
+  ),
+  ol: (props) => (
+    <ol className="my-4 list-decimal space-y-2 pl-6 text-foreground/80" {...props} />
+  ),
+  li: (props) => <li className="leading-7 [&>p]:my-1" {...props} />,
+  blockquote: (props) => (
+    <blockquote
+      className="my-6 border-l-2 border-muted-foreground/40 pl-4 italic text-muted-foreground"
+      {...props}
+    />
+  ),
+  hr: () => <hr className="my-8" />,
+  table: (props) => (
+    <div className="my-6 overflow-x-auto">
+      <table className="w-full border-collapse text-sm" {...props} />
+    </div>
+  ),
+  th: (props) => (
+    <th className="border-b px-3 py-2 text-left font-medium" {...props} />
+  ),
+  td: (props) => (
+    <td className="border-b border-border/50 px-3 py-2 text-foreground/80" {...props} />
+  ),
+  pre: (props) => (
+    <pre
+      className="my-6 overflow-x-auto rounded border bg-input/50 p-4 text-[13px] leading-6 font-mono"
+      {...props}
+    />
+  ),
+  code: (props) => (
+    <code
+      className="rounded bg-secondary px-1.5 py-0.5 font-mono text-[13px] [pre_&]:bg-transparent [pre_&]:p-0"
+      {...props}
+    />
+  ),
+  strong: (props) => <strong className="font-semibold text-foreground" {...props} />,
+  Callout,
+};
