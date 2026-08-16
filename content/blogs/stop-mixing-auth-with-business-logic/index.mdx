@@ -1,0 +1,73 @@
+---
+title: "Stop Mixing Auth with Business Logic"
+subtitle: "Polyglot Pragmatism: Why We Split Auth and Domain Logic"
+description: "Learn why separating authentication from domain logic improves security, scalability, and maintainability in modern microservices architectures."
+date: "2026-04-26"
+tags: ["Microservices", "Software Architecture", "System Design Concepts", "Monolithic Architecture"]
+readingTime: "5 min read"
+canonicalUrl: "https://medium.com/@thantheinthwin.dev/stop-mixing-auth-with-business-logic-e0ee66f13412"
+coverImage: "https://miro.medium.com/v2/resize:fit:1200/1*gXfEYDQbiRpwixuzV6VQdw.png"
+draft: false
+---
+
+It started as a fitness tracking app. Nothing exotic — users log workouts, get AI coaching, track progress over time. The backend was a single Go service and life was simple.
+
+Then came the auth requirements. Google login, Apple login, email verification, session management, password resets. I looked at what it would take to build all of that properly in Go — the PKCE flows, the OAuth provider integrations, the token lifecycle management — and the honest answer was: weeks of work that had nothing to do with the actual product.
+
+Better Auth solved it. TypeScript-first, batteries included. But it meant running a second runtime alongside Go.
+
+I almost talked myself out of it. Two runtimes, two deployment units, two things to monitor. But then I thought about what happens six months from now when the product grows. Auth endpoints and domain endpoints don't scale the same way — and if they live in the same process, you're stuck scaling both together even when only one needs it.
+
+So I split them. Here's how that decision played out — and what it actually cost.
+
+<MissingImage caption="Architecture diagram" />
+
+## The Architecture at a Glance
+
+Nginx sits in front as a reverse proxy, routing traffic by URL path. From the client's perspective there's one API. Behind the scenes, two completely independent runtimes handle different concerns at different speeds.
+
+<MissingImage caption="Request routing diagram" />
+
+## Why the Split?
+
+### Selective Scaling
+
+Auth endpoints are less demanding than domain endpoints — and they scale differently. When the product grows, I want to scale the Go API aggressively without dragging the auth runtime along for the ride. Keeping them separate means each service scales on its own terms: more Go API pods during peak usage, auth stays lean. That kind of independence doesn't come for free in a monolith.
+
+This is the exact problem Martin Fowler and James Lewis diagnosed in their foundational 2014 article [*Microservices*](https://martinfowler.com/articles/microservices.html) on martinfowler.com. They described the core frustration with monolithic architecture as: *"scaling requires scaling of the entire application rather than parts of it that require greater resource."* Reading that line was the moment the split stopped feeling like an over-engineering risk and started feeling like the obvious call.
+
+### Ecosystem Maturity
+
+Authentication is a solved problem, but the solutions are language-specific. The TypeScript/Node.js ecosystem has mature, battle-tested libraries for OAuth, session management, and social logins. Porting Better Auth to Go would have meant re-implementing PKCE flows, social provider integrations, and token issuance by hand — months of work and a large custom attack surface. Less custom code means fewer custom bugs. That's a security decision, not just a convenience one.
+
+### Blast Radius Isolation
+
+Splitting the runtimes also partitions the attack surface. A vulnerability in the OAuth callback handler gives an attacker access to the auth server's process — not the Go API's memory, goroutines, or database connection pool. Two services, two blast radii, both smaller.
+
+Sam Newman calls this out explicitly in [*Building Microservices*, 2nd Edition](https://samnewman.io/books/building_microservices_2nd_edition/) (O'Reilly, 2021) as one of the primary motivations for service separation: the ability to *"isolate the blast radius of service failures"* so a compromise or failure in one service doesn't cascade into the rest of the system. I wasn't thinking about this when I made the split — I was thinking about scaling. The security boundary was a bonus I only appreciated later.
+
+## The Shared Database: A Deliberate Trade-off
+
+I kept both servers on the same PostgreSQL instance. Purists will push back on this — microservices are supposed to have private databases. Here's why I disagree for this stage:
+
+- **Foreign Key Integrity:** Domain data is heavily tied to `user_id`. Separate databases would mean distributed joins or a caching layer — both are complexity traps at early scale.
+- **Clear Ownership:** The auth server owns the identity tables (`users`, `sessions`). The Go API treats them as read-only — it reads `user_id` from a verified JWT and uses it as a lookup key. It never writes to auth tables.
+- **Migration Control:** All migrations, including the auth schema, live in a single versioned source of truth in the Go codebase. No black-box library owns the schema.
+
+The real trade-off is the single point of failure. I mitigate that with connection pooling, read replicas, and advisory locks to prevent migration races — standard operational discipline, nothing novel.
+
+## Nginx: The Invisible Router
+
+Nginx handles TLS termination and sets `X-Forwarded-Proto` and `X-Real-IP` correctly. Both backend services stay stateless and unaware of the network complexity outside. The routing is purely path-based — `/auth/*` goes left, `/v1/*` goes right.
+
+## What I'd Warn You About
+
+Running two runtimes introduces deployment coordination overhead that a monolith doesn't have. Docker Compose startup races are real — the Go API tries to warm its JWKS cache at boot, and if the auth server isn't ready yet, it needs to fail gracefully instead of crashing. That resilience has to be intentional. If you go this route, design for your services to start in any order from day one.
+
+The selective scaling payoff is real. But you earn it later. Early on, you're just carrying the operational overhead.
+
+Sam Newman said it well in a conversation with Martin Fowler (gotopia.tech, 2020): *"A microservice architecture is a conscious choice you have made… because of some outcome you're looking for. There's some benefit you think it's going to give you."* That framing — from *Building Microservices*, the book that shaped how I thought about service boundaries — is exactly the right test to apply before you go down this road. I had a clear outcome in mind: scale the domain API independently, without touching auth. If you can't name your outcome that specifically, the operational overhead probably isn't worth it yet.
+
+---
+
+*Part 1 of 3 in the Securing Forged series.*

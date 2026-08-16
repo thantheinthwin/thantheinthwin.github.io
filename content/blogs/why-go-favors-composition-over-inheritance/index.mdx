@@ -1,0 +1,114 @@
+---
+title: "Why Go Favors Composition Over Inheritance"
+description: "Discover how Go simplifies Object-Oriented Programming by using composition over inheritance for cleaner, modular, and more testable code."
+date: "2025-07-22"
+tags: ["Golang", "Design Patterns", "Inheritance", "Composition"]
+readingTime: "3 min read"
+canonicalUrl: "https://medium.com/@thantheinthwin.dev/why-go-favors-composition-over-inheritance-2464a83db0dd"
+coverImage: "https://miro.medium.com/v2/resize:fit:1024/1*xOEYkDT4MmUti86IORPRAA.png"
+draft: false
+---
+
+Object-Oriented Programming (OOP) has shaped how we build software for decades. Languages like Java and C++ popularized inheritance to promote code reuse and abstraction. But when developers switch to Go (Golang), they quickly notice something missing — **classical inheritance**. Instead, Go takes a different route: it embraces **composition**.
+
+So, how does Go approach OOP? And why does it favor composition? Let's explore.
+
+## OOP in Go: A Different Angle
+
+Go skips traditional OOP constructs like classes but still embraces its core ideas:
+
+- **Encapsulation** through exported and un-exported fields/methods
+- **Polymorphism** using interfaces
+- **Code reuse** via **composition**, not inheritance
+
+Go encourages building behavior using **structs** and **interfaces**, focusing on modular, decoupled design.
+
+## Why Go Has No Inheritance
+
+Go's creators deliberately avoided inheritance for several key reasons:
+
+1. **Simplicity** — No deep class trees to manage or untangle
+2. **Loose Coupling** — Encourages independent, testable components
+3. **Resilience** — Avoids the "fragile base class" problem
+4. **Readability** — Promotes flat, maintainable architecture
+
+Rather than forcing rigid hierarchies, Go gives you flexible building blocks.
+
+## Composition in Practice
+
+Instead of inheritance, Go composes structs by **embedding**. This lets you reuse behavior cleanly.
+
+```go
+type Engine struct{}
+func (e Engine) Start() { fmt.Println("Engine started") }
+
+type Radio struct{}
+func (r Radio) PlayMusic() { fmt.Println("Playing music") }
+
+type Car struct {
+ Engine
+ Radio
+}
+
+func main() {
+ car := Car{}
+ car.Start()      // Via Engine
+ car.PlayMusic()  // Via Radio
+}
+```
+
+**Thought:** `Car` embeds `Engine` and `Radio`, and gains their methods—like inheritance, but simpler and safer.
+
+## Composition + Interfaces = Go's Polymorphism
+
+Go's interfaces are powerful and **implicitly satisfied** — no need for an `implements` keyword.
+
+```go
+type Starter interface {
+	Start()
+}
+func StartVehicle(s Starter) {
+	s.Start()
+}
+func main() {
+	car := Car{}
+	StartVehicle(car) // Car satisfies Starter via embedded Engine
+}
+```
+
+This is Go's take on **duck typing**: if it has a `Start()` method, it's a `Starter`.
+
+## A Real-World Analogy
+
+Imagine building a robot.
+
+**Inheritance style:** Adding new abilities like "Cleaning" requires new subclasses — hard to scale.
+
+**Go's composition style:**
+
+```go
+type Singing struct{}
+type Dancing struct{}
+type Robot struct {
+	Singing
+	Dancing
+}
+```
+
+Need new behavior? Just embed it. No tangled inheritance chain.
+
+## Final Thoughts
+
+Go's approach — **composition over inheritance** — isn't just a syntax difference. It reflects a deeper philosophy:
+
+- Favor simplicity
+- Build small, testable units
+- Design for flexibility, not hierarchy
+
+When writing Go, think in terms of **capabilities**, not class trees. More often than not, **composition is all you need**.
+
+## Resources
+
+- [Go FAQ: Why no inheritance?](https://golang.org/doc/faq#inheritance)
+- [Effective Go: Embedding](https://golang.org/doc/effective_go#embedding)
+- [Go Proverbs — Rob Pike](https://go-proverbs.github.io/)

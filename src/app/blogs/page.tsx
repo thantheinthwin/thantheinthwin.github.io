@@ -47,6 +47,9 @@ export default function BlogIndexPage() {
                   {post.title}
                 </Link>
               </h2>
+              {post.subtitle && (
+                <p className="text-xs italic text-muted-foreground">{post.subtitle}</p>
+              )}
               {post.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1">
                   {post.tags.map((tag) => (

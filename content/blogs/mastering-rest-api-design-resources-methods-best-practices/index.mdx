@@ -1,0 +1,64 @@
+---
+title: "Mastering REST API Design: The Art of Resources and Methods"
+description: "Learn the fundamentals of REST API design. Master resource-based endpoints, map HTTP methods (GET, POST, PUT) to actions, and implement essential practices like versioning and status codes."
+date: "2025-12-17"
+tags: ["Rest Api", "Https", "Web Development", "Api Design", "Software Architecture"]
+readingTime: "3 min read"
+canonicalUrl: "https://medium.com/@thantheinthwin.dev/mastering-rest-api-design-resources-methods-best-practices-14ad117c6fe6"
+coverImage: "https://miro.medium.com/v2/resize:fit:1200/1*rSpwqUJT6kDdwTyB6IFdwg.png"
+draft: false
+---
+
+If you're building software that needs to talk to the internet, you need to master **REST (Representational State Transfer)**. This isn't just a technical acronym; it's the fundamental architecture that dictates how modern web services are built. A well-designed REST API is easy for other developers to use and keeps your system efficient and stable by organizing everything around simple, conceptual **resources**.
+
+<MissingImage caption="Core HTTP methods diagram" />
+
+## 1. The Core Principle: Resources, Not Actions
+
+The most fundamental rule of RESTful design is to structure your API around **resources**. A resource is any conceptual entity that can be identified and acted upon. Think of resources as **nouns**, not verbs.
+
+- **Bad Endpoint Example:** `/createNewUser` or `/delete-order-by-id`
+- **Good Endpoint Example:** `/users` or `/orders/{id}`
+
+The actions (the verbs) are implied by the standard HTTP methods themselves.
+
+## 2. Structuring Your Endpoints: Naming Conventions
+
+The URI (Uniform Resource Identifier) for an endpoint should clearly identify the resource you are interacting with.
+
+## 3. Essential Best Practices: The Finishing Touches
+
+### 3.1. Verbs of the Web
+
+The standard **HTTP methods** are used to perform the basic CRUD (Create, Read, Update, Delete) operations on your resources. They provide the **action** part of your request, eliminating the need for verbs in the URI.
+
+### 3.2. API Versioning
+
+APIs inevitably change. Use versioning to prevent breaking existing clients. The recommended approach is **URI Versioning**:
+
+- **Example:** `/v1/users` or `/v2/users`
+
+### 3.3. Standard HTTP Status Codes
+
+Status codes are crucial for signaling the outcome of a request. Using them correctly is mandatory for a RESTful API.
+
+### 3.4. Data Format and Content Negotiation
+
+**JSON (JavaScript Object Notation)** is the industry standard for data transfer.
+
+- **Request:** Specify the format being sent via the `Content-Type` header: `Content-Type: application/json`.
+- **Response:** Clients can request a format via the `Accept` header.
+
+### 3.5. Statelessness
+
+REST requires that the API be **stateless**. Every request must contain all the information needed to process it. The server cannot rely on any session state information stored from previous requests. This promotes **scalability** and **reliability**.
+
+### 3.6. Filtering, Sorting, and Pagination
+
+For managing large collections of resources (e.g., `GET /users`), use query parameters:
+
+- **Pagination:** `?limit=10&offset=50`
+- **Filtering:** `?status=active&category=electronics`
+- **Sorting:** `?sort=price_asc`
+
+By embracing the principles of **resource orientation** and leveraging the power of **HTTP methods**, you can design REST APIs that are clean, consistent, and a pleasure for developers to use.

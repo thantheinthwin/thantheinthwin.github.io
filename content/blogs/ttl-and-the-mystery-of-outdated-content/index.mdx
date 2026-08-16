@@ -1,0 +1,67 @@
+---
+title: "TTL and the Mystery of Outdated Content"
+description: "Struggling with stale or outdated content? Learn how TTL, invalidation, and caching layers—frontend, CDN, storage, backend, and in-memory—affect freshness. Discover key factors to debug cache issues and balance performance with accuracy."
+date: "2025-10-05"
+tags: ["Cache", "Https"]
+readingTime: "3 min read"
+canonicalUrl: "https://medium.com/@thantheinthwin.dev/ttl-and-the-mystery-of-outdated-content-618c99552e52"
+coverImage: "https://miro.medium.com/v2/resize:fit:1024/1*UZIVEf4E2LPoNFOP5gBu8A.png"
+draft: false
+---
+
+Today let's talk about caching.
+
+**Have you ever come across the word "TTL"?
+Have you ever wondered why stale content keeps showing up, even after you've updated something on your site or app?**
+
+If you've been frustrated by this, you're not alone. The reason often lies in **how caching layers work together** — and sometimes against you. Let's break down the common places where outdated content hides and what you should keep in mind when debugging it.
+
+## Frontend: The User's Browser or App
+
+Browsers are excellent at reusing files to make pages load quickly. But if cache rules are too relaxed, the browser may keep **HTML, CSS, JavaScript, images, or even API responses** longer than you expect.
+
+With the right headers, you can actually instruct the browser to cache server responses for a set duration. This is great for performance — but if those headers aren't tuned carefully, users will still see yesterday's data today.
+
+**Key question:** Is the browser following your freshness policy, or holding on too long?
+
+## Edge: The Content Delivery Layer
+
+Content is often cached at edge servers near users. This reduces latency, but these edges respect their own timers (TTL). If they aren't purged or refreshed after an update, they'll keep serving stale versions.
+
+**Key question:** Is the outdated content local to one region, or showing up globally?
+
+## Object Storage: Where Files Live
+
+When you update an image, document, or media file, you expect the new one to show instantly. But storage systems also follow metadata rules like **cache-control** and sometimes even expose older versions.
+
+**Key question:** Did the new file truly replace the old one, and are its headers aligned with freshness needs?
+
+## Backend: Application Responses
+
+Applications often cache responses in memory or as pre-rendered pages to save resources. These cached responses usually come with TTLs. If the expiry window is too long — or if invalidation isn't triggered after a change — old results stick around.
+
+**Key question:** Is the backend cache being cleared or refreshed properly when data changes?
+
+## In-Memory Stores: The Redis-Style Layer
+
+Fast in-memory caches (like Redis) rely heavily on TTL. Each stored entry has a clock ticking down. But unless keys are **reset, replaced, or deleted** when new data arrives, outdated values can persist until expiry.
+
+**Key question:** Are expiry policies and invalidations firing as expected?
+
+## Regional and Layered Delays
+
+Not all caches refresh at the same time. A page might be fresh in one location but outdated in another. Or the HTML may be new, while images or API responses are still old.
+
+**Key question:** Is the issue consistent everywhere, or is it isolated by location or content type?
+
+## Expiry vs. Expectation
+
+Here's the tricky part: sometimes outdated content isn't a bug — it's policy. If your system is told to hold onto data for an hour, it will. If your business needs freshness every five minutes, then the mismatch isn't technical — it's strategic.
+
+**Key question:** Do TTL values actually reflect the level of freshness your use case demands?
+
+## Final Thoughts
+
+Outdated content is almost never random. It's usually the result of **TTL rules, invalidation gaps, or asynchronous updates** across layers. By checking systematically — frontend, edge, storage, backend, in-memory — you can trace where the stale data lives and fix it without tearing apart your cache strategy.
+
+Caching is powerful, but it's all about balance: speed vs. freshness. Understanding TTL gives you the control to keep both in harmony.

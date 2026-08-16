@@ -2,14 +2,16 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-const BLOG_DIR = path.join(process.cwd(), "content", "blog");
+const BLOG_DIR = path.join(process.cwd(), "content", "blogs");
 
 export interface PostMeta {
   slug: string;
   title: string;
+  subtitle?: string;
   date: string;
   tags: string[];
   excerpt: string;
+  coverImage?: string;
   canonicalUrl?: string;
   draft: boolean;
   readingTimeMinutes: number;
@@ -24,6 +26,13 @@ function estimateReadingTime(content: string): number {
   return Math.max(1, Math.round(words / 200));
 }
 
+// Prefer the author-stated reading time (e.g. "5 min read") when present,
+// since it reflects the platform's own estimate rather than a word-count guess.
+function parseReadingTime(value: unknown, content: string): number {
+  const match = typeof value === "string" ? value.match(/\d+/) : null;
+  return match ? parseInt(match[0], 10) : estimateReadingTime(content);
+}
+
 function parsePost(slug: string): Post | null {
   const filePath = path.join(BLOG_DIR, slug, "index.mdx");
   if (!fs.existsSync(filePath)) return null;
@@ -34,12 +43,14 @@ function parsePost(slug: string): Post | null {
   return {
     slug,
     title: data.title ?? slug,
+    subtitle: data.subtitle,
     date: data.date ?? new Date().toISOString(),
     tags: data.tags ?? [],
-    excerpt: data.excerpt ?? "",
+    excerpt: data.excerpt ?? data.description ?? "",
+    coverImage: data.coverImage,
     canonicalUrl: data.canonicalUrl,
     draft: data.draft ?? false,
-    readingTimeMinutes: estimateReadingTime(content),
+    readingTimeMinutes: parseReadingTime(data.readingTime, content),
     content,
   };
 }

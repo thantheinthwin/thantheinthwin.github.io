@@ -1,0 +1,83 @@
+---
+title: "I Broke My React Query Cache by Using <a> tag in Next.js — Here's What I Learned"
+description: "Avoid using the native <a> tag for internal navigation in Next.js apps—learn how it breaks state and how to fix it using next/link or router.push()."
+date: "2025-07-15"
+tags: ["Nextjs", "Navigation", "A Tag", "Routing"]
+readingTime: "2 min read"
+canonicalUrl: "https://medium.com/@thantheinthwin.dev/i-broke-my-react-query-cache-by-using-a-tag-in-next-js-heres-what-i-learned-66933c61165f"
+coverImage: "https://miro.medium.com/v2/resize:fit:1024/1*0uAh95Rr0xgapZgtZoAedA.png"
+draft: false
+---
+
+### Intro
+
+While working on a full-stack app using **Next.js App Router**, **shadcn UI**, **React Query**, and **NextAuth**, I ran into an unexpected bug: navigating between internal pages would **reset my entire app state**.
+
+At first glance, everything seemed fine — the routes loaded, styles applied correctly, and the layout didn't break. But then I realized that:
+
+- **React Query lost its cache**
+- **NextAuth session flickered**
+- **The whole React tree was unmounted and remounted**
+
+Turns out, I was using a native `<a>` tag to navigate between pages. Here's why that caused issues — and how switching to Next.js-native routing fixed everything.
+
+### The Problem
+
+I used this:
+
+```html
+<a href="/garage">Go to Garage</a>
+```
+
+It worked visually, but each time I clicked the link, the entire app reloaded. This triggered a complete teardown and reinitialization of:
+
+- React Query Provider
+- NextAuth session
+- Global context state
+
+What seemed like a harmless anchor tag ended up resetting my app on every navigation.
+
+### Why It Happened
+
+The root issue is **how different navigation methods are handled by the browser and by Next.js**.
+
+### TL;DR:
+
+- `<a>` **tag** → full page reload → app resets
+- `next/link` **or** `router.push()` → client-side navigation → app state preserved
+
+### How I Fixed It
+
+**Replaced `<a>` with `next/link`**
+
+```tsx
+import Link from 'next/link';
+
+<Link href="/garage">Go to Garage</Link>
+```
+
+This allows Next.js to handle routing internally without reloading the page, keeping **React Query** and **NextAuth** state intact.
+
+**Used `router.push()` for programmatic navigation**
+
+When I needed to navigate after a form submit or a conditional redirect:
+
+```tsx
+'use client';
+import { useRouter } from 'next/navigation';
+
+const router = useRouter();
+router.push('/garage');
+```
+
+### Conclusion
+
+If you're building with React Query, NextAuth, or any stateful client libraries, **never use** `<a>` **for internal navigation**. It'll silently break your cache and context, and you might not notice until debugging hours later.
+
+Instead:
+
+- Use `next/link` for declarative navigation inside components
+- Use `router.push()` for programmatic routing
+- Only use `<a>` for external URLs or non-JS fallbacks
+
+A simple change saved me hours of debugging — hopefully, it saves you too.

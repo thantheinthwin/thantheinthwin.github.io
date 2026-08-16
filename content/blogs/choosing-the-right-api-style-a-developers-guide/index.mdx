@@ -1,0 +1,222 @@
+---
+title: "Choosing the Right API Style: A Developer's Guide"
+description: "Guide to REST, GraphQL, gRPC, WebSocket & SOAP with pros/cons, best use cases, code examples, and diagrams for faster API decisions."
+date: "2025-08-14"
+tags: ["Rest Api", "GraphQL", "Grpc", "Websocket", "Soap"]
+readingTime: "5 min read"
+canonicalUrl: "https://medium.com/@thantheinthwin.dev/choosing-the-right-api-style-a-developers-guide-dd71b11da16f"
+coverImage: "https://miro.medium.com/v2/resize:fit:1024/1*9Z5cwpjdHZUmJeEpG0oI_Q.png"
+draft: false
+---
+
+APIs are the invisible bridges that connect software systems. Whether you're building a mobile app, orchestrating microservices, or integrating with legacy platforms, the **API style** you choose directly impacts **performance**, **developer experience**, and **scalability**.
+
+This post gives you a **practical, side-by-side breakdown** of the five major API styles — **REST, GraphQL, gRPC, WebSocket, and SOAP** — complete with **how they work**, **pros/cons**, **best fits**, and diagrams you can reuse in your own documentation.
+
+## 1) REST (Representational State Transfer)
+
+**How it works:**
+
+REST organizes resources into endpoints and uses HTTP verbs like `GET`, `POST`, `PUT`, and `DELETE`. Data is often returned as JSON, making it highly compatible across platforms.
+
+**Pros:**
+
+- Works with almost every tool and platform
+- Easy to cache with HTTP
+- Simple to learn and implement
+
+**Cons:**
+
+- Over-fetching or under-fetching data is common
+- Nested data often requires multiple requests
+
+**Best fit:** Public APIs, CRUD-heavy apps, broad client support.
+
+**Example — Node.js Express API**
+
+```js
+const express = require("express");
+
+const app = express();
+
+app.get("/users/:id", (req, res) => {
+  res.json({ id: req.params.id, name: "Ada", email: "a@ex.com" });
+});
+app.listen(3000, () => console.log("REST API running on port 3000"));
+```
+
+## 2) GraphQL
+
+**How it works:**
+
+A single endpoint accepts queries where the client specifies exactly which fields it needs. The server can pull data from multiple sources before sending back a custom-shaped response.
+
+**Pros:**
+
+- No over- or under-fetching
+- Versionless, schema-driven
+- Strongly typed
+
+**Cons:**
+
+- More complex to cache
+- Requires careful handling to avoid N+1 query issues
+
+**Best fit:** Complex UIs (web/mobile), federated data sources, evolving frontends.
+
+**Example — Apollo Server**
+
+```js
+const { ApolloServer, gql } = require("apollo-server");
+
+const typeDefs = gql`
+  type Order { id: ID!, total: Float }
+  type User { id: ID!, name: String!, orders: [Order] }
+  type Query { user(id: ID!): User }
+`;
+
+const resolvers = {
+  Query: {
+    user: (_, { id }) => ({ id, name: "Ada", orders: [{ id: 77, total: 48.5 }] })
+  }
+};
+
+const server = new ApolloServer({ typeDefs, resolvers });
+
+server.listen().then(({ url }) => console.log(`GraphQL ready at ${url}`));
+```
+
+## 3) gRPC
+
+**How it works:**
+
+You define services in `.proto` files and exchange compact binary data (Protocol Buffers) over HTTP/2. Code generation creates strongly typed clients and servers, supporting unary and streaming calls.
+
+**Pros:**
+
+- Very fast and type-safe
+- Small payloads
+- Built-in bidirectional streaming
+
+**Cons:**
+
+- Not human-readable
+- Limited browser support (needs a proxy)
+- Steeper learning curve
+
+**Best fit:** Internal microservices, low-latency server-to-server communication, data-plane pipelines.
+
+**Example —** `.proto` **definition**
+
+```protobuf
+syntax = "proto3";
+
+service UserService {
+  rpc GetUserOrders(UserId) returns (stream Order);
+}
+
+message UserId {
+  int32 id = 1;
+}
+
+message Order {
+  int32 id = 1;
+  float total = 2;
+}
+```
+
+**Example — Go gRPC server**
+
+```go
+func (s *server) GetUserOrders(req *pb.UserId, stream pb.UserService_GetUserOrdersServer) error {
+    orders := []pb.Order{
+        {Id: 77, Total: 48.5},
+        {Id: 81, Total: 19.0},
+    }
+    for _, o := range orders {
+        if err := stream.Send(&o); err != nil {
+            return err
+        }
+    }
+    return nil
+}
+```
+
+## 4) WebSocket
+
+**How it works:**
+
+After an HTTP handshake, a persistent full-duplex connection is established, allowing both client and server to push data at any time.
+
+**Pros:**
+
+- Real-time, low-latency updates
+- No polling overhead
+
+**Cons:**
+
+- Stateful scaling is tricky
+- Must handle backpressure and authentication lifecycle
+
+**Best fit:** Chat, multiplayer games, live dashboards, collaborative editing, IoT telemetry.
+
+**Example — Node.js WebSocket server**
+
+```js
+const WebSocket = require("ws");
+
+const wss = new WebSocket.Server({ port: 8080 });
+
+wss.on("connection", ws => {
+  ws.send(JSON.stringify({ message: "Connected!" }));
+  ws.on("message", msg => console.log("Received:", msg));
+});
+```
+
+## 5) SOAP (Simple Object Access Protocol)
+
+**How it works:**
+
+SOAP wraps requests and responses in XML envelopes defined by strict WSDL contracts. It supports WS-* standards for security, reliability, and transactions.
+
+**Pros:**
+
+- Mature enterprise-grade standards
+- Strong security and transaction support
+
+**Cons:**
+
+- Verbose XML
+- Heavy tooling and rigidity
+
+**Best fit:** Banking, enterprise systems, regulated industries, legacy interoperability.
+
+**Example — SOAP request**
+
+```xml
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                  xmlns:ser="http://example.com/service">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:GetUser>
+         <ser:UserId>123</ser:UserId>
+      </ser:GetUser>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+## Rules of Thumb
+
+- **REST** → Simplicity and ecosystem breadth
+- **GraphQL** → Flexible, client-driven data fetching
+- **gRPC** → High-performance, internal service-to-service calls
+- **WebSocket** → Real-time, bidirectional communication
+- **SOAP** → Enterprise-grade security and strict contracts
+
+## Implementation Tips (Battle-Tested)
+
+- **REST:** Use ETags, pagination (RFC 8288), and proper HTTP caching.
+- **GraphQL:** Prevent N+1 queries, set complexity limits, use data loaders.
+- **gRPC:** Version your `.proto` files, enforce deadlines and retries.
+- **WebSocket:** Implement heartbeats, handle scaling with sticky sessions or brokers.
+- **SOAP:** Leverage WSDL-first contracts and WS-Security policies.

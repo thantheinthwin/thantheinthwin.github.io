@@ -1,0 +1,198 @@
+---
+title: "Understanding SSR, SSG, ISR, and CSR in Next.js App Router"
+description: "How to choose the right rendering method for performance, SEO, and scalability"
+date: "2025-07-29"
+tags: ["Nextjs", "Server Side Rendering", "Server Side Generation", "Client Side Rendering", "SEO"]
+readingTime: "3 min read"
+canonicalUrl: "https://medium.com/@thantheinthwin.dev/understanding-ssr-ssg-isr-and-csr-in-next-js-app-router-75784488e395"
+coverImage: "https://miro.medium.com/v2/resize:fit:1200/1*xP-xUH0rF5HxvhhZ--MaBQ.png"
+draft: false
+---
+
+*How to choose the right rendering method for performance, SEO, and scalability*
+
+## Introduction
+
+Next.js 13+ with the **App Router** brings a new paradigm to how we render pages. While rendering strategies like **SSR, SSG, ISR, and CSR** aren't new, their implementation in the App Router differs from the old Pages Router.
+
+In this post, you'll learn:
+
+- What each rendering strategy means
+- How to implement them with App Router
+- The pros and cons of each
+- When to use which rendering method in real-world use cases
+
+Let's dive in.
+
+## Server-Side Rendering (SSR)
+
+### What is SSR?
+
+SSR generates the page **on each request** on the server. It's ideal for dynamic, personalized content.
+
+### App Router Implementation
+
+```tsx
+// app/products/[id]/page.tsx
+export const dynamic = 'force-dynamic';
+
+export default async function ProductPage({ params }) {
+  const product = await getProduct(params.id);
+  return <div>{product.name}</div>;
+}
+```
+
+### Pros
+
+- Always fresh data
+- SEO-friendly
+- Good for personalization and auth-based content
+
+### Cons
+
+- Slower than static pages
+- Higher server cost and complexity
+
+### Use Cases
+
+- Dashboards
+- Order confirmation
+- Real-time analytics
+
+## Static Site Generation (SSG)
+
+### What is SSG?
+
+SSG builds HTML **at build time** and serves static files.
+
+### App Router Implementation
+
+```tsx
+export async function generateStaticParams() {
+  const posts = await getAllPosts();
+  return posts.map(post => ({ slug: post.slug }));
+}
+
+export default async function BlogPost({ params }) {
+  const post = await getPost(params.slug);
+  return <article>{post.title}</article>;
+}
+```
+
+### Pros
+
+- Fastest performance (CDN-delivered)
+- SEO-optimized
+- No runtime cost
+
+### Cons
+
+- Re-deploy to update content
+- Not suitable for highly dynamic data
+
+### Use Cases
+
+- Marketing pages
+- Documentation
+- Static blog posts
+
+## Incremental Static Regeneration (ISR)
+
+### What is ISR?
+
+ISR allows pages to be **statically generated** but **updated in the background** on a set interval.
+
+### App Router Implementation
+
+```tsx
+export const revalidate = 60; // seconds
+
+export default async function Page({ params }) {
+  const content = await fetchContent(params.slug);
+  return <div>{content.title}</div>;
+}
+```
+
+### Pros
+
+- Best of both worlds (static + dynamic)
+- Seamless updates without full rebuild
+- Good for SEO
+
+### Cons
+
+- Slight risk of stale content
+- Debugging cache issues can be tricky
+
+### Use Cases
+
+- CMS-powered blogs
+- E-commerce product pages
+- News feeds
+
+## Client-Side Rendering (CSR)
+
+### What is CSR?
+
+CSR fetches and renders data **in the browser** after the initial load. It's used for pages that rely on **client-side interactivity**.
+
+### App Router Implementation
+
+```tsx
+'use client';
+import { useEffect, useState } from 'react';
+
+export default function Dashboard() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/dashboard').then(res => res.json()).then(setData);
+  }, []);
+
+  return <div>{data ? data.metric : 'Loading...'}</div>;
+}
+```
+
+### Pros
+
+- Ideal for authenticated and interactive UIs
+- No need to expose sensitive data in HTML
+
+### Cons
+
+- Poor SEO
+- Slower Time-to-First-Content
+- Not visible without JS
+
+### Use Cases
+
+- Admin panels
+- User profile pages
+- Authenticated dashboards
+
+## How to Choose?
+
+| Question | Strategy |
+|---|---|
+| Is SEO important? | SSR, SSG, or ISR |
+| Is the content user-specific? | SSR or CSR |
+| Can the content be pre-generated? | SSG |
+| Do you want a balance of performance and freshness? | ISR |
+| Is interactivity more important than SEO? | CSR |
+
+## Conclusion
+
+Next.js App Router allows you to **mix and match rendering strategies** per page. The right choice depends on:
+
+- The importance of **SEO**
+- Your **performance goals**
+- How **fresh** your data needs to be
+- Your **hosting costs**
+
+By mastering SSR, SSG, ISR, and CSR with App Router, you can build high-performance applications tailored to any business need — from blazing-fast marketing sites to real-time dashboards.
+
+## Bonus Tips
+
+- Use **App Router's built-in caching and streaming** features to optimize SSR/ISR performance.
+- For dynamic routing and SEO, combine `generateStaticParams()` **+** `revalidate` smartly.
+- Prefer **React Query or SWR** for CSR-heavy pages to simplify loading and caching.

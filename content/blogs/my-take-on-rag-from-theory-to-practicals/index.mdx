@@ -1,0 +1,132 @@
+---
+title: "My Take on RAG: From Theory to Practicals"
+description: "Breaking down RAG: what it is, how to build, tune retrievers, and balance cost vs accuracy — from theory to practicals."
+date: "2025-09-02"
+tags: ["Retrieval Augmented Gen", "Large Language Models", "Artificial Intelligence"]
+readingTime: "4 min read"
+canonicalUrl: "https://medium.com/@thantheinthwin.dev/rmy-take-on-rag-from-theory-to-practicals-8428587ef073"
+coverImage: "https://miro.medium.com/v2/resize:fit:1024/1*0kEVAJN_3jAzwmXiieL0dQ.png"
+draft: false
+---
+
+Last week, I had an interesting discussion about **Retrieval-Augmented Generation (RAG)**. It made me realize how many people in tech hear the term but don't actually know what it really means, how to build one, or even where to start tuning. So I thought: why not share my learnings with you all?
+
+If you've been curious about RAG — the *theory*, the *practicals*, and even the *pros and cons* — here's my breakdown.
+
+## 1. What is RAG?
+
+Think of a large language model (LLM) like GPT as a **really smart student with a great memory**. But here's the catch: their knowledge is frozen at a certain point in time, and they don't know what's in *your* company docs, research papers, or private knowledge base.
+
+That's where RAG comes in.
+
+RAG = **Retriever + Generator**.
+
+- The **retriever** searches your data (PDFs, databases, wikis, etc.) for relevant info.
+- The **generator (LLM)** then uses that info to craft a grounded, context-aware answer.
+
+It's like giving that smart student access to a library whenever you ask them a question.
+
+<MissingImage caption="RAG architecture diagram" />
+
+## 2. How to Tune the Retriever (The Real Magic)
+
+Most people think the LLM is the star of the show, but honestly, the **retriever makes or breaks your RAG system**.
+
+### Chunking Strategy
+
+- Split documents into smaller pieces (300–500 tokens).
+- Use **overlap** so meaning doesn't get lost between chunks.
+
+### High-Quality Embeddings (Core of Retrieval)
+
+Embeddings are **vector representations of text** — turning words, sentences, or documents into high-dimensional points.
+
+- **General-purpose models**: OpenAI `text-embedding-3-large`, `text-embedding-3-small`, Cohere, HuggingFace BGE.
+- **Domain-specific models**: BioBERT (biomedical), Legal-BERT (legal).
+- **Trade-offs**: Larger embeddings → better semantic capture, but higher cost & storage.
+- **Multilingual**: Use multilingual embeddings if your dataset spans multiple languages.
+
+Rule of thumb: **good embeddings = better retrieval**.
+
+### Top-K Retrieval
+
+- **Top-K** = how many chunks you retrieve.
+- Too low (1–2): risk missing key context.
+- Too high (10+): more cost, more noise.
+- Sweet spot: **3–5**, but tune based on dataset.
+
+### Hybrid Retrieval
+
+- Mix **semantic search** (embeddings) with **keyword search** (BM25).
+- This balances "semantic meaning" and "exact keyword match."
+
+### Rerankers
+
+- Apply rerankers (cross-encoders or LLM-based scoring) to reorder results by **true relevance**.
+
+### Cost Awareness
+
+- More chunks = more tokens → higher API cost + latency.
+- Optimize with:
+  - Smaller embeddings for large-scale systems.
+  - Summarizing chunks before feeding into LLM.
+  - Self-hosted DB (FAISS, pgvector) to cut vendor costs.
+
+### Core Functions of a Retriever (AI Fundamentals)
+
+Every retriever does 3 things:
+
+1. **Encoding**: Turn queries/docs into embeddings.
+2. **Similarity Search**: Compare query vector vs doc vectors.
+3. **Selection**: Pick the top-K most relevant chunks.
+
+### ERD for Embeddings & Metadata
+
+When building RAG, it's important not just to store embeddings but also **metadata** like document titles, categories, or even SEO meta titles. This helps filtering and improves retriever quality.
+
+- **DOCUMENT**: Original source (title, content, meta title).
+- **EMBEDDING**: Vector representation of chunks.
+- **METADATA**: Extra info (author, tags, category, language).
+
+This structure allows filtering like:
+
+"Retrieve top-5 chunks from docs tagged with *finance* created after 2023."
+
+## 4. How to Build a RAG System
+
+Here's a step-by-step blueprint:
+
+1. **Collect** → Gather knowledge base (PDFs, FAQs, wikis, databases).
+2. **Preprocess** → Clean, chunk, and embed docs.
+3. **Store** → Save embeddings + metadata in a vector DB (FAISS, Pinecone, Weaviate, pgvector).
+4. **Retrieve** → Search using embeddings + metadata filters.
+5. **Rerank** → Optional, improve quality before sending to LLM.
+6. **Generate** → Feed query + retrieved chunks into LLM.
+7. **Respond** → LLM outputs grounded answer.
+
+## 5. Pros and Cons of RAG
+
+**Pros**
+
+- Grounded answers (less hallucination).
+- Access to **up-to-date data**.
+- Cheaper than fine-tuning models.
+- Provides citations for transparency.
+
+**Cons**
+
+- Retriever bottleneck: weak retrieval = poor answers.
+- Higher **latency** (retrieval + generation).
+- **Context window limits**: can't overload LLM with too many chunks.
+- System complexity: vector DBs, embeddings, and pipelines to maintain.
+
+## 6. Final Thoughts
+
+For me, the biggest "aha moment" was this: **RAG isn't about making the LLM smarter — it's about giving it the right context at the right time.**
+
+To tune your RAG effectively, you need to balance:
+
+- **Embeddings quality** → semantic accuracy.
+- **Top-K** → enough context but not too costly.
+- **Cost** → tokens and latency can scale fast.
+- **Metadata** → helps filter noise and improve relevance.
