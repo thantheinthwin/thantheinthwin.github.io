@@ -84,14 +84,23 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         {post.coverImage && (
           <div className="relative mt-6 aspect-[1200/630] w-full overflow-hidden rounded border bg-secondary/30">
-            <Image
-              src={post.coverImage}
-              alt={post.title}
-              fill
-              sizes="(max-width: 768px) 100vw, 576px"
-              className="object-cover"
-              priority
-            />
+            {post.coverImage.endsWith(".svg") ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={post.coverImage}
+                alt={post.title}
+                className="h-full w-full object-contain"
+              />
+            ) : (
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 576px"
+                className="object-cover"
+                priority
+              />
+            )}
           </div>
         )}
 

@@ -1,0 +1,15 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <rect x="0.5" y="0.5" width="1199" height="629" fill="none" stroke="#242424" stroke-width="1"/>
+
+  <text x="80" y="140" font-size="58" font-weight="700" fill="#f2f2f2">Securing APIs</text>
+  <text x="80" y="200" font-size="58" font-weight="700" fill="#f2f2f2">with</text>
+  <text x="80" y="270" font-size="58" font-weight="700" fill="#f87171">JWT &amp; OAuth</text>
+
+  <!-- shield with lock -->
+  <g transform="translate(920,230)">
+    <path d="M0,-110 L90,-75 V10 C90,75 45,115 0,130 C-45,115 -90,75 -90,10 V-75 Z" fill="none" stroke="#f87171" stroke-width="3"/>
+    <rect x="-28" y="-10" width="56" height="44" rx="6" fill="none" stroke="#f87171" stroke-width="3"/>
+    <path d="M-16,-10 V-28 a16,16 0 0 1 32,0 V-10" fill="none" stroke="#f87171" stroke-width="3"/>
+  </g>
+</svg>

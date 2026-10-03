@@ -1,0 +1,29 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <rect x="0.5" y="0.5" width="1199" height="629" fill="none" stroke="#242424" stroke-width="1"/>
+
+  <text x="80" y="150" font-size="68" font-weight="700" fill="#f2f2f2">My Take</text>
+  <text x="80" y="220" font-size="68" font-weight="700" fill="#818cf8">on RAG</text>
+  <text x="80" y="270" font-size="30" fill="#9a9a9a">Theory to Practicals</text>
+
+  <!-- retriever -> generator flow -->
+  <g transform="translate(80,380)">
+    <rect x="0" y="0" width="170" height="90" rx="10" fill="none" stroke="#818cf8" stroke-width="2.5"/>
+    <text x="85" y="40" font-size="18" fill="#818cf8" text-anchor="middle" font-weight="700">Docs</text>
+    <text x="85" y="64" font-size="14" fill="#9a9a9a" text-anchor="middle">knowledge base</text>
+
+    <line x1="170" y1="45" x2="250" y2="45" stroke="#6b6b6b" stroke-width="2"/>
+    <polygon points="250,45 238,39 238,51" fill="#6b6b6b"/>
+
+    <rect x="260" y="0" width="200" height="90" rx="10" fill="none" stroke="#4ade80" stroke-width="2.5"/>
+    <text x="360" y="40" font-size="18" fill="#4ade80" text-anchor="middle" font-weight="700">Retriever</text>
+    <text x="360" y="64" font-size="14" fill="#9a9a9a" text-anchor="middle">embeddings + top-k</text>
+
+    <line x1="460" y1="45" x2="540" y2="45" stroke="#6b6b6b" stroke-width="2"/>
+    <polygon points="540,45 528,39 528,51" fill="#6b6b6b"/>
+
+    <rect x="550" y="0" width="220" height="90" rx="10" fill="none" stroke="#f87171" stroke-width="2.5"/>
+    <text x="660" y="40" font-size="18" fill="#f87171" text-anchor="middle" font-weight="700">Generator</text>
+    <text x="660" y="64" font-size="14" fill="#9a9a9a" text-anchor="middle">grounded answer</text>
+  </g>
+</svg>

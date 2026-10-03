@@ -23,6 +23,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://thantheinthwin.vercel.app"),
   title: "Thant Hein Thwin - Lead Software Engineer",
   description:
     "Portfolio of Thant Hein Thwin, a Lead Software Engineer with expertise in React, Next.js, Node.js, Golang, and Python",

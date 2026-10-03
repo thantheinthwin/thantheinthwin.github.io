@@ -1,0 +1,28 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <rect x="0.5" y="0.5" width="1199" height="629" fill="none" stroke="#242424" stroke-width="1"/>
+
+  <text x="80" y="150" font-size="68" font-weight="700" fill="#f2f2f2">TTL &amp; the</text>
+  <text x="80" y="220" font-size="68" font-weight="700" fill="#d6a35c">Mystery</text>
+  <text x="80" y="270" font-size="30" fill="#9a9a9a">of Outdated Content</text>
+
+  <!-- clock -->
+  <g transform="translate(900,215)">
+    <circle cx="0" cy="0" r="90" fill="none" stroke="#d6a35c" stroke-width="3"/>
+    <line x1="0" y1="0" x2="0" y2="-55" stroke="#d6a35c" stroke-width="4" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="45" y2="20" stroke="#d6a35c" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="5" fill="#d6a35c"/>
+  </g>
+
+  <!-- fading cache layers -->
+  <g transform="translate(80,400)">
+    <rect x="0" y="0" width="860" height="36" rx="8" fill="#d6a35c" opacity="0.9"/>
+    <text x="16" y="24" font-size="16" fill="#0a0a0a" font-weight="700">frontend</text>
+    <rect x="0" y="48" width="860" height="36" rx="8" fill="#d6a35c" opacity="0.65"/>
+    <text x="16" y="72" font-size="16" fill="#0a0a0a" font-weight="700">edge / CDN</text>
+    <rect x="0" y="96" width="860" height="36" rx="8" fill="#d6a35c" opacity="0.4"/>
+    <text x="16" y="120" font-size="16" fill="#0a0a0a" font-weight="700">backend</text>
+    <rect x="0" y="144" width="860" height="36" rx="8" fill="#d6a35c" opacity="0.2"/>
+    <text x="16" y="168" font-size="16" fill="#0a0a0a" font-weight="700">in-memory</text>
+  </g>
+</svg>
