@@ -17,7 +17,7 @@ const Blogs: React.FC<BlogsProps> = ({ blogs }) => {
         <h2>Blogs</h2>
         {blogs?.data && blogs.data.length > 3 && (
           <Link
-            href="https://medium.com/@thantheinthwin.dev"
+            href="/blogs"
             className="text-xs text-muted-foreground flex gap-1 items-center"
           >
             View all blogs{" "}
