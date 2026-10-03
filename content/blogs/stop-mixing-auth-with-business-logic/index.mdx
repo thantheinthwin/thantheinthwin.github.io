@@ -20,13 +20,13 @@ I almost talked myself out of it. Two runtimes, two deployment units, two things
 
 So I split them. Here's how that decision played out — and what it actually cost.
 
-<MissingImage caption="Architecture diagram" />
+![Two runtimes behind one nginx, sharing a PostgreSQL instance](/blog/stop-mixing-auth-with-business-logic/architecture.svg)
 
 ## The Architecture at a Glance
 
 Nginx sits in front as a reverse proxy, routing traffic by URL path. From the client's perspective there's one API. Behind the scenes, two completely independent runtimes handle different concerns at different speeds.
 
-<MissingImage caption="Request routing diagram" />
+![nginx routes /auth/* to the auth server and /v1/* to the Go API](/blog/stop-mixing-auth-with-business-logic/request-routing.svg)
 
 ## Why the Split?
 

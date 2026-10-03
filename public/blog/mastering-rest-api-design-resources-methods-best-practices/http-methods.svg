@@ -1,0 +1,44 @@
+<svg viewBox="0 0 1000 460" width="1000" height="460" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="460" fill="#0a0a0a"/>
+  <rect x="0.5" y="0.5" width="999" height="459" fill="none" stroke="#242424"/>
+
+  <g font-size="18" fill="#8a8a8a">
+    <text x="140" y="56" text-anchor="middle">Method</text>
+    <text x="340" y="56">Action</text>
+    <text x="600" y="56">Example</text>
+  </g>
+  <line x1="40" y1="70" x2="960" y2="70" stroke="#242424" stroke-width="1.5"/>
+
+  <!-- GET -->
+  <rect x="40" y="90" width="200" height="60" rx="30" fill="none" stroke="#4ade80" stroke-width="2.5"/>
+  <text x="140" y="129" font-size="24" fill="#4ade80" text-anchor="middle" font-weight="700">GET</text>
+  <line x1="254" y1="120" x2="316" y2="120" stroke="#8a8a8a" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="340" y="129" font-size="24" fill="#e8e8e8" font-weight="700">Read</text>
+  <text x="600" y="128" font-size="20" fill="#9a9a9a">GET /users/{id}</text>
+
+  <!-- POST -->
+  <rect x="40" y="180" width="200" height="60" rx="30" fill="none" stroke="#818cf8" stroke-width="2.5"/>
+  <text x="140" y="219" font-size="24" fill="#818cf8" text-anchor="middle" font-weight="700">POST</text>
+  <line x1="254" y1="210" x2="316" y2="210" stroke="#8a8a8a" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="340" y="219" font-size="24" fill="#e8e8e8" font-weight="700">Create</text>
+  <text x="600" y="218" font-size="20" fill="#9a9a9a">POST /users</text>
+
+  <!-- PUT -->
+  <rect x="40" y="270" width="200" height="60" rx="30" fill="none" stroke="#fb923c" stroke-width="2.5"/>
+  <text x="140" y="309" font-size="24" fill="#fb923c" text-anchor="middle" font-weight="700">PUT</text>
+  <line x1="254" y1="300" x2="316" y2="300" stroke="#8a8a8a" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="340" y="309" font-size="24" fill="#e8e8e8" font-weight="700">Update</text>
+  <text x="600" y="308" font-size="20" fill="#9a9a9a">PUT /users/{id}</text>
+
+  <!-- DELETE -->
+  <rect x="40" y="360" width="200" height="60" rx="30" fill="none" stroke="#f87171" stroke-width="2.5"/>
+  <text x="140" y="399" font-size="24" fill="#f87171" text-anchor="middle" font-weight="700">DELETE</text>
+  <line x1="254" y1="390" x2="316" y2="390" stroke="#8a8a8a" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <text x="340" y="399" font-size="24" fill="#e8e8e8" font-weight="700">Delete</text>
+  <text x="600" y="398" font-size="20" fill="#9a9a9a">DELETE /users/{id}</text>
+</svg>

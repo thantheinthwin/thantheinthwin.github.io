@@ -4,7 +4,7 @@ import { imageSize } from "image-size";
 import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import Link from "next/link";
-import { ImageIcon, InfoIcon } from "lucide-react";
+import { InfoIcon } from "lucide-react";
 
 // Self-hosted images (no CDN): measure dimensions from public/ at render time
 // so the layout reserves space before the image loads (no CLS). Rasters go
@@ -67,18 +67,6 @@ function BlogImage({ src = "", alt = "" }: { src?: string; alt?: string }) {
         className="h-auto w-full rounded border"
       />
       {caption}
-    </span>
-  );
-}
-
-// Placeholder for a diagram that hasn't been migrated from the source post yet.
-function MissingImage({ caption }: { caption?: string }) {
-  return (
-    <span className="my-6 flex flex-col items-center gap-2 rounded border border-dashed p-8 text-center text-xs text-muted-foreground">
-      <ImageIcon className="h-5 w-5" strokeWidth={1.5} />
-      <span>
-        {caption ? `${caption} — ` : ""}not yet migrated from the original post.
-      </span>
     </span>
   );
 }
@@ -161,5 +149,4 @@ export const mdxComponents: MDXComponents = {
   strong: (props) => <strong className="font-semibold text-foreground" {...props} />,
   img: BlogImage,
   Callout,
-  MissingImage,
 };
