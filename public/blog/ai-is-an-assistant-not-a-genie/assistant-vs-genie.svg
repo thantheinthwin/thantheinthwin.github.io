@@ -1,4 +1,4 @@
-<svg viewBox="0 0 900 520" width="900" height="520" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+<svg viewBox="0 0 760 508" width="760" height="508" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
@@ -9,64 +9,83 @@
     <marker id="arrow-rose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#fb7185"/>
     </marker>
+    <symbol id="i-scope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M8.5 12l2 2 4-4"/><path d="M8.5 17h7"/></g></symbol>
+    <symbol id="i-robot" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V5"/><circle cx="12" cy="3.5" r="1.5"/><path d="M9 13.5v1M15 13.5v1"/></g></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></g></symbol>
+    <symbol id="i-ship" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11M7.5 7.5L12 3l4.5 4.5"/><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></g></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3L2 21h20z"/><path d="M12 10v5M12 18h.01"/></g></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></g></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></g></symbol>
   </defs>
-  <rect width="900" height="520" fill="#0a0a0a"/>
-  <rect x="0.5" y="0.5" width="899" height="519" fill="none" stroke="#242424"/>
+  <rect width="760" height="508" fill="#0a0a0a"/>
+  <rect x="0.5" y="0.5" width="759" height="507" fill="none" stroke="#242424"/>
 
-  <!-- assistant -->
-  <text x="16" y="40" font-size="26" font-weight="700" fill="#22d3ee">Assistant</text>
-  <text x="16" y="68" font-size="18" fill="#9a9a9a">a human decides at every step</text>
+  <!-- assistant panel -->
+  <rect x="16" y="16" width="728" height="230" rx="14" fill="#0e0e0e" stroke="#22d3ee" stroke-opacity="0.6" stroke-width="1.5"/>
+  <use href="#i-person" x="32" y="30" width="26" height="26" color="#22d3ee"/>
+  <text x="66" y="51" font-size="22" font-weight="700" fill="#22d3ee">Assistant</text>
+  <text x="66" y="75" font-size="16" font-style="italic" fill="#9a9a9a">a human decides at every step</text>
 
-  <g fill="none" stroke-width="2.5">
-    <rect x="16" y="90" width="156" height="76" rx="10" stroke="#22d3ee"/>
-    <rect x="194" y="90" width="156" height="76" rx="10" stroke="#9a9a9a"/>
-    <rect x="372" y="90" width="156" height="76" rx="10" stroke="#22d3ee"/>
-    <rect x="550" y="90" width="156" height="76" rx="10" stroke="#4ade80"/>
-    <rect x="728" y="90" width="156" height="76" rx="10" stroke="#fb7185"/>
+  <g fill="#141414" stroke-width="1.8">
+    <rect x="32" y="92" width="128" height="96" rx="10" stroke="#22d3ee"/>
+    <rect x="174" y="92" width="128" height="96" rx="10" stroke="#6b6b6b"/>
+    <rect x="316" y="92" width="128" height="96" rx="10" stroke="#22d3ee"/>
+    <rect x="458" y="92" width="128" height="96" rx="10" stroke="#4ade80"/>
+    <rect x="600" y="92" width="128" height="96" rx="10" stroke="#fb7185"/>
   </g>
-  <g text-anchor="middle" font-size="20" font-weight="700">
-    <text x="94" y="135" fill="#22d3ee">You scope</text>
-    <text x="272" y="135" fill="#e8e8e8">AI builds</text>
-    <text x="450" y="135" fill="#22d3ee">You review</text>
-    <text x="628" y="135" fill="#4ade80">Ship</text>
-    <text x="806" y="135" fill="#fb7185">It breaks</text>
+  <use href="#i-scope" x="82" y="106" width="28" height="28" color="#22d3ee"/>
+  <use href="#i-robot" x="224" y="106" width="28" height="28" color="#c4c4c4"/>
+  <use href="#i-eye" x="366" y="106" width="28" height="28" color="#22d3ee"/>
+  <use href="#i-ship" x="508" y="106" width="28" height="28" color="#4ade80"/>
+  <use href="#i-alert" x="650" y="106" width="28" height="28" color="#fb7185"/>
+  <g font-size="16" font-weight="700" text-anchor="middle">
+    <text x="96" y="164" fill="#22d3ee">You scope</text>
+    <text x="238" y="164" fill="#f0f0f0">AI builds</text>
+    <text x="380" y="164" fill="#22d3ee">You review</text>
+    <text x="522" y="164" fill="#4ade80">Ship</text>
+    <text x="664" y="164" fill="#fb7185">It breaks</text>
   </g>
-  <g stroke="#8a8a8a" stroke-width="2.5">
-    <line x1="172" y1="128" x2="190" y2="128" marker-end="url(#arrow)"/>
-    <line x1="350" y1="128" x2="368" y2="128" marker-end="url(#arrow)"/>
-    <line x1="528" y1="128" x2="546" y2="128" marker-end="url(#arrow)"/>
-    <line x1="706" y1="128" x2="724" y2="128" marker-end="url(#arrow)"/>
+  <g stroke="#8a8a8a" stroke-width="2">
+    <line x1="161" y1="140" x2="172" y2="140" marker-end="url(#arrow)"/>
+    <line x1="303" y1="140" x2="314" y2="140" marker-end="url(#arrow)"/>
+    <line x1="445" y1="140" x2="456" y2="140" marker-end="url(#arrow)"/>
+    <line x1="587" y1="140" x2="598" y2="140" marker-end="url(#arrow)"/>
   </g>
-  <polyline points="806,166 806,200 628,200 628,170" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow-cyan)"/>
-  <text x="717" y="228" font-size="18" fill="#22d3ee" text-anchor="middle">AI drafts a fix, you verify it</text>
+  <polyline points="664,188 664,210 522,210 522,192" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow-cyan)"/>
+  <text x="593" y="234" font-size="15" font-weight="600" fill="#22d3ee" text-anchor="middle">AI drafts a fix, you verify it</text>
 
-  <line x1="16" y1="258" x2="884" y2="258" stroke="#242424" stroke-width="1.5"/>
+  <!-- genie panel -->
+  <rect x="16" y="262" width="728" height="230" rx="14" fill="#0e0e0e" stroke="#fb7185" stroke-opacity="0.6" stroke-width="1.5"/>
+  <use href="#i-chat" x="32" y="276" width="26" height="26" color="#fb7185"/>
+  <text x="66" y="297" font-size="22" font-weight="700" fill="#fb7185">Genie</text>
+  <text x="66" y="321" font-size="16" font-style="italic" fill="#9a9a9a">nobody in the loop can check the work</text>
 
-  <!-- genie -->
-  <text x="16" y="300" font-size="26" font-weight="700" fill="#fb7185">Genie</text>
-  <text x="16" y="328" font-size="18" fill="#9a9a9a">nobody in the loop can check the work</text>
-
-  <g fill="none" stroke-width="2.5">
-    <rect x="16" y="350" width="156" height="76" rx="10" stroke="#9a9a9a"/>
-    <rect x="194" y="350" width="156" height="76" rx="10" stroke="#9a9a9a"/>
-    <rect x="372" y="350" width="156" height="76" rx="10" stroke="#4a4a4a" stroke-width="2" stroke-dasharray="6 5"/>
-    <rect x="550" y="350" width="156" height="76" rx="10" stroke="#9a9a9a"/>
-    <rect x="728" y="350" width="156" height="76" rx="10" stroke="#fb7185"/>
+  <g fill="#141414" stroke-width="1.8">
+    <rect x="32" y="338" width="128" height="96" rx="10" stroke="#6b6b6b"/>
+    <rect x="174" y="338" width="128" height="96" rx="10" stroke="#6b6b6b"/>
+    <rect x="458" y="338" width="128" height="96" rx="10" stroke="#6b6b6b"/>
+    <rect x="600" y="338" width="128" height="96" rx="10" stroke="#fb7185"/>
   </g>
-  <g text-anchor="middle" font-size="20" font-weight="700">
-    <text x="94" y="384" fill="#e8e8e8">Prompt</text>
-    <text x="94" y="408" fill="#e8e8e8">&amp; accept</text>
-    <text x="272" y="395" fill="#e8e8e8">AI builds</text>
-    <text x="450" y="395" fill="#6b6b6b" font-weight="400">no review</text>
-    <text x="628" y="395" fill="#e8e8e8">Ship</text>
-    <text x="806" y="395" fill="#fb7185">It breaks</text>
+  <rect x="316" y="338" width="128" height="96" rx="10" fill="none" stroke="#4a4a4a" stroke-width="1.8" stroke-dasharray="6 5"/>
+  <use href="#i-chat" x="82" y="350" width="28" height="28" color="#c4c4c4"/>
+  <use href="#i-robot" x="224" y="352" width="28" height="28" color="#c4c4c4"/>
+  <use href="#i-eye" x="366" y="352" width="28" height="28" color="#4a4a4a"/>
+  <use href="#i-ship" x="508" y="352" width="28" height="28" color="#c4c4c4"/>
+  <use href="#i-alert" x="650" y="352" width="28" height="28" color="#fb7185"/>
+  <g font-size="16" font-weight="700" text-anchor="middle">
+    <text x="96" y="400" fill="#f0f0f0">Prompt &amp;</text>
+    <text x="96" y="420" fill="#f0f0f0">accept</text>
+    <text x="238" y="410" fill="#f0f0f0">AI builds</text>
+    <text x="380" y="410" fill="#6b6b6b" font-weight="400" font-style="italic">no review</text>
+    <text x="522" y="410" fill="#f0f0f0">Ship</text>
+    <text x="664" y="410" fill="#fb7185">It breaks</text>
   </g>
-  <g stroke="#8a8a8a" stroke-width="2.5">
-    <line x1="172" y1="388" x2="190" y2="388" marker-end="url(#arrow)"/>
-    <line x1="350" y1="388" x2="368" y2="388" marker-end="url(#arrow)"/>
-    <line x1="528" y1="388" x2="546" y2="388" marker-end="url(#arrow)"/>
-    <line x1="706" y1="388" x2="724" y2="388" marker-end="url(#arrow)"/>
+  <g stroke="#8a8a8a" stroke-width="2">
+    <line x1="161" y1="386" x2="172" y2="386" marker-end="url(#arrow)"/>
+    <line x1="303" y1="386" x2="314" y2="386" marker-end="url(#arrow)"/>
+    <line x1="445" y1="386" x2="456" y2="386" marker-end="url(#arrow)"/>
+    <line x1="587" y1="386" x2="598" y2="386" marker-end="url(#arrow)"/>
   </g>
-  <polyline points="806,426 806,460 628,460 628,430" fill="none" stroke="#fb7185" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow-rose)"/>
-  <text x="717" y="488" font-size="18" fill="#fb7185" text-anchor="middle">AI fixes it, nobody can check</text>
+  <polyline points="664,434 664,456 522,456 522,438" fill="none" stroke="#fb7185" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow-rose)"/>
+  <text x="593" y="480" font-size="15" font-weight="600" fill="#fb7185" text-anchor="middle">AI fixes it, nobody can check</text>
 </svg>

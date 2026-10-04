@@ -1,70 +1,120 @@
-<svg viewBox="0 0 720 620" width="720" height="620" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+<svg viewBox="0 0 760 650" width="760" height="650" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
     </marker>
-    <marker id="arrow-loop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/>
-    </marker>
+    <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></g></symbol>
+    <symbol id="i-scope" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9z"/><path d="M8.5 12l2 2 4-4"/><path d="M8.5 17h7"/></g></symbol>
+    <symbol id="i-design" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="6" rx="1"/><rect x="14" y="3" width="7" height="6" rx="1"/><rect x="8.5" y="15" width="7" height="6" rx="1"/><path d="M6.5 9v3h11V9M12 12v3"/></g></symbol>
+    <symbol id="i-code" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></g></symbol>
+    <symbol id="i-test" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"/><path d="M7.5 15h9"/></g></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></g></symbol>
+    <symbol id="i-ship" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11M7.5 7.5L12 3l4.5 4.5"/><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></g></symbol>
+    <symbol id="i-pulse" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-7 4 14 3-7h6"/></g></symbol>
+    <symbol id="i-loop" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></g></symbol>
   </defs>
-  <rect width="720" height="620" fill="#0a0a0a"/>
-  <rect x="0.5" y="0.5" width="719" height="619" fill="none" stroke="#242424"/>
+  <rect width="760" height="650" fill="#0a0a0a"/>
+  <rect x="0.5" y="0.5" width="759" height="649" fill="none" stroke="#242424"/>
 
-  <!-- loop back from 8 to 1 -->
-  <polyline points="540,60 540,32 180,32 180,56" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow-loop)"/>
-  <text x="360" y="24" font-size="16" fill="#22d3ee" text-anchor="middle">repeat with what you learned</text>
+  <!-- group frames -->
+  <rect x="16" y="16" width="728" height="186" rx="14" fill="none" stroke="#818cf8" stroke-opacity="0.6" stroke-width="1.5" stroke-dasharray="7 6"/>
+  <rect x="16" y="232" width="728" height="186" rx="14" fill="none" stroke="#d6a35c" stroke-opacity="0.6" stroke-width="1.5" stroke-dasharray="7 6"/>
+  <rect x="16" y="448" width="728" height="186" rx="14" fill="none" stroke="#4ade80" stroke-opacity="0.6" stroke-width="1.5" stroke-dasharray="7 6"/>
 
-  <g fill="none" stroke="#6b6b6b" stroke-width="2">
-    <rect x="20" y="60" width="320" height="115" rx="10"/>
-    <rect x="20" y="200" width="320" height="115" rx="10"/>
-    <rect x="20" y="340" width="320" height="115" rx="10"/>
-    <rect x="20" y="480" width="320" height="115" rx="10"/>
-    <rect x="380" y="480" width="320" height="115" rx="10"/>
-    <rect x="380" y="340" width="320" height="115" rx="10"/>
-    <rect x="380" y="200" width="320" height="115" rx="10"/>
-    <rect x="380" y="60" width="320" height="115" rx="10"/>
+  <text x="34" y="48"><tspan font-size="20" font-weight="700" fill="#818cf8">Plan</tspan><tspan dx="12" font-size="16" font-style="italic" fill="#9a9a9a">decide what’s worth building</tspan></text>
+  <text x="34" y="264"><tspan font-size="20" font-weight="700" fill="#d6a35c">Build</tspan><tspan dx="12" font-size="16" font-style="italic" fill="#9a9a9a">make it and prove it works</tspan></text>
+  <text x="34" y="480"><tspan font-size="20" font-weight="700" fill="#4ade80">Run</tspan><tspan dx="12" font-size="16" font-style="italic" fill="#9a9a9a">ship it and keep it alive</tspan></text>
+
+  <!-- panels -->
+  <g fill="#111111" stroke="#333333" stroke-width="1.5">
+    <rect x="30" y="64" width="224" height="124" rx="10"/>
+    <rect x="268" y="64" width="224" height="124" rx="10"/>
+    <rect x="506" y="64" width="224" height="124" rx="10"/>
+    <rect x="30" y="280" width="224" height="124" rx="10"/>
+    <rect x="268" y="280" width="224" height="124" rx="10"/>
+    <rect x="506" y="280" width="224" height="124" rx="10"/>
+    <rect x="30" y="496" width="224" height="124" rx="10"/>
+    <rect x="268" y="496" width="224" height="124" rx="10"/>
+  </g>
+  <rect x="506" y="496" width="224" height="124" rx="10" fill="none" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="6 5"/>
+
+  <!-- badges -->
+  <g>
+    <circle cx="56" cy="92" r="15" fill="#818cf8"/>
+    <circle cx="294" cy="92" r="15" fill="#818cf8"/>
+    <circle cx="532" cy="92" r="15" fill="#818cf8"/>
+    <circle cx="56" cy="308" r="15" fill="#d6a35c"/>
+    <circle cx="294" cy="308" r="15" fill="#d6a35c"/>
+    <circle cx="532" cy="308" r="15" fill="#d6a35c"/>
+    <circle cx="56" cy="524" r="15" fill="#4ade80"/>
+    <circle cx="294" cy="524" r="15" fill="#4ade80"/>
+  </g>
+  <g font-size="15" font-weight="700" fill="#0a0a0a" text-anchor="middle">
+    <text x="56" y="97">1</text><text x="294" y="97">2</text><text x="532" y="97">3</text>
+    <text x="56" y="313">4</text><text x="294" y="313">5</text><text x="532" y="313">6</text>
+    <text x="56" y="529">7</text><text x="294" y="529">8</text>
   </g>
 
-  <g font-size="22" font-weight="700" fill="#e8e8e8">
-    <text x="38" y="96">1 · Research</text>
-    <text x="38" y="236">2 · Scoping</text>
-    <text x="38" y="376">3 · Design</text>
-    <text x="38" y="516">4 · Development</text>
-    <text x="398" y="516">5 · Testing</text>
-    <text x="398" y="376">6 · Review</text>
-    <text x="398" y="236">7 · Shipping</text>
-    <text x="398" y="96">8 · Operating</text>
+  <!-- titles -->
+  <g font-size="18" font-weight="700" fill="#f0f0f0">
+    <text x="80" y="98">Research</text>
+    <text x="318" y="98">Scoping</text>
+    <text x="556" y="98">Design</text>
+    <text x="80" y="314">Development</text>
+    <text x="318" y="314">Testing</text>
+    <text x="556" y="314">Review</text>
+    <text x="80" y="530">Shipping</text>
+    <text x="318" y="530">Operating</text>
   </g>
 
-  <g font-size="18" fill="#9a9a9a">
-    <text y="130"><tspan x="38" font-weight="700">AI</tspan><tspan x="86">reads the docs</tspan></text>
-    <text y="270"><tspan x="38" font-weight="700">AI</tspan><tspan x="86">drafts the spec</tspan></text>
-    <text y="410"><tspan x="38" font-weight="700">AI</tspan><tspan x="86">lists options</tspan></text>
-    <text y="550"><tspan x="38" font-weight="700">AI</tspan><tspan x="86">writes the code</tspan></text>
-    <text y="550"><tspan x="398" font-weight="700">AI</tspan><tspan x="446">writes tests</tspan></text>
-    <text y="410"><tspan x="398" font-weight="700">AI</tspan><tspan x="446">first pass</tspan></text>
-    <text y="270"><tspan x="398" font-weight="700">AI</tspan><tspan x="446">watches rollout</tspan></text>
-    <text y="130"><tspan x="398" font-weight="700">AI</tspan><tspan x="446">triages alerts</tspan></text>
+  <!-- icons -->
+  <use href="#i-search" x="216" y="79" width="26" height="26" color="#818cf8"/>
+  <use href="#i-scope" x="454" y="79" width="26" height="26" color="#818cf8"/>
+  <use href="#i-design" x="692" y="79" width="26" height="26" color="#818cf8"/>
+  <use href="#i-code" x="216" y="295" width="26" height="26" color="#d6a35c"/>
+  <use href="#i-test" x="454" y="295" width="26" height="26" color="#d6a35c"/>
+  <use href="#i-eye" x="692" y="295" width="26" height="26" color="#d6a35c"/>
+  <use href="#i-ship" x="216" y="511" width="26" height="26" color="#4ade80"/>
+  <use href="#i-pulse" x="454" y="511" width="26" height="26" color="#4ade80"/>
+
+  <!-- AI lines -->
+  <g font-size="15" fill="#c4c4c4">
+    <text y="140"><tspan x="48" font-size="14" font-weight="700" fill="#8f8f8f">AI</tspan><tspan x="84">reads the docs</tspan></text>
+    <text y="140"><tspan x="286" font-size="14" font-weight="700" fill="#8f8f8f">AI</tspan><tspan x="322">drafts the spec</tspan></text>
+    <text y="140"><tspan x="524" font-size="14" font-weight="700" fill="#8f8f8f">AI</tspan><tspan x="560">lists the options</tspan></text>
+    <text y="356"><tspan x="48" font-size="14" font-weight="700" fill="#8f8f8f">AI</tspan><tspan x="84">writes the code</tspan></text>
+    <text y="356"><tspan x="286" font-size="14" font-weight="700" fill="#8f8f8f">AI</tspan><tspan x="322">writes the tests</tspan></text>
+    <text y="356"><tspan x="524" font-size="14" font-weight="700" fill="#8f8f8f">AI</tspan><tspan x="560">does a first pass</tspan></text>
+    <text y="572"><tspan x="48" font-size="14" font-weight="700" fill="#8f8f8f">AI</tspan><tspan x="84">watches the rollout</tspan></text>
+    <text y="572"><tspan x="286" font-size="14" font-weight="700" fill="#8f8f8f">AI</tspan><tspan x="322">triages the alert</tspan></text>
   </g>
 
-  <g font-size="18" fill="#22d3ee">
-    <text y="158"><tspan x="38" font-weight="700">You</tspan><tspan x="86">pick the problem</tspan></text>
-    <text y="298"><tspan x="38" font-weight="700">You</tspan><tspan x="86">set the scope</tspan></text>
-    <text y="438"><tspan x="38" font-weight="700">You</tspan><tspan x="86">pick trade-offs</tspan></text>
-    <text y="578"><tspan x="38" font-weight="700">You</tspan><tspan x="86">direct it</tspan></text>
-    <text y="578"><tspan x="398" font-weight="700">You</tspan><tspan x="446">set what passes</tspan></text>
-    <text y="438"><tspan x="398" font-weight="700">You</tspan><tspan x="446">approve</tspan></text>
-    <text y="298"><tspan x="398" font-weight="700">You</tspan><tspan x="446">go or roll back</tspan></text>
-    <text y="158"><tspan x="398" font-weight="700">You</tspan><tspan x="446">own the fix</tspan></text>
+  <!-- You lines -->
+  <g font-size="15" fill="#22d3ee">
+    <text y="168"><tspan x="48" font-size="14" font-weight="700">You</tspan><tspan x="84">pick the problem</tspan></text>
+    <text y="168"><tspan x="286" font-size="14" font-weight="700">You</tspan><tspan x="322">set the scope</tspan></text>
+    <text y="168"><tspan x="524" font-size="14" font-weight="700">You</tspan><tspan x="560">pick the trade-off</tspan></text>
+    <text y="384"><tspan x="48" font-size="14" font-weight="700">You</tspan><tspan x="84">direct it</tspan></text>
+    <text y="384"><tspan x="286" font-size="14" font-weight="700">You</tspan><tspan x="322">decide what passes</tspan></text>
+    <text y="384"><tspan x="524" font-size="14" font-weight="700">You</tspan><tspan x="560">approve or reject</tspan></text>
+    <text y="600"><tspan x="48" font-size="14" font-weight="700">You</tspan><tspan x="84">go or roll back</tspan></text>
+    <text y="600"><tspan x="286" font-size="14" font-weight="700">You</tspan><tspan x="322">own the fix</tspan></text>
   </g>
 
-  <g stroke="#8a8a8a" stroke-width="2.5">
-    <line x1="180" y1="175" x2="180" y2="196" marker-end="url(#arrow)"/>
-    <line x1="180" y1="315" x2="180" y2="336" marker-end="url(#arrow)"/>
-    <line x1="180" y1="455" x2="180" y2="476" marker-end="url(#arrow)"/>
-    <line x1="340" y1="537" x2="376" y2="537" marker-end="url(#arrow)"/>
-    <line x1="540" y1="480" x2="540" y2="459" marker-end="url(#arrow)"/>
-    <line x1="540" y1="340" x2="540" y2="319" marker-end="url(#arrow)"/>
-    <line x1="540" y1="200" x2="540" y2="179" marker-end="url(#arrow)"/>
+  <!-- loop note -->
+  <use href="#i-loop" x="603" y="514" width="30" height="30" color="#22d3ee"/>
+  <text x="618" y="572" font-size="17" font-weight="700" fill="#22d3ee" text-anchor="middle">Back to Research</text>
+  <text x="618" y="598" font-size="15" font-style="italic" fill="#9a9a9a" text-anchor="middle">with what you learned</text>
+
+  <!-- arrows -->
+  <g stroke="#8a8a8a" stroke-width="2">
+    <line x1="255" y1="126" x2="266" y2="126" marker-end="url(#arrow)"/>
+    <line x1="493" y1="126" x2="504" y2="126" marker-end="url(#arrow)"/>
+    <line x1="255" y1="342" x2="266" y2="342" marker-end="url(#arrow)"/>
+    <line x1="493" y1="342" x2="504" y2="342" marker-end="url(#arrow)"/>
+    <line x1="255" y1="558" x2="266" y2="558" marker-end="url(#arrow)"/>
+    <line x1="493" y1="558" x2="504" y2="558" marker-end="url(#arrow)"/>
+    <line x1="380" y1="203" x2="380" y2="229" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <line x1="380" y1="419" x2="380" y2="445" stroke-width="2.5" marker-end="url(#arrow)"/>
   </g>
 </svg>
