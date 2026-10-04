@@ -1,66 +1,72 @@
-<svg viewBox="0 0 1040 500" width="1040" height="500" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+<svg viewBox="0 0 900 520" width="900" height="520" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
     </marker>
-    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/>
     </marker>
-    <marker id="arrow-rose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#fb7185"/>
     </marker>
   </defs>
-  <rect width="1040" height="500" fill="#0a0a0a"/>
-  <rect x="0.5" y="0.5" width="1039" height="499" fill="none" stroke="#242424"/>
+  <rect width="900" height="520" fill="#0a0a0a"/>
+  <rect x="0.5" y="0.5" width="899" height="519" fill="none" stroke="#242424"/>
 
   <!-- assistant -->
-  <text x="20" y="40" font-size="24" font-weight="700" fill="#22d3ee">Assistant</text>
-  <text x="20" y="66" font-size="16" fill="#9a9a9a">a human decides at every step</text>
-
-  <rect x="45" y="90" width="200" height="80" rx="10" fill="none" stroke="#22d3ee" stroke-width="2.5"/>
-  <rect x="295" y="90" width="200" height="80" rx="10" fill="none" stroke="#9a9a9a" stroke-width="2.5"/>
-  <rect x="545" y="90" width="200" height="80" rx="10" fill="none" stroke="#22d3ee" stroke-width="2.5"/>
-  <rect x="795" y="90" width="200" height="80" rx="10" fill="none" stroke="#4ade80" stroke-width="2.5"/>
-  <g text-anchor="middle" font-size="20" font-weight="700">
-    <text x="145" y="137" fill="#22d3ee">You scope</text>
-    <text x="395" y="137" fill="#e8e8e8">AI builds</text>
-    <text x="645" y="137" fill="#22d3ee">You review</text>
-    <text x="895" y="137" fill="#4ade80">Ship</text>
-  </g>
-  <g stroke="#8a8a8a" stroke-width="2.5">
-    <line x1="245" y1="130" x2="291" y2="130" marker-end="url(#arrow)"/>
-    <line x1="495" y1="130" x2="541" y2="130" marker-end="url(#arrow)"/>
-    <line x1="745" y1="130" x2="791" y2="130" marker-end="url(#arrow)"/>
-  </g>
-  <polyline points="645,170 645,205 395,205 395,174" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow-cyan)"/>
-  <text x="520" y="228" font-size="15" fill="#22d3ee" text-anchor="middle">not right yet</text>
-
-  <line x1="20" y1="255" x2="1020" y2="255" stroke="#242424" stroke-width="1.5"/>
-
-  <!-- genie -->
-  <text x="20" y="295" font-size="24" font-weight="700" fill="#fb7185">Genie</text>
-  <text x="20" y="321" font-size="16" fill="#9a9a9a">nobody in the loop understands the system</text>
+  <text x="16" y="40" font-size="26" font-weight="700" fill="#22d3ee">Assistant</text>
+  <text x="16" y="68" font-size="18" fill="#9a9a9a">a human decides at every step</text>
 
   <g fill="none" stroke-width="2.5">
-    <rect x="30" y="345" width="172" height="80" rx="10" stroke="#9a9a9a"/>
-    <rect x="232" y="345" width="172" height="80" rx="10" stroke="#9a9a9a"/>
-    <rect x="434" y="345" width="172" height="80" rx="10" stroke="#9a9a9a"/>
-    <rect x="636" y="345" width="172" height="80" rx="10" stroke="#fb7185"/>
-    <rect x="838" y="345" width="172" height="80" rx="10" stroke="#9a9a9a"/>
+    <rect x="16" y="90" width="156" height="76" rx="10" stroke="#22d3ee"/>
+    <rect x="194" y="90" width="156" height="76" rx="10" stroke="#9a9a9a"/>
+    <rect x="372" y="90" width="156" height="76" rx="10" stroke="#22d3ee"/>
+    <rect x="550" y="90" width="156" height="76" rx="10" stroke="#4ade80"/>
+    <rect x="728" y="90" width="156" height="76" rx="10" stroke="#fb7185"/>
   </g>
   <g text-anchor="middle" font-size="20" font-weight="700">
-    <text x="116" y="392" fill="#e8e8e8">Make a wish</text>
-    <text x="318" y="392" fill="#e8e8e8">AI builds</text>
-    <text x="520" y="392" fill="#e8e8e8">Ship</text>
-    <text x="722" y="392" fill="#fb7185">It breaks</text>
-    <text x="924" y="392" fill="#e8e8e8">AI fixes it</text>
+    <text x="94" y="135" fill="#22d3ee">You scope</text>
+    <text x="272" y="135" fill="#e8e8e8">AI builds</text>
+    <text x="450" y="135" fill="#22d3ee">You review</text>
+    <text x="628" y="135" fill="#4ade80">Ship</text>
+    <text x="806" y="135" fill="#fb7185">It breaks</text>
   </g>
   <g stroke="#8a8a8a" stroke-width="2.5">
-    <line x1="202" y1="385" x2="228" y2="385" marker-end="url(#arrow)"/>
-    <line x1="404" y1="385" x2="430" y2="385" marker-end="url(#arrow)"/>
-    <line x1="606" y1="385" x2="632" y2="385" marker-end="url(#arrow)"/>
-    <line x1="808" y1="385" x2="834" y2="385" marker-end="url(#arrow)"/>
+    <line x1="172" y1="128" x2="190" y2="128" marker-end="url(#arrow)"/>
+    <line x1="350" y1="128" x2="368" y2="128" marker-end="url(#arrow)"/>
+    <line x1="528" y1="128" x2="546" y2="128" marker-end="url(#arrow)"/>
+    <line x1="706" y1="128" x2="724" y2="128" marker-end="url(#arrow)"/>
   </g>
-  <polyline points="924,425 924,460 520,460 520,429" fill="none" stroke="#fb7185" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow-rose)"/>
-  <text x="722" y="484" font-size="15" fill="#fb7185" text-anchor="middle">a fix nobody can check</text>
+  <polyline points="806,166 806,200 628,200 628,170" fill="none" stroke="#22d3ee" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow-cyan)"/>
+  <text x="717" y="228" font-size="18" fill="#22d3ee" text-anchor="middle">AI drafts a fix, you verify it</text>
+
+  <line x1="16" y1="258" x2="884" y2="258" stroke="#242424" stroke-width="1.5"/>
+
+  <!-- genie -->
+  <text x="16" y="300" font-size="26" font-weight="700" fill="#fb7185">Genie</text>
+  <text x="16" y="328" font-size="18" fill="#9a9a9a">nobody in the loop can check the work</text>
+
+  <g fill="none" stroke-width="2.5">
+    <rect x="16" y="350" width="156" height="76" rx="10" stroke="#9a9a9a"/>
+    <rect x="194" y="350" width="156" height="76" rx="10" stroke="#9a9a9a"/>
+    <rect x="372" y="350" width="156" height="76" rx="10" stroke="#4a4a4a" stroke-width="2" stroke-dasharray="6 5"/>
+    <rect x="550" y="350" width="156" height="76" rx="10" stroke="#9a9a9a"/>
+    <rect x="728" y="350" width="156" height="76" rx="10" stroke="#fb7185"/>
+  </g>
+  <g text-anchor="middle" font-size="20" font-weight="700">
+    <text x="94" y="384" fill="#e8e8e8">Prompt</text>
+    <text x="94" y="408" fill="#e8e8e8">&amp; accept</text>
+    <text x="272" y="395" fill="#e8e8e8">AI builds</text>
+    <text x="450" y="395" fill="#6b6b6b" font-weight="400">no review</text>
+    <text x="628" y="395" fill="#e8e8e8">Ship</text>
+    <text x="806" y="395" fill="#fb7185">It breaks</text>
+  </g>
+  <g stroke="#8a8a8a" stroke-width="2.5">
+    <line x1="172" y1="388" x2="190" y2="388" marker-end="url(#arrow)"/>
+    <line x1="350" y1="388" x2="368" y2="388" marker-end="url(#arrow)"/>
+    <line x1="528" y1="388" x2="546" y2="388" marker-end="url(#arrow)"/>
+    <line x1="706" y1="388" x2="724" y2="388" marker-end="url(#arrow)"/>
+  </g>
+  <polyline points="806,426 806,460 628,460 628,430" fill="none" stroke="#fb7185" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow-rose)"/>
+  <text x="717" y="488" font-size="18" fill="#fb7185" text-anchor="middle">AI fixes it, nobody can check</text>
 </svg>
