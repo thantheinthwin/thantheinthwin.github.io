@@ -20,6 +20,8 @@ Back in the day, engineers had to write every line of code, word by word. That p
 
 What's left is the part that was always the real job: knowing what's wrong, what's right, and what the trade-offs are.
 
+Spotify said this out loud in February. On its earnings call, co-CEO Gustav Söderström said his best engineers ["haven't written a single line of code since December"](https://techcrunch.com/2026/02/12/spotify-says-its-best-developers-havent-written-a-line-of-code-since-december-thanks-to-ai/). They generate code with an internal agent built on Claude Code, and they supervise it. Read that again: they didn't stop engineering. They stopped typing. Directing the agent, reviewing what it produces, and making the architecture calls is still on them.
+
 There's no correct solution to every problem. Every choice costs something. A cache makes reads fast and makes data stale. A queue smooths out traffic and adds a place for messages to get stuck. A second service lets you scale independently and gives you one more thing to deploy. You need to know those trade-offs to pick the right one — and to notice when the AI picked the wrong one for you.
 
 Speed still matters. I'm not arguing against shipping fast. I'm arguing that we should be responsible with how we use AI to build software.
@@ -34,15 +36,29 @@ Now picture the person driving the agent who doesn't know what it actually built
 
 That's the hard part. AI can still hallucinate. If it hallucinates a fix, and the person who "built" the system doesn't know how the system works, there's nobody left who can tell the fix is wrong. Now we're fucked.
 
-This is why **observability** isn't optional. Logs, metrics, traces, alerts — they're how a human finds out what's actually happening instead of guessing. Spotify was down for almost six hours on September 29, and it still hasn't said publicly what caused it. I'm not going to guess either. But whatever it was, getting a system that size back up took people who understood how it works, with the tooling to see inside it.
+This is why **observability** isn't optional. Logs, metrics, traces, alerts — they're how a human finds out what's actually happening instead of guessing. And when the alert fires, it has to wake up someone who understands the system well enough to tell whether the AI's fix is right.
 
 ## Clean Input, Clean Output
 
 This next part might sound like I'm arguing for slowing down — especially to founders and managers comparing this to someone who just lets the AI do the whole run. Hear me out.
 
-When you train an AI model, you need data, and that data can't be trash. Data cleaning is a whole discipline for a reason: only clean data gives you clean results.
+When you train an AI model, you need data, and that data can't be trash. Only clean data gives you clean results.
 
-Prompting works the same way. Only when the scope is clear and the information is complete will an agent's output be good. Vague scope in, vague code out. And the person who can write a clear scope is the person who understands the problem — the architecture, the constraints, the edge cases.
+Prompting works the same way, except the input isn't a dataset. It's **context**. An agent only knows what you tell it and what it can see in the repo. Everything else, it guesses. So before it writes a single line, give it:
+
+- **The goal and the scope.** What we're building, what's out of scope, and what "done" means.
+- **Acceptance criteria.** The behaviors that must hold, written as cases you can test: "a refund larger than the original charge is rejected", not "handle refunds properly".
+- **Constraints.** The things it can't infer from the code: latency budgets, security rules, data retention, what it costs to run.
+- **Conventions, with an example.** Point at the file that does it right: "follow how `orders/service.go` handles errors". One example beats a paragraph of rules.
+- **Decisions already made, and why.** "Auth lives in its own service." "We use Postgres for this, not a new queue." Leave them out, and the agent will happily re-decide them for you.
+- **How to verify.** The commands to run, the tests that must pass, what green looks like.
+- **What not to touch.** The migrations, the payment client, the generated code.
+
+Most of this can live in a rules file the agent reads on every task, like an `AGENTS.md` or `CLAUDE.md`, so you write it once instead of retyping it.
+
+Writing this takes an hour, maybe less. Skipping it costs you the afternoon spent untangling code that solved the wrong problem — or the incident after it ships, or the customers who leave after the incident. That's the trade I'm asking founders and managers to make: a little slower to start, a lot faster to trust.
+
+And here's the catch: the person who can write that context is the person who understands the problem — the architecture, the constraints, the edge cases. You can't hand the context to the AI, because the context is the part only you know.
 
 ## Greenfield Is Where the Slop Grows
 
@@ -70,6 +86,17 @@ Here's the honest problem with all of this. AI can produce a lot of code in an h
 
 But that bottleneck is where the understanding lives. Skip it, and you're shipping code nobody understands. The fix isn't to remove the human from the loop. It's to make the loop smaller: tighter scopes, smaller changes, and tests that prove behavior, so each review is something a person can actually hold in their head. That's exactly what Shopify's checkpoints are.
 
+## So What Do We Actually Do?
+
+Awareness is the first step. Here's what using AI as an assistant looks like in practice:
+
+1. **Write the reference yourself.** A clean-slate project has no old app to copy, so make one on paper: a spec and acceptance criteria for each feature. That's your version of Shopify's reference app.
+2. **Decide the tests for the paths that hurt.** Auth, payments, anything that deletes data. You decide what the tests must prove. Let the agent write them as failing tests first, then the code — and review the tests before the implementation.
+3. **Ship in small checkpoints.** One feature, one PR, small enough to hold in your head. Each one proven by tests and approved by someone who can explain it.
+4. **Ship observability with the feature, not after the incident.** Structured logs, error tracking, a few key metrics, and an alert that wakes a human up. If you can't see it, you can't fix it — and neither can the AI.
+5. **Make rollback cheap.** Feature flags and gradual rollouts, so when a fix turns out to be wrong — whoever wrote it — you back it out in minutes instead of debugging in production.
+6. **If you can't explain it, don't merge it.** That's the whole test.
+
 ## Assistant, Not Genie
 
 So there are two ways to use AI to build software.
@@ -79,3 +106,10 @@ You can use it as an **assistant**: you know what you're building, you know the 
 Or you can treat it as a **genie**: make a wish, get a result, and hope nothing breaks — because if it does, you'll be asking the genie to fix something neither of you understands.
 
 The models will keep getting better. The responsibility still isn't theirs. It's ours.
+
+## Questions I'm Still Thinking About
+
+I don't have clean answers to these, and I'd like to hear yours:
+
+- **Where's the line between AI review and human review?** Shopify's checkpoints include two adversarial code reviews before an engineer signs off. As more of that reviewing is done by agents, which reviews can we safely hand over, and which must stay with a human?
+- **Where do the next seasoned engineers come from?** This whole argument depends on engineers who understand the trade-offs. Most of us learned them by writing a lot of code and breaking a lot of things. If juniors stop writing code, how do they build that judgment?
