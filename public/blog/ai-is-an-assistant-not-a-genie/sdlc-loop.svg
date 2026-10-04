@@ -1,0 +1,68 @@
+<svg viewBox="0 0 1040 414" width="1040" height="414" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
+    </marker>
+    <marker id="arrow-loop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/>
+    </marker>
+  </defs>
+  <rect width="1040" height="414" fill="#0a0a0a"/>
+  <rect x="0.5" y="0.5" width="1039" height="413" fill="none" stroke="#242424"/>
+
+  <g fill="none" stroke="#6b6b6b" stroke-width="2">
+    <rect x="20" y="30" width="226" height="124" rx="10"/>
+    <rect x="278" y="30" width="226" height="124" rx="10"/>
+    <rect x="536" y="30" width="226" height="124" rx="10"/>
+    <rect x="794" y="30" width="226" height="124" rx="10"/>
+    <rect x="794" y="260" width="226" height="124" rx="10"/>
+    <rect x="536" y="260" width="226" height="124" rx="10"/>
+    <rect x="278" y="260" width="226" height="124" rx="10"/>
+    <rect x="20" y="260" width="226" height="124" rx="10"/>
+  </g>
+
+  <g font-size="21" font-weight="700" fill="#e8e8e8">
+    <text x="36" y="68">1 · Research</text>
+    <text x="294" y="68">2 · Scoping</text>
+    <text x="552" y="68">3 · Design</text>
+    <text x="810" y="68">4 · Development</text>
+    <text x="810" y="298">5 · Testing</text>
+    <text x="552" y="298">6 · Review</text>
+    <text x="294" y="298">7 · Shipping</text>
+    <text x="36" y="298">8 · Operating</text>
+  </g>
+
+  <g font-size="16" fill="#9a9a9a">
+    <text y="104"><tspan x="36" font-weight="700">AI</tspan><tspan x="78">reads the docs</tspan></text>
+    <text y="104"><tspan x="294" font-weight="700">AI</tspan><tspan x="336">drafts the spec</tspan></text>
+    <text y="104"><tspan x="552" font-weight="700">AI</tspan><tspan x="594">lists options</tspan></text>
+    <text y="104"><tspan x="810" font-weight="700">AI</tspan><tspan x="852">writes the code</tspan></text>
+    <text y="334"><tspan x="810" font-weight="700">AI</tspan><tspan x="852">writes tests</tspan></text>
+    <text y="334"><tspan x="552" font-weight="700">AI</tspan><tspan x="594">first pass</tspan></text>
+    <text y="334"><tspan x="294" font-weight="700">AI</tspan><tspan x="336">watches rollout</tspan></text>
+    <text y="334"><tspan x="36" font-weight="700">AI</tspan><tspan x="78">triages alerts</tspan></text>
+  </g>
+
+  <g font-size="16" fill="#22d3ee">
+    <text y="132"><tspan x="36" font-weight="700">You</tspan><tspan x="78">pick the problem</tspan></text>
+    <text y="132"><tspan x="294" font-weight="700">You</tspan><tspan x="336">set the scope</tspan></text>
+    <text y="132"><tspan x="552" font-weight="700">You</tspan><tspan x="594">pick trade-offs</tspan></text>
+    <text y="132"><tspan x="810" font-weight="700">You</tspan><tspan x="852">direct it</tspan></text>
+    <text y="362"><tspan x="810" font-weight="700">You</tspan><tspan x="852">set what passes</tspan></text>
+    <text y="362"><tspan x="552" font-weight="700">You</tspan><tspan x="594">approve</tspan></text>
+    <text y="362"><tspan x="294" font-weight="700">You</tspan><tspan x="336">go or roll back</tspan></text>
+    <text y="362"><tspan x="36" font-weight="700">You</tspan><tspan x="78">own the fix</tspan></text>
+  </g>
+
+  <g stroke="#8a8a8a" stroke-width="2.5">
+    <line x1="246" y1="92" x2="274" y2="92" marker-end="url(#arrow)"/>
+    <line x1="504" y1="92" x2="532" y2="92" marker-end="url(#arrow)"/>
+    <line x1="762" y1="92" x2="790" y2="92" marker-end="url(#arrow)"/>
+    <line x1="907" y1="154" x2="907" y2="256" marker-end="url(#arrow)"/>
+    <line x1="794" y1="322" x2="766" y2="322" marker-end="url(#arrow)"/>
+    <line x1="536" y1="322" x2="508" y2="322" marker-end="url(#arrow)"/>
+    <line x1="278" y1="322" x2="250" y2="322" marker-end="url(#arrow)"/>
+  </g>
+  <line x1="133" y1="260" x2="133" y2="158" stroke="#22d3ee" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#arrow-loop)"/>
+  <text x="152" y="214" font-size="15" fill="#22d3ee">repeat with what you learned</text>
+</svg>

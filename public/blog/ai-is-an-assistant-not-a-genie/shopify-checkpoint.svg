@@ -1,0 +1,54 @@
+<svg viewBox="0 0 1040 265" width="1040" height="265" xmlns="http://www.w3.org/2000/svg" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8a8a8a"/>
+    </marker>
+    <marker id="arrow-fail" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#fb7185"/>
+    </marker>
+  </defs>
+  <rect width="1040" height="265" fill="#0a0a0a"/>
+  <rect x="0.5" y="0.5" width="1039" height="264" fill="none" stroke="#242424"/>
+
+  <text x="20" y="40" font-size="17" fill="#9a9a9a">One checkpoint</text>
+  <line x1="210" y1="48" x2="750" y2="48" stroke="#d6a35c" stroke-width="1.5"/>
+  <text x="480" y="38" font-size="15" fill="#d6a35c" text-anchor="middle">quality gates</text>
+
+  <rect x="20" y="60" width="160" height="100" rx="10" fill="none" stroke="#9a9a9a" stroke-width="2.5"/>
+  <rect x="210" y="60" width="160" height="100" rx="10" fill="none" stroke="#d6a35c" stroke-width="2.5"/>
+  <rect x="400" y="60" width="160" height="100" rx="10" fill="none" stroke="#d6a35c" stroke-width="2.5"/>
+  <rect x="590" y="60" width="160" height="100" rx="10" fill="none" stroke="#d6a35c" stroke-width="2.5"/>
+  <rect x="780" y="60" width="160" height="100" rx="10" fill="none" stroke="#4ade80" stroke-width="2.5"/>
+
+  <g text-anchor="middle" font-size="18" font-weight="700">
+    <text x="100" y="104" fill="#e8e8e8">Agent builds</text>
+    <text x="290" y="104" fill="#d6a35c">Tests from</text>
+    <text x="480" y="104" fill="#d6a35c">Visual match</text>
+    <text x="670" y="104" fill="#d6a35c">2 adversarial</text>
+    <text x="860" y="104" fill="#4ade80">Engineer</text>
+  </g>
+  <g text-anchor="middle" font-size="17" fill="#9a9a9a">
+    <text x="100" y="130">one step</text>
+    <text x="290" y="130">reference app</text>
+    <text x="480" y="130">vs. reference</text>
+    <text x="670" y="130">reviews</text>
+    <text x="860" y="130">approves</text>
+  </g>
+
+  <g stroke="#8a8a8a" stroke-width="2.5">
+    <line x1="180" y1="110" x2="206" y2="110" marker-end="url(#arrow)"/>
+    <line x1="370" y1="110" x2="396" y2="110" marker-end="url(#arrow)"/>
+    <line x1="560" y1="110" x2="586" y2="110" marker-end="url(#arrow)"/>
+    <line x1="750" y1="110" x2="776" y2="110" marker-end="url(#arrow)"/>
+    <line x1="940" y1="110" x2="1000" y2="110" marker-end="url(#arrow)"/>
+  </g>
+  <text x="970" y="98" font-size="15" fill="#9a9a9a" text-anchor="middle">next</text>
+
+  <g fill="none" stroke="#fb7185" stroke-width="2" stroke-dasharray="6 6">
+    <line x1="290" y1="160" x2="290" y2="210"/>
+    <line x1="480" y1="160" x2="480" y2="210"/>
+    <line x1="670" y1="160" x2="670" y2="210"/>
+    <polyline points="860,160 860,210 100,210 100,166" marker-end="url(#arrow-fail)"/>
+  </g>
+  <text x="480" y="242" font-size="16" fill="#fb7185" text-anchor="middle">fails a gate or gets rejected → back to the agent</text>
+</svg>
