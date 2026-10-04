@@ -14,6 +14,21 @@ That's where the misconception starts. Something that runs is a prototype. It is
 
 Making it production ready — robust, observable, and still standing after the first bad deploy — depends on decisions. And those decisions are still made by a human. If that human doesn't know how these systems work and lets the AI make every call, you'll get a demo. You won't get a system.
 
+## How Software Got Built Before AI
+
+Before agents, shipping a feature went through the same stages it does now. We just did every one of them by hand:
+
+1. **Research.** Understand the problem before touching code: who has it, what they do today, what's been tried, and what the existing system already does.
+2. **Scoping.** Turn the problem into requirements: what's in, what's out, the acceptance criteria, and constraints like performance, security, and budget.
+3. **Design.** Decide how it fits together: data models, APIs, service boundaries, and the trade-offs between the options.
+4. **Development.** Write the code — every line, by hand.
+5. **Testing.** Unit, integration, and end-to-end tests, plus manual QA, to prove it does what the scope says.
+6. **Review.** Another engineer reads the change, questions the decisions, and catches what the tests can't.
+7. **Shipping.** CI/CD pipelines, staging, migrations, feature flags, and gradual rollouts.
+8. **Operating.** Monitoring, alerts, on-call, incidents, postmortems — and then back to step one with what you learned.
+
+Development was usually the slowest step, so that's where most of the time and headcount went. It's also the step AI got dramatically faster at. The other seven didn't go away. If anything, they matter more now, because the code shows up faster than anyone can think about it.
+
 ## From Writing Every Line to Knowing What's Right
 
 Back in the day, engineers had to write every line of code, word by word. That part is mostly gone, and honestly, good riddance.
