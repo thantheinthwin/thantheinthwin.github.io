@@ -1,0 +1,40 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#26262b"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#63636b"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="630" fill="#0e0e10"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <text x="80" y="160" font-size="68" font-weight="700" fill="#f4f4f5" letter-spacing="-1">AI Is an Assistant,</text>
+  <text x="80" y="244" font-size="68" font-weight="700" fill="#fda4af" letter-spacing="-1">Not a Genie</text>
+
+  <!-- human-in-the-loop flow -->
+  <rect x="80" y="352" width="1040" height="196" rx="18" fill="#4ade80" fill-opacity="0.06" stroke="#4ade80" stroke-opacity="0.35" stroke-width="1.5"/>
+  <text x="108" y="390" font-size="20" font-weight="600" fill="#86efac">Human in the loop</text>
+
+  <g fill="#1c1c21" stroke="#d4d4d8" stroke-width="2">
+    <rect x="108" y="414" width="200" height="80" rx="12"/>
+    <rect x="608" y="414" width="200" height="80" rx="12"/>
+  </g>
+  <g fill="#17171b" stroke="#2e2e34" stroke-width="1.5">
+    <rect x="358" y="414" width="200" height="80" rx="12"/>
+    <rect x="858" y="414" width="200" height="80" rx="12"/>
+  </g>
+  <g font-size="26" font-weight="600" text-anchor="middle" fill="#f4f4f5">
+    <text x="208" y="463">You scope</text>
+    <text x="458" y="463" fill="#a1a1aa">AI builds</text>
+    <text x="708" y="463">You review</text>
+    <text x="958" y="463" fill="#86efac">Ship</text>
+  </g>
+  <g stroke="#63636b" stroke-width="2">
+    <line x1="308" y1="454" x2="354" y2="454" marker-end="url(#arrow)"/>
+    <line x1="558" y1="454" x2="604" y2="454" marker-end="url(#arrow)"/>
+    <line x1="808" y1="454" x2="854" y2="454" marker-end="url(#arrow)"/>
+  </g>
+  <polyline points="708,494 708,524 458,524 458,498" fill="none" stroke="#63636b" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+</svg>

@@ -21,6 +21,10 @@ export interface Post extends PostMeta {
   content: string;
 }
 
+// Drafts render locally and on Vercel preview deployments, never in production.
+const showDrafts =
+  process.env.NODE_ENV === "development" || process.env.VERCEL_ENV === "preview";
+
 function estimateReadingTime(content: string): number {
   const words = content.split(/\s+/).length;
   return Math.max(1, Math.round(words / 200));
@@ -58,8 +62,6 @@ function parsePost(slug: string): Post | null {
 export function getAllPosts(): Post[] {
   if (!fs.existsSync(BLOG_DIR)) return [];
 
-  const showDrafts = process.env.NODE_ENV === "development";
-
   return fs
     .readdirSync(BLOG_DIR, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
@@ -72,6 +74,6 @@ export function getAllPosts(): Post[] {
 export function getPostBySlug(slug: string): Post | null {
   const post = parsePost(slug);
   if (!post) return null;
-  if (post.draft && process.env.NODE_ENV !== "development") return null;
+  if (post.draft && !showDrafts) return null;
   return post;
 }

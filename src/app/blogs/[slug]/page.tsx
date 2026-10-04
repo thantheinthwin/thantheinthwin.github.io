@@ -62,6 +62,11 @@ export default async function BlogPostPage({ params }: PageProps) {
             {" · "}
             {post.readingTimeMinutes} min read
           </time>
+          {post.draft && (
+            <span className="w-fit rounded border border-dashed px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
+              Draft
+            </span>
+          )}
           <h1 className="text-2xl font-semibold tracking-tight text-balance">
             {post.title}
           </h1>
