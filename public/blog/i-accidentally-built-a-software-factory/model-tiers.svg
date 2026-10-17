@@ -1,0 +1,75 @@
+<svg viewBox="0 0 728 452" width="728" height="452" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#26262b"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#63636b"/>
+    </marker>
+  </defs>
+  <rect width="728" height="452" rx="14" fill="#0e0e10"/>
+  <rect width="728" height="452" rx="14" fill="url(#dots)"/>
+  <rect x="0.5" y="0.5" width="727" height="451" rx="14" fill="none" stroke="#202024"/>
+  <rect x="16" y="16" width="264" height="300" rx="12" fill="#818cf8" fill-opacity="0.07" stroke="#818cf8" stroke-opacity="0.4"/>
+  <text x="32" y="40" font-size="15" font-weight="600" fill="#a5b4fc">Five questions</text>
+  <rect x="28" y="56" width="240" height="40" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="44" y="81" font-size="14" fill="#f4f4f5">What breaks if it’s wrong?</text>
+  <rect x="28" y="106" width="240" height="40" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="44" y="131" font-size="14" fill="#f4f4f5">Is the spec settled?</text>
+  <rect x="28" y="156" width="240" height="40" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="44" y="181" font-size="14" fill="#f4f4f5">How much does it touch?</text>
+  <rect x="28" y="206" width="240" height="40" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="44" y="231" font-size="14" fill="#f4f4f5">Is there a pattern to copy?</text>
+  <rect x="28" y="256" width="240" height="40" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="44" y="281" font-size="14" fill="#f4f4f5">Can a revert undo it?</text>
+  <rect x="316" y="16" width="396" height="300" rx="12" fill="#e0a85a" fill-opacity="0.07" stroke="#e0a85a" stroke-opacity="0.4"/>
+  <text x="332" y="40" font-size="15" font-weight="600" fill="#f2c27b">Tier</text>
+  <text x="696" y="40" font-size="13" fill="#8b8b94" text-anchor="end">the worst answer picks it</text>
+  <rect x="328" y="56" width="372" height="56" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <rect x="344" y="70" width="6" height="12" rx="1.5" fill="#f2c27b"/>
+  <rect x="354" y="70" width="6" height="12" rx="1.5" fill="#2e2e34"/>
+  <rect x="364" y="70" width="6" height="12" rx="1.5" fill="#2e2e34"/>
+  <rect x="374" y="70" width="6" height="12" rx="1.5" fill="#2e2e34"/>
+  <text x="390" y="81" font-size="15" font-weight="600" fill="#f4f4f5">1  Light</text>
+  <text x="688" y="81" font-size="12.5" fill="#8b8b94" text-anchor="end">small model · low effort</text>
+  <text x="344" y="101" font-size="13" fill="#a1a1aa">lookups, renames, CI logs</text>
+  <rect x="328" y="120" width="372" height="56" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <rect x="344" y="134" width="6" height="12" rx="1.5" fill="#f2c27b"/>
+  <rect x="354" y="134" width="6" height="12" rx="1.5" fill="#f2c27b"/>
+  <rect x="364" y="134" width="6" height="12" rx="1.5" fill="#2e2e34"/>
+  <rect x="374" y="134" width="6" height="12" rx="1.5" fill="#2e2e34"/>
+  <text x="390" y="145" font-size="15" font-weight="600" fill="#f4f4f5">2  Standard</text>
+  <text x="688" y="145" font-size="12.5" fill="#8b8b94" text-anchor="end">mid model · medium effort</text>
+  <text x="344" y="165" font-size="13" fill="#a1a1aa">small change with a pattern to copy</text>
+  <rect x="328" y="184" width="372" height="56" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <rect x="344" y="198" width="6" height="12" rx="1.5" fill="#f2c27b"/>
+  <rect x="354" y="198" width="6" height="12" rx="1.5" fill="#f2c27b"/>
+  <rect x="364" y="198" width="6" height="12" rx="1.5" fill="#f2c27b"/>
+  <rect x="374" y="198" width="6" height="12" rx="1.5" fill="#2e2e34"/>
+  <text x="390" y="209" font-size="15" font-weight="600" fill="#f4f4f5">3  Complex</text>
+  <text x="688" y="209" font-size="12.5" fill="#8b8b94" text-anchor="end">big model · medium effort</text>
+  <text x="344" y="229" font-size="13" fill="#a1a1aa">multi-file features, new UI</text>
+  <rect x="328" y="248" width="372" height="56" rx="9" fill="#17171b" stroke="#e0a85a" stroke-width="1.5"/>
+  <rect x="344" y="262" width="6" height="12" rx="1.5" fill="#f2c27b"/>
+  <rect x="354" y="262" width="6" height="12" rx="1.5" fill="#f2c27b"/>
+  <rect x="364" y="262" width="6" height="12" rx="1.5" fill="#f2c27b"/>
+  <rect x="374" y="262" width="6" height="12" rx="1.5" fill="#f2c27b"/>
+  <text x="390" y="273" font-size="15" font-weight="600" fill="#f4f4f5">4  Critical</text>
+  <text x="688" y="273" font-size="12.5" fill="#8b8b94" text-anchor="end">big model · high effort</text>
+  <text x="344" y="293" font-size="13" fill="#a1a1aa">auth, payments, migrations, user data</text>
+  <line x1="280" y1="166" x2="312" y2="166" stroke="#63636b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="16" y="332" width="696" height="104" rx="12" fill="#a1a1aa" fill-opacity="0.04" stroke="#a1a1aa" stroke-opacity="0.4"/>
+  <text x="32" y="356" font-size="15" font-weight="600" fill="#a1a1aa">Rules</text>
+  <rect x="28" y="368" width="162" height="54" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="42" y="390" font-size="13.5" font-weight="600" fill="#f4f4f5">Reviewer is never</text>
+  <text x="42" y="409" font-size="13" fill="#8b8b94">below the builder</text>
+  <rect x="198" y="368" width="162" height="54" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="212" y="390" font-size="13.5" font-weight="600" fill="#f4f4f5">Fails review twice?</text>
+  <text x="212" y="409" font-size="13" fill="#8b8b94">One tier up, then me</text>
+  <rect x="368" y="368" width="162" height="54" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="382" y="390" font-size="13.5" font-weight="600" fill="#f4f4f5">Not sure?</text>
+  <text x="382" y="409" font-size="13" fill="#8b8b94">Take the higher tier</text>
+  <rect x="538" y="368" width="162" height="54" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="552" y="390" font-size="13.5" font-weight="600" fill="#f4f4f5">One risky part?</text>
+  <text x="552" y="409" font-size="13" fill="#8b8b94">Split it off</text>
+</svg>
