@@ -10,7 +10,7 @@ draft: true
 
 I was building Forge, and most of the work happened while I slept.
 
-Every night I wrote up a few issues, handed them to agents, and checked the results in the morning. The first few nights were rough. One agent fixed the wrong thing. Another wrote tests that never ran. A third touched files it had no business touching.
+Every evening I lined up a few issues, handed them to agents, and checked the results in the morning. The first few nights were rough. One agent fixed the wrong thing. Another wrote tests that never ran. A third touched files it had no business touching.
 
 So I started writing rules down. Read the code before you pick an approach. One issue, one branch. Never review your own work. Don't merge until I say so. Over time, the rules became one skill file: `dev-workflow`. My nights got a lot calmer. Create the issue, hand it over, and let the agents work out what to fix and how to check it.
 
@@ -42,17 +42,18 @@ My workflow sits at Level 4: I hand over issues and check the pull requests at t
 
 ## My Assembly Line
 
-Here's what happens between "I wrote an issue" and "it's merged".
+Here's what happens between "I found a bug" and "it's merged".
 
 ![My dev-workflow skill, from issue to merge](/blog/i-accidentally-built-a-software-factory/assembly-line.svg)
 
-1. **Understand.** The lead agent reads the code the change touches and traces the real flow. Issues go stale, so it checks the ticket against the code. Anything the code can answer, it answers. Only product decisions come to me.
-2. **Design** (UI only). It builds a proposal with every screen state side by side. Nothing gets built until I approve it. On an overnight run, it stops here and leaves me the open questions.
-3. **Track.** One issue, one branch.
-4. **Build.** The lead agent splits the work and gives each worker agent a full brief: the context, the decisions already made, what "done" means, and the known traps. Agents working in parallel each get their own copy of the repo, so they don't step on each other.
-5. **Review.** A fresh agent that didn't write the code checks four gates: UX/API, security, bugs, and code quality. Every finding needs a file, a line, and how it breaks. Findings go back to the builder until all four pass. CI also has to show the new tests actually *ran*, not just that nothing failed.
-6. **Verify.** Run it where users will: a simulator, a browser, a real request. I get screenshots.
-7. **Ship.** It tells me what's ready and in what order. It merges only when I type "merge".
+1. **Shape the issue.** I don't write issues by hand. I explain the bug to a smart model, and it fact-checks my story by walking through the code. It proposes the problem and a fix, then drafts the issue. I review it, and the issue gets created only after I approve it.
+2. **Understand.** When the run starts, the lead agent traces the real flow through the code again. Anything the code can answer, it answers. Only product decisions come to me.
+3. **Design** (UI only). It builds a proposal with every screen state side by side. Nothing gets built until I approve it. On an overnight run, it stops here and leaves me the open questions.
+4. **Track.** One issue, one branch.
+5. **Build.** The lead agent splits the work and gives each worker agent a full brief: the context, the decisions already made, what "done" means, and the known traps. Agents working in parallel each get their own copy of the repo, so they don't step on each other.
+6. **Review.** A fresh agent that didn't write the code checks four gates: UX/API, security, bugs, and code quality. Every finding needs a file, a line, and how it breaks. Findings go back to the builder until all four pass. CI also has to show the new tests actually *ran*, not just that nothing failed.
+7. **Verify.** Run it where users will: a simulator, a browser, a real request. I get screenshots.
+8. **Ship.** It tells me what's ready and in what order. It merges only when I type "merge".
 
 ## Same Factory, Different Century
 
@@ -60,7 +61,7 @@ Put my steps next to an old factory, and they line up almost one to one:
 
 | Old factory | My skill file |
 | --- | --- |
-| Work order | The issue |
+| Work order | Issue I approve |
 | Blueprint sign-off | Design I approve |
 | Standard work instructions | Agent brief and hard rules |
 | Parts that fit together | API shape and types agreed first |
@@ -82,7 +83,7 @@ A renamed constant gets a small, cheap model. Anything near auth, payments, or u
 
 ## Why I Keep the Lights On
 
-Three things always wait for me: the design, the merge, and anything that writes to production.
+Four things always wait for me: the issue, the design, the merge, and anything that writes to production.
 
 That's on purpose. In my last post, I argued that [responsibility lives with the human](/blogs/ai-is-an-assistant-not-a-genie). A dark factory works when your tests can prove everything. For most of us, they can't yet. The agents can take the night shift. Someone still has to sign off in the morning.
 
