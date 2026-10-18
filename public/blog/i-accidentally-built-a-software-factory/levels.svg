@@ -1,0 +1,65 @@
+<svg viewBox="0 0 728 432" width="728" height="432" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#26262b"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#63636b"/>
+    </marker>
+  </defs>
+  <rect width="728" height="432" rx="14" fill="#0e0e10"/>
+  <rect width="728" height="432" rx="14" fill="url(#dots)"/>
+  <rect x="0.5" y="0.5" width="727" height="431" rx="14" fill="none" stroke="#202024"/>
+  <rect x="16" y="16" width="556" height="374" rx="12" fill="#4ade80" fill-opacity="0.07" stroke="#4ade80" stroke-opacity="0.4"/>
+  <rect x="580" y="16" width="132" height="374" rx="12" fill="#fb7185" fill-opacity="0.07" stroke="#fb7185" stroke-opacity="0.4"/>
+  <text x="32" y="40" font-size="15" font-weight="600" fill="#86efac">Lights on</text>
+  <text x="32" y="58" font-size="13" fill="#8b8b94">a human checks the work</text>
+  <text x="594" y="40" font-size="15" font-weight="600" fill="#fda4af">Lights off</text>
+  <text x="594" y="58" font-size="13" fill="#8b8b94">no human review</text>
+  <rect x="28" y="270" width="86" height="64" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="71.0" y="290" font-size="12" fill="#8b8b94" text-anchor="middle">Level 0</text>
+  <text x="71.0" y="308" font-size="13" font-weight="600" fill="#f4f4f5" text-anchor="middle">Spicy</text>
+  <text x="71.0" y="324" font-size="13" font-weight="600" fill="#f4f4f5" text-anchor="middle">autocomplete</text>
+  <text x="71.0" y="356" font-size="12" fill="#a1a1aa" text-anchor="middle">you type</text>
+  <text x="71.0" y="372" font-size="12" fill="#a1a1aa" text-anchor="middle">every line</text>
+  <rect x="118" y="240" width="86" height="94" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="161.0" y="260" font-size="12" fill="#8b8b94" text-anchor="middle">Level 1</text>
+  <text x="161.0" y="278" font-size="13" font-weight="600" fill="#f4f4f5" text-anchor="middle">Coding</text>
+  <text x="161.0" y="294" font-size="13" font-weight="600" fill="#f4f4f5" text-anchor="middle">intern</text>
+  <text x="161.0" y="356" font-size="12" fill="#a1a1aa" text-anchor="middle">it does</text>
+  <text x="161.0" y="372" font-size="12" fill="#a1a1aa" text-anchor="middle">the chores</text>
+  <rect x="208" y="210" width="86" height="124" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="251.0" y="230" font-size="12" fill="#8b8b94" text-anchor="middle">Level 2</text>
+  <text x="251.0" y="248" font-size="13" font-weight="600" fill="#f4f4f5" text-anchor="middle">Junior</text>
+  <text x="251.0" y="264" font-size="13" font-weight="600" fill="#f4f4f5" text-anchor="middle">developer</text>
+  <text x="251.0" y="356" font-size="12" fill="#a1a1aa" text-anchor="middle">you pair</text>
+  <text x="251.0" y="372" font-size="12" fill="#a1a1aa" text-anchor="middle">with it</text>
+  <rect x="298" y="180" width="86" height="154" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="341.0" y="200" font-size="12" fill="#8b8b94" text-anchor="middle">Level 3</text>
+  <text x="341.0" y="218" font-size="13" font-weight="600" fill="#f4f4f5" text-anchor="middle">Developer</text>
+  <text x="341.0" y="356" font-size="12" fill="#a1a1aa" text-anchor="middle">it codes,</text>
+  <text x="341.0" y="372" font-size="12" fill="#a1a1aa" text-anchor="middle">you check</text>
+  <rect x="388" y="150" width="86" height="184" rx="9" fill="#1c1c21" stroke="#d4d4d8" stroke-width="1.5"/>
+  <text x="431.0" y="170" font-size="12" fill="#8b8b94" text-anchor="middle">Level 4</text>
+  <text x="431.0" y="188" font-size="13" font-weight="600" fill="#f4f4f5" text-anchor="middle">Engineering</text>
+  <text x="431.0" y="204" font-size="13" font-weight="600" fill="#f4f4f5" text-anchor="middle">team</text>
+  <text x="431.0" y="356" font-size="12" fill="#a1a1aa" text-anchor="middle">specs in,</text>
+  <text x="431.0" y="372" font-size="12" fill="#a1a1aa" text-anchor="middle">you check PRs</text>
+  <rect x="602" y="120" width="86" height="214" rx="9" fill="#17171b" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="645.0" y="140" font-size="12" fill="#fda4af" text-anchor="middle">Level 5</text>
+  <text x="645.0" y="158" font-size="13" font-weight="600" fill="#f4f4f5" text-anchor="middle">Dark</text>
+  <text x="645.0" y="174" font-size="13" font-weight="600" fill="#f4f4f5" text-anchor="middle">factory</text>
+  <text x="645.0" y="356" font-size="12" fill="#a1a1aa" text-anchor="middle">spec in,</text>
+  <text x="645.0" y="372" font-size="12" fill="#a1a1aa" text-anchor="middle">nobody reads it</text>
+  <rect x="383" y="106" width="96" height="20" rx="5" fill="#16161a" stroke="#2c2c31"/><text x="431.0" y="120" font-size="12.5" fill="#f4f4f5" text-anchor="middle">my workflow</text>
+  <line x1="431.0" y1="126" x2="431.0" y2="145" stroke="#63636b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="603" y="76" width="84" height="20" rx="5" fill="#16161a" stroke="#2c2c31"/><text x="645.0" y="90" font-size="12.5" fill="#fda4af" text-anchor="middle">StrongDM</text>
+  <line x1="645.0" y1="96" x2="645.0" y2="115" stroke="#63636b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="488" y="250" font-size="12.5" fill="#8b8b94">I still</text>
+  <text x="488" y="268" font-size="12.5" fill="#8b8b94">approve the</text>
+  <text x="488" y="286" font-size="12.5" fill="#8b8b94">issue, design</text>
+  <text x="488" y="304" font-size="12.5" fill="#8b8b94">and merge</text>
+  <line x1="28" y1="410" x2="700" y2="410" stroke="#63636b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="290" y="400" width="148" height="20" rx="5" fill="#0e0e10"/>
+  <text x="364" y="414" font-size="12.5" fill="#a1a1aa" text-anchor="middle">the agent does more</text>
+</svg>

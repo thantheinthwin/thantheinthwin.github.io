@@ -6,8 +6,11 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
-import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { getAllPosts, getPostBySlug, getShareImage } from "@/lib/blog";
 import { mdxComponents } from "@/components/mdx";
+
+const SITE_URL = "https://thantheinthwin.vercel.app";
+const AUTHOR = "Thant Hein Thwin";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -22,16 +25,33 @@ export async function generateMetadata({ params }: PageProps) {
   const post = getPostBySlug(slug);
   if (!post) return {};
 
+  const url = `/blogs/${post.slug}`;
+  const shareImage = getShareImage(post);
+  const image = shareImage && { url: shareImage, alt: post.title };
+
   return {
     title: post.title,
     description: post.excerpt,
-    alternates: post.canonicalUrl ? { canonical: post.canonicalUrl } : undefined,
+    keywords: post.tags,
+    alternates: { canonical: post.canonicalUrl ?? url },
     openGraph: {
       type: "article",
+      url,
+      siteName: `${AUTHOR} Portfolio`,
       title: post.title,
       description: post.excerpt,
       publishedTime: post.date,
-      images: post.coverImage ? [post.coverImage] : undefined,
+      authors: [AUTHOR],
+      tags: post.tags,
+      // defining openGraph/twitter here drops the inherited site-wide images,
+      // so name them explicitly when the post has no share image of its own
+      images: [image || "/opengraph-image"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [image || "/twitter-image"],
     },
   };
 }
@@ -41,8 +61,30 @@ export default async function BlogPostPage({ params }: PageProps) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const url = `${SITE_URL}/blogs/${post.slug}`;
+  const shareImage = getShareImage(post);
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    author: { "@type": "Person", name: AUTHOR, url: SITE_URL },
+    url,
+    mainEntityOfPage: post.canonicalUrl ?? url,
+    image: shareImage ? `${SITE_URL}${shareImage}` : undefined,
+    keywords: post.tags.join(", "),
+  };
+
   return (
     <main className="flex justify-center p-8 3xl:p-12 fade-in">
+      <script
+        type="application/ld+json"
+        // escape "<" so post text can never close the script tag
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <article className="w-full max-w-xl py-4">
         <Link
           href="/blogs"

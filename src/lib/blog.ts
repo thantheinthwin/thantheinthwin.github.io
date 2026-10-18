@@ -59,6 +59,16 @@ function parsePost(slug: string): Post | null {
   };
 }
 
+// X, LinkedIn, Facebook and Slack don't render SVG og:images, so an SVG cover
+// is shared through the PNG of the same name next to it, when one exists.
+// Without one, the post falls back to the site-wide opengraph-image.
+export function getShareImage(post: PostMeta): string | undefined {
+  const cover = post.coverImage;
+  if (!cover || !cover.endsWith(".svg")) return cover;
+  const png = cover.replace(/\.svg$/, ".png");
+  return fs.existsSync(path.join(process.cwd(), "public", png)) ? png : undefined;
+}
+
 export function getAllPosts(): Post[] {
   if (!fs.existsSync(BLOG_DIR)) return [];
 

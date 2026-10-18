@@ -1,0 +1,109 @@
+---
+title: "I Accidentally Built a Software Factory"
+subtitle: "I wrote a workflow for my overnight agent runs. A few weeks later, the internet had a name for it."
+description: "While building Forge, I wrote a skill file so agents could fix issues overnight. A few weeks later, everyone was talking about software factories, a term from 1968."
+date: "2026-10-17"
+tags: ["AI", "Agents", "Software Engineering", "Workflow"]
+coverImage: "/blog/i-accidentally-built-a-software-factory/cover.svg"
+draft: false
+---
+
+I was building Forge, and most of the work happened while I slept.
+
+Every evening I lined up a few issues, handed them to agents, and checked the results in the morning. The first few nights were rough. One agent fixed the wrong thing. Another wrote tests that never ran. A third touched files it had no business touching.
+
+So I started writing rules down. Read the code before you pick an approach. One issue, one branch. Never review your own work. Don't merge until I say so. Over time, the rules became one skill file: `dev-workflow`. My nights got a lot calmer. Create the issue, hand it over, and let the agents work out what to fix and how to check it.
+
+Two or three weeks later, my feed filled up with a "new" term: the **software factory**. Agents build, people set the goal and approve. Threads, diagrams, hot takes.
+
+I read a few and thought: wait, that's my skill file.
+
+## "Factory" Is an Old Word
+
+The funny part is that the term isn't new. It's older than most of the people hyping it.
+
+![From 1968 to now: the software factory keeps coming back](/blog/i-accidentally-built-a-software-factory/timeline.svg)
+
+In 1968, Bob Bemer suggested that GE build a "software factory". A year later, Hitachi opened the first one. Toshiba, NEC, Fujitsu, and SDC followed in the 1970s, and Michael Cusumano later studied them in [*Japan's Software Factories*](https://academic.oup.com/book/52424).
+
+Those factories had no robots. They had standard steps, reusable parts, quality checks, and measurement. The idea was simple: if everyone builds software the same careful way, you get fewer surprises.
+
+The 2026 version swaps the workers for agents. The idea underneath hasn't changed.
+
+## How Far People Take It
+
+Dan Shapiro [ranked AI coding in levels](https://simonwillison.net/2026/Jan/28/the-five-levels/), borrowed from self-driving cars. At the bottom is "spicy autocomplete", where you still type every line. At the top is the "dark factory": a spec goes in, code comes out, and no human reads it. It's dark because a factory with no people doesn't need the lights on.
+
+Some teams really run it that way. [StrongDM's rules](https://simonwillison.net/2026/Feb/7/software-factory/) say code must not be written by humans and must not be reviewed by humans.
+
+![The levels of AI coding, from typing every line to no human review](/blog/i-accidentally-built-a-software-factory/levels.svg)
+
+My workflow sits at Level 4: I hand over issues and check the pull requests at the end. But I keep the lights on.
+
+## My Assembly Line
+
+Here's what happens between "I found a bug" and "it's merged".
+
+![My dev-workflow skill, from issue to merge](/blog/i-accidentally-built-a-software-factory/assembly-line.svg)
+
+1. **Shape the issue.** I don't write issues by hand. I explain the bug to a smart model, and it fact-checks my story by walking through the code. It proposes the problem and a fix, then drafts the issue. I review it, and the issue gets created only after I approve it.
+2. **Understand.** When the run starts, the lead agent traces the real flow through the code again. Anything the code can answer, it answers. Only product decisions come to me.
+3. **Design** (UI only). It builds a proposal with every screen state side by side. Nothing gets built until I approve it. On an overnight run, it stops here and leaves me the open questions.
+4. **Track.** One issue, one branch.
+5. **Build.** The lead agent splits the work and gives each worker agent a full brief: the context, the decisions already made, what "done" means, and the known traps. Agents working in parallel each get their own copy of the repo, so they don't step on each other.
+6. **Review.** A fresh agent that didn't write the code checks four gates: UX/API, security, bugs, and code quality. Every finding needs a file, a line, and how it breaks. Findings go back to the builder until all four pass. CI also has to show the new tests actually *ran*, not just that nothing failed.
+7. **Verify.** Run it where users will: a simulator, a browser, a real request. I get screenshots.
+8. **Ship.** It tells me what's ready and in what order. It merges only when I type "merge".
+
+## Same Factory, Different Century
+
+Put my steps next to an old factory, and they line up almost one to one:
+
+| Old factory | My skill file |
+| --- | --- |
+| Work order | Issue I approve |
+| Blueprint sign-off | Design I approve |
+| Standard work instructions | Agent brief and hard rules |
+| Parts that fit together | API shape and types agreed first |
+| Separate workstations | One repo copy per agent |
+| Inspector who didn't build the part | Fresh reviewer agent |
+| Stop the line | Stuck agent moves up a tier, then to me |
+| Field test | Run it on a device |
+| Shipping dock | Merge only on "merge" |
+
+I didn't copy any of this. I hit the same problems, and the same fixes fell out. Put a lot of workers on one product, and you end up with a factory whether you call it one or not.
+
+## Picking the Right Worker
+
+You don't send your most senior engineer to every job, and my skill doesn't send the biggest model to every task. The lead agent asks five questions about each one, and the worst answer picks the tier.
+
+![How the lead agent picks a model for each task](/blog/i-accidentally-built-a-software-factory/model-tiers.svg)
+
+A renamed constant gets a small, cheap model. Anything near auth, payments, or user data gets the biggest model with the most effort, and so does its reviewer. If a task fails review twice, it re-runs one tier up. When in doubt, go higher: a cheap run you throw away costs more than it saved.
+
+## Why I Keep the Lights On
+
+Four things always wait for me: the issue, the design, the merge, and anything that writes to production.
+
+That's on purpose. In my last post, I argued that [responsibility lives with the human](/blogs/ai-is-an-assistant-not-a-genie). A dark factory works when your tests can prove everything. For most of us, they can't yet. The agents can take the night shift. Someone still has to sign off in the morning.
+
+## Where Factories Struggle
+
+The factory idea always had a weak spot. Critics pointed out that building software isn't mass production: every project is at least a little new. Factories shine when the work repeats.
+
+My runs show the same thing. Bug fixes and features that follow an existing pattern come out clean. New ideas need me in the loop much earlier. So the skill bends: each repo's own `CLAUDE.md` overrides it, and the lead agent makes small fixes itself instead of starting another agent.
+
+It isn't free, either:
+
+- **I'm the bottleneck.** Overnight runs mean a pile of pull requests every morning.
+- **It costs tokens.** Every review round is another run.
+- **Agents share blind spots.** A reviewer on the same model can miss what the builder missed.
+- **It's heavy for tiny changes.** A typo doesn't need four gates.
+
+## Write Yours Down
+
+I didn't set out to build a factory. I wanted agents to work while I slept, and to wake up to something I could trust. The factory came from fixing what went wrong, one rule at a time.
+
+If you run agents overnight, you probably have one too. It might just live in your head. Write it down, and give it gates.
+
+One question I'm still chewing on: what would my tests have to prove before I'd turn the lights off?
