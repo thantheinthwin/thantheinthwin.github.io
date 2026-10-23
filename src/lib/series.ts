@@ -33,6 +33,10 @@ function isPartNumber(value: unknown): value is number {
 // post that names the same series. Returns null unless the current post has
 // a series name and a part between 1 and its total, so bad frontmatter
 // renders no card.
+//
+// `posts` is expected newest first (as getAllPosts returns them). When two
+// posts claim the same part, the current post or else the newer one keeps
+// it, and a warning names both so the frontmatter can be fixed.
 export function buildSeries(
   current: SeriesFields,
   posts: readonly SeriesFields[],
@@ -42,21 +46,28 @@ export function buildSeries(
   if (!isPartNumber(seriesPart) || !isPartNumber(seriesTotal)) return null;
   if (seriesPart > seriesTotal) return null;
 
+  const name = series.trim();
   const key = seriesKey(series);
-  const published = new Map<number, { title: string; slug: string }>();
+  const claimed = new Map<number, { title: string; slug: string }>([
+    [seriesPart, { title: current.title, slug: current.slug }],
+  ]);
   for (const post of posts) {
     if (post.slug === current.slug) continue;
     if (typeof post.series !== "string" || seriesKey(post.series) !== key) continue;
-    if (!isPartNumber(post.seriesPart) || post.seriesPart > seriesTotal) continue;
-    // the first post listed for a part wins (lists come newest first)
-    if (!published.has(post.seriesPart)) {
-      published.set(post.seriesPart, { title: post.title, slug: post.slug });
+    if (!isPartNumber(post.seriesPart)) continue;
+    const holder = claimed.get(post.seriesPart);
+    if (holder) {
+      console.warn(
+        `Series "${name}": part ${post.seriesPart} is claimed by both "${holder.slug}" and "${post.slug}"; showing "${holder.slug}".`,
+      );
+      continue;
     }
+    claimed.set(post.seriesPart, { title: post.title, slug: post.slug });
   }
 
   const parts: SeriesPart[] = [];
   for (let part = 1; part <= seriesTotal; part++) {
-    const other = published.get(part);
+    const other = claimed.get(part);
     if (part === seriesPart) {
       parts.push({ part, status: "current", title: current.title });
     } else if (other) {
@@ -66,5 +77,5 @@ export function buildSeries(
     }
   }
 
-  return { name: series.trim(), part: seriesPart, total: seriesTotal, parts };
+  return { name, part: seriesPart, total: seriesTotal, parts };
 }

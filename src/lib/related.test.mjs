@@ -61,20 +61,59 @@ test("excludes the current post", () => {
   assert.deepEqual(slugs(result), ["a", "b"]);
 });
 
-test("compares tags case-insensitively and ignores surrounding spaces", () => {
-  const current = post("current", "2026-01-01", ["Software Architecture", " API "]);
+test("compares tags case-insensitively", () => {
+  const current = post("current", "2026-01-01", ["Software Architecture", "API"]);
   const posts = [
     post("newer-unrelated", "2025-12-01", ["React"]),
-    post("match", "2024-01-01", ["software architecture", "api"]),
+    // the case-folded tag is the only one shared
+    post("match", "2024-01-01", ["software architecture", "Go"]),
     // "API" must not match "Api Design": tags compare whole, not by substring
     post("substring", "2025-06-01", ["Api Design"]),
   ];
-  const [first] = rankRelatedPosts(current, posts);
-  assert.equal(first.slug, "match");
   assert.deepEqual(slugs(rankRelatedPosts(current, posts)), [
     "match",
     "newer-unrelated",
     "substring",
+  ]);
+});
+
+test("ignores spaces around tags on either side", () => {
+  const current = post("current", "2026-01-01", [" Go "]);
+  const posts = [
+    post("newer-unrelated", "2025-12-01", ["React"]),
+    // the trimmed tag is the only one shared
+    post("plain", "2024-06-01", ["Go", "CSS"]),
+    post("padded", "2024-01-01", ["go  ", "CSS"]),
+  ];
+  const result = rankRelatedPosts(current, posts);
+  assert.deepEqual(slugs(result), ["plain", "padded", "newer-unrelated"]);
+  // tags keep their original text
+  assert.deepEqual(result[1].tags, ["go  ", "CSS"]);
+});
+
+test("counts a tag repeated in another case as one shared tag", () => {
+  const current = post("current", "2026-01-01", ["Go", "API"]);
+  const posts = [
+    post("repeated", "2025-12-01", ["Go", "go"]),
+    post("two-distinct", "2024-01-01", ["Go", "API"]),
+  ];
+  assert.deepEqual(slugs(rankRelatedPosts(current, posts)), [
+    "two-distinct",
+    "repeated",
+  ]);
+});
+
+test("handles numeric tags from unquoted YAML", () => {
+  const current = post("current", "2026-01-01", ["Go", 2025]);
+  const posts = [
+    post("newer-unrelated", "2025-12-01", ["React"]),
+    post("number", "2024-06-01", [2025]),
+    post("string", "2024-01-01", ["2025"]),
+  ];
+  assert.deepEqual(slugs(rankRelatedPosts(current, posts)), [
+    "number",
+    "string",
+    "newer-unrelated",
   ]);
 });
 

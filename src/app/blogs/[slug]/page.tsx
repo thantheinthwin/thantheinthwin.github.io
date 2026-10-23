@@ -12,7 +12,6 @@ import {
   getPostSeries,
   getRelatedPosts,
   getShareImage,
-  toPostMeta,
 } from "@/lib/blog";
 import { formatPostDate } from "@/lib/date";
 import { mdxComponents } from "@/components/mdx";
@@ -91,8 +90,8 @@ export default async function BlogPostPage({ params }: PageProps) {
   };
 
   // the same three picks feed the end of the post and the desktop sidebar
-  const related = getRelatedPosts(post.slug);
-  const series = getPostSeries(toPostMeta(post));
+  const related = getRelatedPosts(post);
+  const series = getPostSeries(post);
 
   return (
     <main className="flex justify-center gap-8 p-8 3xl:p-12 fade-in">
@@ -209,7 +208,9 @@ export default async function BlogPostPage({ params }: PageProps) {
       </article>
 
       {/* desktop only; sticks against the document scroll */}
-      <aside className="sticky top-8 mt-4 hidden w-80 shrink-0 flex-col gap-4 self-start lg:flex xl:w-96">
+      <aside
+        aria-label="More from the blog"
+        className="sticky top-8 mt-4 hidden w-80 shrink-0 flex-col gap-4 self-start lg:flex xl:w-96">
         <Blogs title="Keep reading" posts={related} />
         <CoffeeChat />
       </aside>

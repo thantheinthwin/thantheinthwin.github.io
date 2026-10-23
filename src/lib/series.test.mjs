@@ -80,3 +80,36 @@ test("renders no card for invalid series frontmatter", () => {
   const noSeries = { slug: "plain", title: "Plain post" };
   assert.equal(buildSeries(noSeries, [noSeries]), null);
 });
+
+test("keeps the newer post when two posts claim the same part, and warns", (t) => {
+  const warn = t.mock.method(console, "warn", () => {});
+  const current = part("one", 1);
+  // posts arrive newest first, as getAllPosts returns them
+  const series = buildSeries(current, [current, part("newer-two", 2), part("older-two", 2)]);
+  assert.deepEqual(series.parts[1], {
+    part: 2,
+    status: "published",
+    title: "Title of newer-two",
+    slug: "newer-two",
+  });
+  assert.equal(warn.mock.callCount(), 1);
+  const [message] = warn.mock.calls[0].arguments;
+  assert.match(message, /part 2/);
+  assert.match(message, /"newer-two"/);
+  assert.match(message, /"older-two"/);
+});
+
+test("keeps the current post when another post claims its part, and warns", (t) => {
+  const warn = t.mock.method(console, "warn", () => {});
+  const current = part("one", 1);
+  const series = buildSeries(current, [part("also-one", 1), current]);
+  assert.deepEqual(series.parts[0], { part: 1, status: "current", title: "Title of one" });
+  assert.equal(warn.mock.callCount(), 1);
+});
+
+test("does not warn when every part has one post", (t) => {
+  const warn = t.mock.method(console, "warn", () => {});
+  const current = part("one", 1);
+  buildSeries(current, [part("three", 3), part("two", 2), current]);
+  assert.equal(warn.mock.callCount(), 0);
+});

@@ -6,7 +6,7 @@ import { AvailabilityStatus } from "@/components/Header/AvailabilityStatus";
 // Last thing on every post: who wrote it, and two ways to stay on the site.
 export const AuthorCard: React.FC = () => {
   return (
-    <aside aria-label="About the author" className="grid gap-3 rounded border p-4">
+    <div className="grid gap-3 rounded border p-4">
       <div className="flex items-center gap-3">
         <Image
           src="/profile.webp"
@@ -39,6 +39,6 @@ export const AuthorCard: React.FC = () => {
           <ArrowUpRight className="w-4 h-4" />
         </a>
       </div>
-    </aside>
+    </div>
   );
 };

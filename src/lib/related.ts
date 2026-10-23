@@ -7,8 +7,9 @@ export interface RelatedCandidate {
   tags: string[];
 }
 
-function normalizeTag(tag: string): string {
-  return tag.trim().toLowerCase();
+// String() because YAML reads an unquoted tag like `2025` as a number.
+function normalizeTag(tag: unknown): string {
+  return String(tag).trim().toLowerCase();
 }
 
 function timeOf(date: string): number {

@@ -103,14 +103,9 @@ export function getRecentPosts(limit: number): PostMeta[] {
 }
 
 // Other posts ranked by shared tags, filled to `limit` with the newest.
-export function getRelatedPosts(slug: string, limit = 3): PostMeta[] {
-  const posts = getAllPosts().map(toPostMeta);
-  const current = posts.find((post) => post.slug === slug) ?? {
-    slug,
-    date: "",
-    tags: [],
-  };
-  return rankRelatedPosts(current, posts, limit);
+// Ranks PostMeta copies, so no post `content` is ever returned.
+export function getRelatedPosts(post: PostMeta, limit = 3): PostMeta[] {
+  return rankRelatedPosts(post, getAllPosts().map(toPostMeta), limit);
 }
 
 // The series card for a post, or null when its series frontmatter is incomplete.

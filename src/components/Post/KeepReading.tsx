@@ -11,8 +11,9 @@ export const KeepReading: React.FC<KeepReadingProps> = ({ posts }) => {
   if (posts.length === 0) return null;
 
   return (
-    <section aria-labelledby="keep-reading" className="grid gap-4">
-      <h2 id="keep-reading" className="font-semibold">
+    // prefixed id: rehype-slug gives a post's own "Keep reading" heading id="keep-reading"
+    <section aria-labelledby="post-keep-reading" className="grid gap-4">
+      <h2 id="post-keep-reading" className="font-semibold">
         Keep reading
       </h2>
       <div className="grid gap-3">
