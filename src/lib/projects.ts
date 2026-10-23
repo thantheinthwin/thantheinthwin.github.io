@@ -2,11 +2,10 @@
 // Kept pure (types, data and helpers, no imports) so client components and
 // node:test can both load it.
 
-export interface ProjectPageSection {
-  title: string;
-  items?: string[];
-  text?: string;
-}
+// A section is either a bulleted list or a paragraph, never empty.
+export type ProjectPageSection =
+  | { title: string; items: string[] }
+  | { title: string; text: string };
 
 export interface ProjectFollowLink {
   title: string;
@@ -14,27 +13,31 @@ export interface ProjectFollowLink {
   note: string;
 }
 
-// A page written for the people who use the product. When a project has
-// one, its project page shows this instead of the technical details: no tech
-// chips, no challenges, no outcomes. Forged is a commercial product, so its
-// page says what athletes get and never how it's built.
+// A page written for the people who use the product, in place of a case
+// study. Forged is a commercial product, so its page says what athletes get
+// and never how it's built: no tech chips, no challenges, no outcomes.
 export interface ProjectPage {
   description: string;
   sections: ProjectPageSection[];
   follow?: ProjectFollowLink[];
 }
 
-export interface Project {
+// The engineering write-up shown on the project page.
+export interface ProjectCaseStudy {
+  features: string[];
+  challenges: string[];
+  outcomes: string[];
+}
+
+interface ProjectBase {
   slug: string;
   title: string;
   date: string;
   subtitle: string;
+  // the homepage row's description and tech list
   description: string;
   tech: string[];
   details: {
-    features: string[];
-    challenges: string[];
-    outcomes: string[];
     github?: {
       label: string;
       link: string;
@@ -43,8 +46,16 @@ export interface Project {
     role?: string;
     teamSize?: string;
   };
-  page?: ProjectPage;
 }
+
+// A project has either an athlete-facing page or a case study, never both,
+// so a product's build details can't sit unused in the data (this module
+// ships to the browser with the homepage).
+export type Project = ProjectBase &
+  (
+    | { page: ProjectPage; caseStudy?: never }
+    | { caseStudy: ProjectCaseStudy; page?: never }
+  );
 
 const projects: Project[] = [
   {
@@ -70,26 +81,6 @@ const projects: Project[] = [
       "Fly.io",
     ],
     details: {
-      features: [
-        "AI-generated 4-week personalized training plans from a 6-step onboarding flow",
-        "LLM tool-calling (get_exercises, get_substitutes) against a curated exercise catalogue—zero freehand exercise names",
-        "Workout logging with per-set tracking, PR detection, and per-muscle-group volume analysis",
-        "Streaming AI coach chat with RAG context: user profile, recent workouts, and pgvector semantic search",
-        "SQL-driven exercise substitution engine that avoids AI calls entirely",
-        "Better Auth service (Node.js + Hono) issuing JWTs consumed by the Go API middleware chain",
-      ],
-      challenges: [
-        "Enforcing canonical exercise naming by routing all AI exercise selection through database-backed tools",
-        "Bridging authentication between a Node.js auth server and a Go API via JWT validation middleware",
-        "Designing a Postgres schema resilient to messy AI-generated workout log ingestion",
-        "Reducing LLM API cost by moving exercise lookup and substitution from AI calls to SQL queries",
-      ],
-      outcomes: [
-        "Full backend deployed to Fly.io: Go API, auth server, and Supabase Postgres with automated migrations",
-        "End-to-end plan generation pipeline working from onboarding profile to structured 4-week plan",
-        "Exercise catalogue with seeded muscles, exercises, and muscle mappings powering deterministic substitution",
-        "OpenAPI documentation generated from code annotations via swaggo",
-      ],
       role: "Founder & Full Stack Developer",
       teamSize: "Solo Founder",
     },
@@ -141,7 +132,7 @@ const projects: Project[] = [
       "GitHub",
       "Postman",
     ],
-    details: {
+    caseStudy: {
       features: [
         "Secure Firebase Google Authentication for seamless login",
         "Categorized expense tracking with detailed insights",
@@ -166,6 +157,8 @@ const projects: Project[] = [
         "Implemented AI features that improved user engagement by 40%",
         "Established secure payment processing with zero security incidents",
       ],
+    },
+    details: {
       github: [
         {
           label: "Frontend",
@@ -196,4 +189,83 @@ export function getNextProject(slug: string): Project | undefined {
   const index = projects.findIndex((project) => project.slug === slug);
   if (index === -1) return undefined;
   return projects[(index + 1) % projects.length];
+}
+
+export interface ProjectPageLinkRow {
+  label: string;
+  links: { label: string; href: string }[];
+}
+
+export interface ProjectPageContent {
+  title: string;
+  date: string;
+  subtitle: string;
+  meta?: string;
+  description: string;
+  links: ProjectPageLinkRow[];
+  sections: ProjectPageSection[];
+  chips?: { title: string; items: string[] };
+  follow: ProjectFollowLink[];
+  next?: { href: string; title: string; subtitle: string };
+}
+
+// Everything a project page shows, its metadata included. The page renders
+// only this, so the tests check exactly what reaches /projects/{slug}.
+export function getProjectPageContent(project: Project): ProjectPageContent {
+  const { details } = project;
+
+  const links: ProjectPageLinkRow[] = [];
+  if (details.github?.length) {
+    links.push({
+      label: "GitHub",
+      links: details.github.map(({ label, link }) => ({ label, href: link })),
+    });
+  }
+  if (details.live) {
+    links.push({
+      label: "Live",
+      links: [{ label: "Visit project", href: details.live }],
+    });
+  }
+
+  const nextProject = getNextProject(project.slug);
+  const common = {
+    title: project.title,
+    date: project.date,
+    subtitle: project.subtitle,
+    meta:
+      [details.role, details.teamSize].filter(Boolean).join(" · ") ||
+      undefined,
+    links,
+    next:
+      nextProject && nextProject.slug !== project.slug
+        ? {
+            href: `/projects/${nextProject.slug}`,
+            title: nextProject.title,
+            subtitle: nextProject.subtitle,
+          }
+        : undefined,
+  };
+
+  if (project.page) {
+    return {
+      ...common,
+      description: project.page.description,
+      sections: project.page.sections,
+      follow: project.page.follow ?? [],
+    };
+  }
+
+  const { features, challenges, outcomes } = project.caseStudy;
+  return {
+    ...common,
+    description: project.description,
+    sections: [
+      { title: "Key Features", items: features },
+      { title: "Challenges Overcome", items: challenges },
+      { title: "Outcomes & Impact", items: outcomes },
+    ],
+    chips: { title: "Technologies", items: project.tech },
+    follow: [],
+  };
 }

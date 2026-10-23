@@ -4,67 +4,65 @@ import {
   getAllProjects,
   getNextProject,
   getProjectBySlug,
+  getProjectPageContent,
 } from "./projects.ts";
 
 // Forged is a commercial product: its page must not say how it's built.
+// Its own tech list, plus the other build details it has had.
 const FORBIDDEN_TERMS = [
-  "Go",
-  "Golang",
-  "Gin",
-  "Hono",
-  "Better Auth",
-  "pgvector",
-  "RAG",
-  "tool-calling",
-  "SQL",
-  "OpenRouter",
-  "Fly.io",
-  "Supabase",
-  "JWT",
-  "schema",
-  "LLM",
-  "Postgres",
-  "PostgreSQL",
-  "Redis",
-  "Docker",
-  "API gateway",
-  "Expo",
-  "React Native",
-  "Node.js",
+  ...new Set([
+    ...getProjectBySlug("forged").tech,
+    "Go",
+    "Golang",
+    "Gin",
+    "Hono",
+    "Better Auth",
+    "pgvector",
+    "RAG",
+    "tool-calling",
+    "SQL",
+    "OpenRouter",
+    "Fly.io",
+    "Supabase",
+    "JWT",
+    "schema",
+    "LLM",
+    "Postgres",
+    "PostgreSQL",
+    "Redis",
+    "Docker",
+    "API gateway",
+    "Expo",
+    "React Native",
+    "Node.js",
+    "TypeScript",
+    "OpenAPI",
+    "swaggo",
+    "middleware",
+    "get_",
+  ]),
 ];
 
 const escape = (term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 // Whole words, any case, with an optional plural "s": "Go" matches "go" and
-// "Go-based" but not "going" or "ago"; "LLM" also matches "LLMs".
-const forbidden = new RegExp(
-  `\\b(?:${FORBIDDEN_TERMS.map((term) =>
-    escape(term).replace(/ /g, "\\s+")
-  ).join("|")})s?\\b`,
-  "gi"
-);
+// "Go-based" but not "going" or "ago"; "LLM" also matches "LLMs". A term
+// ending in "_" is a prefix: "get_" matches "get_exercises".
+const termPattern = (term) => {
+  const body = escape(term).replace(/ /g, "\\s+");
+  return term.endsWith("_") ? `\\b${body}\\w*` : `\\b${body}s?\\b`;
+};
+const forbidden = new RegExp(FORBIDDEN_TERMS.map(termPattern).join("|"), "gi");
 
 const forbiddenIn = (text) => text.match(forbidden) ?? [];
 
-// Every string the /projects/forged page and its metadata render.
-function forgedPageStrings() {
-  const forged = getProjectBySlug("forged");
-  const { page } = forged;
-  return [
-    forged.title,
-    forged.subtitle,
-    forged.date,
-    forged.details.role,
-    forged.details.teamSize,
-    page.description,
-    ...page.sections.flatMap((section) => [
-      section.title,
-      ...(section.items ?? []),
-      section.text ?? "",
-    ]),
-    ...(page.follow ?? []).flatMap((link) => [link.title, link.href, link.note]),
-  ];
-}
+// Every string in a value, however deeply nested.
+const stringsIn = (value) =>
+  typeof value === "string"
+    ? [value]
+    : value && typeof value === "object"
+      ? Object.values(value).flatMap(stringsIn)
+      : [];
 
 test("finds a project by slug", () => {
   const project = getProjectBySlug("wealthsync");
@@ -82,7 +80,6 @@ test("next project follows list order and wraps to the first", () => {
     const expected = slugs[(i + 1) % slugs.length];
     assert.equal(getNextProject(slugs[i])?.slug, expected);
   }
-  assert.equal(getNextProject(slugs.at(-1))?.slug, slugs[0]);
   assert.equal(getNextProject("no-such-project"), undefined);
 });
 
@@ -92,29 +89,67 @@ test("project slugs are unique", () => {
 });
 
 test("the forbidden-term matcher matches whole words only", () => {
-  // it flags the homepage Forged description, which names the stack
-  const homepageRow = getProjectBySlug("forged").description;
-  assert.ok(forbiddenIn(homepageRow).length > 0);
-  assert.deepEqual(forbiddenIn("A Go-based app on Fly.io with Node.js"), [
-    "Go",
-    "Fly.io",
-    "Node.js",
-  ]);
-  assert.deepEqual(forbiddenIn("Two LLMs and a Better  Auth"), [
-    "LLMs",
-    "Better  Auth",
-  ]);
-  assert.deepEqual(forbiddenIn("going, ago, Google, gopher, dragon"), []);
+  assert.deepEqual(
+    forbiddenIn(
+      "A Go-based API gateway on Fly.io: Node.js middleware, two LLMs, get_exercises and a Better  Auth schema"
+    ),
+    [
+      "Go",
+      "API gateway",
+      "Fly.io",
+      "Node.js",
+      "middleware",
+      "LLMs",
+      "get_exercises",
+      "Better  Auth",
+      "schema",
+    ]
+  );
+  assert.deepEqual(
+    forbiddenIn("going, ago, Google, gopher, dragon, together, target"),
+    []
+  );
 });
 
-test("Forged has an athlete-facing page", () => {
+test("Forged has an athlete-facing page and no case study", () => {
   const forged = getProjectBySlug("forged");
-  assert.ok(forged.page, "Forged needs a page override so tech stays hidden");
+  assert.ok(forged.page, "Forged needs an athlete-facing page");
+  assert.equal("caseStudy" in forged, false);
+  for (const field of ["features", "challenges", "outcomes"]) {
+    assert.equal(field in forged, false, `Forged has ${field}`);
+    assert.equal(field in forged.details, false, `Forged has details.${field}`);
+  }
+});
+
+test("the Forged page shows no tech chips and no repo or live links", () => {
+  const forged = getProjectBySlug("forged");
+  const content = getProjectPageContent(forged);
+  assert.equal(content.chips, undefined);
+  assert.deepEqual(content.links, []);
+  assert.equal(content.description, forged.page.description);
 });
 
 test("the Forged page names none of its implementation details", () => {
-  const leaks = forgedPageStrings().flatMap((text) =>
+  const content = getProjectPageContent(getProjectBySlug("forged"));
+  const strings = stringsIn(content);
+  assert.ok(strings.includes("What athletes get"));
+  const leaks = strings.flatMap((text) =>
     forbiddenIn(text).map((term) => `${term} in "${text}"`)
   );
   assert.deepEqual(leaks, []);
+});
+
+test("a case-study page shows its features, challenges, outcomes and tech", () => {
+  const wealthsync = getProjectBySlug("wealthsync");
+  const content = getProjectPageContent(wealthsync);
+  assert.deepEqual(
+    content.sections.map((section) => section.title),
+    ["Key Features", "Challenges Overcome", "Outcomes & Impact"]
+  );
+  assert.deepEqual(content.chips?.items, wealthsync.tech);
+  assert.deepEqual(
+    content.links.map((row) => row.label),
+    ["GitHub"]
+  );
+  assert.equal(content.next?.href, "/projects/forged");
 });
