@@ -8,7 +8,7 @@ A modern, responsive portfolio website built with Next.js 15, React 19, and Type
 - **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - **Dark Theme**: Elegant dark theme with smooth transitions
 - **Interactive Sections**: Expandable experience and project details
-- **Blog Integration**: Dynamic blog content from external API
+- **Blog**: MDX posts in the repo
 - **Real-time Status**: Live availability status indicator
 - **Performance Optimized**: Fast loading with Turbopack and optimized assets
 - **Accessibility**: WCAG compliant with proper semantic HTML
@@ -34,11 +34,11 @@ A modern, responsive portfolio website built with Next.js 15, React 19, and Type
 
 ```
 portfolio/
+├── content/blogs/          # Blog posts (MDX)
 ├── public/                 # Static assets
 │   ├── profile.png        # Profile image
 │   └── resume/            # Resume files
 ├── src/
-│   ├── api-services/      # API integration
 │   ├── app/              # Next.js app directory
 │   ├── components/       # React components
 │   │   ├── Header/       # Header components
@@ -72,7 +72,7 @@ Update your personal information in the following files:
 
 - Replace `public/profile.png` with your profile image
 - Update resume files in `public/resume/`
-- Modify blog API integration in `src/api-services/blogs.ts`
+- Add blog posts as MDX in `content/blogs/<slug>/index.mdx` (read by `src/lib/blog.ts`)
 
 ## 📱 Responsive Design
 
@@ -82,12 +82,9 @@ The portfolio is fully responsive with breakpoints:
 - **Tablet**: 768px - 1024px
 - **Desktop**: > 1024px
 
-### API Integration
+### Blog Content
 
-The portfolio integrates with external APIs for:
-
-- Blog content (`src/api-services/blogs.ts`)
-- Availability status (`src/components/Header/AvailabilityStatus.tsx`)
+Blog posts are local MDX files in `content/blogs/`, read at build time by `src/lib/blog.ts`.
 
 ## 🎯 Performance
 

@@ -7,6 +7,10 @@ interface SocialLink {
 
 const links: SocialLink[] = [
   {
+    label: "Blog",
+    url: "/blogs",
+  },
+  {
     label: "Github",
     url: "https://github.com/thantheinthwin",
   },

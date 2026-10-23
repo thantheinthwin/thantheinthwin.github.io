@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { toPostDate } from "./date";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blogs");
 
@@ -48,7 +49,7 @@ function parsePost(slug: string): Post | null {
     slug,
     title: data.title ?? slug,
     subtitle: data.subtitle,
-    date: data.date ?? new Date().toISOString(),
+    date: toPostDate(data.date),
     tags: data.tags ?? [],
     excerpt: data.excerpt ?? data.description ?? "",
     coverImage: data.coverImage,
@@ -79,6 +80,17 @@ export function getAllPosts(): Post[] {
     .filter((post): post is Post => post !== null)
     .filter((post) => showDrafts || !post.draft)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+}
+
+// Drops the MDX body, so post lists stay small when passed to client components.
+export function toPostMeta(post: Post): PostMeta {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { content, ...meta } = post;
+  return meta;
+}
+
+export function getRecentPosts(limit: number): PostMeta[] {
+  return getAllPosts().slice(0, limit).map(toPostMeta);
 }
 
 export function getPostBySlug(slug: string): Post | null {
