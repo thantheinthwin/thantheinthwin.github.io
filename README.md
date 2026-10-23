@@ -8,7 +8,7 @@ A modern, responsive portfolio website built with Next.js 15, React 19, and Type
 - **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - **Dark Theme**: Elegant dark theme with smooth transitions
 - **Interactive Sections**: Expandable experience and project details
-- **Blog**: MDX posts in the repo, with related reads on every post
+- **Blog**: MDX posts in the repo
 - **Real-time Status**: Live availability status indicator
 - **Performance Optimized**: Fast loading with Turbopack and optimized assets
 - **Accessibility**: WCAG compliant with proper semantic HTML

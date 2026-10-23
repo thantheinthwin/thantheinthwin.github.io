@@ -19,7 +19,7 @@ export default function Root() {
   return (
     <main className="flex flex-col md:flex-row justify-center gap-8 p-8 3xl:p-12 fade-in">
       <HomePage posts={posts} />
-      <aside className="sticky top-8 self-start hidden md:flex flex-col gap-4">
+      <aside className="sticky top-8 3xl:top-12 self-start hidden md:flex flex-col gap-4">
         <Blogs posts={posts} />
 
         <CoffeeChat />

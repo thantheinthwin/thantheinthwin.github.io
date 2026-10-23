@@ -81,7 +81,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" data-scroll-behavior="smooth">
       <head>
         <meta name="google-site-verification" content="Zh346iq0FXIQFjBIzq1aaZupSsFofgjosbkEMbgmzNQ" />
       </head>
