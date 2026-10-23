@@ -10,6 +10,10 @@ test("turns an unquoted frontmatter date into a YYYY-MM-DD string", () => {
   assert.equal(toPostDate(new Date("2026-10-30T00:00:00Z")), "2026-10-30");
 });
 
+test("falls back to a full ISO timestamp when the date is missing", () => {
+  assert.match(toPostDate(undefined), /^\d{4}-\d{2}-\d{2}T/);
+});
+
 test("formats a post date as a long US date", () => {
   assert.equal(formatPostDate("2026-10-17"), "October 17, 2026");
 });

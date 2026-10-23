@@ -8,7 +8,7 @@ A modern, responsive portfolio website built with Next.js 15, React 19, and Type
 - **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - **Dark Theme**: Elegant dark theme with smooth transitions
 - **Interactive Sections**: Expandable experience and project details
-- **Blog Integration**: Dynamic blog content from external API
+- **Blog**: MDX posts in the repo, with related reads on every post
 - **Real-time Status**: Live availability status indicator
 - **Performance Optimized**: Fast loading with Turbopack and optimized assets
 - **Accessibility**: WCAG compliant with proper semantic HTML
@@ -34,6 +34,7 @@ A modern, responsive portfolio website built with Next.js 15, React 19, and Type
 
 ```
 portfolio/
+├── content/blogs/          # Blog posts (MDX)
 ├── public/                 # Static assets
 │   ├── profile.png        # Profile image
 │   └── resume/            # Resume files
@@ -81,7 +82,7 @@ The portfolio is fully responsive with breakpoints:
 - **Tablet**: 768px - 1024px
 - **Desktop**: > 1024px
 
-### API Integration
+### Blog Content
 
 Blog posts are local MDX files in `content/blogs/`, read at build time by `src/lib/blog.ts`.
 
