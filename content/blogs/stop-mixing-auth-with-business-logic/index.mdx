@@ -7,6 +7,9 @@ tags: ["Microservices", "Software Architecture", "System Design Concepts", "Mono
 readingTime: "5 min read"
 canonicalUrl: "https://medium.com/@thantheinthwin.dev/stop-mixing-auth-with-business-logic-e0ee66f13412"
 coverImage: "/blog/stop-mixing-auth-with-business-logic/cover.svg"
+series: "Securing Forged"
+seriesPart: 1
+seriesTotal: 3
 draft: false
 ---
 
@@ -67,7 +70,3 @@ Running two runtimes introduces deployment coordination overhead that a monolith
 The selective scaling payoff is real. But you earn it later. Early on, you're just carrying the operational overhead.
 
 Sam Newman said it well in a conversation with Martin Fowler (gotopia.tech, 2020): *"A microservice architecture is a conscious choice you have made… because of some outcome you're looking for. There's some benefit you think it's going to give you."* That framing — from *Building Microservices*, the book that shaped how I thought about service boundaries — is exactly the right test to apply before you go down this road. I had a clear outcome in mind: scale the domain API independently, without touching auth. If you can't name your outcome that specifically, the operational overhead probably isn't worth it yet.
-
----
-
-*Part 1 of 3 in the Securing Forged series.*

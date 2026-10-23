@@ -1,13 +1,27 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeftIcon, InfoIcon } from "lucide-react";
+import { InfoIcon } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 import rehypePrettyCode from "rehype-pretty-code";
-import { getAllPosts, getPostBySlug, getShareImage } from "@/lib/blog";
+import {
+  getAllPosts,
+  getPostBySlug,
+  getPostSeries,
+  getRelatedPosts,
+  getShareImage,
+  toPostMeta,
+} from "@/lib/blog";
+import { formatPostDate } from "@/lib/date";
 import { mdxComponents } from "@/components/mdx";
+import { NameTrail } from "@/components/NameTrail";
+import Blogs from "@/components/SideBar/Blogs";
+import CoffeeChat from "@/components/SideBar/CoffeeChat";
+import { KeepReading } from "@/components/Post/KeepReading";
+import { SeriesCard } from "@/components/Post/SeriesCard";
+import { AuthorCard } from "@/components/Post/AuthorCard";
 
 const SITE_URL = "https://thantheinthwin.vercel.app";
 const AUTHOR = "Thant Hein Thwin";
@@ -76,8 +90,12 @@ export default async function BlogPostPage({ params }: PageProps) {
     keywords: post.tags.join(", "),
   };
 
+  // the same three picks feed the end of the post and the desktop sidebar
+  const related = getRelatedPosts(post.slug);
+  const series = getPostSeries(toPostMeta(post));
+
   return (
-    <main className="flex justify-center p-8 3xl:p-12 fade-in">
+    <main className="flex justify-center gap-8 p-8 3xl:p-12 fade-in">
       <script
         type="application/ld+json"
         // escape "<" so post text can never close the script tag
@@ -85,22 +103,12 @@ export default async function BlogPostPage({ params }: PageProps) {
           __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c"),
         }}
       />
-      <article className="w-full max-w-xl py-4">
-        <Link
-          href="/blogs"
-          className="mb-8 flex w-fit items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors"
-        >
-          <ArrowLeftIcon className="h-4 w-4" strokeWidth={1} />
-          All blogs
-        </Link>
+      <article className="w-full min-w-0 max-w-xl py-4">
+        <NameTrail section={{ label: "Blog", href: "/blogs" }} className="mb-6" />
 
         <header className="grid gap-3 border-b pb-6">
-          <time className="text-xs text-muted-foreground">
-            {new Date(post.date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+          <time dateTime={post.date} className="text-xs text-muted-foreground">
+            {formatPostDate(post.date)}
             {" · "}
             {post.readingTimeMinutes} min read
           </time>
@@ -151,24 +159,6 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         )}
 
-        {post.canonicalUrl && (
-          <div className="mt-6 flex gap-3 rounded border bg-secondary/50 p-4 text-sm text-foreground/90">
-            <InfoIcon className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" strokeWidth={1.5} />
-            <p className="m-0">
-              Originally published on{" "}
-              <Link
-                href={post.canonicalUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline underline-offset-4 decoration-muted-foreground hover:text-primary transition-colors"
-              >
-                Medium
-              </Link>
-              .
-            </p>
-          </div>
-        )}
-
         <MDXRemote
           source={post.content}
           components={mdxComponents}
@@ -185,7 +175,44 @@ export default async function BlogPostPage({ params }: PageProps) {
             },
           }}
         />
+
+        {/* end of post: Medium notice › series › Keep reading › author */}
+        <footer className="mt-6 grid gap-8 border-t pt-6">
+          {(post.canonicalUrl || series) && (
+            <div className="grid gap-4">
+              {post.canonicalUrl && (
+                <div className="flex gap-3 rounded border bg-secondary/50 p-4 text-sm text-foreground/90">
+                  <InfoIcon className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" strokeWidth={1.5} />
+                  <p className="m-0">
+                    Originally published on{" "}
+                    <Link
+                      href={post.canonicalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-4 decoration-muted-foreground hover:text-primary transition-colors"
+                    >
+                      Medium
+                    </Link>
+                    .
+                  </p>
+                </div>
+              )}
+              {series && <SeriesCard series={series} />}
+            </div>
+          )}
+          {/* tighter gap: "View all blogs" already pads itself to 44px */}
+          <div className="grid gap-2">
+            <KeepReading posts={related} />
+            <AuthorCard />
+          </div>
+        </footer>
       </article>
+
+      {/* desktop only; sticks against the document scroll */}
+      <aside className="sticky top-8 mt-4 hidden w-80 shrink-0 flex-col gap-4 self-start lg:flex xl:w-96">
+        <Blogs title="Keep reading" posts={related} />
+        <CoffeeChat />
+      </aside>
     </main>
   );
 }
