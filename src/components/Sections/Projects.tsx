@@ -12,8 +12,10 @@ const Projects: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
           const href = `/projects/${project.slug}`;
 
           return (
+            // The title link stretches over the whole row, so each project
+            // is one link and one tab stop; the arrow is only a visual cue.
             <div
-              className="flex flex-col md:flex-row items-start gap-x-6 gap-y-2"
+              className="group relative flex flex-col md:flex-row items-start gap-x-6 gap-y-2"
               key={project.slug}
             >
               <div className={`text-sm min-w-30 text-muted-foreground pt-1`}>
@@ -25,7 +27,7 @@ const Projects: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                     <div className="font-semibold">
                       <Link
                         href={href}
-                        className="hover:underline hover:underline-offset-4"
+                        className="group-hover:underline group-hover:underline-offset-4 after:absolute after:inset-0"
                       >
                         {project.title}
                       </Link>
@@ -34,15 +36,12 @@ const Projects: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                       {project.subtitle}
                     </div>
                   </div>
-                  {/* 44px tap target; the negative margins keep it from
-                      shifting the row layout */}
-                  <Link
-                    href={href}
-                    className="-my-3 -mr-3.5 flex size-11 shrink-0 items-center justify-center rounded-md hover:bg-muted-foreground/10"
-                    aria-label={`View project: ${project.title}`}
+                  <span
+                    className="-my-3 -mr-3.5 flex size-11 shrink-0 items-center justify-center rounded-md group-hover:bg-muted-foreground/10"
+                    aria-hidden="true"
                   >
-                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                  </Link>
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
                 </div>
                 <div className="text-foreground/80 text-sm my-2">
                   {project.description}
