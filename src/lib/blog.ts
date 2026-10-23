@@ -2,6 +2,8 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { toPostDate } from "./date";
+import { rankRelatedPosts } from "./related";
+import { buildSeries, type Series } from "./series";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blogs");
 
@@ -16,6 +18,9 @@ export interface PostMeta {
   canonicalUrl?: string;
   draft: boolean;
   readingTimeMinutes: number;
+  series?: string;
+  seriesPart?: number;
+  seriesTotal?: number;
 }
 
 export interface Post extends PostMeta {
@@ -56,6 +61,10 @@ function parsePost(slug: string): Post | null {
     canonicalUrl: data.canonicalUrl,
     draft: data.draft ?? false,
     readingTimeMinutes: parseReadingTime(data.readingTime, content),
+    // checked for type only; buildSeries decides whether they form a valid part
+    series: typeof data.series === "string" ? data.series : undefined,
+    seriesPart: typeof data.seriesPart === "number" ? data.seriesPart : undefined,
+    seriesTotal: typeof data.seriesTotal === "number" ? data.seriesTotal : undefined,
     content,
   };
 }
@@ -91,6 +100,17 @@ export function toPostMeta(post: Post): PostMeta {
 
 export function getRecentPosts(limit: number): PostMeta[] {
   return getAllPosts().slice(0, limit).map(toPostMeta);
+}
+
+// Other posts ranked by shared tags, filled to `limit` with the newest.
+// Ranks PostMeta copies, so no post `content` is ever returned.
+export function getRelatedPosts(post: PostMeta, limit = 3): PostMeta[] {
+  return rankRelatedPosts(post, getAllPosts().map(toPostMeta), limit);
+}
+
+// The series card for a post, or null when its series frontmatter is incomplete.
+export function getPostSeries(post: PostMeta): Series | null {
+  return buildSeries(post, getAllPosts());
 }
 
 export function getPostBySlug(slug: string): Post | null {
