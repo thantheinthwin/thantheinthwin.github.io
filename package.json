@@ -6,12 +6,12 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "node --test \"src/**/*.test.mjs\""
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.10",
     "@radix-ui/react-dialog": "^1.1.14",
-    "@types/xml2js": "^0.4.14",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "class-variance-authority": "^0.7.1",
@@ -29,8 +29,7 @@
     "remark-gfm": "^4.0.1",
     "shiki": "^4.4.3",
     "sonner": "^2.0.6",
-    "tailwind-merge": "^3.3.1",
-    "xml2js": "^0.6.2"
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

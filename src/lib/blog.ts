@@ -81,6 +81,17 @@ export function getAllPosts(): Post[] {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
+// Drops the MDX body, so post lists stay small when passed to client components.
+export function toPostMeta(post: Post): PostMeta {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { content, ...meta } = post;
+  return meta;
+}
+
+export function getRecentPosts(limit: number): PostMeta[] {
+  return getAllPosts().slice(0, limit).map(toPostMeta);
+}
+
 export function getPostBySlug(slug: string): Post | null {
   const post = parsePost(slug);
   if (!post) return null;

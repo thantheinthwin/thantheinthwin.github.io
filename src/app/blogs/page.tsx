@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
 import { getAllPosts } from "@/lib/blog";
+import { formatPostDate } from "@/lib/date";
 
 export const metadata = {
   title: "Blog",
@@ -33,12 +34,8 @@ export default function BlogIndexPage() {
               key={post.slug}
               className="group grid gap-2 border-b pb-6 last:border-b-0"
             >
-              <time className="text-xs text-muted-foreground">
-                {new Date(post.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
+              <time dateTime={post.date} className="text-xs text-muted-foreground">
+                {formatPostDate(post.date)}
                 {" · "}
                 {post.readingTimeMinutes} min read
               </time>
