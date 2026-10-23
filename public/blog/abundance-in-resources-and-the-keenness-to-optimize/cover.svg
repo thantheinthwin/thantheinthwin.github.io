@@ -1,0 +1,15 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#26262b"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#0e0e10"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+
+  <text x="80" y="210" font-size="68" font-weight="700" fill="#f4f4f5" letter-spacing="-1">Abundance in Resources</text>
+  <text x="80" y="294" font-size="68" font-weight="700" fill="#fcd34d" letter-spacing="-1">and the Keenness to Optimize</text>
+
+  <line x1="80" y1="370" x2="200" y2="370" stroke="#3f3f46" stroke-width="2"/>
+  <text x="80" y="430" font-size="32" fill="#a1a1aa">The bill is in dollars. The salary isn't.</text>
+</svg>
