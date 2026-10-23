@@ -12,8 +12,6 @@ const Projects: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
           const href = `/projects/${project.slug}`;
 
           return (
-            // The title link stretches over the whole row, so each project
-            // is one link and one tab stop; the arrow is only a visual cue.
             <div
               className="group relative flex flex-col md:flex-row items-start gap-x-6 gap-y-2"
               key={project.slug}
@@ -25,9 +23,11 @@ const Projects: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                 <div className="flex justify-between items-start">
                   <div className="grid gap-1">
                     <div className="font-semibold">
+                      {/* stretched over the whole row: one link and one tab
+                          stop per project; the arrow is only a visual cue */}
                       <Link
                         href={href}
-                        className="group-hover:underline group-hover:underline-offset-4 after:absolute after:inset-0"
+                        className="group-hover:underline group-focus-within:underline underline-offset-4 after:absolute after:inset-0"
                       >
                         {project.title}
                       </Link>
@@ -37,7 +37,8 @@ const Projects: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                     </div>
                   </div>
                   <span
-                    className="-my-3 -mr-3.5 flex size-11 shrink-0 items-center justify-center rounded-md group-hover:bg-muted-foreground/10"
+                    // the whole row is the target, so the chip stays inside it
+                    className="flex size-8 shrink-0 items-center justify-center rounded-md group-hover:bg-muted-foreground/10 group-focus-within:bg-muted-foreground/10"
                     aria-hidden="true"
                   >
                     <ArrowRight className="w-4 h-4" />
