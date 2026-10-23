@@ -1,4 +1,4 @@
-// Pure helper for the series card at the end of a post. No runtime imports,
+// Pure helper for the series line under a post's date. No runtime imports,
 // so node:test can load this file directly (see series.test.mjs).
 
 export interface SeriesFields {
@@ -32,7 +32,7 @@ function isPartNumber(value: unknown): value is number {
 // Builds parts 1..total for the current post's series from every published
 // post that names the same series. Returns null unless the current post has
 // a series name and a part between 1 and its total, so bad frontmatter
-// renders no card.
+// renders no series line.
 //
 // `posts` is expected newest first (as getAllPosts returns them). When two
 // posts claim the same part, the current post or else the newer one keeps

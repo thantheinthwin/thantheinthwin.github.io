@@ -108,7 +108,7 @@ export function getRelatedPosts(post: PostMeta, limit = 3): PostMeta[] {
   return rankRelatedPosts(post, getAllPosts().map(toPostMeta), limit);
 }
 
-// The series card for a post, or null when its series frontmatter is incomplete.
+// The series line for a post, or null when its series frontmatter is incomplete.
 export function getPostSeries(post: PostMeta): Series | null {
   return buildSeries(post, getAllPosts());
 }
