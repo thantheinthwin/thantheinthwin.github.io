@@ -12,7 +12,7 @@ const className =
 export const Link: React.FC<LinkProps> = ({ label, url }) => {
   // Pages on this site open in the same tab so the visit continues;
   // profiles elsewhere open in a new one.
-  if (url.startsWith("/")) {
+  if (url.startsWith("/") && !url.startsWith("//")) {
     return (
       <NextLink href={url} className={className}>
         {label}

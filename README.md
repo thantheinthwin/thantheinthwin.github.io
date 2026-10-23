@@ -38,7 +38,6 @@ portfolio/
 │   ├── profile.png        # Profile image
 │   └── resume/            # Resume files
 ├── src/
-│   ├── api-services/      # API integration
 │   ├── app/              # Next.js app directory
 │   ├── components/       # React components
 │   │   ├── Header/       # Header components
@@ -72,7 +71,7 @@ Update your personal information in the following files:
 
 - Replace `public/profile.png` with your profile image
 - Update resume files in `public/resume/`
-- Modify blog API integration in `src/api-services/blogs.ts`
+- Add blog posts as MDX in `content/blogs/<slug>/index.mdx` (read by `src/lib/blog.ts`)
 
 ## 📱 Responsive Design
 
@@ -84,10 +83,7 @@ The portfolio is fully responsive with breakpoints:
 
 ### API Integration
 
-The portfolio integrates with external APIs for:
-
-- Blog content (`src/api-services/blogs.ts`)
-- Availability status (`src/components/Header/AvailabilityStatus.tsx`)
+Blog posts are local MDX files in `content/blogs/`, read at build time by `src/lib/blog.ts`.
 
 ## 🎯 Performance
 

@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import { toPostDate } from "./date";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blogs");
 
@@ -48,7 +49,7 @@ function parsePost(slug: string): Post | null {
     slug,
     title: data.title ?? slug,
     subtitle: data.subtitle,
-    date: data.date ?? new Date().toISOString(),
+    date: toPostDate(data.date),
     tags: data.tags ?? [],
     excerpt: data.excerpt ?? data.description ?? "",
     coverImage: data.coverImage,
