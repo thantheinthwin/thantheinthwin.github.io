@@ -14,10 +14,12 @@ export async function generateMetadata() {
 export default function Root() {
   const posts = getRecentPosts(3);
 
+  // The window scrolls, not <main>: the browser only restores window scroll
+  // on Back, so returning from a post or project lands where you left off.
   return (
-    <main className="md:h-screen overflow-y-auto flex flex-col md:flex-row justify-center gap-8 p-8 3xl:p-12 fade-in">
+    <main className="flex flex-col md:flex-row justify-center gap-8 p-8 3xl:p-12 fade-in">
       <HomePage posts={posts} />
-      <aside className="sticky top-0 hidden md:flex flex-col gap-4">
+      <aside className="sticky top-8 self-start hidden md:flex flex-col gap-4">
         <Blogs posts={posts} />
 
         <CoffeeChat />
