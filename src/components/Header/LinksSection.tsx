@@ -3,12 +3,15 @@ import { Link } from "./Link";
 interface SocialLink {
   label: string;
   url: string;
+  className?: string;
 }
 
 const links: SocialLink[] = [
   {
+    // phones only: on desktop the sidebar's blog card already links to the list
     label: "Blog",
     url: "/blogs",
+    className: "md:hidden",
   },
   {
     label: "Github",
@@ -25,7 +28,12 @@ export const LinksSection: React.FC = () => {
     <div className="flex gap-1 items-baseline text-xs">
       <span className="mr-2 font-semibold">Links</span>
       {links.map((link) => (
-        <Link key={link.label} label={link.label} url={link.url} />
+        <Link
+          key={link.label}
+          label={link.label}
+          url={link.url}
+          className={link.className}
+        />
       ))}
     </div>
   );

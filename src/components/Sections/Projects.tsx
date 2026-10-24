@@ -13,7 +13,7 @@ const Projects: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
 
           return (
             <div
-              className="flex flex-col md:flex-row items-start gap-x-6 gap-y-2"
+              className="group relative flex flex-col md:flex-row items-start gap-x-6 gap-y-2"
               key={project.slug}
             >
               <div className={`text-sm min-w-30 text-muted-foreground pt-1`}>
@@ -23,9 +23,11 @@ const Projects: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                 <div className="flex justify-between items-start">
                   <div className="grid gap-1">
                     <div className="font-semibold">
+                      {/* stretched over the whole row: one link and one tab
+                          stop per project; the arrow is only a visual cue */}
                       <Link
                         href={href}
-                        className="hover:underline hover:underline-offset-4"
+                        className="group-hover:underline group-focus-within:underline underline-offset-4 after:absolute after:inset-0"
                       >
                         {project.title}
                       </Link>
@@ -34,15 +36,13 @@ const Projects: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                       {project.subtitle}
                     </div>
                   </div>
-                  {/* 44px tap target; the negative margins keep it from
-                      shifting the row layout */}
-                  <Link
-                    href={href}
-                    className="-my-3 -mr-3.5 flex size-11 shrink-0 items-center justify-center rounded-md hover:bg-muted-foreground/10"
-                    aria-label={`View project: ${project.title}`}
+                  <span
+                    // the whole row is the target, so the chip stays inside it
+                    className="flex size-8 shrink-0 items-center justify-center rounded-md group-hover:bg-muted-foreground/10 group-focus-within:bg-muted-foreground/10"
+                    aria-hidden="true"
                   >
-                    <ArrowRight className="w-4 h-4" aria-hidden="true" />
-                  </Link>
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
                 </div>
                 <div className="text-foreground/80 text-sm my-2">
                   {project.description}

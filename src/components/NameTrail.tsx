@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface NameTrailProps {
-  section: { label: string; href: string };
+  // `current` marks the section as the page you're on (e.g. the blog index),
+  // so it renders as text instead of a link to itself.
+  section: { label: string; href: string; current?: boolean };
   className?: string;
 }
 
@@ -30,9 +32,15 @@ export const NameTrail: React.FC<NameTrailProps> = ({ section, className }) => {
         </li>
         <li className="flex items-center gap-2 text-muted-foreground">
           <span aria-hidden="true">/</span>
-          <Link href={section.href} className={`${linkClassName} hover:text-foreground`}>
-            {section.label}
-          </Link>
+          {section.current ? (
+            <span aria-current="page" className="flex min-h-11 items-center">
+              {section.label}
+            </span>
+          ) : (
+            <Link href={section.href} className={`${linkClassName} hover:text-foreground`}>
+              {section.label}
+            </Link>
+          )}
         </li>
       </ol>
     </nav>

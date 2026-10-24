@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeftIcon } from "lucide-react";
+import { NameTrail } from "@/components/NameTrail";
 import { getAllPosts } from "@/lib/blog";
 import { formatPostDate } from "@/lib/date";
 
@@ -15,13 +15,10 @@ export default function BlogIndexPage() {
   return (
     <main className="flex justify-center p-8 3xl:p-12 fade-in">
       <div className="w-full max-w-xl py-4">
-        <Link
-          href="/"
-          className="mb-8 flex w-fit items-center gap-1 text-xs text-muted-foreground hover:text-primary transition-colors"
-        >
-          <ArrowLeftIcon className="h-4 w-4" strokeWidth={1} />
-          Home
-        </Link>
+        <NameTrail
+          section={{ label: "Blog", href: "/blogs", current: true }}
+          className="mb-6"
+        />
 
         <h1 className="mb-8 text-2xl font-semibold tracking-tight">Blog</h1>
 
