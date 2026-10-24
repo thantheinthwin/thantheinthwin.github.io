@@ -23,7 +23,7 @@ export const AuthorBand: React.FC<AuthorBandProps> = ({ hasContents }) => {
       <div className={cn(POST_GRID, "gap-y-4 lg:gap-y-6", hasContents && POST_GRID_WITH_CONTENTS)}>
         <h2
           id="post-about-author"
-          className="text-xl font-semibold tracking-tight lg:col-start-1"
+          className="text-base font-semibold tracking-tight lg:col-start-1"
         >
           About the author
         </h2>
