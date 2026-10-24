@@ -17,7 +17,7 @@ export const RailKeepReading: React.FC<RailKeepReadingProps> = ({ posts, classNa
     // own id: the end-of-post list (hidden at lg and up) is still in the DOM
     <aside aria-labelledby="post-rail-keep-reading" className={cn("grid", className)}>
       {/* same label style as the Contents rail, so both rails share one header;
-          the rail stays quieter than the article's own body text (14px, 80%) */}
+          the titles stay quieter than the article's body text (14px, 80%) */}
       <h2
         id="post-rail-keep-reading"
         className="mb-2 flex h-5 items-center text-xs font-semibold uppercase tracking-wide"
@@ -31,7 +31,7 @@ export const RailKeepReading: React.FC<RailKeepReadingProps> = ({ posts, classNa
             {" · "}
             {post.readingTimeMinutes} min read
           </time>
-          <h3 className="line-clamp-2 text-[13px] leading-[18px] text-foreground/80 group-hover:text-foreground transition-colors">
+          <h3 className="line-clamp-2 text-[13px] leading-4.5 text-foreground/80 group-hover:text-foreground group-focus-within:text-foreground transition-colors">
             {/* the link covers the whole row, so the target is the row */}
             <Link
               href={`/blogs/${post.slug}`}
