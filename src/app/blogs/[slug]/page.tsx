@@ -2,9 +2,6 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import remarkGfm from "remark-gfm";
-import rehypeSlug from "rehype-slug";
-import rehypePrettyCode from "rehype-pretty-code";
 import {
   getAllPosts,
   getPostBySlug,
@@ -13,6 +10,9 @@ import {
   getShareImage,
 } from "@/lib/blog";
 import { formatPostDate } from "@/lib/date";
+import { serializeJsonLd } from "@/lib/json-ld";
+import { postMdxOptions } from "@/lib/mdx-options";
+import { AUTHOR, SITE_URL } from "@/lib/site";
 import { extractHeadings, MIN_TOC_HEADINGS } from "@/lib/toc";
 import { cn } from "@/lib/utils";
 import { mdxComponents } from "@/components/mdx";
@@ -25,9 +25,12 @@ import {
   ContentsProvider,
   ContentsRail,
 } from "@/components/Post/Contents";
-
-const SITE_URL = "https://thantheinthwin.vercel.app";
-const AUTHOR = "Thant Hein Thwin";
+import {
+  POST_GRID,
+  POST_GRID_WITH_CONTENTS,
+  POST_WIDTH,
+  POST_WIDTH_WITH_CONTENTS,
+} from "@/components/Post/layout";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -96,106 +99,89 @@ export default async function BlogPostPage({ params }: PageProps) {
   // the same three picks feed the desktop rail and, on phones, the end of the post
   const related = getRelatedPosts(post);
   const series = getPostSeries(post);
-  const headings = extractHeadings(post.content);
+  // collected from the same compile MDXRemote runs, so the ids match the page
+  const headings = await extractHeadings(post.content, postMdxOptions);
   const hasContents = headings.length >= MIN_TOC_HEADINGS;
 
   const grid = (
-    <div
-      className={cn(
-        "grid grid-cols-[minmax(0,36rem)] items-start justify-center lg:grid-cols-[576px_256px] lg:gap-x-12",
-        hasContents && "xl:grid-cols-[200px_576px_256px]",
-      )}
-    >
+    <div className={cn(POST_GRID, "items-start", hasContents && POST_GRID_WITH_CONTENTS)}>
       {hasContents && (
         <ContentsRail className="sticky top-8 hidden max-h-[calc(100vh-4rem)] self-start overflow-y-auto xl:block" />
       )}
 
       <div className="min-w-0">
-        {/* the bar's sticky range is this wrapper, so it leaves with the post's last line */}
-        <div>
-          {hasContents && <ContentsBar className="-mx-5 mb-6 lg:mx-0 xl:hidden" />}
-
-          <article>
-            <header className="grid gap-3">
-              {post.draft && (
-                <span className="w-fit rounded border border-dashed px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
-                  Draft
-                </span>
-              )}
-              <h1 className="text-2xl font-semibold tracking-tight text-balance lg:text-3xl">
-                {post.title}
-              </h1>
-              {post.subtitle && (
-                <p className="text-sm italic text-muted-foreground">{post.subtitle}</p>
-              )}
-              <div className="grid gap-1 text-xs text-muted-foreground">
-                <p>
-                  <time dateTime={post.date}>{formatPostDate(post.date)}</time>
-                  {" · "}
-                  {post.readingTimeMinutes} min read
-                  {post.canonicalUrl && (
-                    <>
-                      {" · "}Originally on{" "}
-                      <a
-                        href={post.canonicalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-0.5 underline underline-offset-4 decoration-muted-foreground hover:text-primary transition-colors"
-                      >
-                        Medium
-                        <ArrowUpRight aria-hidden="true" className="size-3" />
-                      </a>
-                    </>
-                  )}
-                </p>
-                {series && (
-                  <p>
-                    Part {series.part} of {series.total} · {series.name}
-                  </p>
-                )}
-              </div>
-            </header>
-
-            {post.coverImage && (
-              <div className="relative mt-6 aspect-[1200/630] w-full overflow-hidden rounded border bg-secondary/30">
-                {post.coverImage.endsWith(".svg") ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={post.coverImage}
-                    alt={post.title}
-                    className="h-full w-full object-contain"
-                  />
-                ) : (
-                  <Image
-                    src={post.coverImage}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 576px"
-                    className="object-cover"
-                    priority
-                  />
-                )}
-              </div>
+        <article>
+          <header className="grid gap-3">
+            {post.draft && (
+              <span className="w-fit rounded border border-dashed px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
+                Draft
+              </span>
             )}
+            <h1 className="text-2xl font-semibold tracking-tight text-balance lg:text-3xl">
+              {post.title}
+            </h1>
+            {post.subtitle && (
+              <p className="text-sm italic text-muted-foreground">{post.subtitle}</p>
+            )}
+            <div className="grid gap-1 text-xs text-muted-foreground">
+              <p>
+                <time dateTime={post.date}>{formatPostDate(post.date)}</time>
+                {" · "}
+                {post.readingTimeMinutes} min read
+                {post.canonicalUrl && (
+                  <>
+                    {" · "}Originally on{" "}
+                    {/* the ::after pads the hit area to 44px without moving the line */}
+                    <a
+                      href={post.canonicalUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative inline-flex items-center gap-0.5 underline underline-offset-4 decoration-muted-foreground hover:text-primary transition-colors after:absolute after:-inset-x-1 after:-inset-y-3.5"
+                    >
+                      Medium
+                      <ArrowUpRight aria-hidden="true" className="size-3" />
+                    </a>
+                  </>
+                )}
+              </p>
+              {series && (
+                <p>
+                  Part {series.part} of {series.total} · {series.name}
+                </p>
+              )}
+            </div>
+          </header>
 
-            <MDXRemote
-              source={post.content}
-              components={mdxComponents}
-              options={{
-                mdxOptions: {
-                  remarkPlugins: [remarkGfm],
-                  rehypePlugins: [
-                    rehypeSlug,
-                    [
-                      rehypePrettyCode,
-                      { theme: "github-dark-default", keepBackground: false },
-                    ],
-                  ],
-                },
-              }}
-            />
-          </article>
-        </div>
+          {post.coverImage && (
+            <div className="relative mt-6 aspect-[1200/630] w-full overflow-hidden rounded border bg-secondary/30">
+              {post.coverImage.endsWith(".svg") ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={post.coverImage}
+                  alt={post.title}
+                  className="h-full w-full object-contain"
+                />
+              ) : (
+                <Image
+                  src={post.coverImage}
+                  alt={post.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 576px"
+                  className="object-cover"
+                  priority
+                />
+              )}
+            </div>
+          )}
+
+          {/* the bar starts with the body and its sticky range is this
+              wrapper, so it pins once the body is reached and leaves with
+              the post's last line */}
+          <div>
+            {hasContents && <ContentsBar className="-mx-5 mt-6 lg:mx-0 xl:hidden" />}
+            <MDXRemote source={post.content} components={mdxComponents} options={{ mdxOptions: postMdxOptions }} />
+          </div>
+        </article>
 
         {/* phones and tablets only; at lg and up the right rail has these picks */}
         {related.length > 0 && (
@@ -217,18 +203,12 @@ export default async function BlogPostPage({ params }: PageProps) {
     <main className="fade-in">
       <script
         type="application/ld+json"
-        // escape "<" so post text can never close the script tag
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(articleJsonLd).replace(/</g, "\u003c"),
-        }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleJsonLd) }}
       />
       <div className="px-5 pt-6 pb-12 lg:px-8 lg:pt-8 lg:pb-16">
         <NameTrail
           section={{ label: "Blog", href: "/blogs" }}
-          className={cn(
-            "mx-auto mb-6 w-full max-w-xl lg:max-w-[880px]",
-            hasContents && "xl:max-w-[1128px]",
-          )}
+          className={cn(POST_WIDTH, "mb-6", hasContents && POST_WIDTH_WITH_CONTENTS)}
         />
         {hasContents ? <ContentsProvider headings={headings}>{grid}</ContentsProvider> : grid}
       </div>

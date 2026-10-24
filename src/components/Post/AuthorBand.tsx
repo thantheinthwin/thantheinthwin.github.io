@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { AvailabilityStatus } from "@/components/Header/AvailabilityStatus";
+import { AUTHOR } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { POST_GRID, POST_GRID_WITH_CONTENTS } from "./layout";
 
 interface AuthorBandProps {
   // the band's inner grid follows the post grid, which has a left column
@@ -18,12 +20,7 @@ export const AuthorBand: React.FC<AuthorBandProps> = ({ hasContents }) => {
       aria-labelledby="post-about-author"
       className="border-t bg-card px-5 py-6 lg:px-8 lg:pt-12 lg:pb-22"
     >
-      <div
-        className={cn(
-          "mx-auto grid w-full max-w-xl gap-4 lg:max-w-none lg:grid-cols-[576px_256px] lg:justify-center lg:gap-x-12 lg:gap-y-6",
-          hasContents && "xl:grid-cols-[200px_576px_256px]",
-        )}
-      >
+      <div className={cn(POST_GRID, "gap-y-4 lg:gap-y-6", hasContents && POST_GRID_WITH_CONTENTS)}>
         <h2
           id="post-about-author"
           className="text-xl font-semibold tracking-tight lg:col-start-1"
@@ -41,7 +38,7 @@ export const AuthorBand: React.FC<AuthorBandProps> = ({ hasContents }) => {
               className="size-12 shrink-0 rounded-full object-cover"
             />
             <div>
-              <p className="text-base font-semibold">Thant Hein Thwin</p>
+              <p className="text-base font-semibold">{AUTHOR}</p>
               <p className="text-sm text-muted-foreground">Lead Software Engineer</p>
               <div className="mt-2">
                 <AvailabilityStatus />

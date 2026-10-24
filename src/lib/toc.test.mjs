@@ -1,102 +1,104 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import rehypeSlug from "rehype-slug";
-import { extractHeadings, headingText } from "./toc.ts";
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { createElement, Fragment } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { compileMDX } from "next-mdx-remote/rsc";
+import matter from "gray-matter";
+import { postMdxOptions } from "./mdx-options.ts";
+import { extractHeadings } from "./toc.ts";
 
-const ids = (source) => extractHeadings(source).map((h) => h.id);
-
-// Runs the real rehype-slug over a hast tree, so the ids are checked against
-// the plugin the post page uses rather than against expectations typed here.
-function rehypeIds(headings) {
-  const tree = {
-    type: "root",
-    children: headings.map(([tagName, children]) => ({
-      type: "element",
-      tagName,
-      properties: {},
-      children,
-    })),
+// The h2 ids in the HTML the post page actually renders: MDXRemote's own
+// compile with the page's options, rendered by React. Independent of the
+// collector in toc.ts, so a mismatch between the two fails here.
+async function renderedH2Ids(source) {
+  const { content } = await compileMDX({
+    source,
+    options: { mdxOptions: postMdxOptions },
+    components: { Callout: ({ children }) => createElement(Fragment, null, children) },
+  });
+  const html = renderToStaticMarkup(content);
+  return {
+    h2: [...html.matchAll(/<h2[^>]*\sid="([^"]+)"/g)].map((m) => m[1]),
+    all: new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1])),
   };
-  rehypeSlug()(tree);
-  return tree.children.map((node) => node.properties.id);
 }
-const text = (value) => ({ type: "text", value });
-const code = (value) => ({ type: "element", tagName: "code", properties: {}, children: [text(value)] });
 
-test("returns only the h2s, in order, with their text", () => {
-  const source = ["# Title", "## First", "### Detail", "## Second", "#### Deep", "## Third"].join("\n");
-  assert.deepEqual(extractHeadings(source), [
-    { id: "first", text: "First" },
-    { id: "second", text: "Second" },
-    { id: "third", text: "Third" },
+async function check(source, expectedIds) {
+  const headings = await extractHeadings(source, postMdxOptions);
+  const ids = headings.map((h) => h.id);
+  assert.deepEqual(ids, (await renderedH2Ids(source)).h2, "matches the rendered page");
+  if (expectedIds) assert.deepEqual(ids, expectedIds);
+  return headings;
+}
+
+test("returns only the h2s, in order, with their text", async () => {
+  const headings = await check("# Title\n\n## First\n\n### Detail\n\n## Second\n\n#### Deep\n\n## Third\n", [
+    "first",
+    "second",
+    "third",
   ]);
+  assert.deepEqual(headings.map((h) => h.text), ["First", "Second", "Third"]);
 });
 
-test("slugs apostrophes, em-dashes and punctuation as rehype-slug does", () => {
-  const source = [
-    "## From Writing Every Line to Knowing What's Right",
-    "## Humans Are the Bottleneck — and That's the Point",
-    "## Who Cares After It Ships?",
-    "## The Shared Database: A Deliberate Trade-off",
-    "## 1) REST (Representational State Transfer)",
-    "## Composition + Interfaces = Go's Polymorphism",
-  ].join("\n");
-  const expected = [
-    "from-writing-every-line-to-knowing-whats-right",
-    "humans-are-the-bottleneck--and-thats-the-point",
-    "who-cares-after-it-ships",
-    "the-shared-database-a-deliberate-trade-off",
-    "1-rest-representational-state-transfer",
-    "composition--interfaces--gos-polymorphism",
-  ];
-  assert.deepEqual(ids(source), expected);
-  const fromPlugin = rehypeIds(extractHeadings(source).map((h) => ["h2", [text(h.text)]]));
-  assert.deepEqual(fromPlugin, expected);
+test("apostrophes, em-dashes and punctuation", async () => {
+  await check(
+    [
+      "## From Writing Every Line to Knowing What's Right",
+      "## Humans Are the Bottleneck — and That's the Point",
+      "## The Shared Database: A Deliberate Trade-off",
+      "## Composition + Interfaces = Go's Polymorphism",
+    ].join("\n\n"),
+    [
+      "from-writing-every-line-to-knowing-whats-right",
+      "humans-are-the-bottleneck--and-thats-the-point",
+      "the-shared-database-a-deliberate-trade-off",
+      "composition--interfaces--gos-polymorphism",
+    ],
+  );
 });
 
-test("keeps inline code text and strips markdown from the rest", () => {
-  assert.equal(headingText("Using the `<a>` tag in `next/link`"), "Using the <a> tag in next/link");
-  assert.equal(headingText("Keep `snake_case` and **bold** _words_"), "Keep snake_case and bold words");
-  assert.equal(headingText("See [the docs](https://example.com) and ![img](/x.png)"), "See the docs and");
-  assert.equal(headingText("Escaped \\*stars\\* stay"), "Escaped *stars* stay");
-  assert.equal(headingText("Closing hashes ##"), "Closing hashes");
-
-  const source = "## Why `useEffect` Runs Twice";
-  assert.deepEqual(extractHeadings(source), [{ id: "why-useeffect-runs-twice", text: "Why useEffect Runs Twice" }]);
-  assert.deepEqual(rehypeIds([["h2", [text("Why "), code("useEffect"), text(" Runs Twice")]]]), [
-    "why-useeffect-runs-twice",
-  ]);
+test("inline code, emphasis and links reduce to their text", async () => {
+  const headings = await check(
+    "## Why `useEffect` Runs **Twice**\n\n## See [the [nested] docs](https://example.com) and ![img](/x.png)\n",
+    ["why-useeffect-runs-twice", "see-the-nested-docs-and-"],
+  );
+  assert.equal(headings[0].text, "Why useEffect Runs Twice");
 });
 
-test("counts every heading level when de-duplicating ids", () => {
-  const source = ["### Pros", "## Pros", "### Use Cases", "## Use Cases", "## Pros"].join("\n");
-  const expected = rehypeIds([
-    ["h3", [text("Pros")]],
-    ["h2", [text("Pros")]],
-    ["h3", [text("Use Cases")]],
-    ["h2", [text("Use Cases")]],
-    ["h2", [text("Pros")]],
-  ]).filter((_, i) => i !== 0 && i !== 2);
-  assert.deepEqual(ids(source), ["pros-1", "use-cases-1", "pros-2"]);
-  assert.deepEqual(ids(source), expected);
+test("character references and JS expressions", async () => {
+  await check("## Fast&nbsp;and &copy; Safe\n\n## Total {1 + 1} Count\n", undefined);
+  const [entity, expression] = await extractHeadings(
+    "## Fast&nbsp;and &copy; Safe\n\n## Total {1 + 1} Count\n",
+    postMdxOptions,
+  );
+  assert.equal(entity.text, "Fast\u00a0and © Safe");
+  // MDXRemote strips JS expressions (blockJS), so the heading loses it
+  assert.equal(expression.text, "Total Count");
 });
 
-test("ignores headings inside fenced and indented code", () => {
-  const source = [
-    "## Before",
-    "```bash",
-    "## not a heading",
-    "```",
-    "~~~",
-    "## also not",
-    "~~~",
-    "    ## indented code",
-    "## After",
-  ].join("\n");
-  assert.deepEqual(ids(source), ["before", "after"]);
+test("indented headings count (MDX has no indented code)", async () => {
+  await check("    ## Indented\n\n## After\n", ["indented", "after"]);
 });
 
-test("handles Windows line endings and lines that only look like headings", () => {
-  const source = "## One\r\n##Two\r\n#hashtag\r\n## Three\r\n";
-  assert.deepEqual(ids(source), ["one", "three"]);
+test("headings in blockquotes and other levels shift the -1 suffixes", async () => {
+  await check("> ## Pros\n\n### Pros\n\n## Pros\n\n## Pros\n", ["pros", "pros-2", "pros-3"]);
+});
+
+test("headings inside fenced code are not headings", async () => {
+  await check("## Before\n\n```bash\n## not a heading\n```\n\n## After\n", ["before", "after"]);
+});
+
+test("every post's contents ids exist in its rendered page", async () => {
+  const dir = join(process.cwd(), "content", "blogs");
+  const slugs = readdirSync(dir, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
+  assert.ok(slugs.length > 0);
+  for (const slug of slugs) {
+    const { content } = matter(readFileSync(join(dir, slug, "index.mdx"), "utf8"));
+    const ids = (await extractHeadings(content, postMdxOptions)).map((h) => h.id);
+    const rendered = await renderedH2Ids(content);
+    for (const id of ids) assert.ok(rendered.all.has(id), `${slug}: #${id} is not in the page`);
+    assert.deepEqual(ids, rendered.h2, slug);
+  }
 });

@@ -14,7 +14,8 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
 interface ContentsState {
   headings: TocHeading[];
-  current: number;
+  // null until the tracker has run, so the server render marks no section
+  current: number | null;
   setCurrent: (index: number) => void;
 }
 
@@ -27,7 +28,7 @@ function useContents(): ContentsState {
 }
 
 // Tracks which h2 the reader is in, for the rail and the bar. The ids come
-// from rehype-slug, extracted on the server (src/lib/toc.ts).
+// from the post's own MDX compile (src/lib/toc.ts).
 export function ContentsProvider({
   headings,
   children,
@@ -35,22 +36,28 @@ export function ContentsProvider({
   headings: TocHeading[];
   children: React.ReactNode;
 }) {
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState<number | null>(null);
   const endRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const targets = headings
       .map((heading, index) => ({ index, el: document.getElementById(heading.id) }))
       .filter((t): t is { index: number; el: HTMLElement } => t.el !== null);
-    if (targets.length === 0) return;
+    if (targets.length === 0) {
+      setCurrent(0);
+      return;
+    }
 
     // Recompute from every heading on each change, so long sections (no h2
     // in view) and scrolling back up both resolve to the right section.
-    // Once the end of the post is on screen, the last section may be too
-    // short to reach the line, so the lowest heading in view counts instead.
+    // Once the reader has scrolled to the end of the post, the last section
+    // may be too short to reach the line, so the lowest heading in view
+    // counts instead. (Not before scrolling: a short post would open with
+    // its last section marked.)
     const update = () => {
       const end = endRef.current;
-      const line = end && end.getBoundingClientRect().top <= innerHeight ? innerHeight : CURRENT_LINE;
+      const atEnd = scrollY > 0 && end !== null && end.getBoundingClientRect().top <= innerHeight;
+      const line = atEnd ? innerHeight : CURRENT_LINE;
       let next = 0;
       for (const { index, el } of targets) {
         if (el.getBoundingClientRect().top <= line) next = index;
@@ -85,7 +92,13 @@ export function ContentsProvider({
   );
 }
 
-function ContentsList({ variant, onPick }: { variant: "rail" | "panel"; onPick?: () => void }) {
+function ContentsList({
+  variant,
+  onPick,
+}: {
+  variant: "rail" | "panel";
+  onPick?: (id: string) => void;
+}) {
   const { headings, current, setCurrent } = useContents();
   const panel = variant === "panel";
 
@@ -100,7 +113,7 @@ function ContentsList({ variant, onPick }: { variant: "rail" | "panel"; onPick?:
               aria-current={isCurrent ? "location" : undefined}
               onClick={() => {
                 setCurrent(index);
-                onPick?.();
+                onPick?.(heading.id);
               }}
               className={cn(
                 "relative flex items-start border-t border-border/50 text-muted-foreground transition-colors hover:text-foreground",
@@ -149,12 +162,20 @@ export function ContentsRail({ className }: { className?: string }) {
   );
 }
 
-// Below xl: a sticky bar naming the current section, which opens the full list.
+// Below xl: a sticky bar naming the current section, which opens the full
+// list. It stays invisible (keeping its space) until the tracker has run;
+// without JS the <noscript> list below stands in for it.
 export function ContentsBar({ className }: { className?: string }) {
   const { headings, current } = useContents();
   const [open, setOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const heading = headings[current] ?? headings[0];
+  const ready = current !== null;
+  const index = current ?? 0;
+
+  const close = () => {
+    setOpen(false);
+    buttonRef.current?.focus();
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -167,11 +188,20 @@ export function ContentsBar({ className }: { className?: string }) {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
+  // after a pick, focus moves to the heading the link jumps to
+  const pick = (id: string) => {
+    setOpen(false);
+    const heading = document.getElementById(id);
+    if (!heading) return;
+    if (!heading.hasAttribute("tabindex")) heading.setAttribute("tabindex", "-1");
+    heading.focus({ preventScroll: true });
+  };
+
   const Chevron = open ? ChevronUp : ChevronDown;
 
   return (
     <>
-      <div className={cn("sticky top-0 z-30", className)}>
+      <div className={cn("sticky top-0 z-30", !ready && "invisible", className)}>
         <button
           ref={buttonRef}
           type="button"
@@ -182,19 +212,15 @@ export function ContentsBar({ className }: { className?: string }) {
         >
           <span className="sr-only">Contents, current section: </span>
           <span className="shrink-0 font-mono text-xs leading-5 text-muted-foreground">
-            {pad(current + 1)}
+            {pad(index + 1)}
           </span>
-          <span className="min-w-0 flex-1 truncate">{heading?.text}</span>
+          <span className="min-w-0 flex-1 truncate">{headings[index]?.text}</span>
           <Chevron aria-hidden="true" className="size-4 shrink-0 text-muted-foreground" />
         </button>
 
         {open && (
           // dims the post behind the list; a tap outside the list closes it
-          <div
-            aria-hidden="true"
-            onClick={() => setOpen(false)}
-            className="fixed inset-0 bg-background/80"
-          />
+          <div aria-hidden="true" onClick={close} className="fixed inset-0 bg-background/80" />
         )}
 
         <div
@@ -203,14 +229,14 @@ export function ContentsBar({ className }: { className?: string }) {
           className="absolute inset-x-0 top-11 z-10 max-h-[calc(100dvh-2.75rem)] overflow-y-auto border-b bg-background px-5 pb-2 shadow-[0_24px_40px_-16px_rgba(0,0,0,0.8)] lg:px-0"
         >
           <nav aria-label="Contents">
-            <ContentsList variant="panel" onPick={() => setOpen(false)} />
+            <ContentsList variant="panel" onPick={pick} />
           </nav>
         </div>
       </div>
 
       {/* without JS the bar can't open, so the list shows under it, unstuck */}
       <noscript>
-        <nav aria-label="Contents" className="mb-6 xl:hidden">
+        <nav aria-label="Contents" className="mb-2 xl:hidden">
           <ContentsList variant="panel" />
         </nav>
       </noscript>

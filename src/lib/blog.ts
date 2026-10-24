@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { toPostDate } from "./date";
-import { rankRelatedPosts } from "./related";
+import { linkedPostSlugs, rankRelatedPosts } from "./related";
 import { buildSeries, type Series } from "./series";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blogs");
@@ -102,15 +102,21 @@ export function getRecentPosts(limit: number): PostMeta[] {
   return getAllPosts().slice(0, limit).map(toPostMeta);
 }
 
-// Other posts ranked by shared tags, filled to `limit` with the newest.
-// Ranks PostMeta copies, so no post `content` is ever returned.
-export function getRelatedPosts(post: PostMeta, limit = 3): PostMeta[] {
-  return rankRelatedPosts(post, getAllPosts().map(toPostMeta), limit);
+// Other posts ranked by shared tags, filled to `limit` with the newest,
+// leaving out posts the body already links to. Ranks PostMeta copies, so no
+// post `content` is ever returned.
+export function getRelatedPosts(post: Post, limit = 3): PostMeta[] {
+  return rankRelatedPosts(
+    post,
+    getAllPosts().map(toPostMeta),
+    limit,
+    linkedPostSlugs(post.content),
+  );
 }
 
 // The series line for a post, or null when its series frontmatter is incomplete.
 export function getPostSeries(post: PostMeta): Series | null {
-  return buildSeries(post, getAllPosts());
+  return buildSeries(post);
 }
 
 export function getPostBySlug(slug: string): Post | null {
