@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { rankRelatedPosts } from "./related.ts";
+import { linkedPostSlugs, rankRelatedPosts } from "./related.ts";
 
 const post = (slug, date, tags) => ({ slug, date, tags, title: slug });
 const slugs = (posts) => posts.map((p) => p.slug);
@@ -147,4 +147,28 @@ test("returns at most the limit, three by default", () => {
   );
   assert.equal(rankRelatedPosts(current, posts).length, 3);
   assert.deepEqual(slugs(rankRelatedPosts(current, posts, 2)), ["e", "d"]);
+});
+
+test("leaves out excluded posts and fills from the rest", () => {
+  const current = post("current", "2026-01-01", ["Go"]);
+  const posts = [
+    post("linked", "2026-02-01", ["Go"]),
+    post("shared", "2025-01-01", ["Go"]),
+    post("newest", "2026-03-01", []),
+    post("newer", "2025-12-01", []),
+  ];
+  assert.deepEqual(slugs(rankRelatedPosts(current, posts, 3, ["linked"])), ["shared", "newest", "newer"]);
+});
+
+test("finds the posts an MDX body links to", () => {
+  const body = [
+    "See [my last post](/blogs/ai-is-an-assistant-not-a-genie) for why.",
+    "Also [this](https://thantheinthwin.vercel.app/blogs/Stop-Mixing-Auth-With-Business-Logic#why).",
+    '<Link href="/blogs/ttl-and-the-mystery-of-outdated-content">TTL</Link>',
+    "Not a post: [list](/blogs) or [elsewhere](https://example.com/blogs/other-site).",
+  ].join("\n");
+  assert.deepEqual(
+    [...linkedPostSlugs(body)].sort(),
+    ["ai-is-an-assistant-not-a-genie", "stop-mixing-auth-with-business-logic", "ttl-and-the-mystery-of-outdated-content"],
+  );
 });

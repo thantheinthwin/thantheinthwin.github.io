@@ -1,11 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
-import { InfoIcon } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import remarkGfm from "remark-gfm";
-import rehypeSlug from "rehype-slug";
-import rehypePrettyCode from "rehype-pretty-code";
 import {
   getAllPosts,
   getPostBySlug,
@@ -14,16 +10,27 @@ import {
   getShareImage,
 } from "@/lib/blog";
 import { formatPostDate } from "@/lib/date";
+import { serializeJsonLd } from "@/lib/json-ld";
+import { postMdxOptions } from "@/lib/mdx-options";
+import { AUTHOR, SITE_URL } from "@/lib/site";
+import { extractHeadings, MIN_TOC_HEADINGS } from "@/lib/toc";
+import { cn } from "@/lib/utils";
 import { mdxComponents } from "@/components/mdx";
 import { NameTrail } from "@/components/NameTrail";
-import Blogs from "@/components/SideBar/Blogs";
-import CoffeeChat from "@/components/SideBar/CoffeeChat";
 import { KeepReading } from "@/components/Post/KeepReading";
-import { SeriesCard } from "@/components/Post/SeriesCard";
-import { AuthorCard } from "@/components/Post/AuthorCard";
-
-const SITE_URL = "https://thantheinthwin.vercel.app";
-const AUTHOR = "Thant Hein Thwin";
+import { RailKeepReading } from "@/components/Post/RailKeepReading";
+import { AuthorBand } from "@/components/Post/AuthorBand";
+import {
+  ContentsBar,
+  ContentsProvider,
+  ContentsRail,
+} from "@/components/Post/Contents";
+import {
+  POST_GRID,
+  POST_GRID_WITH_CONTENTS,
+  POST_WIDTH,
+  POST_WIDTH_WITH_CONTENTS,
+} from "@/components/Post/layout";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -89,131 +96,123 @@ export default async function BlogPostPage({ params }: PageProps) {
     keywords: post.tags.join(", "),
   };
 
-  // the same three picks feed the end of the post and the desktop sidebar
+  // the same three picks feed the desktop rail and, on phones, the end of the post
   const related = getRelatedPosts(post);
   const series = getPostSeries(post);
+  // collected from the same compile MDXRemote runs, so the ids match the page
+  const headings = await extractHeadings(post.content, postMdxOptions);
+  const hasContents = headings.length >= MIN_TOC_HEADINGS;
 
-  return (
-    <main className="flex justify-center gap-8 p-8 3xl:p-12 fade-in">
-      <script
-        type="application/ld+json"
-        // escape "<" so post text can never close the script tag
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c"),
-        }}
-      />
-      <article className="w-full min-w-0 max-w-xl py-4">
-        <NameTrail section={{ label: "Blog", href: "/blogs" }} className="mb-6" />
+  const grid = (
+    <div className={cn(POST_GRID, "items-start", hasContents && POST_GRID_WITH_CONTENTS)}>
+      {hasContents && (
+        <ContentsRail className="sticky top-8 hidden max-h-[calc(100vh-4rem)] self-start overflow-y-auto xl:block" />
+      )}
 
-        <header className="grid gap-3 border-b pb-6">
-          <time dateTime={post.date} className="text-xs text-muted-foreground">
-            {formatPostDate(post.date)}
-            {" · "}
-            {post.readingTimeMinutes} min read
-          </time>
-          {post.draft && (
-            <span className="w-fit rounded border border-dashed px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
-              Draft
-            </span>
-          )}
-          <h1 className="text-2xl font-semibold tracking-tight text-balance">
-            {post.title}
-          </h1>
-          {post.subtitle && (
-            <p className="text-sm italic text-muted-foreground">{post.subtitle}</p>
-          )}
-          {post.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1">
-              {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[10px] text-foreground/60 bg-muted-foreground/20 rounded px-2 py-1"
-                >
-                  #{tag}
-                </span>
-              ))}
-            </div>
-          )}
-        </header>
-
-        {post.coverImage && (
-          <div className="relative mt-6 aspect-[1200/630] w-full overflow-hidden rounded border bg-secondary/30">
-            {post.coverImage.endsWith(".svg") ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={post.coverImage}
-                alt={post.title}
-                className="h-full w-full object-contain"
-              />
-            ) : (
-              <Image
-                src={post.coverImage}
-                alt={post.title}
-                fill
-                sizes="(max-width: 768px) 100vw, 576px"
-                className="object-cover"
-                priority
-              />
+      <div className="min-w-0">
+        <article>
+          <header className="grid gap-3">
+            {post.draft && (
+              <span className="w-fit rounded border border-dashed px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted-foreground">
+                Draft
+              </span>
             )}
-          </div>
-        )}
-
-        <MDXRemote
-          source={post.content}
-          components={mdxComponents}
-          options={{
-            mdxOptions: {
-              remarkPlugins: [remarkGfm],
-              rehypePlugins: [
-                rehypeSlug,
-                [
-                  rehypePrettyCode,
-                  { theme: "github-dark-default", keepBackground: false },
-                ],
-              ],
-            },
-          }}
-        />
-
-        {/* end of post: Medium notice › series › Keep reading › author */}
-        <footer className="mt-6 grid gap-8 border-t pt-6">
-          {(post.canonicalUrl || series) && (
-            <div className="grid gap-4">
-              {post.canonicalUrl && (
-                <div className="flex gap-3 rounded border bg-secondary/50 p-4 text-sm text-foreground/90">
-                  <InfoIcon className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" strokeWidth={1.5} />
-                  <p className="m-0">
-                    Originally published on{" "}
-                    <Link
+            <h1 className="text-2xl font-semibold tracking-tight text-balance lg:text-3xl">
+              {post.title}
+            </h1>
+            {post.subtitle && (
+              <p className="text-sm italic text-muted-foreground">{post.subtitle}</p>
+            )}
+            <div className="grid gap-1 text-xs text-muted-foreground">
+              <p>
+                <time dateTime={post.date}>{formatPostDate(post.date)}</time>
+                {" · "}
+                {post.readingTimeMinutes} min read
+                {post.canonicalUrl && (
+                  <>
+                    {" · "}Originally on{" "}
+                    {/* the ::after pads the hit area to 44px without moving the line */}
+                    <a
                       href={post.canonicalUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="underline underline-offset-4 decoration-muted-foreground hover:text-primary transition-colors"
+                      className="relative inline-flex items-center gap-0.5 underline underline-offset-4 decoration-muted-foreground hover:text-primary transition-colors after:absolute after:-inset-x-1 after:-inset-y-3.5"
                     >
                       Medium
-                    </Link>
-                    .
-                  </p>
-                </div>
+                      <ArrowUpRight aria-hidden="true" className="size-3" />
+                    </a>
+                  </>
+                )}
+              </p>
+              {series && (
+                <p>
+                  Part {series.part} of {series.total} · {series.name}
+                </p>
               )}
-              {series && <SeriesCard series={series} />}
+            </div>
+          </header>
+
+          {post.coverImage && (
+            <div className="relative mt-6 aspect-[1200/630] w-full overflow-hidden rounded border bg-secondary/30">
+              {post.coverImage.endsWith(".svg") ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={post.coverImage}
+                  alt={post.title}
+                  className="h-full w-full object-contain"
+                />
+              ) : (
+                <Image
+                  src={post.coverImage}
+                  alt={post.title}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 576px"
+                  className="object-cover"
+                  priority
+                />
+              )}
             </div>
           )}
-          {/* tighter gap: "View all blogs" already pads itself to 44px */}
-          <div className="grid gap-2">
-            <KeepReading posts={related} />
-            <AuthorCard />
-          </div>
-        </footer>
-      </article>
 
-      {/* desktop only; sticks against the document scroll */}
-      <aside
-        aria-label="More from the blog"
-        className="sticky top-8 mt-4 hidden w-80 shrink-0 flex-col gap-4 self-start lg:flex xl:w-96">
-        <Blogs title="Keep reading" posts={related} />
-        <CoffeeChat />
-      </aside>
+          {/* the bar starts with the body and its sticky range is this
+              wrapper, so it pins once the body is reached and leaves with
+              the post's last line */}
+          <div>
+            {hasContents && <ContentsBar className="-mx-5 mt-6 lg:mx-0 xl:hidden" />}
+            <MDXRemote source={post.content} components={mdxComponents} options={{ mdxOptions: postMdxOptions }} />
+          </div>
+        </article>
+
+        {/* phones and tablets only; at lg and up the right rail has these picks */}
+        {related.length > 0 && (
+          <div className="mt-6 border-t pt-6 lg:hidden">
+            <KeepReading posts={related} />
+          </div>
+        )}
+      </div>
+
+      {/* sticks against the document scroll; the grid ends before the author band */}
+      <RailKeepReading
+        posts={related}
+        className="sticky top-8 hidden self-start lg:grid"
+      />
+    </div>
+  );
+
+  return (
+    <main className="fade-in">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleJsonLd) }}
+      />
+      <div className="px-5 pt-6 pb-12 lg:px-8 lg:pt-8 lg:pb-16">
+        <NameTrail
+          section={{ label: "Blog", href: "/blogs" }}
+          className={cn(POST_WIDTH, "mb-6", hasContents && POST_WIDTH_WITH_CONTENTS)}
+        />
+        {hasContents ? <ContentsProvider headings={headings}>{grid}</ContentsProvider> : grid}
+      </div>
+      <AuthorBand hasContents={hasContents} />
     </main>
   );
 }

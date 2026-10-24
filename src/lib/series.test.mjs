@@ -2,63 +2,22 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { buildSeries } from "./series.ts";
 
-const part = (slug, seriesPart, extra = {}) => ({
-  slug,
-  title: `Title of ${slug}`,
+const part = (seriesPart, extra = {}) => ({
   series: "Securing Forged",
   seriesPart,
   seriesTotal: 3,
   ...extra,
 });
 
-test("links a published part by its title", () => {
-  const current = part("one", 1);
-  const series = buildSeries(current, [current, part("two", 2)]);
-  assert.deepEqual(series.parts[1], {
-    part: 2,
-    status: "published",
-    title: "Title of two",
-    slug: "two",
-  });
+test("reports the series name, part and total", () => {
+  assert.deepEqual(buildSeries(part(2)), { name: "Securing Forged", part: 2, total: 3 });
 });
 
-test("shows an unpublished part as coming soon", () => {
-  const current = part("one", 1);
-  const series = buildSeries(current, [current]);
-  assert.deepEqual(series.parts, [
-    { part: 1, status: "current", title: "Title of one" },
-    { part: 2, status: "upcoming" },
-    { part: 3, status: "upcoming" },
-  ]);
+test("trims the series name", () => {
+  assert.equal(buildSeries(part(1, { series: "  Securing Forged " })).name, "Securing Forged");
 });
 
-test("marks the current part and reports its position", () => {
-  const current = part("two", 2);
-  const series = buildSeries(current, [part("three", 3), current, part("one", 1)]);
-  assert.equal(series.name, "Securing Forged");
-  assert.equal(series.part, 2);
-  assert.equal(series.total, 3);
-  assert.deepEqual(
-    series.parts.map((p) => p.status),
-    ["published", "current", "published"],
-  );
-  assert.deepEqual(series.parts[1], { part: 2, status: "current", title: "Title of two" });
-});
-
-test("only counts posts from the same series", () => {
-  const current = part("one", 1);
-  const series = buildSeries(current, [
-    current,
-    part("other-series", 2, { series: "Something Else" }),
-    part("same-series-other-case", 3, { series: " securing forged " }),
-  ]);
-  assert.deepEqual(
-    series.parts.map((p) => p.status),
-    ["current", "upcoming", "published"],
-  );
-});
-
-test("renders no card for invalid series frontmatter", () => {
+test("renders no line for invalid series frontmatter", () => {
   const invalid = [
     { series: undefined },
     { series: "" },
@@ -74,42 +33,7 @@ test("renders no card for invalid series frontmatter", () => {
     { seriesTotal: "3" },
   ];
   for (const fields of invalid) {
-    const current = part("one", 1, fields);
-    assert.equal(buildSeries(current, [current]), null, JSON.stringify(fields));
+    assert.equal(buildSeries(part(1, fields)), null, JSON.stringify(fields));
   }
-  const noSeries = { slug: "plain", title: "Plain post" };
-  assert.equal(buildSeries(noSeries, [noSeries]), null);
-});
-
-test("keeps the newer post when two posts claim the same part, and warns", (t) => {
-  const warn = t.mock.method(console, "warn", () => {});
-  const current = part("one", 1);
-  // posts arrive newest first, as getAllPosts returns them
-  const series = buildSeries(current, [current, part("newer-two", 2), part("older-two", 2)]);
-  assert.deepEqual(series.parts[1], {
-    part: 2,
-    status: "published",
-    title: "Title of newer-two",
-    slug: "newer-two",
-  });
-  assert.equal(warn.mock.callCount(), 1);
-  const [message] = warn.mock.calls[0].arguments;
-  assert.match(message, /part 2/);
-  assert.match(message, /"newer-two"/);
-  assert.match(message, /"older-two"/);
-});
-
-test("keeps the current post when another post claims its part, and warns", (t) => {
-  const warn = t.mock.method(console, "warn", () => {});
-  const current = part("one", 1);
-  const series = buildSeries(current, [part("also-one", 1), current]);
-  assert.deepEqual(series.parts[0], { part: 1, status: "current", title: "Title of one" });
-  assert.equal(warn.mock.callCount(), 1);
-});
-
-test("does not warn when every part has one post", (t) => {
-  const warn = t.mock.method(console, "warn", () => {});
-  const current = part("one", 1);
-  buildSeries(current, [part("three", 3), part("two", 2), current]);
-  assert.equal(warn.mock.callCount(), 0);
+  assert.equal(buildSeries({}), null);
 });
