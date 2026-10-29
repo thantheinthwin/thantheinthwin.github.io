@@ -1,0 +1,91 @@
+---
+title: "Abundance in Resources and the Keenness to Optimize"
+subtitle: "Engineers don't optimize because of where they're from. They optimize what's scarce."
+description: "Why engineers in high-income countries throw hardware at problems while engineers in emerging Asian markets squeeze every byte — and why the real difference is the price of an engineer's hour next to the price of a server."
+date: "2026-10-08"
+tags: ["Software Engineering", "Performance", "Cloud Cost", "Career"]
+coverImage: "/blog/abundance-in-resources-and-the-keenness-to-optimize/cover.svg"
+draft: true
+---
+
+I've built software in Yangon and Bangkok, and for teams in Canada and Australia. Over time I noticed a pattern in how each side handles a slow or expensive system.
+
+On teams in high-income Western countries, the first answer is usually "add more": a bigger server, a paid service, another copy of the app. On teams in emerging Asian markets, the first answer is usually "find what's wasting it": the slow query, the oversized image, the work done twice.
+
+It isn't culture, and it isn't skill. It's prices. Engineers optimize whatever is expensive for them, and where you work decides what's expensive.
+
+## The Bill Is in Dollars. The Salary Isn't.
+
+Cloud providers charge in US dollars, at roughly the same price everywhere. A server often costs *more* in Singapore than in Virginia. Salaries follow the local economy. A senior engineer in San Francisco can cost a company ten times what a senior engineer in Yangon does, or more.
+
+So the same server costs a very different number of engineer-hours depending on where the engineer sits.
+
+Here's how that changes a real decision. Say an engineer can cut $100 a month off the cloud bill with a week of work. These are round numbers to keep the math easy:
+
+- **At $100 an hour**, that week costs $4,000. It takes more than three years to pay back. And that week didn't ship a feature, which probably mattered more.
+- **At $10 an hour**, the same week costs $400. It pays back in four months.
+
+Same work, same savings, opposite answer. Neither team is lazy or obsessive. Both are doing the math correctly for their own prices.
+
+For the Yangon company, there's a second sting. It earns in kyat, which has lost much of its value since 2021, and pays the cloud bill in dollars. Every month, the same invoice costs more in the money the company actually makes.
+
+## Two Kinds of Scarcity
+
+There are two different pressures here, and they're easy to mix up.
+
+**The first is the company's bill.** That's the math above. When the server is expensive next to the engineer, you spend the engineer's time to save the server.
+
+**The second is the user's phone and data plan.** This is the one people in rich markets tend to miss. In much of Southeast Asia, users are on budget Android phones with little storage, on prepaid data where every megabyte costs them money, on connections that drop. In parts of Myanmar, the power goes out on a schedule. A heavy web page that loads fine on a new laptop on office Wi-Fi is a different product on a three-year-old phone on a weak signal.
+
+You don't need a style guide to optimize for those users. Your users tell you, by uninstalling.
+
+Even the companies with the most money in the world build differently for them. In 2015, Facebook launched [Facebook Lite](https://techcrunch.com/2015/06/04/download-facebook-lite/), a separate Android app for 2G networks and cheap phones. It was under 1 MB. The main app was around 25 MB. Same company, different constraints, different software.
+
+## What Abundance Teaches
+
+In 2008, Jeff Atwood wrote a post whose title became a rule for a generation of engineers: ["Hardware is Cheap, Programmers are Expensive"](https://blog.codinghorror.com/hardware-is-cheap-programmers-are-expensive/). If a few thousand dollars of hardware makes the site twice as fast, buy the hardware.
+
+Where engineers are the most expensive thing in the building, he's still mostly right. Buy the managed service instead of building it. Scale up first and figure out why later. Ship, then measure. A lot of great products got built quickly that way.
+
+But it builds a reflex: when something is slow or expensive, reach for more.
+
+## When the Constraint Moves, So Do the Engineers
+
+If this were about where engineers come from, rich teams would never optimize. They do, the moment the constraint shows up.
+
+**Scale is a constraint.** Google and Meta optimize ruthlessly, because at a billion users a 1% saving is a data center. Abundance has a ceiling, and the biggest companies hit it first.
+
+**Bad pricing is a constraint.** In 2023, Amazon's own Prime Video team [wrote about](https://www.primevideotech.com/video-streaming/scaling-up-the-prime-video-audio-video-monitoring-service-and-reducing-costs-by-90) a monitoring service built from many small serverless pieces. It hit scaling limits early and was billed for every tiny step it took. They merged it into a single application and cut its infrastructure cost by over 90%.
+
+**A bill that's too big is a constraint.** In 2022, 37signals, the company behind Basecamp, decided its cloud bill was too high for what it got and moved onto its own servers. David Heinemeier Hansson [now expects](https://world.hey.com/dhh/our-cloud-exit-savings-will-now-top-10-million-over-five-years-c7d9b5bd) the savings to top $10 million over five years.
+
+**Expensive money is a constraint.** When interest rates went up in 2022, Western tech suddenly rediscovered cost dashboards and right-sizing. The engineers didn't change. The constraint did.
+
+And when chips became scarce, it happened in China too. Cut off from Nvidia's best hardware by US export controls, DeepSeek [squeezed weaker chips](https://arxiv.org/abs/2412.19437) hard enough to train a top model for a fraction of what rivals were thought to spend. When its R1 model landed in January 2025, Nvidia's stock fell 17% in a day.
+
+## Where Each Habit Goes Wrong
+
+Neither side gets to be the hero.
+
+**Abundance turns into bloat.** A chat app that uses a gigabyte of memory. A giant setup for an app with fifty users. A cloud bill nobody owns until finance asks why it doubled. When "add more" is always the answer, nobody learns to find out why something is slow, and when the constraint finally arrives, the team doesn't know where to start.
+
+**Scarcity turns into false economy.** Weeks spent self-hosting something to save $20 a month. Clever code only one person understands, written to save milliseconds nobody notices. Worst of all, no monitoring, no tests and no staging environment because they're "too expensive", paid for later in outages.
+
+There's a darker version too. When engineer time is cheap, some companies treat it as free. Instead of paying for a tool, they assign a person. Instead of fixing the process, they ask for overtime. That isn't optimization. It's moving the cost onto the engineers, and the company pays it back in turnover and slower delivery.
+
+## Optimize What's Scarce
+
+None of this means "be like the West" or "be like Asia". It means knowing what's actually scarce for you.
+
+1. **Name the scarce resource.** Engineer time, cash, your users' data, their storage, your team's attention. It's often a different one for each project.
+2. **Do the payback math, including the hours.** A simple rule: if it pays back in under three months and doesn't block the roadmap, do it. If it takes more than a year, buy the hardware and move on. In between, ask what else those days would build. And before rewriting anything, check the cheap wins: reserved pricing and right-sized servers often cut the bill with no code changes at all.
+3. **Put the bill where the team can see it.** Cost per service, reviewed with the rest of the sprint. Hiring in Bangkok doesn't buy you the frugal habit. The habit follows the constraint, so if the bill is invisible to the team, they'll build like it's abundant.
+4. **Test on your users' devices, not yours.** Keep a cheap Android phone on your desk and use slow-network mode in your browser. You'll learn quickly what your users actually live with.
+
+The best engineers can do both. They know when to throw hardware at a problem, and when the hardware is hiding one.
+
+## One Question I Can't Answer Yet
+
+If an AI agent can do that week of optimization in twenty minutes, the payback math changes for everyone. Engineer time gets abundant everywhere at once. Does that mean every team starts optimizing, or that no team ever has to think about it again?
+
+I'd like to hear what you think.
