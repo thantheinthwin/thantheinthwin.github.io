@@ -1,0 +1,69 @@
+<svg viewBox="0 0 728 476" width="728" height="476" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <!-- Icons: Phosphor Icons (https://phosphoricons.com), MIT License, Copyright (c) 2023 Phosphor Icons -->
+  <defs>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#26262b"/>
+    </pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#63636b"/>
+    </marker>
+    <symbol id="i-calc" viewBox="0 0 256 256"><g fill="currentColor"><path d="M80,120h96a8,8,0,0,0,8-8V64a8,8,0,0,0-8-8H80a8,8,0,0,0-8,8v48A8,8,0,0,0,80,120Zm8-48h80v32H88ZM200,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V40A16,16,0,0,0,200,24Zm0,192H56V40H200ZM100,148a12,12,0,1,1-12-12A12,12,0,0,1,100,148Zm40,0a12,12,0,1,1-12-12A12,12,0,0,1,140,148Zm40,0a12,12,0,1,1-12-12A12,12,0,0,1,180,148Zm-80,40a12,12,0,1,1-12-12A12,12,0,0,1,100,188Zm40,0a12,12,0,1,1-12-12A12,12,0,0,1,140,188Zm40,0a12,12,0,1,1-12-12A12,12,0,0,1,180,188Z"/></g></symbol>
+    <symbol id="i-cards" viewBox="0 0 256 256"><g fill="currentColor"><path d="M184,72H40A16,16,0,0,0,24,88V200a16,16,0,0,0,16,16H184a16,16,0,0,0,16-16V88A16,16,0,0,0,184,72Zm0,128H40V88H184V200ZM232,56V176a8,8,0,0,1-16,0V56H64a8,8,0,0,1,0-16H216A16,16,0,0,1,232,56Z"/></g></symbol>
+    <symbol id="i-chart" viewBox="0 0 256 256"><g fill="currentColor"><path d="M224,200h-8V40a8,8,0,0,0-8-8H152a8,8,0,0,0-8,8V80H96a8,8,0,0,0-8,8v40H48a8,8,0,0,0-8,8v64H32a8,8,0,0,0,0,16H224a8,8,0,0,0,0-16ZM160,48h40V200H160ZM104,96h40V200H104ZM56,144H88v56H56Z"/></g></symbol>
+    <symbol id="i-database" viewBox="0 0 256 256"><g fill="currentColor"><path d="M128,24C74.17,24,32,48.6,32,80v96c0,31.4,42.17,56,96,56s96-24.6,96-56V80C224,48.6,181.83,24,128,24Zm80,104c0,9.62-7.88,19.43-21.61,26.92C170.93,163.35,150.19,168,128,168s-42.93-4.65-58.39-13.08C55.88,147.43,48,137.62,48,128V111.36c17.06,15,46.23,24.64,80,24.64s62.94-9.68,80-24.64ZM69.61,53.08C85.07,44.65,105.81,40,128,40s42.93,4.65,58.39,13.08C200.12,60.57,208,70.38,208,80s-7.88,19.43-21.61,26.92C170.93,115.35,150.19,120,128,120s-42.93-4.65-58.39-13.08C55.88,99.43,48,89.62,48,80S55.88,60.57,69.61,53.08ZM186.39,202.92C170.93,211.35,150.19,216,128,216s-42.93-4.65-58.39-13.08C55.88,195.43,48,185.62,48,176V159.36c17.06,15,46.23,24.64,80,24.64s62.94-9.68,80-24.64V176C208,185.62,200.12,195.43,186.39,202.92Z"/></g></symbol>
+    <symbol id="i-note" viewBox="0 0 256 256"><g fill="currentColor"><path d="M229.66,58.34l-32-32a8,8,0,0,0-11.32,0l-96,96A8,8,0,0,0,88,128v32a8,8,0,0,0,8,8h32a8,8,0,0,0,5.66-2.34l96-96A8,8,0,0,0,229.66,58.34ZM124.69,152H104V131.31l64-64L188.69,88ZM200,76.69,179.31,56,192,43.31,212.69,64ZM224,128v80a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32h80a8,8,0,0,1,0,16H48V208H208V128a8,8,0,0,1,16,0Z"/></g></symbol>
+    <symbol id="i-pin" viewBox="0 0 256 256"><g fill="currentColor"><path d="M235.32,81.37,174.63,20.69a16,16,0,0,0-22.63,0L98.37,74.49c-10.66-3.34-35-7.37-60.4,13.14a16,16,0,0,0-1.29,23.78L85,159.71,42.34,202.34a8,8,0,0,0,11.32,11.32L96.29,171l48.29,48.29A16,16,0,0,0,155.9,224c.38,0,.75,0,1.13,0a15.93,15.93,0,0,0,11.64-6.33c19.64-26.1,17.75-47.32,13.19-60L235.33,104A16,16,0,0,0,235.32,81.37ZM224,92.69h0l-57.27,57.46a8,8,0,0,0-1.49,9.22c9.46,18.93-1.8,38.59-9.34,48.62L48,100.08c12.08-9.74,23.64-12.31,32.48-12.31A40.13,40.13,0,0,1,96.81,91a8,8,0,0,0,9.25-1.51L163.32,32,224,92.68Z"/></g></symbol>
+    <symbol id="i-squares" viewBox="0 0 256 256"><g fill="currentColor"><path d="M104,40H56A16,16,0,0,0,40,56v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,104,40Zm0,64H56V56h48v48Zm96-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,200,40Zm0,64H152V56h48v48Zm-96,32H56a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,104,136Zm0,64H56V152h48v48Zm96-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,200,136Zm0,64H152V152h48v48Z"/></g></symbol>
+    <symbol id="i-users" viewBox="0 0 256 256"><g fill="currentColor"><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.84,8,57,57,0,0,0-98.16,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"/></g></symbol>
+  </defs>
+  <rect width="728" height="476" rx="14" fill="#0e0e10"/>
+  <rect width="728" height="476" rx="14" fill="url(#dots)"/>
+  <rect x="0.5" y="0.5" width="727" height="475" rx="14" fill="none" stroke="#202024"/>
+  <rect x="56" y="56" width="240" height="64" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <use href="#i-squares" x="70" y="69" width="20" height="20" color="#f2c27b"/>
+  <text x="98" y="85" font-size="15" font-weight="600" fill="#f4f4f5">Generated layouts</text>
+  <text x="70" y="108" font-size="13" fill="#8b8b94">answer the long tail</text>
+  <polyline points="176,120 176,146" fill="none" stroke="#63636b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="56" y="152" width="240" height="64" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <use href="#i-database" x="70" y="165" width="20" height="20" color="#d4d4d8"/>
+  <text x="98" y="181" font-size="15" font-weight="600" fill="#f4f4f5">Recorded</text>
+  <text x="70" y="204" font-size="13" fill="#8b8b94">structure only, no values</text>
+  <polyline points="176,216 176,242" fill="none" stroke="#63636b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="56" y="248" width="240" height="64" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <use href="#i-chart" x="70" y="261" width="20" height="20" color="#d4d4d8"/>
+  <text x="98" y="277" font-size="15" font-weight="600" fill="#f4f4f5">Weekly report</text>
+  <text x="70" y="300" font-size="13" fill="#8b8b94">grouped by shape, masked</text>
+  <polyline points="176,312 176,338" fill="none" stroke="#63636b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="56" y="344" width="240" height="64" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <use href="#i-users" x="70" y="357" width="20" height="20" color="#d4d4d8"/>
+  <text x="98" y="373" font-size="15" font-weight="600" fill="#f4f4f5">Keeps coming back?</text>
+  <text x="70" y="396" font-size="13" fill="#8b8b94">across many athletes</text>
+  <polyline points="56,376 32,376 32,88 50,88" fill="none" stroke="#63636b" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <rect x="3" y="222" width="66" height="20" rx="5" fill="#16161a" stroke="#2c2c31"/><text x="36" y="236" font-size="12.5" fill="#f4f4f5" text-anchor="middle">not yet</text>
+  <text x="56" y="36" font-size="15" font-weight="600" fill="#f4f4f5">Every week</text>
+  <rect x="360" y="16" width="352" height="444" rx="12" fill="#818cf8" fill-opacity="0.07" stroke="#818cf8" stroke-opacity="0.4"/>
+  <text x="376" y="40" font-size="15" font-weight="600" fill="#a5b4fc">Cheapest fix first</text>
+  <text x="376" y="58" font-size="13" fill="#8b8b94">climb only if the step below isn't enough</text>
+  <rect x="376" y="80" width="320" height="64" rx="9" fill="#17171b" stroke="#818cf8" stroke-width="1.5"/>
+  <use href="#i-cards" x="390" y="93" width="20" height="20" color="#a5b4fc"/>
+  <text x="418" y="109" font-size="15" font-weight="600" fill="#f4f4f5">4 · Designed card</text>
+  <text x="390" y="132" font-size="13" fill="#8b8b94">reviewed design, numbers from code</text>
+  <rect x="376" y="168" width="320" height="64" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <use href="#i-pin" x="390" y="181" width="20" height="20" color="#d4d4d8"/>
+  <text x="418" y="197" font-size="15" font-weight="600" fill="#f4f4f5">3 · Pinned template</text>
+  <text x="390" y="220" font-size="13" fill="#8b8b94">a fixed layout for that shape</text>
+  <polyline points="536,168 536,150" fill="none" stroke="#63636b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="376" y="256" width="320" height="64" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <use href="#i-calc" x="390" y="269" width="20" height="20" color="#d4d4d8"/>
+  <text x="418" y="285" font-size="15" font-weight="600" fill="#f4f4f5">2 · A tool returns the number</text>
+  <text x="390" y="308" font-size="13" fill="#8b8b94">computed and tested in code</text>
+  <polyline points="536,256 536,238" fill="none" stroke="#63636b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="376" y="344" width="320" height="64" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <use href="#i-note" x="390" y="357" width="20" height="20" color="#d4d4d8"/>
+  <text x="418" y="373" font-size="15" font-weight="600" fill="#f4f4f5">1 · Prompt or catalog fix</text>
+  <text x="390" y="396" font-size="13" fill="#8b8b94">clearer rules for the model</text>
+  <polyline points="536,344 536,326" fill="none" stroke="#63636b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="376" y="440" font-size="13" fill="#8b8b94">Cards are capped: one in, one out.</text>
+  <polyline points="296,376 370,376" fill="none" stroke="#63636b" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="293" y="340" width="80" height="20" rx="5" fill="#16161a" stroke="#2c2c31"/><text x="333" y="354" font-size="12.5" fill="#a5b4fc" text-anchor="middle">candidate</text>
+</svg>
