@@ -39,7 +39,7 @@ export const AuthorBand: React.FC<AuthorBandProps> = ({ hasContents }) => {
             />
             <div>
               <p className="text-base font-semibold">{AUTHOR}</p>
-              <p className="text-sm text-muted-foreground">Lead Software Engineer</p>
+              <p className="text-sm text-muted-foreground">Staff Software Engineer</p>
               <div className="mt-2">
                 <AvailabilityStatus />
               </div>

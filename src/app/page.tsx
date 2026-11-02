@@ -5,9 +5,9 @@ import Blogs from "@/components/SideBar/Blogs";
 
 export async function generateMetadata() {
   return {
-    title: "Lead Software Engineer",
+    title: "Staff Software Engineer",
     description:
-      "Portfolio of Thant Hein Thwin, a Lead Software Engineer with expertise in React, Next.js, Node.js, Golang, and Python",
+      "Portfolio of Thant Hein Thwin, a Staff Software Engineer building production web, mobile and AI platforms with TypeScript, React, Node.js, Python, Golang and AWS",
   };
 }
 
