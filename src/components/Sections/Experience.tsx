@@ -31,7 +31,7 @@ const experienceData: Experience[] = [
     date: "2025 – 2026",
     title: "Lead Algorithm Engineer",
     company: "Six Atomic",
-    location: "Bangkok, Onsite",
+    location: "Bangkok",
     summary:
       "Owned the Garment Generation Agentic Engine, one of three core platform pillars, and led the AI orchestration platform as harness engineer. Built an end-to-end generative design system that cut pattern creation time from <b>2–4 weeks to 5 minutes</b>, and cut AI cost by <b>70%</b> on very large data processing.",
     tech: ["Python", "TypeScript", "OpenRouter", "AWS", "Docker"],
@@ -238,7 +238,7 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                       (responsibility, index) => (
                         <li
                           key={index}
-                          className="text-sm text-muted-foreground flex items-end gap-2"
+                          className="text-sm text-muted-foreground flex items-start gap-2"
                         >
                           <span className="text-primary mt-1">•</span>
                           <RichText text={responsibility} />
@@ -257,7 +257,7 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                       (achievement, index) => (
                         <li
                           key={index}
-                          className="text-sm text-muted-foreground flex items-end gap-2"
+                          className="text-sm text-muted-foreground flex items-start gap-2"
                         >
                           <span className="text-primary mt-1">•</span>
                           <RichText text={achievement} />
@@ -287,6 +287,8 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                   </div>
                 )}
 
+                {(selectedExperience.details.teamSize ||
+                  selectedExperience.details.methodologies) && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {selectedExperience.details.teamSize && (
                     <div>
@@ -317,6 +319,7 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                     </div>
                   )}
                 </div>
+                )}
 
                 <div>
                   <h4 className="font-semibold text-sm mb-2">Technologies</h4>
