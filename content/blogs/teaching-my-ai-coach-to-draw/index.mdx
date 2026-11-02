@@ -105,6 +105,8 @@ If you've built mobile apps, you might know the closest relative: server-driven 
 
 The one big difference is the presenter. In MVP, the presenter is code I wrote and tested, so I trust what it sends to the view. Here the presenter is a language model, and it can ask for blocks that don't exist, make up numbers, or stop halfway. So the contract between presenter and view has to be enforced at runtime, by the validator, instead of trusted.
 
+![Classic MVP next to the coach: same roles, but the presenter is a language model, so a validator enforces the contract](/blog/teaching-my-ai-coach-to-draw/patterns.svg)
+
 That's when it clicked for me. AI-native development and traditional software engineering share the same core principles:
 
 - **Separation of concerns:** the model decides, code computes, and the app draws.
