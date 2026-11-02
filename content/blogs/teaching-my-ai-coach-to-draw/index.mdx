@@ -87,6 +87,35 @@ A chart with a made-up number is worse than no chart at all. I had two options:
 
 I chose checking for the first version. It's much simpler for a small model, and my test had already shown that models copy tool output faithfully. Every dropped block is logged with the reason. If the logs show numbers landing under the wrong labels, I'll switch to binding.
 
+## Old Patterns, New Presenter
+
+When I started working out the solution, nothing about it felt brand new. The patterns I've used for years as a software engineer kept coming to mind: MVC, MVP, and MVVM. Each one gave me a piece of the design.
+
+- **MVC (Model, View, Controller):** a controller takes the user's input, works with the model, and picks which view to show. That's the coach's first job: read the question, call the tools, and choose a designed card, a layout, or text.
+- **MVP (Model, View, Presenter):** the view is passive. It has no logic and only talks to the presenter through a strict interface. That's my app renderer: it draws what it's given, and the block catalog is the interface.
+- **MVVM (Model, View, ViewModel):** the view binds to data instead of holding copies of it. That's the "bind by reference" option for numbers: the model points at a value, and the server fills it in.
+
+| Pattern | The idea I borrowed | Where it shows up |
+|---|---|---|
+| MVC | A controller handles input and picks the view | The coach picks a card, a layout, or text |
+| MVP | A passive view behind a strict contract | The app only draws blocks from the catalog |
+| MVVM | Bind to the data, don't copy it | The "bind by reference" option for numbers |
+
+If you've built mobile apps, you might know the closest relative: server-driven UI. Companies like Airbnb send screens from the server as a list of components, and the app renders them natively. Generative UI is server-driven UI where a model picks the components instead of hand-written server code.
+
+The one big difference is the presenter. In MVP, the presenter is code I wrote and tested, so I trust what it sends to the view. Here the presenter is a language model, and it can ask for blocks that don't exist, make up numbers, or stop halfway. So the contract between presenter and view has to be enforced at runtime, by the validator, instead of trusted.
+
+That's when it clicked for me. AI-native development and traditional software engineering share the same core principles:
+
+- **Separation of concerns:** the model decides, code computes, and the app draws.
+- **Contracts between layers:** the block catalog is an interface, like any API.
+- **A single source of truth:** one catalog for every block, and tools for every number.
+- **Never trust input at the boundary:** the model's output gets validated like anything a user types into a form.
+- **Graceful degradation:** if the layout fails, the athlete still gets a text answer.
+- **Observability:** every dropped block is logged with the reason.
+
+None of these are new. What's new is that one component in the system doesn't behave the same way twice. So I treat the model the way I'd treat user input or a third-party API: useful, but checked at the boundary.
+
 ## When Should the Coach Draw at All?
 
 More UI isn't better UI. A worried athlete doesn't want a dashboard.
@@ -148,6 +177,7 @@ The coach handles athletes' private chats and spends money on every model call, 
 4. Don't let the model invent numbers.
 5. Measure both too much UI and too little.
 6. Use generated UI to discover what to design next.
+7. AI-native doesn't mean new principles. The ones we already know still hold; the model is just a component you can't fully trust.
 
 ## What's Next
 
