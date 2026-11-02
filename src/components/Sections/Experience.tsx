@@ -28,88 +28,56 @@ interface Experience {
 
 const experienceData: Experience[] = [
   {
-    date: "2025 – Present",
-    title: "Lead Software Engineer",
+    date: "2025 – 2026",
+    title: "Lead Algorithm Engineer",
     company: "Six Atomic",
-    location: "Bangkok, Onsite",
+    location: "Bangkok",
     summary:
-      "Took autonomous ownership of the Garment Generation API, transitioning from full-stack web into the math-heavy fashion domain. Architected a generative design platform with end-to-end agentic composition that generates production-ready patterns in <b>5 minutes versus 2-4 weeks traditionally</b>, while leading the agentic platform's evolution as harness engineer.",
-    tech: ["Python", "TypeScript", "AWS", "Docker", "LogFire", "PostgreSQL"],
+      "Owned the Garment Generation Agentic Engine, one of three core platform pillars, and led the AI orchestration platform as harness engineer. Built an end-to-end generative design system that cut pattern creation time from <b>2–4 weeks to 5 minutes</b>, and cut AI cost by <b>70%</b> on very large data processing.",
+    tech: ["Python", "TypeScript", "OpenRouter", "AWS", "Docker"],
     details: {
       responsibilities: [
-        "Took autonomous ownership of the Garment Generation API, one of three core product pillars, within 3 months after joining freshly",
-        "Designed comprehensive TDD test suites and orchestrated coding agents through SOLID design patterns",
-        "Designed agent behavior validation frameworks with quality thresholds as harness engineer",
-        "Architected CI/CD pipelines and deployment strategies for coordinating multiple intelligent agents",
+        "Led the AI orchestration platform as harness engineer: built the model harness through OpenRouter, set up evaluations and graders to score the orchestrator's behavior and performance, and built validation frameworks, CI/CD pipelines, and deployment strategies to run multiple AI agents in production without drift.",
+        "Wrote TDD test suites and used SOLID design patterns to direct coding agents, shipping features autonomously while holding quality up under fast delivery timelines, and mentored senior engineers on AI-assisted development.",
+        "Applied DevOps and system architecture knowledge to study how the whole system fit together, then designed solutions that improved AI orchestration performance and cost.",
+        "Built mods and improved developer experience through loop engineering and graph engineering, going beyond plain prompting.",
       ],
       achievements: [
-        "Architected a generative design platform within 3 months of joining, generating production-ready patterns in 5 minutes vs. 2-4 weeks traditionally",
-        "Shipped solutions autonomously with AI-native engineering: defined test contracts for agents and maintained quality despite velocity demands",
-        "Managed operational complexity at scale while preventing agent drift across multiple coordinated agents",
+        "Used evaluation scores and graders to guide optimization instead of using AI blindly: cut AI cost by 70% on very large data processing and halved response time with RAG-like chunking of user input and better scaling.",
+        "Owned the Garment Generation Agentic Engine, one of three core platform pillars. Built an end-to-end generative design system that cut pattern creation time from 2–4 weeks to 5 minutes, ramping up in 3 months after moving from full-stack web into a math-heavy fashion domain.",
       ],
-      methodologies: [
-        "Agentic Frameworks",
-        "Semantic AI",
-        "TDD",
-        "Design Patterns",
-        "SOLID",
-      ],
+      methodologies: ["AI agent orchestration", "Evaluations & graders", "TDD", "SOLID"],
     },
   },
   {
     date: "2024 – 2025",
     title: "Senior Full Stack Engineer",
     company: "Empire Pixel",
-    location: "Remote (Canada)",
+    location: "Remote",
     summary:
-      "Led a team to architect and implement an AI-powered content generation system using 3 AI models in an event-driven architecture with queues and webhooks. The system generates <b>50 pages daily with AI detection bypass capabilities</b>, integrated with React, Next.js, and cloud infrastructure.",
+      "Built a RAG-powered content automation platform combining multiple LLMs with vector search, increasing AI-driven output by <b>700%</b> and cutting cost from <b>$1,000 to $5 per 100 posts</b>. Led architecture decisions and code reviews, and set the team's clean-code and cross-platform standards.",
     tech: [
       "React",
-      "Next.js",
-      "Node.js",
-      "TypeScript",
-      "Python",
-      "AWS",
-      "GCP",
-      "Docker",
-      "Redis",
-      "AI",
-      "Webhooks",
-      "PM2",
-      "Nginx",
-      "Apache2",
-      "Coolify",
-      "Cloudflare",
-      "Grafana",
-      "Prometheus",
-      "Loki",
       "React Native",
-      "Shadcn/ui",
-      "Stripe",
+      "Next.js",
+      "TypeScript",
+      "Node.js",
+      "PayloadCMS",
+      "Redis",
+      "Docker",
+      "AWS/GCP",
+      "Grafana",
+      "Payment APIs",
     ],
     details: {
       responsibilities: [
-        "Architected and implemented AI-powered content generation system using 3 different AI models",
-        "Designed event-driven architecture with message queues and webhook integrations",
-        "Led a development team of 4 engineers across frontend and backend",
-        "Implemented AI detection bypass mechanisms for content generation",
-        "Managed cloud infrastructure across AWS and GCP platforms",
-        "Optimized system performance to handle 50+ pages generated daily",
+        "Led architecture decisions and code reviews, and set the team's clean-code and cross-platform development standards.",
+        "Set up monitoring and logging (Grafana, Prometheus, Loki, Docker) across distributed services, making issues easier to catch and debug, and improving Core Web Vitals and SEO.",
       ],
       achievements: [
-        "Successfully deployed AI content generation system processing 50+ pages daily",
-        "Reduced content generation time by 70% through AI automation",
-        "Implemented robust error handling and monitoring systems",
-        "Achieved 99.9% uptime for critical content generation services",
-        "Mentored junior developers and established coding standards",
+        "Built a RAG-powered content automation platform, combining multiple LLMs (StormGPT, ChatGPT, Gemini) with vector search. Increased AI-driven output by 700% and cut cost from $1,000 to $5 per 100 posts.",
+        "Built a cross-platform mobile app with a web-to-native bridge and unified Android/iOS payments, while scaling the backend to serve 800+ dynamic pages off a single VPS.",
       ],
-      projects: [
-        "AI Content Generation Platform",
-        "Event-Driven Architecture System",
-        "Multi-Cloud Infrastructure Setup",
-      ],
-      teamSize: "12 engineers",
-      methodologies: ["Agile", "Event-Driven Architecture", "Microservices"],
     },
   },
   {
@@ -118,41 +86,33 @@ const experienceData: Experience[] = [
     company: "BigBee",
     location: "Yangon, Myanmar",
     summary:
-      "Focused on performance optimization, modern frontend architecture, and backend automation using Golang, React, and cloud technologies. Improved app speed, maintainability, and developer efficiency.",
+      "Strengthened backend workflows with Golang middlewares and request pipelines, and improved app speed with SSR, hydration, caching, and rendering strategies in Next.js and React, on a reusable, headless component architecture.",
     tech: [
       "React",
       "Next.js",
       "React Native",
+      "TypeScript",
+      "RxJS",
+      "React Query",
+      "React Hook Form",
+      "TanStack Table",
+      "Expo",
       "Golang",
       "PostgreSQL",
-      "Docker",
       "Redis",
       "Hasura",
-      "Sentry",
+      "Docker",
     ],
     details: {
       responsibilities: [
-        "Developed and maintained full-stack applications using React, Next.js, and Golang",
-        "Optimized application performance and reduced load times by 40%",
-        "Implemented modern frontend architecture patterns and best practices",
-        "Designed and maintained PostgreSQL databases with efficient query optimization",
-        "Collaborated with cross-functional teams to deliver high-quality software",
-        "Mentored junior developers and conducted code reviews",
+        "Evaluated and adopted new technologies to keep the stack current and improve system architecture.",
+        "Built Golang middlewares, request pipelines, and context handling to strengthen backend workflows.",
+        "Built reusable, headless components for a scalable frontend architecture, applying design patterns, OOP, and clean-code principles.",
+        "Managed complex client-side state with RxJS and built Redis-backed data pipelines and caching.",
       ],
       achievements: [
-        "Improved application performance by 40% through optimization techniques",
-        "Reduced deployment time by 60% through CI/CD pipeline improvements",
-        "Successfully migrated legacy systems to modern React architecture",
-        "Implemented automated testing increasing code coverage to 85%",
-        "Received recognition for outstanding code quality and documentation",
+        "Improved app speed using SSR, hydration, caching, and rendering strategies in Next.js and React.",
       ],
-      projects: [
-        "E-commerce Platform Optimization",
-        "Mobile App Development",
-        "Database Migration Project",
-      ],
-      teamSize: "5 engineers",
-      methodologies: ["Agile", "Scrum", "Test-Driven Development"],
     },
   },
   {
@@ -278,7 +238,7 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                       (responsibility, index) => (
                         <li
                           key={index}
-                          className="text-sm text-muted-foreground flex items-end gap-2"
+                          className="text-sm text-muted-foreground flex items-start gap-2"
                         >
                           <span className="text-primary mt-1">•</span>
                           <RichText text={responsibility} />
@@ -297,7 +257,7 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                       (achievement, index) => (
                         <li
                           key={index}
-                          className="text-sm text-muted-foreground flex items-end gap-2"
+                          className="text-sm text-muted-foreground flex items-start gap-2"
                         >
                           <span className="text-primary mt-1">•</span>
                           <RichText text={achievement} />
@@ -327,6 +287,8 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                   </div>
                 )}
 
+                {(selectedExperience.details.teamSize ||
+                  selectedExperience.details.methodologies) && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {selectedExperience.details.teamSize && (
                     <div>
@@ -357,6 +319,7 @@ const Experience: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
                     </div>
                   )}
                 </div>
+                )}
 
                 <div>
                   <h4 className="font-semibold text-sm mb-2">Technologies</h4>

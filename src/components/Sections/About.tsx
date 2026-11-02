@@ -4,13 +4,13 @@ const About: React.FC<Pick<SectionBase, "id">> = ({ id }) => {
   return (
     <SessionBase id={id} title="About">
       <p className="leading-relaxed text-balance text-foreground/80">
-        A Lead Software Engineer with 5+ years of experience building scalable
-        applications and leading teams. What am I so good at? I excel at taking
-        complex problems and breaking them down into manageable pieces, then
-        designing and implementing elegant solutions. I have a strong track
-        record of delivering high-quality software on time and within budget. I
-        am also a strong communicator and collaborator, able to work effectively
-        with cross-functional teams.
+        Full-stack engineer with over 5 years building production web, mobile,
+        and AI platforms. At Six Atomic, I owned the Garment Generation Agentic
+        Engine and led the harness that ran multiple AI agents in production,
+        using TDD, SOLID patterns, and evaluation graders to direct coding
+        agents. I also cut AI cost by 70% and halved response time, and mentored
+        senior engineers on AI-assisted development. I work across TypeScript,
+        React, Node.js, Python, Golang, PostgreSQL, and AWS.
       </p>
     </SessionBase>
   );

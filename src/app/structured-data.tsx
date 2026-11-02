@@ -3,9 +3,9 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Thant Hein Thwin",
-    jobTitle: "Lead Software Engineer",
+    jobTitle: "Staff Software Engineer",
     description:
-      "Portfolio of Thant Hein Thwin, a Lead Software Engineer with expertise in React, Next.js, Node.js, Golang, and Python",
+      "Portfolio of Thant Hein Thwin, a Staff Software Engineer building production web, mobile and AI platforms with TypeScript, React, Node.js, Python, Golang and AWS",
     url: "https://thantheinthwin.vercel.app",
     image: "https://thantheinthwin.vercel.app/profile.webp",
     sameAs: [
@@ -15,24 +15,21 @@ export default function StructuredData() {
       // "https://twitter.com/yourusername"
     ],
     knowsAbout: [
-      "React",
-      "Next.js",
-      "Node.js",
-      "Golang",
+      "AI agent orchestration",
+      "LLM integration",
       "TypeScript",
-      "JavaScript",
+      "React",
+      "Node.js",
+      "Python",
+      "Golang",
+      "PostgreSQL",
+      "AWS",
       "Full Stack Development",
-      "Web Development",
-      "Software Engineering",
     ],
-    worksFor: {
-      "@type": "Organization",
-      name: "Software Engineering",
-    },
-    alumniOf: {
-      "@type": "Organization",
-      name: "Greenwich University",
-    },
+    alumniOf: [
+      { "@type": "CollegeOrUniversity", name: "University of Greenwich" },
+      { "@type": "CollegeOrUniversity", name: "Myanmar Institute of Information Technology" },
+    ],
   };
 
   return (

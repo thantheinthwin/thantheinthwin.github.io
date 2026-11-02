@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "Thant Hein Thwin - Lead Software Engineer";
+export const alt = "Thant Hein Thwin - Staff Software Engineer";
 export const contentType = "image/png";
 export const size = {
   width: 1200,
@@ -72,7 +72,7 @@ export default async function Image() {
               lineHeight: 1.3,
             }}
           >
-            Lead Software Engineer
+            Staff Software Engineer
           </h2>
 
           {/* Skills */}
@@ -85,7 +85,7 @@ export default async function Image() {
               marginTop: "24px",
             }}
           >
-            {["React", "Next.js", "Node.js", "Golang", "TypeScript"].map(
+            {["TypeScript", "Python", "React", "Node.js", "AWS"].map(
               (skill) => (
                 <span
                   key={skill}
