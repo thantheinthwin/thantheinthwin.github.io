@@ -1,0 +1,100 @@
+---
+title: "My Software Factory Had a Token Problem"
+subtitle: "Nine sessions, about $950, and 97% of the tokens spent re-reading the same context."
+description: "My dev-workflow skill worked, but it was expensive. Real usage from nine sessions shows where the tokens went, and how I cut the cost without cutting the checks that matter."
+date: "2026-11-09"
+tags: ["AI", "Agents", "Software Engineering", "Workflow"]
+coverImage: "/blog/my-software-factory-had-a-token-problem/cover.svg"
+series: "My Accidental Software Factory"
+seriesPart: 2
+seriesTotal: 2
+draft: true
+---
+
+In [Part 1](/blogs/i-accidentally-built-a-software-factory), I wrote about `dev-workflow`, the skill file that lets agents fix Forged issues while I sleep. It worked. Then I looked at what it cost.
+
+## The Bill
+
+Claude Code records the tokens and an estimated cost for every session. I pulled the numbers for the nine sessions that ran my workflow over five weeks. Together they came to about **$950**.
+
+![Estimated cost of each session](/blog/my-software-factory-had-a-token-problem/cost-by-session.svg)
+
+Some of that is fair. The biggest session built a workout import across two repos over a month, and several others shipped more than one ticket. But look at the small ones. Scrolling a table into view, a one-file fix, cost $8.13. A copy fix that never got past the investigation step cost $5.64.
+
+## Where the Tokens Went
+
+My first guess was the skill itself. Wrong: the skill file was about 1,500 tokens.
+
+The answer was in the breakdown. Across those nine sessions, 2.27 billion tokens went through the model, and **97% of them were context being re-read**. Every turn, the model gets the whole conversation again: the code it read, every agent's report, every log. Caching makes those re-reads cheaper, but not free, and they add up fast.
+
+![What the tokens were: re-read, written to cache, or new](/blog/my-software-factory-had-a-token-problem/token-mix.svg)
+
+Only 0.4% was new input and output. For every token the agents wrote, about 244 were re-read.
+
+Subagents don't escape this. In the copy-fix session, the two checking agents made 85% of the re-reads.
+
+## Multipliers, Not Line Items
+
+That changed how I looked at the skill. The cost wasn't one big item. It was a few factors multiplied together: the lead agent's context times its turns, plus each agent's context times review rounds times gates checked.
+
+![The factors that multiply into the cost, before and after](/blog/my-software-factory-had-a-token-problem/multipliers.svg)
+
+And my workflow pushed every factor to its maximum on every request:
+
+1. **Every request ran the full pipeline.** A one-line fix got implementers, a four-gate review and device checks.
+2. **The review loop had no limit,** and every gate was re-checked every round. The Activity sheet went three rounds.
+3. **Everything piled up in the lead agent's context:** reports, diffs, CI logs, screenshots.
+4. **The same code was traced twice:** once by the lead agent, then again by each worker.
+5. **Briefs repeated rules** that agents already load from `CLAUDE.md`.
+6. **The tier rules rounded up.** "When unsure, go higher" plus "reviewers never below the builder" pushed most work to the biggest model.
+7. **Design proposals were heavy:** a 34 KB reference read on every proposal, even for small tweaks.
+8. **Screenshots were full resolution,** and images cost tokens too.
+
+The data showed a ninth I hadn't listed: **the session's effort setting.** My workflow sessions ran at "high" or "xhigh". And the most expensive small change in the set, $24.90 to remove one menu item, didn't use the workflow at all. It ran at "max".
+
+## The Detour: A Code-Graph Tool
+
+Before changing anything, I looked at [Graphify](https://github.com/Graphify-Labs/graphify), which turns a repo into a graph that agents query instead of grepping. Its banner says "Cut agent token spend by 80%", but that's for its paid Cloud product, with no method shown. Its own benchmark measures answer coverage (70.8% to 82.0% on a 1M-line repo), not tokens saved.
+
+At best, it helps with driver 4. It does nothing for the pipeline size, the review loop or the context pile-up. I set it aside.
+
+## The Fixes
+
+The biggest change: **size the work first.** Every request now starts as S, M or L, and only L gets the full workflow.
+
+![Every request is sized first, and the size decides the process](/blog/my-software-factory-had-a-token-problem/sizing.svg)
+
+The rest:
+
+- **Cap the review loop.** At most two rounds. Round 2 re-checks only the gates that had findings, against only the fix. A code-quality note with no concrete cost doesn't block.
+- **Trace once.** The lead agent writes a context map (`path:line`, decisions, traps) that goes into every brief.
+- **Keep reports short.** Every brief ends with the same footer: the hard rules, plus "report in 15 lines or fewer, no diffs, no log dumps". CI failures go to the smallest model, which returns at most 20 log lines.
+- **Pick the lowest tier that fits.** Escalation catches the misses. Every agent gets an explicit model and effort. Nothing runs above "high" without my say-so, and the lead agent runs at "medium".
+- **Lighter design proposals.** Agents read a 9 KB skeleton instead of the 34 KB reference. Small tweaks get a before/after screenshot instead of a proposal.
+
+The trade-off: the skill file grew from 6.2 KB to 10.4 KB, about 1,000 more tokens per load. Next to 2.27 billion, that's noise.
+
+## What I Kept on Purpose
+
+Cutting cost is easy. Cutting it without cutting quality is the actual job. So some things didn't move:
+
+| Cut | Kept |
+| --- | --- |
+| Full pipeline for every request | Full pipeline for sensitive work |
+| Unlimited review rounds | A reviewer who didn't write the code |
+| Re-checking gates that passed | A separate top-tier security review on auth, payments and personal data |
+| Long reports and log dumps | CI proof that new tests actually ran |
+| Defaulting to the biggest model | My approval on the issue, the design and the merge |
+
+## Before and After
+
+<Callout>
+After numbers are coming. I'm re-running two old tickets with the new skill, from the same starting commits, on throwaway branches: FGD-203 (S, $8.13 before) and FGD-271 (M, $21.83 before). This section gets the real numbers when they're in.
+</Callout>
+
+## What I'd Tell You
+
+- **Look at your numbers.** Claude Code already records them per session. I had a theory about my bill. The data had a different answer.
+- **Your bill is mostly re-reading.** Anything that keeps context small saves more than a clever prompt.
+- **Effort is a dial, not a default.** Turn it up for hard problems, not for every session.
+- **Keep the checks that matter.** The point of the factory was never speed. It was being able to trust what it ships.
