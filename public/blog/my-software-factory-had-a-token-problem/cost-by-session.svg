@@ -1,0 +1,68 @@
+<svg viewBox="0 0 728 490" width="728" height="490" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#26262b"/></pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#63636b"/></marker>
+  </defs>
+  <rect width="728" height="490" rx="14" fill="#0e0e10"/>
+  <rect width="728" height="490" rx="14" fill="url(#dots)"/>
+  <rect x="0.5" y="0.5" width="727" height="489" rx="14" fill="none" stroke="#202024"/>
+  <text x="32" y="40" font-size="15" font-weight="600" fill="#f4f4f5">Estimated cost per session</text>
+  <text x="32" y="60" font-size="13" fill="#8b8b94">whole-session totals, subagents included · Oct 2 – Nov 9</text>
+  <text x="696" y="44" font-size="13" fill="#d4d4d8" text-anchor="end">no workflow</text>
+  <rect x="603" y="34" width="10" height="10" rx="2" fill="#9085e9"/>
+  <text x="585" y="44" font-size="13" fill="#d4d4d8" text-anchor="end">dev-workflow</text>
+  <rect x="485" y="34" width="10" height="10" rx="2" fill="#c98500"/>
+  <line x1="284.0" y1="90" x2="284.0" y2="442" stroke="#26262b" stroke-width="1"/>
+  <text x="284" y="462" font-size="12" fill="#8b8b94" text-anchor="middle">$0</text>
+  <line x1="360.0" y1="90" x2="360.0" y2="442" stroke="#26262b" stroke-width="1"/>
+  <text x="360" y="462" font-size="12" fill="#8b8b94" text-anchor="middle">$100</text>
+  <line x1="436.0" y1="90" x2="436.0" y2="442" stroke="#26262b" stroke-width="1"/>
+  <text x="436" y="462" font-size="12" fill="#8b8b94" text-anchor="middle">$200</text>
+  <line x1="512.0" y1="90" x2="512.0" y2="442" stroke="#26262b" stroke-width="1"/>
+  <text x="512" y="462" font-size="12" fill="#8b8b94" text-anchor="middle">$300</text>
+  <line x1="588.0" y1="90" x2="588.0" y2="442" stroke="#26262b" stroke-width="1"/>
+  <text x="588" y="462" font-size="12" fill="#8b8b94" text-anchor="middle">$400</text>
+  <line x1="664.0" y1="90" x2="664.0" y2="442" stroke="#26262b" stroke-width="1"/>
+  <text x="664" y="462" font-size="12" fill="#8b8b94" text-anchor="middle">$500</text>
+  <text x="32" y="118" font-size="13.5" fill="#f4f4f5">Workout import, a month</text>
+  <text x="270" y="118" font-size="12.5" font-weight="600" fill="#8b8b94" text-anchor="end">L</text>
+  <path d="M284.0,104.0 H622.9 Q626.9,104.0 626.9,108.0 V118.0 Q626.9,122.0 622.9,122.0 H284.0 Z" fill="#c98500"/>
+  <text x="634.942" y="118" font-size="13" font-weight="600" fill="#f4f4f5">$451.24</text>
+  <text x="32" y="152" font-size="13.5" fill="#f4f4f5">Keyboard-safe sheets, 7+ PRs</text>
+  <text x="270" y="152" font-size="12.5" font-weight="600" fill="#8b8b94" text-anchor="end">L</text>
+  <path d="M284.0,138.0 H394.9 Q398.9,138.0 398.9,142.0 V152.0 Q398.9,156.0 394.9,156.0 H284.0 Z" fill="#c98500"/>
+  <text x="406.904" y="152" font-size="13" font-weight="600" fill="#f4f4f5">$151.19</text>
+  <text x="32" y="186" font-size="13.5" fill="#f4f4f5">Coach tools, 5 tickets</text>
+  <text x="270" y="186" font-size="12.5" font-weight="600" fill="#8b8b94" text-anchor="end">L</text>
+  <path d="M284.0,172.0 H376.9 Q380.9,172.0 380.9,176.0 V186.0 Q380.9,190.0 376.9,190.0 H284.0 Z" fill="#c98500"/>
+  <text x="388.854" y="186" font-size="13" font-weight="600" fill="#f4f4f5">$127.44</text>
+  <text x="32" y="220" font-size="13.5" fill="#f4f4f5">Share workout as image</text>
+  <text x="270" y="220" font-size="12.5" font-weight="600" fill="#8b8b94" text-anchor="end">L</text>
+  <path d="M284.0,206.0 H352.3 Q356.3,206.0 356.3,210.0 V220.0 Q356.3,224.0 352.3,224.0 H284.0 Z" fill="#c98500"/>
+  <text x="364.337" y="220" font-size="13" font-weight="600" fill="#f4f4f5">$95.18</text>
+  <text x="32" y="254" font-size="13.5" fill="#f4f4f5">Edit logged sets, 3 PRs</text>
+  <text x="270" y="254" font-size="12.5" font-weight="600" fill="#8b8b94" text-anchor="end">M</text>
+  <path d="M284.0,240.0 H335.0 Q339.0,240.0 339.0,244.0 V254.0 Q339.0,258.0 335.0,258.0 H284.0 Z" fill="#c98500"/>
+  <text x="347.009" y="254" font-size="13" font-weight="600" fill="#f4f4f5">$72.38</text>
+  <text x="32" y="288" font-size="13.5" fill="#f4f4f5">Remove one menu item</text>
+  <text x="270" y="288" font-size="12.5" font-weight="600" fill="#8b8b94" text-anchor="end">S</text>
+  <path d="M284.0,274.0 H298.9 Q302.9,274.0 302.9,278.0 V288.0 Q302.9,292.0 298.9,292.0 H284.0 Z" fill="#9085e9"/>
+  <text x="310.924" y="288" font-size="13" font-weight="600" fill="#f4f4f5">$24.90</text>
+  <text x="32" y="322" font-size="13.5" fill="#f4f4f5">Add Activity sheet</text>
+  <text x="270" y="322" font-size="12.5" font-weight="600" fill="#8b8b94" text-anchor="end">M</text>
+  <path d="M284.0,308.0 H296.6 Q300.6,308.0 300.6,312.0 V322.0 Q300.6,326.0 296.6,326.0 H284.0 Z" fill="#c98500"/>
+  <text x="308.591" y="322" font-size="13" font-weight="600" fill="#f4f4f5">$21.83</text>
+  <text x="32" y="356" font-size="13.5" fill="#f4f4f5">Blank AI debrief fix</text>
+  <text x="270" y="356" font-size="12.5" font-weight="600" fill="#8b8b94" text-anchor="end">M</text>
+  <path d="M284.0,342.0 H294.1 Q298.1,342.0 298.1,346.0 V356.0 Q298.1,360.0 294.1,360.0 H284.0 Z" fill="#c98500"/>
+  <text x="306.113" y="356" font-size="13" font-weight="600" fill="#f4f4f5">$18.57</text>
+  <text x="32" y="390" font-size="13.5" fill="#f4f4f5">Scroll a table into view</text>
+  <text x="270" y="390" font-size="12.5" font-weight="600" fill="#8b8b94" text-anchor="end">S</text>
+  <path d="M284.0,376.0 H287.1 Q290.2,376.0 290.2,379.1 V390.9 Q290.2,394.0 287.1,394.0 H284.0 Z" fill="#c98500"/>
+  <text x="298.179" y="390" font-size="13" font-weight="600" fill="#f4f4f5">$8.13</text>
+  <text x="32" y="424" font-size="13.5" fill="#f4f4f5">Copy fix, investigation only</text>
+  <text x="270" y="424" font-size="12.5" font-weight="600" fill="#8b8b94" text-anchor="end">S</text>
+  <path d="M284.0,410.0 H286.1 Q288.3,410.0 288.3,412.1 V425.9 Q288.3,428.0 286.1,428.0 H284.0 Z" fill="#c98500"/>
+  <text x="296.286" y="424" font-size="13" font-weight="600" fill="#f4f4f5">$5.64</text>
+  <text x="270" y="86" font-size="11.5" fill="#63636b" text-anchor="end">size</text>
+</svg>

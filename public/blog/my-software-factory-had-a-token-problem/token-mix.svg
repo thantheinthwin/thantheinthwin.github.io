@@ -1,0 +1,81 @@
+<svg viewBox="0 0 728 522" width="728" height="522" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#26262b"/></pattern>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#63636b"/></marker>
+  </defs>
+  <rect width="728" height="522" rx="14" fill="#0e0e10"/>
+  <rect width="728" height="522" rx="14" fill="url(#dots)"/>
+  <rect x="0.5" y="0.5" width="727" height="521" rx="14" fill="none" stroke="#202024"/>
+  <rect x="24" y="24" width="216" height="104" rx="9" fill="#17171b" stroke="#e0a85a" stroke-width="1.5"/>
+  <text x="40" y="72" font-size="34" font-weight="700" fill="#f2c27b">97%</text>
+  <text x="40" y="96" font-size="14" font-weight="600" fill="#f4f4f5">re-read from cache</text>
+  <text x="40" y="115" font-size="12.5" fill="#8b8b94">context sent again, every turn</text>
+  <rect x="252" y="24" width="216" height="104" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="268" y="72" font-size="34" font-weight="700" fill="#f4f4f5">2.5%</text>
+  <text x="268" y="96" font-size="14" font-weight="600" fill="#f4f4f5">written to cache</text>
+  <text x="268" y="115" font-size="12.5" fill="#8b8b94">new context, stored</text>
+  <rect x="480" y="24" width="216" height="104" rx="9" fill="#17171b" stroke="#2e2e34" stroke-width="1.2"/>
+  <text x="496" y="72" font-size="34" font-weight="700" fill="#f4f4f5">0.4%</text>
+  <text x="496" y="96" font-size="14" font-weight="600" fill="#f4f4f5">new input and output</text>
+  <text x="496" y="115" font-size="12.5" fill="#8b8b94">what the agents actually wrote</text>
+  <text x="32" y="160" font-size="13.5" fill="#d4d4d8">2.27 billion tokens across the 9 dev-workflow sessions</text>
+  <text x="696" y="160" font-size="13.5" fill="#d4d4d8" text-anchor="end">244 re-read tokens for every token written</text>
+  <text x="32" y="196" font-size="14" font-weight="600" fill="#f4f4f5">Re-read share, per session</text>
+  <text x="696" y="196" font-size="12" fill="#8b8b94" text-anchor="end">axis starts at 90%</text>
+  <line x1="268.0" y1="210" x2="268.0" y2="454" stroke="#26262b" stroke-width="1"/>
+  <text x="268" y="472" font-size="12" fill="#8b8b94" text-anchor="middle">90%</text>
+  <line x1="350.4" y1="210" x2="350.4" y2="454" stroke="#26262b" stroke-width="1"/>
+  <text x="350.4" y="472" font-size="12" fill="#8b8b94" text-anchor="middle">92%</text>
+  <line x1="432.8" y1="210" x2="432.8" y2="454" stroke="#26262b" stroke-width="1"/>
+  <text x="432.8" y="472" font-size="12" fill="#8b8b94" text-anchor="middle">94%</text>
+  <line x1="515.2" y1="210" x2="515.2" y2="454" stroke="#26262b" stroke-width="1"/>
+  <text x="515.2" y="472" font-size="12" fill="#8b8b94" text-anchor="middle">96%</text>
+  <line x1="597.6" y1="210" x2="597.6" y2="454" stroke="#26262b" stroke-width="1"/>
+  <text x="597.6" y="472" font-size="12" fill="#8b8b94" text-anchor="middle">98%</text>
+  <line x1="680.0" y1="210" x2="680.0" y2="454" stroke="#26262b" stroke-width="1"/>
+  <text x="680" y="472" font-size="12" fill="#8b8b94" text-anchor="middle">100%</text>
+  <text x="32" y="230.5" font-size="13" fill="#f4f4f5">Remove one menu item</text>
+  <line x1="268" y1="226.0" x2="359.9" y2="226.0" stroke="#2e2e34" stroke-width="1"/>
+  <circle cx="359.9" cy="226.0" r="6" fill="#9085e9" stroke="#0e0e10" stroke-width="2"/>
+  <text x="371.914" y="230.5" font-size="12" fill="#d4d4d8">92.2%</text>
+  <text x="32" y="254.5" font-size="13" fill="#f4f4f5">Add Activity sheet</text>
+  <line x1="268" y1="250.0" x2="486.2" y2="250.0" stroke="#2e2e34" stroke-width="1"/>
+  <circle cx="486.2" cy="250.0" r="6" fill="#c98500" stroke="#0e0e10" stroke-width="2"/>
+  <text x="498.186" y="254.5" font-size="12" fill="#d4d4d8">95.3%</text>
+  <text x="32" y="278.5" font-size="13" fill="#f4f4f5">Scroll a table into view</text>
+  <line x1="268" y1="274.0" x2="518.0" y2="274.0" stroke="#2e2e34" stroke-width="1"/>
+  <circle cx="518.0" cy="274.0" r="6" fill="#c98500" stroke="#0e0e10" stroke-width="2"/>
+  <text x="530.048" y="278.5" font-size="12" fill="#d4d4d8">96.1%</text>
+  <text x="32" y="302.5" font-size="13" fill="#f4f4f5">Copy fix, investigation only</text>
+  <line x1="268" y1="298.0" x2="522.5" y2="298.0" stroke="#2e2e34" stroke-width="1"/>
+  <circle cx="522.5" cy="298.0" r="6" fill="#c98500" stroke="#0e0e10" stroke-width="2"/>
+  <text x="534.497" y="302.5" font-size="12" fill="#d4d4d8">96.2%</text>
+  <text x="32" y="326.5" font-size="13" fill="#f4f4f5">Workout import, a month</text>
+  <line x1="268" y1="322.0" x2="537.7" y2="322.0" stroke="#2e2e34" stroke-width="1"/>
+  <circle cx="537.7" cy="322.0" r="6" fill="#c98500" stroke="#0e0e10" stroke-width="2"/>
+  <text x="549.677" y="326.5" font-size="12" fill="#d4d4d8">96.5%</text>
+  <text x="32" y="350.5" font-size="13" fill="#f4f4f5">Blank AI debrief fix</text>
+  <line x1="268" y1="346.0" x2="554.0" y2="346.0" stroke="#2e2e34" stroke-width="1"/>
+  <circle cx="554.0" cy="346.0" r="6" fill="#c98500" stroke="#0e0e10" stroke-width="2"/>
+  <text x="565.997" y="350.5" font-size="12" fill="#d4d4d8">96.9%</text>
+  <text x="32" y="374.5" font-size="13" fill="#f4f4f5">Keyboard-safe sheets, 7+ PRs</text>
+  <line x1="268" y1="370.0" x2="574.2" y2="370.0" stroke="#2e2e34" stroke-width="1"/>
+  <circle cx="574.2" cy="370.0" r="6" fill="#c98500" stroke="#0e0e10" stroke-width="2"/>
+  <text x="586.248" y="374.5" font-size="12" fill="#d4d4d8">97.4%</text>
+  <text x="32" y="398.5" font-size="13" fill="#f4f4f5">Share workout as image</text>
+  <line x1="268" y1="394.0" x2="574.6" y2="394.0" stroke="#2e2e34" stroke-width="1"/>
+  <circle cx="574.6" cy="394.0" r="6" fill="#c98500" stroke="#0e0e10" stroke-width="2"/>
+  <text x="586.604" y="398.5" font-size="12" fill="#d4d4d8">97.4%</text>
+  <text x="32" y="422.5" font-size="13" fill="#f4f4f5">Coach tools, 5 tickets</text>
+  <line x1="268" y1="418.0" x2="587.9" y2="418.0" stroke="#2e2e34" stroke-width="1"/>
+  <circle cx="587.9" cy="418.0" r="6" fill="#c98500" stroke="#0e0e10" stroke-width="2"/>
+  <text x="599.887" y="422.5" font-size="12" fill="#d4d4d8">97.8%</text>
+  <text x="32" y="446.5" font-size="13" fill="#f4f4f5">Edit logged sets, 3 PRs</text>
+  <line x1="268" y1="442.0" x2="601.1" y2="442.0" stroke="#2e2e34" stroke-width="1"/>
+  <circle cx="601.1" cy="442.0" r="6" fill="#c98500" stroke="#0e0e10" stroke-width="2"/>
+  <text x="613.095" y="446.5" font-size="12" fill="#d4d4d8">98.1%</text>
+  <rect x="268" y="494" width="10" height="10" rx="5" fill="#c98500"/>
+  <text x="284" y="503" font-size="12.5" fill="#d4d4d8">dev-workflow</text>
+  <rect x="388" y="494" width="10" height="10" rx="5" fill="#9085e9"/>
+  <text x="404" y="503" font-size="12.5" fill="#d4d4d8">no workflow</text>
+</svg>

@@ -1,0 +1,15 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <defs>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.2" fill="#26262b"/></pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#0e0e10"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <text x="80" y="160" font-size="68" font-weight="700" fill="#f4f4f5" letter-spacing="-1">My Software Factory</text>
+  <text x="80" y="244" font-size="68" font-weight="700" fill="#f2c27b" letter-spacing="-1">Had a Token Problem</text>
+  <rect x="80" y="352" width="1040" height="196" rx="18" fill="#e0a85a" fill-opacity="0.06" stroke="#e0a85a" stroke-opacity="0.35" stroke-width="1.5"/>
+  <text x="108" y="392" font-size="20" font-weight="600" fill="#f2c27b">Where 2.27 billion tokens went</text>
+  <rect x="108" y="418" width="953.2" height="56" rx="8" fill="#c98500"/>
+  <rect x="1063.2" y="418" width="28.8" height="56" rx="6" fill="#52525b"/>
+  <text x="132" y="455" font-size="24" font-weight="700" fill="#0e0e10">97% re-reading the same context</text>
+  <text x="1092" y="508" font-size="18" fill="#d4d4d8" text-anchor="end">3% everything else ↑</text>
+</svg>
