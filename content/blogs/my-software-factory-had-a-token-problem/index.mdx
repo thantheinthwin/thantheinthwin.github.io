@@ -43,14 +43,12 @@ And my workflow pushed every factor to its maximum on every request:
 
 1. **Every request ran the full pipeline.** A one-line fix got implementers, a four-gate review and device checks.
 2. **The review loop had no limit,** and every gate was re-checked every round. The Activity sheet went three rounds.
-3. **Everything piled up in the lead agent's context:** reports, diffs, CI logs, screenshots.
+3. **Everything piled up in the lead agent's context:** full reports, diffs, CI logs.
 4. **The same code was traced twice:** once by the lead agent, then again by each worker.
 5. **Briefs repeated rules** that agents already load from `CLAUDE.md`.
 6. **The tier rules rounded up.** "When unsure, go higher" plus "reviewers never below the builder" pushed most work to the biggest model.
-7. **Design proposals were heavy:** a 34 KB reference read on every proposal, even for small tweaks.
-8. **Screenshots were full resolution,** and images cost tokens too.
 
-The data showed a ninth I hadn't listed: **the session's effort setting.** My workflow sessions ran at "high" or "xhigh". And the most expensive small change in the set, $24.90 to remove one menu item, didn't use the workflow at all. It ran at "max".
+The data showed a seventh I hadn't listed: **the session's effort setting.** My workflow sessions ran at "high" or "xhigh". And the most expensive small change in the set, $24.90 to remove one menu item, didn't use the workflow at all. It ran at "max".
 
 ## The Detour: A Code-Graph Tool
 
@@ -70,7 +68,7 @@ The rest:
 - **Trace once.** The lead agent writes a context map (`path:line`, decisions, traps) that goes into every brief.
 - **Keep reports short.** Every brief ends with the same footer: the hard rules, plus "report in 15 lines or fewer, no diffs, no log dumps". CI failures go to the smallest model, which returns at most 20 log lines.
 - **Pick the lowest tier that fits.** Escalation catches the misses. Every agent gets an explicit model and effort. Nothing runs above "high" without my say-so, and the lead agent runs at "medium".
-- **Lighter design proposals.** Agents read a 9 KB skeleton instead of the 34 KB reference. Small tweaks get a before/after screenshot instead of a proposal.
+- **Propose only what needs a proposal.** New screens and flows get a full design proposal. A small tweak gets a before/after screenshot instead.
 
 The trade-off: the skill file grew from 6.2 KB to 10.4 KB, about 1,000 more tokens per load. Next to 2.27 billion, that's noise.
 
@@ -85,6 +83,8 @@ Cutting cost is easy. Cutting it without cutting quality is the actual job. So s
 | Re-checking gates that passed | A separate top-tier security review on auth, payments and personal data |
 | Long reports and log dumps | CI proof that new tests actually ran |
 | Defaulting to the biggest model | My approval on the issue, the design and the merge |
+
+Two things look expensive and stay that way. Every design proposal reads the full 34 KB reference proposal, and every screenshot is taken at full resolution. A first pass at the fixes cut both, and I put them back. Agents can only judge what they can see clearly. A blurry screenshot is how a misaligned button ships, and a proposal built without the reference drifts from the finish I already approved.
 
 ## Before and After
 
